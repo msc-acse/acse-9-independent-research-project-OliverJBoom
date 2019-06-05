@@ -1,6 +1,8 @@
 # Importing database access information
 from config import USER, PASSWORD, HOST, DB_NAME
 import logging
+import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 # Postgre sql library
 import psycopg2
@@ -55,10 +57,43 @@ class ChaiDB:
            df = pd.read_sql_query(query, self.engine)
            return df['instrument'].tolist()
        
+def plot_instrument(*args):
+    """Plots the instrument of interest"""
+    fig, axarr = plt.subplots(len(args), 1, figsize=(4, 4))
+    
+    for i, (ax, df) in enumerate(zip(axarr.flatten(), args)):
+        df = df.sort_index()
+        ax.plot_date(df.index, df["value"], '-')
+        ax.grid()
 
+    plt.show()
+      
+    
+def covariance_matrix(*args):
+    """
+    Args: Dataframes
+        The time series data that are being cross-correlated
+    Returns:
+        The covariance matrix of the input dataframes
+    Raises:
+        Assertion error: If the dataframe do not contain the same
+        quantity of points
+    """
+    for df in args[1:]:
+        assert(len(df))==len(args[0])
+        
+    stacked_arrays = np.vstack(args)
+    cov = np.corrcoef(stacked_arrays)
+    return cov
+    
 if __name__ == "__main__":
     """Example of how to user the methods in ChaiDB"""
     db = ChaiDB()
     print(db.get_list_datascope_instruments())
-    df = db.get_instrument_data('al_lme_prices')
+    df_al_lme = db.get_instrument_data('al_lme_prices')
+    df_cu_lme = db.get_instrument_data('cu_lme_prices')
+    df_cu_shfe = db.get_instrument_data('cu_shfe_prices')
+    plot_instrument(df_al_lme, df_cu_lme, df_cu_shfe)
+    covariance_matrix(df_al_lme["value"], df_cu_lme["value"])
+    
     db.close_db_connection()
