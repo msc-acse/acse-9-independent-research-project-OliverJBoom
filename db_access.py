@@ -1,5 +1,6 @@
 # Importing database access information
 from config import USER, PASSWORD, HOST, DB_NAME
+import datetime
 import logging
 import numpy as np
 import matplotlib.pyplot as plt
@@ -57,15 +58,19 @@ class ChaiDB:
            df = pd.read_sql_query(query, self.engine)
            return df['instrument'].tolist()
        
-def plot_instrument(*args):
+        
+def plot_instrument(universe_dict):
     """Plots the instrument of interest"""
-    fig, axarr = plt.subplots(len(args), 1, figsize=(4, 4))
+    fig, axarr = plt.subplots(len(universe_dict), 1, figsize=(4, len(universe_dict) * 2))
     
-    for i, (ax, df) in enumerate(zip(axarr.flatten(), args)):
+    for ax, df_name in zip(axarr.flatten(), universe_dict):
+        df = universe_dict[df_name]
         df = df.sort_index()
-        ax.plot_date(df.index, df["value"], '-')
+        ax.plot(df.index, df["value"])
+        ax.set_title(df_name)
         ax.grid()
-
+        ax.set_xlim([datetime.date(2018, 1, 1), datetime.date(2019, 1, 1)])
+        ax.set_ylim([0.8 * df["value"].min(), 1.2 * df["value"].max()])
     plt.show()
       
     
@@ -86,14 +91,60 @@ def covariance_matrix(*args):
     cov = np.corrcoef(stacked_arrays)
     return cov
     
+def df_save(universe_dict):
+    for df_name in universe_dict:
+        universe_dict[df_name].to_csv("Data/" + df_name + ".csv")
+    
+    
 if __name__ == "__main__":
     """Example of how to user the methods in ChaiDB"""
     db = ChaiDB()
     print(db.get_list_datascope_instruments())
-    df_al_lme = db.get_instrument_data('al_lme_prices')
-    df_cu_lme = db.get_instrument_data('cu_lme_prices')
-    df_cu_shfe = db.get_instrument_data('cu_shfe_prices')
-    plot_instrument(df_al_lme, df_cu_lme, df_cu_shfe)
-    covariance_matrix(df_al_lme["value"], df_cu_lme["value"])
+    
+    # Copper specific instruments
+    cu_shfe = db.get_instrument_data('cu_shfe_prices')
+    cu_lme = db.get_instrument_data('cu_lme_prices')
+    cu_comex_p = db.get_instrument_data('cu_comex_prices')
+    cu_comex_s = db.get_instrument_data('cu_comex_stocks')
+    peso = db.get_instrument_data('chile_peso_spot')
+    sol = db.get_instrument_data('peru_sol_spot')
+    
+    # Aluminium specific insturments
+    al_shfe = db.get_instrument_data('al_shfe_prices')
+    al_lme = db.get_instrument_data('al_lme_prices')
+    al_comex_p = db.get_instrument_data('al_comex_prices')
+    al_comex_s = db.get_instrument_data('al_comex_stocks')
+    al_lme_s = db.get_instrument_data('al_lme_stocks')
+    yuan = db.get_instrument_data('china_yuan_spot')
+    
+    # Generic instruments
+    bdi = db.get_instrument_data('bdi')
+    ted = db.get_instrument_data('ted')
+    vix = db.get_instrument_data('vix')
+    skew = db.get_instrument_data('skew')
+    gsci = db.get_instrument_data('gsci')
+    
+    # Instruments for Cu
+    copper_dict = {"cu_shfe":cu_shfe, "cu_lme":cu_lme, "cu_comex_p":cu_comex_p,
+                   "cu_comex_s":cu_comex_s, "peso":peso, "sol":sol}
+    
+    # Instruments for Al
+    aluminium_dict = {"al_shfe":al_shfe, "al_lme":al_lme, "al_comex_p":al_comex_p,
+                      "al_comex_s":al_comex_s, "al_lme_s":al_lme_s, "yuan":yuan}
+    
+    # Instruments common to both cu and al
+    generic_dict =  {"bdi":bdi, "ted":ted, "vix":vix, "skew":skew, "gsci":gsci}
+    
+    # Saving the dataframe
+    df_save(copper_dict)
+    df_save(aluminium_dict)
+    df_save(generic_dict)
+    
+    # Visualising the different instuments
+    plot_instrument(copper_dict)
+    plot_instrument(aluminium_dict)
+    plot_instrument(generic_dict)
+    
+#    covariance_matrix(df_cu_1["value"], df_cu_lme["value"])
     
     db.close_db_connection()
