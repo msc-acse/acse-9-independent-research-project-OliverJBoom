@@ -10,8 +10,6 @@ def price_rename(universe_dict):
     df = universe_dict[df_name]
     df.sort_index(inplace=True)
     df = df.rename(columns={'value':"price"})
-    df["lg_return"] = np.log(df.price) - np.log(df.price.shift(1))
-    df["lg_return"].fillna(0, inplace=True)
     universe_dict[df_name] = df
   return universe_dict
 
@@ -61,15 +59,13 @@ def truncate_window_length(universe_dict):
   return universe_dict
 
 
-def generate_lg_returns(universe_dict):
+def generate_lg_return(df):
     """Returns a dictionary containing dataframes
     with the additional log returns column"""
-    for df_name in universe_dict:
-        df = universe_dict[df_name]
-        df["lg_return"] = np.log(df.price) - np.log(df.price.shift(1))
-        df["lg_return"].fillna(0, inplace=True)
-        universe_dict[df_name] = df
-    return universe_dict
+    for col in df.columns:
+        df[col.replace('price','lg_return')] = np.log(df[col]) - np.log(df[col].shift(1))
+        df[col.replace('price','lg_return')].fillna(0, inplace=True)
+    return df
 
 
 def column_rename(universe_dict):
@@ -89,7 +85,10 @@ def generate_dataset(universe_dict, lg_returns_only=False):
     universe = [] 
     for df_name in universe_dict: universe.append(universe_dict[df_name])
     df_full = pd.concat(universe, axis = 1)
+    # Must do log returns calculations after this forwards fill
     df_full.ffill(inplace=True)
+    # Calculating the log returns
+    df_full = generate_lg_return(df_full)
     
     if lg_returns_only == True:
         for col in df_full.columns: 
@@ -134,6 +133,17 @@ def check_day_frequency(df, day_col_name='ds'):
 def df_std(df, col_name):
     """Returns the standard deviation of a dataframes column"""
     return df[[col_name]].stack().std()
+
+
+def inverse_log_returns(log_returns, starting_val):
+    """Takes an array of log returns and returns the
+    prices for a given starting point"""
+    factor = np.exp(np.roll(log_returns, -1))
+    inv_prices = [starting_val]
+    
+    for i in range(len(factor) - 1):
+        inv_prices.append(factor[i] * inv_prices[-1])
+    return inv_prices
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
