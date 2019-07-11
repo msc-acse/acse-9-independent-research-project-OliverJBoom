@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
 def price_rename(universe_dict):
@@ -23,6 +24,9 @@ def clean_data(df, n_std = 20):
   df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
   df.ffill(inplace=True)
   if df.price.isnull().sum() > 0: print("Rows removed:", df.price.isnull().sum())
+  # Only want to keep business days
+  df = df[df.index.weekday_name != "Saturday"]
+  df = df[df.index.weekday_name != "Sunday"]
   return df
 
 
@@ -55,6 +59,17 @@ def truncate_window_length(universe_dict):
     universe_dict[df_name] = df.loc[((df.index <= min(end_date_arr)) & (df.index >= max(start_date_arr)))]
   
   return universe_dict
+
+
+def generate_lg_returns(universe_dict):
+    """Returns a dictionary containing dataframes
+    with the additional log returns column"""
+    for df_name in universe_dict:
+        df = universe_dict[df_name]
+        df["lg_return"] = np.log(df.price) - np.log(df.price.shift(1))
+        df["lg_return"].fillna(0, inplace=True)
+        universe_dict[df_name] = df
+    return universe_dict
 
 
 def column_rename(universe_dict):
@@ -106,5 +121,41 @@ def visualise_universe(universe_dict):
     """Plots the price and log return for every 
     instrument in the univese dictionary"""
     for df_name in universe_dict: visualise_df(universe_dict[df_name])
-        
+            
     
+def check_day_frequency(df, day_col_name='ds'):
+    """Returns a barchart showing the frequency of the 
+    days of the week within a dataframe"""
+    df["day"] = df[day_col_name].apply(lambda x: x.weekday_name)
+    print(df['day'].value_counts())
+    df['day'].value_counts().plot(kind='bar')
+    
+    
+def df_std(df, col_name):
+    """Returns the standard deviation of a dataframes column"""
+    return df[[col_name]].stack().std()
+
+
+def mean_absolute_percentage_error(y_true, y_pred):
+    """Calculated the mean absolute percentage error metric 
+    between two arrays"""
+    return 100 * np.mean(np.abs(y_true - y_pred) / y_true)
+
+
+def mean_directional_accuracy(y_true, y_pred):
+    """Calculated the mean directional accuracy
+    error metric between two arrays"""
+    return np.mean((np.sign(y_true) == np.sign(y_pred)))
+
+
+def evaluate(df):
+    """Calculated the error metric for a dataframe 
+    of predictions and observed values
+    Returns: Dataframe with the following additional columns
+    MSE: Mean Squared Error
+    MAE: Mean Absolute Error
+    MDE: Mean Directional Error"""
+    df["MSE"] = mean_squared_error(df["y_orig"], df["y_pred"])
+    df["MAE"] = mean_absolute_error(df["y_orig"], df["y_pred"])
+    df["MDE"] = mean_directional_accuracy(df["y_orig"], df["y_pred"])
+    return df
