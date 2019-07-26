@@ -101,26 +101,32 @@ def log_returns(x, lag=1):
     return np.log(x) - np.log(x.shift(lag))
 
 
-def generate_lg_return(df_full, lag, target=True):
+def generate_target(df_full, target_col="price_cu_lme", lag=5):
+    """Generate the target variable"""
+    df_target = df_full[[target_col]].apply(log_returns, lag=lag)
+    df_target = df_target.shift(-lag)
+    df_target.rename(columns={"price_cu_lme":target_col.replace("price_", str(lag) + "_day_forecast_")}, inplace=True)
+    return df_target
+
+
+def generate_lg_return(df_full, lag=1):
     """Returns a dictionary containing dataframes
     with the additional log returns column"""
     for col in df_full.columns:
         # Selecting out the dataframe of interest
         df = df_full[[col]]
-        # Generating the lg returns for that dataframe
-        df_returns = df.apply(log_returns, lag=lag)
-        # Shifting the log returns to the training data
-        df_returns_offset = df_returns.shift(-lag)
-        if target: df_full[col.replace('price','target')] = df_returns_offset
-        else: 
+        if lag==1: 
+            df_full[col.replace('price_', "")] = log_returns(df[col], lag=lag)
+            df_full.dropna(inplace=True)
+        else:
             if ("price" in col) == True:
-                df_full[col.replace('price', str(lag) + "day_lg_return")] = log_returns(df[col], lag=lag)
+                df_full[col.replace('price', str(lag) + "_day_lg_return")] = log_returns(df[col], lag=lag)
                 df_full.dropna(inplace=True)
 
     return df_full
 
 
-def generate_dataset(universe_dict, lag=5):
+def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5, lg_returns_only=True):
     """Generates the full dataset"""
     # Renames the columns with the name of the instrument series
     universe_dict = column_rename(universe_dict)
@@ -130,7 +136,14 @@ def generate_dataset(universe_dict, lag=5):
     # Must do log returns calculations after this forwards fill
     df_full.ffill(inplace=True)
     # Calculating the log returns
-    df_full = generate_lg_return(df_full, lag)
+    df_full = generate_lg_return(df_full)
+    
+    # Fill in nan to allow inverse calculations
+    df_full["target"] = np.nan
+    # As target is forecast backdated the first row values should have
+    # value and the last should have nulls
+    df_full["target"][:-lag] = generate_target(df_full, target_col="price_cu_lme", lag=5)[:-lag].values.ravel()
+    if lg_returns_only: df_full = df_full[df_full.columns.drop(list(df_full.filter(regex='price')))]
     return df_full
 
 
