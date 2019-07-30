@@ -126,8 +126,12 @@ def generate_lg_return(df_full, lag=1):
     return df_full
 
 
-def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5, lg_returns_only=True):
+def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5, 
+                     lg_returns_only=True, price_only=False):
     """Generates the full dataset"""
+    if lg_returns_only: assert (lg_returns_only != price_only)
+    if price_only: assert (lg_returns_only != price_only)
+
     # Renames the columns with the name of the instrument series
     universe_dict = column_rename(universe_dict)
     universe = [] 
@@ -144,6 +148,7 @@ def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5, lg_returns
     # value and the last should have nulls
     df_full["target"][:-lag] = generate_target(df_full, target_col="price_cu_lme", lag=5)[:-lag].values.ravel()
     if lg_returns_only: df_full = df_full[df_full.columns.drop(list(df_full.filter(regex='price')))]
+    if price_only: df_full = df_full[list(df_full.filter(regex='price')) + ['target']]
     return df_full
 
 

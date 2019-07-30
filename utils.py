@@ -47,6 +47,7 @@ def inverse_log_returns(original_prices, log_returns, lag=5, shift=0):
     prices and returns an array of predicted absolute prices"""
     assert isinstance(log_returns, pd.DataFrame)
     assert isinstance(original_prices, pd.DataFrame)
+    # shift is for 
     if shift == 0:
         return (original_prices.shift(shift).values[:-lag] * np.exp(log_returns[:-lag])).values.ravel()
     else: 
@@ -87,3 +88,6 @@ def evaluate(df, y_orig_col, y_pred_col):
     MAE = mean_absolute_error(df[y_orig_col], df[y_pred_col])
     MDE = mean_directional_accuracy(df[y_orig_col], df[y_pred_col])
     return MSE, MAE, MDE
+
+
+
