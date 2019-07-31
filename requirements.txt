@@ -1,7 +1,6 @@
 fbprophet==0.5
 livelossplot==0.4.1
 numpy==1.16.2
-os
 pandas==0.24.2
 pmdarima==1.2.1
 matplotlib==3.0.3
