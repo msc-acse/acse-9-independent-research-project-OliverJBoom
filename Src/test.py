@@ -1,8 +1,6 @@
 import pytest
 from preprocessing import universe_select
-import os
 
-os.listdir()
 
 def test_import_data():
     """Checks that the data is loaded into a
