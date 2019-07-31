@@ -7,5 +7,5 @@ install:
 
 #  - pip install .
 # command to run tests
-#script:
-#  pytest test.py
+script:
+  pytest test.py

@@ -12,15 +12,15 @@ def check_length(universe_dict):
     
 def visualise_df(df):
   """Visualises the features for an instrument"""
-  fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
+    fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
 
-  for ax, df_name in zip(axarr.flatten(), df.columns):
-      ax.set_title(df_name)
-      ax.plot(df.index, df[df_name])
-      ax.grid()
-      ax.legend()
-      
-  plt.show()
+    for ax, df_name in zip(axarr.flatten(), df.columns):
+        ax.set_title(df_name)
+        ax.plot(df.index, df[df_name])
+        ax.grid()
+        ax.legend()
+
+    plt.show()
   
   
 def visualise_universe(universe_dict):

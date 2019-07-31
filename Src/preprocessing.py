@@ -72,16 +72,16 @@ def truncate_window_length(universe_dict):
   start_date_arr = []
   end_date_arr = []
   
-  for df_name in universe_dict:
-    # Finding the latest of the start dates
-    start_date_arr.append(universe_dict[df_name].index[0])
-    # Finding the earliest of the end dates
-    end_date_arr.append(universe_dict[df_name].index[-1])
+    for df_name in universe_dict:
+        # Finding the latest of the start dates
+        start_date_arr.append(universe_dict[df_name].index[0])
+        # Finding the earliest of the end dates
+        end_date_arr.append(universe_dict[df_name].index[-1])
     
-  for i, df_name in enumerate(universe_dict): 
-    df = universe_dict[df_name]
-    # Filters the dataframe between these dates
-    universe_dict[df_name] = df.loc[((df.index <= min(end_date_arr)) & (df.index >= max(start_date_arr)))]
+    for i, df_name in enumerate(universe_dict): 
+        df = universe_dict[df_name]
+        # Filters the dataframe between these dates
+        universe_dict[df_name] = df.loc[((df.index <= min(end_date_arr)) & (df.index >= max(start_date_arr)))]
   
   return universe_dict
 
