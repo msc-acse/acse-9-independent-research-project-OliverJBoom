@@ -33,44 +33,44 @@ def universe_select(path, commodity_name):
 
 def price_rename(universe_dict):
   """Renaming the column of the dataframe values to price"""
-  for df_name in universe_dict:
-    df = universe_dict[df_name]
-    df.sort_index(inplace=True)
-    df = df.rename(columns={'value':"price"})
-    universe_dict[df_name] = df
-  return universe_dict
+    for df_name in universe_dict:
+        df = universe_dict[df_name]
+        df.sort_index(inplace=True)
+        df = df.rename(columns={'value':"price"})
+        universe_dict[df_name] = df
+    return universe_dict
 
 
 def clean_data(df, n_std = 20):
-  """Removes any outliers that are further than a chosen
-  number of standard deviations from the mean"""
-  upper = df.price.mean() + n_std * (df.price.std())
-  lower = df.price.mean() - n_std * (df.price.std())
-  df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
-  df.ffill(inplace=True)
-  if df.price.isnull().sum() > 0: print("Rows removed:", df.price.isnull().sum())
-  # Only want to keep business days
-  df = df[df.index.weekday_name != "Saturday"]
-  df = df[df.index.weekday_name != "Sunday"]
-  return df
+    """Removes any outliers that are further than a chosen
+    number of standard deviations from the mean"""
+    upper = df.price.mean() + n_std * (df.price.std())
+    lower = df.price.mean() - n_std * (df.price.std())
+    df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
+    df.ffill(inplace=True)
+    if df.price.isnull().sum() > 0: print("Rows removed:", df.price.isnull().sum())
+    # Only want to keep business days
+    df = df[df.index.weekday_name != "Saturday"]
+    df = df[df.index.weekday_name != "Sunday"]
+    return df
 
 
 def clean_dict_gen(universe_dict):
   """Returns a dictionary of cleaned dataframes"""
-  cleaned_dict = {}
-  print("Included Instrument:")
-  for df_name in universe_dict:
-    print(df_name)
-    cleaned_dict[df_name] = clean_data(universe_dict[df_name])
-  return cleaned_dict
+    cleaned_dict = {}
+    print("Included Instrument:")
+    for df_name in universe_dict:
+        print(df_name)
+        cleaned_dict[df_name] = clean_data(universe_dict[df_name])
+    return cleaned_dict
 
 
 def truncate_window_length(universe_dict):
-  """Chopping the length of all of the dataframes to ensure
-  that they are all between the same dates
-  Returns: A dictionary of the dataframes between equal dates"""
-  start_date_arr = []
-  end_date_arr = []
+    """Chopping the length of all of the dataframes to ensure
+    that they are all between the same dates
+    Returns: A dictionary of the dataframes between equal dates"""
+    start_date_arr = []
+    end_date_arr = []
   
     for df_name in universe_dict:
         # Finding the latest of the start dates
