@@ -6,8 +6,17 @@ from sklearn.decomposition import PCA
 def universe_select(path, commodity_name):
     """Selects the instruments believed to be of
     interest for the commodity selected
-    Returns: A dictionary of dataframes which are
-    intruments of interest"""
+    
+    :param path: path to the csv folder
+    :param commodity_name: the name of the metal being inspected
+    
+    :type path: type string
+    :type commodity_name: type string
+    
+    :return: financial time series relevant to the commodity
+    :rtype: dict
+    """
+    
     universe_dict = {}
 
     # If commodity is aluminium
@@ -42,7 +51,15 @@ def universe_select(path, commodity_name):
 
 
 def price_rename(universe_dict):
-    """Renaming the column of the dataframe values to price"""
+    """
+    Renaming the column of the dataframe values to price
+    
+    :param universe_dict: financial time series
+    :type universe_dict: dict
+    
+    :return: financial time series
+    :rtype: dict 
+    """
     for df_name in universe_dict:
         df = universe_dict[df_name]
         df.sort_index(inplace=True)
@@ -52,8 +69,19 @@ def price_rename(universe_dict):
 
 
 def clean_data(df, n_std=20):
-    """Removes any outliers that are further than a chosen
-    number of standard deviations from the mean"""
+    """
+    Removes any outliers that are further than a chosen
+    number of standard deviations from the mean
+    
+    :param df: the finacial time series
+    :type df: dataframe
+    
+    :param n_std: the number of standard deviations from the mean
+    :type n_std: int
+    
+    :return: the cleaned financial time series
+    :rtype: dataframe
+    """
     upper = df.price.mean() + n_std * (df.price.std())
     lower = df.price.mean() - n_std * (df.price.std())
     df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
@@ -69,7 +97,15 @@ def clean_data(df, n_std=20):
 
 
 def clean_dict_gen(universe_dict):
-    """Returns a dictionary of cleaned dataframes"""
+    """
+    Returns a dictionary of cleaned dataframes
+    
+    :param universe_dict: the financial time series
+    :type universe_dict: dict
+    
+    :return: the cleaned financial time series
+    :rtype: dict
+    """
     cleaned_dict = {}
     print("Included Instrument:")
 
@@ -81,9 +117,16 @@ def clean_dict_gen(universe_dict):
 
 
 def truncate_window_length(universe_dict):
-    """Chopping the length of all of the dataframes to ensure
+    """
+    Chopping the length of all of the dataframes to ensure
     that they are all between the same dates
-    Returns: A dictionary of the dataframes between equal dates"""
+    
+    :param universe_dict: the financial time series
+    :type universe_dict: dict
+    
+    :return: the truncated financial time series
+    :rtype: dict
+    """
     start_date_arr = []
     end_date_arr = []
 
@@ -104,7 +147,14 @@ def truncate_window_length(universe_dict):
 
 def column_rename(universe_dict):
     """Appends the name of the instrument
-    name to the columns"""
+    name to the columns
+    
+    :param universe_dict: the financial time series
+    :type universe_dict: dict
+    
+    :return: the financial time series
+    :rtype: dict
+    """
     for df_name in universe_dict:
         for col in universe_dict[df_name].columns:
             universe_dict[df_name].rename(
@@ -113,9 +163,19 @@ def column_rename(universe_dict):
     return universe_dict
 
 
-def log_returns(x, lag=1):
-    """Calculate log returns between adjacent close prices"""
-    return np.log(x) - np.log(x.shift(lag))
+def log_returns(series, lag=1):
+    """Calculate log returns between adjacent close prices
+    
+    :param series: prices to calculate the log returns on
+    :type series: numpy array
+    
+    :param lag: the amount of days the returns are calculated between
+    :type lag: int
+    
+    :return: the series of log returns
+    :rtype: numpy array
+    """
+    return np.log(series) - np.log(series.shift(lag))
 
 
 def generate_target(df_full, target_col="price_cu_lme", lag=5):
@@ -138,7 +198,7 @@ def generate_lg_return(df_full, lag=1):
             df_full[col.replace('price_', "")] = log_returns(df[col], lag=lag)
             df_full.dropna(inplace=True)
         else:
-            if ("price" in col) == True:
+            if "price" in col:
                 df_full[col.replace('price', str(lag) + "_day_lg_return")] \
                     = log_returns(df[col], lag=lag)
                 df_full.dropna(inplace=True)
@@ -146,16 +206,22 @@ def generate_lg_return(df_full, lag=1):
     return df_full
 
 
-def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5,
+def generate_dataset(universe_dict, lag=5,
                      lg_returns_only=True, price_only=False):
     """Generates the full dataset"""
-    if lg_returns_only: assert (lg_returns_only != price_only)
-    if price_only: assert (lg_returns_only != price_only)
+    if lg_returns_only:
+        assert (lg_returns_only != price_only)
+
+    if price_only:
+        assert (lg_returns_only != price_only)
 
     # Renames the columns with the name of the instrument series
     universe_dict = column_rename(universe_dict)
     universe = []
-    for df_name in universe_dict: universe.append(universe_dict[df_name])
+
+    for df_name in universe_dict:
+        universe.append(universe_dict[df_name])
+
     df_full = pd.concat(universe, axis=1)
     # Must do log returns calculations after this forwards fill
     df_full.ffill(inplace=True)
@@ -182,7 +248,8 @@ def generate_dataset(universe_dict, target_col="price_cu_lme", lag=5,
 def drop_prices(df):
     """Drops the prices column from the training dataset"""
     for col in df.columns:
-        if ("price" in col) == True: df.drop(columns=col, inplace=True)
+        if "price" in col:
+            df.drop(columns=col, inplace=True)
     return df
 
 

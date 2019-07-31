@@ -7,6 +7,5 @@ def test_import_data():
     dictionary and that it is not empty"""
     path = "./Data/Commodity_Data/"
     universe_dict = universe_select(path, "Cu")
-    assert(type(universe_dict) == dict)
-    assert (bool(universe_dict) == True)
-    
+    assert (type(universe_dict) is dict)
+    assert (bool(universe_dict) is True)

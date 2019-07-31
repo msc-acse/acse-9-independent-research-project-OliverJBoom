@@ -1,0 +1,378 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Src.preprocessing &#8212; Industrial Metals Forecaster 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Src.preprocessing</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
+
+
+<div class="viewcode-block" id="universe_select"><a class="viewcode-back" href="../../index.html#Src.preprocessing.universe_select">[docs]</a><span class="k">def</span> <span class="nf">universe_select</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">commodity_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Selects the instruments believed to be of</span>
+<span class="sd">    interest for the commodity selected</span>
+<span class="sd">    </span>
+<span class="sd">    :param path: path to the csv folder</span>
+<span class="sd">    :param commodity_name: the name of the metal being inspected</span>
+<span class="sd">    </span>
+<span class="sd">    :type path: type string</span>
+<span class="sd">    :type commodity_name: type string</span>
+<span class="sd">    </span>
+<span class="sd">    :return: financial time series relevant to the commodity</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">universe_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># If commodity is aluminium</span>
+    <span class="k">if</span> <span class="n">commodity_name</span> <span class="o">==</span> <span class="s2">&quot;Al&quot;</span><span class="p">:</span>
+        <span class="n">aluminium_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;al_shfe&quot;</span><span class="p">,</span> <span class="s2">&quot;al_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;al_comex_p&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;al_comex_s&quot;</span><span class="p">,</span> <span class="s2">&quot;al_lme_s&quot;</span><span class="p">,</span> <span class="s2">&quot;yuan&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="s2">&quot;ted&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="s2">&quot;gsci&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="n">aluminium_list</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">instrument</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">,</span>
+                             <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>
+                             <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+
+    <span class="c1"># If commodity is copper</span>
+    <span class="k">elif</span> <span class="n">commodity_name</span> <span class="o">==</span> <span class="s2">&quot;Cu&quot;</span><span class="p">:</span>
+        <span class="n">copper_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cu_shfe&quot;</span><span class="p">,</span> <span class="s2">&quot;cu_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;cu_comex_p&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;cu_comex_s&quot;</span><span class="p">,</span> <span class="s2">&quot;peso&quot;</span><span class="p">,</span> <span class="s2">&quot;sol&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="s2">&quot;ted&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="s2">&quot;gsci&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="n">copper_list</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">instrument</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">,</span>
+                             <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>
+                             <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Select an appropriate commodity&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">universe_dict</span></div>
+
+
+<div class="viewcode-block" id="price_rename"><a class="viewcode-back" href="../../index.html#Src.preprocessing.price_rename">[docs]</a><span class="k">def</span> <span class="nf">price_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renaming the column of the dataframe values to price</span>
+<span class="sd">    </span>
+<span class="sd">    :param universe_dict: financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    </span>
+<span class="sd">    :return: financial time series</span>
+<span class="sd">    :rtype: dict </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;price&quot;</span><span class="p">})</span>
+        <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+    <span class="k">return</span> <span class="n">universe_dict</span></div>
+
+
+<div class="viewcode-block" id="clean_data"><a class="viewcode-back" href="../../index.html#Src.preprocessing.clean_data">[docs]</a><span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_std</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Removes any outliers that are further than a chosen</span>
+<span class="sd">    number of standard deviations from the mean</span>
+<span class="sd">    </span>
+<span class="sd">    :param df: the finacial time series</span>
+<span class="sd">    :type df: dataframe</span>
+<span class="sd">    </span>
+<span class="sd">    :param n_std: the number of standard deviations from the mean</span>
+<span class="sd">    :type n_std: int</span>
+<span class="sd">    </span>
+<span class="sd">    :return: the cleaned financial time series</span>
+<span class="sd">    :rtype: dataframe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">n_std</span> <span class="o">*</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">n_std</span> <span class="o">*</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[((</span><span class="n">df</span><span class="o">.</span><span class="n">price</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">price</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)),</span> <span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows removed:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+    <span class="c1"># Only want to keep business days</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">weekday_name</span> <span class="o">!=</span> <span class="s2">&quot;Saturday&quot;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">weekday_name</span> <span class="o">!=</span> <span class="s2">&quot;Sunday&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="clean_dict_gen"><a class="viewcode-back" href="../../index.html#Src.preprocessing.clean_dict_gen">[docs]</a><span class="k">def</span> <span class="nf">clean_dict_gen</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a dictionary of cleaned dataframes</span>
+<span class="sd">    </span>
+<span class="sd">    :param universe_dict: the financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    </span>
+<span class="sd">    :return: the cleaned financial time series</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cleaned_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Included Instrument:&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df_name</span><span class="p">)</span>
+        <span class="n">cleaned_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">cleaned_dict</span></div>
+
+
+<div class="viewcode-block" id="truncate_window_length"><a class="viewcode-back" href="../../index.html#Src.preprocessing.truncate_window_length">[docs]</a><span class="k">def</span> <span class="nf">truncate_window_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Chopping the length of all of the dataframes to ensure</span>
+<span class="sd">    that they are all between the same dates</span>
+<span class="sd">    </span>
+<span class="sd">    :param universe_dict: the financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    </span>
+<span class="sd">    :return: the truncated financial time series</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start_date_arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">end_date_arr</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="c1"># Finding the latest of the start dates</span>
+        <span class="n">start_date_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Finding the earliest of the end dates</span>
+        <span class="n">end_date_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span>
+        <span class="c1"># Filters the dataframe between these dates</span>
+        <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[((</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="nb">min</span><span class="p">(</span><span class="n">end_date_arr</span><span class="p">))</span>
+                                         <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start_date_arr</span><span class="p">)))]</span>
+
+    <span class="k">return</span> <span class="n">universe_dict</span></div>
+
+
+<div class="viewcode-block" id="column_rename"><a class="viewcode-back" href="../../index.html#Src.preprocessing.column_rename">[docs]</a><span class="k">def</span> <span class="nf">column_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Appends the name of the instrument</span>
+<span class="sd">    name to the columns</span>
+<span class="sd">    </span>
+<span class="sd">    :param universe_dict: the financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    </span>
+<span class="sd">    :return: the financial time series</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">df_name</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">universe_dict</span></div>
+
+
+<div class="viewcode-block" id="log_returns"><a class="viewcode-back" href="../../index.html#Src.preprocessing.log_returns">[docs]</a><span class="k">def</span> <span class="nf">log_returns</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate log returns between adjacent close prices</span>
+<span class="sd">    </span>
+<span class="sd">    :param series: prices to calculate the log returns on</span>
+<span class="sd">    :type series: numpy array</span>
+<span class="sd">    </span>
+<span class="sd">    :param lag: the amount of days the returns are calculated between</span>
+<span class="sd">    :type lag: int</span>
+<span class="sd">    </span>
+<span class="sd">    :return: the series of log returns</span>
+<span class="sd">    :rtype: numpy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="generate_target"><a class="viewcode-back" href="../../index.html#Src.preprocessing.generate_target">[docs]</a><span class="k">def</span> <span class="nf">generate_target</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="s2">&quot;price_cu_lme&quot;</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate the target variable&quot;&quot;&quot;</span>
+    <span class="n">df_target</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[[</span><span class="n">target_col</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">log_returns</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_target</span> <span class="o">=</span> <span class="n">df_target</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="n">lag</span><span class="p">)</span>
+    <span class="n">df_target</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;price_cu_lme&quot;</span><span class="p">:</span> <span class="n">target_col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s2">&quot;price_&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_day_forecast_&quot;</span><span class="p">)},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_target</span></div>
+
+
+<div class="viewcode-block" id="generate_lg_return"><a class="viewcode-back" href="../../index.html#Src.preprocessing.generate_lg_return">[docs]</a><span class="k">def</span> <span class="nf">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary containing dataframes</span>
+<span class="sd">    with the additional log returns column&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_full</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="c1"># Selecting out the dataframe of interest</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[[</span><span class="n">col</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">lag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">df_full</span><span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;price_&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">log_returns</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">lag</span><span class="o">=</span><span class="n">lag</span><span class="p">)</span>
+            <span class="n">df_full</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;price&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
+                <span class="n">df_full</span><span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_day_lg_return&quot;</span><span class="p">)]</span> \
+                    <span class="o">=</span> <span class="n">log_returns</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">lag</span><span class="o">=</span><span class="n">lag</span><span class="p">)</span>
+                <span class="n">df_full</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df_full</span></div>
+
+
+<div class="viewcode-block" id="generate_dataset"><a class="viewcode-back" href="../../index.html#Src.preprocessing.generate_dataset">[docs]</a><span class="k">def</span> <span class="nf">generate_dataset</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                     <span class="n">lg_returns_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">price_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates the full dataset&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">lg_returns_only</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">lg_returns_only</span> <span class="o">!=</span> <span class="n">price_only</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">price_only</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">lg_returns_only</span> <span class="o">!=</span> <span class="n">price_only</span><span class="p">)</span>
+
+    <span class="c1"># Renames the columns with the name of the instrument series</span>
+    <span class="n">universe_dict</span> <span class="o">=</span> <span class="n">column_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">)</span>
+    <span class="n">universe</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="n">universe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span>
+
+    <span class="n">df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Must do log returns calculations after this forwards fill</span>
+    <span class="n">df_full</span><span class="o">.</span><span class="n">ffill</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Calculating the log returns</span>
+    <span class="n">df_full</span> <span class="o">=</span> <span class="n">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">)</span>
+
+    <span class="c1"># Fill in nan to allow inverse calculations</span>
+    <span class="n">df_full</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="c1"># As target is forecast backdated the first row values should have</span>
+    <span class="c1"># value and the last should have nulls</span>
+    <span class="n">df_full</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">][:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_target</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span>
+                                               <span class="n">target_col</span><span class="o">=</span><span class="s2">&quot;price_cu_lme&quot;</span><span class="p">,</span>
+                                               <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">)[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">lg_returns_only</span><span class="p">:</span>
+        <span class="n">df_full</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[</span><span class="n">df_full</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df_full</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">)))]</span>
+
+    <span class="k">if</span> <span class="n">price_only</span><span class="p">:</span>
+        <span class="n">df_full</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">df_full</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="n">df_full</span></div>
+
+
+<div class="viewcode-block" id="drop_prices"><a class="viewcode-back" href="../../index.html#Src.preprocessing.drop_prices">[docs]</a><span class="k">def</span> <span class="nf">drop_prices</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Drops the prices column from the training dataset&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;price&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Performing PCA to reduce the amount of&quot;&quot;&quot;</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
+    <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Explained Variance:&quot;</span><span class="p">,</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">,</span>
+          <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Explained Variance Sum:&quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_reduced</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the number of dimensions that reaches the </span>
+<span class="sd">    threshold level of desired variance&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">n_dim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
+        <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">thresh</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of dimensions:&quot;</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">n_dim</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No level of dimensionality reaches threshold variance level </span><span class="si">%.3f</span><span class="s2">&quot;</span>
+          <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Industrial Metals Forecaster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Oliver Boom.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

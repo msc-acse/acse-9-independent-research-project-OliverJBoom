@@ -12,21 +12,22 @@ def check_length(universe_dict):
     
 def visualise_df(df):
   """Visualises the features for an instrument"""
-    fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
+  fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
 
-    for ax, df_name in zip(axarr.flatten(), df.columns):
+  for ax, df_name in zip(axarr.flatten(), df.columns):
         ax.set_title(df_name)
         ax.plot(df.index, df[df_name])
         ax.grid()
         ax.legend()
 
-    plt.show()
-  
+plt.show()
+
   
 def visualise_universe(universe_dict):
     """Plots the price and log return for every 
     instrument in the univese dictionary"""
-    for df_name in universe_dict: visualise_df(universe_dict[df_name])
+    for df_name in universe_dict:
+        visualise_df(universe_dict[df_name])
             
     
 def check_day_frequency(df, day_col_name='ds'):
@@ -84,10 +85,10 @@ def evaluate(df, y_orig_col, y_pred_col):
     # evaluate criteria can't deal with nans or zeros
     df = df.dropna()
     
-    MSE = mean_squared_error(df[y_orig_col], df[y_pred_col])
-    MAE = mean_absolute_error(df[y_orig_col], df[y_pred_col])
-    MDE = mean_directional_accuracy(df[y_orig_col], df[y_pred_col])
-    return MSE, MAE, MDE
+    mse = mean_squared_error(df[y_orig_col], df[y_pred_col])
+    mae = mean_absolute_error(df[y_orig_col], df[y_pred_col])
+    mde = mean_directional_accuracy(df[y_orig_col], df[y_pred_col])
+    return mse, mae, mde
 
 
 

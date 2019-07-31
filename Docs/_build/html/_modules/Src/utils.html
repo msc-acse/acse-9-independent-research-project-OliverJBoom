@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Src.utils &#8212; Industrial Metals Forecaster 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Src.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
+
+
+<div class="viewcode-block" id="check_length"><a class="viewcode-back" href="../../index.html#Src.utils.check_length">[docs]</a><span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Checks the name of all the dataframes in the </span>
+<span class="sd">    dictionary of instruments&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]))</span></div>
+    
+    
+<div class="viewcode-block" id="visualise_df"><a class="viewcode-back" href="../../index.html#Src.utils.visualise_df">[docs]</a><span class="k">def</span> <span class="nf">visualise_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Visualises the features for an instrument&quot;&quot;&quot;</span>
+  <span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+
+  <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axarr</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">df_name</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></div>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+  
+<div class="viewcode-block" id="visualise_universe"><a class="viewcode-back" href="../../index.html#Src.utils.visualise_universe">[docs]</a><span class="k">def</span> <span class="nf">visualise_universe</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots the price and log return for every </span>
+<span class="sd">    instrument in the univese dictionary&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="n">visualise_df</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span></div>
+            
+    
+<div class="viewcode-block" id="check_day_frequency"><a class="viewcode-back" href="../../index.html#Src.utils.check_day_frequency">[docs]</a><span class="k">def</span> <span class="nf">check_day_frequency</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">day_col_name</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a barchart showing the frequency of the </span>
+<span class="sd">    days of the week within a dataframe&quot;&quot;&quot;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">day_col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">weekday_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="df_std"><a class="viewcode-back" href="../../index.html#Src.utils.df_std">[docs]</a><span class="k">def</span> <span class="nf">df_std</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the standard deviation of a dataframes column&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="n">col_name</span><span class="p">]]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="inverse_log_returns"><a class="viewcode-back" href="../../index.html#Src.utils.inverse_log_returns">[docs]</a><span class="k">def</span> <span class="nf">inverse_log_returns</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">log_returns</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a dataframes of predicted log returns and original </span>
+<span class="sd">    prices and returns an array of predicted absolute prices&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">log_returns</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+    <span class="c1"># shift is for </span>
+    <span class="k">if</span> <span class="n">shift</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">original_prices</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="p">(</span><span class="n">original_prices</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../index.html#Src.utils.mean_absolute_percentage_error">[docs]</a><span class="k">def</span> <span class="nf">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculated the mean absolute percentage error metric </span>
+<span class="sd">    between two arrays&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mean_directional_accuracy"><a class="viewcode-back" href="../../index.html#Src.utils.mean_directional_accuracy">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculated the mean directional accuracy</span>
+<span class="sd">    error metric between two arrays&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="../../index.html#Src.utils.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">y_orig_col</span><span class="p">,</span> <span class="n">y_pred_col</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculated the error metric for a dataframe </span>
+<span class="sd">    of predictions and observed values</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    MSE: Mean Squared Error</span>
+<span class="sd">    MAE: Mean Absolute Error</span>
+<span class="sd">    MDE: Mean Directional Error&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_orig_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="c1"># Dropping first NA column. Needs to be dropped because</span>
+    <span class="c1"># evaluate criteria can&#39;t deal with nans or zeros</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">y_orig_col</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_pred_col</span><span class="p">])</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">y_orig_col</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_pred_col</span><span class="p">])</span>
+    <span class="n">mde</span> <span class="o">=</span> <span class="n">mean_directional_accuracy</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">y_orig_col</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_pred_col</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mde</span></div>
+
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Industrial Metals Forecaster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Oliver Boom.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

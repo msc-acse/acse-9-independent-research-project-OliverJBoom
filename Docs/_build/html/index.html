@@ -34,16 +34,283 @@
             
   <div class="section" id="welcome-to-industrial-metals-forecaster-s-documentation">
 <h1>Welcome to Industrial Metals Forecaster’s documentation!<a class="headerlink" href="#welcome-to-industrial-metals-forecaster-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-Src.preprocessing">
+<span id="preprocessing-module"></span><h2>Preprocessing Module<a class="headerlink" href="#module-Src.preprocessing" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="Src.preprocessing.clean_data">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">clean_data</code><span class="sig-paren">(</span><em>df</em>, <em>n_std=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#clean_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.clean_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes any outliers that are further than a chosen
+number of standard deviations from the mean</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dataframe</em>) – the finacial time series</li>
+<li><strong>n_std</strong> (<em>int</em>) – the number of standard deviations from the mean</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the cleaned financial time series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.clean_dict_gen">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">clean_dict_gen</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#clean_dict_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.clean_dict_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of cleaned dataframes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – the financial time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the cleaned financial time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.column_rename">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">column_rename</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#column_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.column_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the name of the instrument
+name to the columns</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – the financial time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the financial time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.dimension_reduce">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">dimension_reduce</code><span class="sig-paren">(</span><em>df</em>, <em>n_dim</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#dimension_reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.dimension_reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performing PCA to reduce the amount of</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.dimension_selector">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">dimension_selector</code><span class="sig-paren">(</span><em>df</em>, <em>thresh=0.98</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#dimension_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.dimension_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of dimensions that reaches the
+threshold level of desired variance</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.drop_prices">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">drop_prices</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#drop_prices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.drop_prices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drops the prices column from the training dataset</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.generate_dataset">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">generate_dataset</code><span class="sig-paren">(</span><em>universe_dict</em>, <em>lag=5</em>, <em>lg_returns_only=True</em>, <em>price_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#generate_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.generate_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the full dataset</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.generate_lg_return">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">generate_lg_return</code><span class="sig-paren">(</span><em>df_full</em>, <em>lag=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#generate_lg_return"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.generate_lg_return" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary containing dataframes
+with the additional log returns column</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.generate_target">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">generate_target</code><span class="sig-paren">(</span><em>df_full</em>, <em>target_col='price_cu_lme'</em>, <em>lag=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#generate_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.generate_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the target variable</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.log_returns">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">log_returns</code><span class="sig-paren">(</span><em>series</em>, <em>lag=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#log_returns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.log_returns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate log returns between adjacent close prices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>series</strong> (<em>numpy array</em>) – prices to calculate the log returns on</li>
+<li><strong>lag</strong> (<em>int</em>) – the amount of days the returns are calculated between</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the series of log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.price_rename">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">price_rename</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#price_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.price_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renaming the column of the dataframe values to price</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – financial time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">financial time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.truncate_window_length">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">truncate_window_length</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#truncate_window_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.truncate_window_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chopping the length of all of the dataframes to ensure
+that they are all between the same dates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – the financial time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the truncated financial time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.preprocessing.universe_select">
+<code class="descclassname">Src.preprocessing.</code><code class="descname">universe_select</code><span class="sig-paren">(</span><em>path</em>, <em>commodity_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#universe_select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.universe_select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the instruments believed to be of
+interest for the commodity selected</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>type string</em>) – path to the csv folder</li>
+<li><strong>commodity_name</strong> (<em>type string</em>) – the name of the metal being inspected</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">financial time series relevant to the commodity</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Src.deeplearning">
+<span id="deeplearning-module"></span><h2>Deeplearning Module<a class="headerlink" href="#module-Src.deeplearning" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="Src.deeplearning.set_seed">
+<code class="descclassname">Src.deeplearning.</code><code class="descname">set_seed</code><span class="sig-paren">(</span><em>seed</em>, <em>device='cpu'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/deeplearning.html#set_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.deeplearning.set_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this to set all the random seeds to a fixed value
+and take out any randomness from cuda kernels</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Src.utils">
+<span id="utils-module"></span><h2>Utils Module<a class="headerlink" href="#module-Src.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="Src.utils.check_day_frequency">
+<code class="descclassname">Src.utils.</code><code class="descname">check_day_frequency</code><span class="sig-paren">(</span><em>df</em>, <em>day_col_name='ds'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#check_day_frequency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.check_day_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a barchart showing the frequency of the
+days of the week within a dataframe</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.check_length">
+<code class="descclassname">Src.utils.</code><code class="descname">check_length</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#check_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.check_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the name of all the dataframes in the
+dictionary of instruments</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.df_std">
+<code class="descclassname">Src.utils.</code><code class="descname">df_std</code><span class="sig-paren">(</span><em>df</em>, <em>col_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#df_std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.df_std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the standard deviation of a dataframes column</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.evaluate">
+<code class="descclassname">Src.utils.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>df</em>, <em>y_orig_col</em>, <em>y_pred_col</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated the error metric for a dataframe
+of predictions and observed values
+Returns:
+MSE: Mean Squared Error
+MAE: Mean Absolute Error
+MDE: Mean Directional Error</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.inverse_log_returns">
+<code class="descclassname">Src.utils.</code><code class="descname">inverse_log_returns</code><span class="sig-paren">(</span><em>original_prices</em>, <em>log_returns</em>, <em>lag=5</em>, <em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#inverse_log_returns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.inverse_log_returns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dataframes of predicted log returns and original
+prices and returns an array of predicted absolute prices</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.mean_absolute_percentage_error">
+<code class="descclassname">Src.utils.</code><code class="descname">mean_absolute_percentage_error</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#mean_absolute_percentage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.mean_absolute_percentage_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated the mean absolute percentage error metric
+between two arrays</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.mean_directional_accuracy">
+<code class="descclassname">Src.utils.</code><code class="descname">mean_directional_accuracy</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#mean_directional_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.mean_directional_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated the mean directional accuracy
+error metric between two arrays</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.visualise_df">
+<code class="descclassname">Src.utils.</code><code class="descname">visualise_df</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#visualise_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.visualise_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualises the features for an instrument</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Src.utils.visualise_universe">
+<code class="descclassname">Src.utils.</code><code class="descname">visualise_universe</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#visualise_universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.visualise_universe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the price and log return for every
+instrument in the univese dictionary</p>
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
-</div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+</div>
+</div>
 </div>
 
 

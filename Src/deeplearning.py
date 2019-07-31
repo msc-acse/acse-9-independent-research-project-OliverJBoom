@@ -15,6 +15,6 @@ def set_seed(seed, device='cpu'):
         torch.cuda.manual_seed_all(seed)
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False  
-        torch.backends.cudnn.enabled   = False
+        torch.backends.cudnn.enabled = False
 
     return True
