@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+from sklearn.decomposition import PCA
 
 def universe_select(path, commodity_name):
     """Selects the instruments believed to be of
@@ -157,3 +157,27 @@ def drop_prices(df):
     for col in df.columns: 
         if ("price" in col) == True: df.drop(columns=col, inplace=True)
     return df
+
+
+def dimension_reduce(df, n_dim):
+    """Performing PCA to reduce the amount of"""
+    pca = PCA(n_components=n_dim)
+    pca.fit(df)
+    df_reduced = pca.transform(df) 
+    print("Explained Variance:", pca.explained_variance_ratio_, 
+          "\nExplained Variance Sum:", sum(pca.explained_variance_ratio_))
+    return pd.DataFrame(df_reduced, index=df.index)
+
+
+def dimension_selector(df, thresh=0.98):
+    """Returns the number of dimensions that reaches the 
+    threshold level of desired variance"""
+    for n_dim in range(1, 11):
+        pca = PCA(n_components=n_dim)
+        pca.fit(df)
+        if sum(pca.explained_variance_ratio_) > thresh: 
+            print("Number of dimensions:", n_dim)
+            return n_dim
+    print("No level of dimensionality reaches threshold variance level %.3f" 
+            % sum(pca.explained_variance_ratio_))
+    return None
