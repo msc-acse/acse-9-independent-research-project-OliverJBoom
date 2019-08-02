@@ -1,4 +1,4 @@
-# Industrial Metal Prices Prediction
+# Industrial Metal Prices Prediction [![Build Status](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master)](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom)
 
 MSC Applied Computational Science & Engineering
 
@@ -23,10 +23,6 @@ This project contains the set of notebooks which use data science techniques to 
 ## Testing
 
 Continuous integration best practices has been utilized, using Travis CL
-
-Build Status:
-
-[![Build Status](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master)](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom)
 
 ## Acknowledgements
 
