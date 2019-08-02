@@ -20,9 +20,13 @@ This project contains the set of notebooks which use data science techniques to 
 
 ## Repository Structure
 
-## Continuous Integration
+## Testing
 
-https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master
+Continuous integration best practices has been utilized, using Travis CL
+
+Build Status:
+
+[![Build Status](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master)](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom)
 
 ## Acknowledgements
 
