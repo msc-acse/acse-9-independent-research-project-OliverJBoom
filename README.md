@@ -20,6 +20,9 @@ This project contains the set of notebooks which use data science techniques to 
 
 ## Repository Structure
 
+## Continuous Integration
+
+https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master
 
 ## Acknowledgements
 
