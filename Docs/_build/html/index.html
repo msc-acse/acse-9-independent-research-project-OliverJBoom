@@ -69,7 +69,7 @@ number of standard deviations from the mean</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – the financial time series</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the cleaned financial time series</td>
 </tr>
@@ -88,7 +88,7 @@ name to the columns</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – the financial time series</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the financial time series</td>
 </tr>
@@ -102,6 +102,24 @@ name to the columns</p>
 <dt id="Src.preprocessing.dimension_reduce">
 <code class="descclassname">Src.preprocessing.</code><code class="descname">dimension_reduce</code><span class="sig-paren">(</span><em>df</em>, <em>n_dim</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#dimension_reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.dimension_reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performing PCA to reduce the amount of</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dataframe</em>) – dataset to perform reduction on</li>
+<li><strong>n_dim</strong> (<em>int</em>) – number of dimensions to reduce to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">reduced dataset</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -109,18 +127,50 @@ name to the columns</p>
 <code class="descclassname">Src.preprocessing.</code><code class="descname">dimension_selector</code><span class="sig-paren">(</span><em>df</em>, <em>thresh=0.98</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#dimension_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.dimension_selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the number of dimensions that reaches the
 threshold level of desired variance</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="Src.preprocessing.drop_prices">
-<code class="descclassname">Src.preprocessing.</code><code class="descname">drop_prices</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#drop_prices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.drop_prices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drops the prices column from the training dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>dataframe</em>) – dataset to perform reduction on</li>
+<li><strong>thresh</strong> (<em>float</em>) – the amount of variance that must be contained in reduced dataset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the amount of dimensions needed to conatin the threshold variance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Src.preprocessing.generate_dataset">
 <code class="descclassname">Src.preprocessing.</code><code class="descname">generate_dataset</code><span class="sig-paren">(</span><em>universe_dict</em>, <em>lag=5</em>, <em>lg_returns_only=True</em>, <em>price_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#generate_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.generate_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates the full dataset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series</li>
+<li><strong>lag</strong> (<em>int</em>) – the amount of days the returns are calculated between</li>
+<li><strong>lg_returns_only</strong> (<em>bool</em>) – whether to return a dataset of log returns only</li>
+<li><strong>price_only</strong> (<em>bool</em>) – whether to return a dataset of raw prices only</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the financial time series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -128,6 +178,24 @@ threshold level of desired variance</p>
 <code class="descclassname">Src.preprocessing.</code><code class="descname">generate_lg_return</code><span class="sig-paren">(</span><em>df_full</em>, <em>lag=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/preprocessing.html#generate_lg_return"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.preprocessing.generate_lg_return" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary containing dataframes
 with the additional log returns column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df_full</strong> (<em>dataframe</em>) – the financial time series</li>
+<li><strong>lag</strong> (<em>int</em>) – the amount of days the returns are calculated between</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the financial time series with log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dataframe</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -168,7 +236,7 @@ with the additional log returns column</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – financial time series</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">financial time series</td>
 </tr>
@@ -240,6 +308,14 @@ and take out any randomness from cuda kernels</p>
 <code class="descclassname">Src.utils.</code><code class="descname">check_day_frequency</code><span class="sig-paren">(</span><em>df</em>, <em>day_col_name='ds'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#check_day_frequency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.check_day_frequency" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a barchart showing the frequency of the
 days of the week within a dataframe</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>pd.DataFrame</em>) – the time series to visualise</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -247,23 +323,65 @@ days of the week within a dataframe</p>
 <code class="descclassname">Src.utils.</code><code class="descname">check_length</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#check_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.check_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the name of all the dataframes in the
 dictionary of instruments</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Src.utils.df_std">
 <code class="descclassname">Src.utils.</code><code class="descname">df_std</code><span class="sig-paren">(</span><em>df</em>, <em>col_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#df_std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.df_std" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the standard deviation of a dataframes column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>pd.DataFrame</em>) – a dataframe of time series</li>
+<li><strong>col_name</strong> – the column of interest</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the standard deviation of the series on interest</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Src.utils.evaluate">
 <code class="descclassname">Src.utils.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>df</em>, <em>y_orig_col</em>, <em>y_pred_col</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculated the error metric for a dataframe
-of predictions and observed values
-Returns:
-MSE: Mean Squared Error
-MAE: Mean Absolute Error
-MDE: Mean Directional Error</p>
+of predictions and observed values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>pd.DataFrame</em>) – The dataframe containing the predicted and observed values</li>
+<li><strong>y_orig_col</strong> (<em>pd.Series</em>) – The observed values column name</li>
+<li><strong>y_pred_col</strong> (<em>pd.Series</em>) – The predicted values column name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return mse, mae, mde:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -271,6 +389,26 @@ MDE: Mean Directional Error</p>
 <code class="descclassname">Src.utils.</code><code class="descname">inverse_log_returns</code><span class="sig-paren">(</span><em>original_prices</em>, <em>log_returns</em>, <em>lag=5</em>, <em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#inverse_log_returns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.inverse_log_returns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a dataframes of predicted log returns and original
 prices and returns an array of predicted absolute prices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>original_prices</strong> (<em>pd.DataFrame</em>) – a dataframe of absolute prices</li>
+<li><strong>log_returns</strong> (<em>pd.DataFrame</em>) – a dataframe of log returns</li>
+<li><strong>lag</strong> (<em>int</em>) – the lag duration of the log returns</li>
+<li><strong>shift</strong> (<em>int</em>) – whether to offset the series forwards of backwards</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the raw prices indicated by the log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pd.Series</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -278,19 +416,63 @@ prices and returns an array of predicted absolute prices</p>
 <code class="descclassname">Src.utils.</code><code class="descname">mean_absolute_percentage_error</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#mean_absolute_percentage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.mean_absolute_percentage_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculated the mean absolute percentage error metric
 between two arrays</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>pd.Series</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>pd.Series</em>) – The predicted values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mean absolute percentage error of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Src.utils.mean_directional_accuracy">
 <code class="descclassname">Src.utils.</code><code class="descname">mean_directional_accuracy</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#mean_directional_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.mean_directional_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculated the mean directional accuracy
-error metric between two arrays</p>
+error metric between two series</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>pd.Series</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>pd.Series</em>) – The predicted values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mean direcional accuracy of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="Src.utils.visualise_df">
 <code class="descclassname">Src.utils.</code><code class="descname">visualise_df</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#visualise_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.visualise_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualises the features for an instrument</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>pd.DataFrame</em>) – the time series to visualise</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -298,6 +480,14 @@ error metric between two arrays</p>
 <code class="descclassname">Src.utils.</code><code class="descname">visualise_universe</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Src/utils.html#visualise_universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Src.utils.visualise_universe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the price and log return for every
 instrument in the univese dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – a dictionary of financial time series to visualise</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <div class="toctree-wrapper compound">

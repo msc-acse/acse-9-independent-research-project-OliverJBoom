@@ -41,12 +41,21 @@
 
 <div class="viewcode-block" id="check_length"><a class="viewcode-back" href="../../index.html#Src.utils.check_length">[docs]</a><span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks the name of all the dataframes in the </span>
-<span class="sd">    dictionary of instruments&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]))</span></div>
+<span class="sd">    dictionary of instruments</span>
+
+<span class="sd">    :param universe_dict: a dictionary of financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]))</span></div>
     
     
 <div class="viewcode-block" id="visualise_df"><a class="viewcode-back" href="../../index.html#Src.utils.visualise_df">[docs]</a><span class="k">def</span> <span class="nf">visualise_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Visualises the features for an instrument&quot;&quot;&quot;</span>
+  <span class="sd">&quot;&quot;&quot;Visualises the features for an instrument</span>
+
+<span class="sd">  :param df: the time series to visualise</span>
+<span class="sd">  :type df: pd.DataFrame</span>
+<span class="sd">  &quot;&quot;&quot;</span>
   <span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
 
   <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axarr</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
@@ -60,27 +69,61 @@
   
 <div class="viewcode-block" id="visualise_universe"><a class="viewcode-back" href="../../index.html#Src.utils.visualise_universe">[docs]</a><span class="k">def</span> <span class="nf">visualise_universe</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plots the price and log return for every </span>
-<span class="sd">    instrument in the univese dictionary&quot;&quot;&quot;</span>
+<span class="sd">    instrument in the univese dictionary</span>
+
+<span class="sd">    :param universe_dict: a dictionary of financial time series to visualise</span>
+<span class="sd">    :type universe_dict: dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="n">universe_dict</span><span class="p">:</span>
         <span class="n">visualise_df</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span></div>
             
     
 <div class="viewcode-block" id="check_day_frequency"><a class="viewcode-back" href="../../index.html#Src.utils.check_day_frequency">[docs]</a><span class="k">def</span> <span class="nf">check_day_frequency</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">day_col_name</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a barchart showing the frequency of the </span>
-<span class="sd">    days of the week within a dataframe&quot;&quot;&quot;</span>
+<span class="sd">    days of the week within a dataframe</span>
+
+<span class="sd">    :param df: the time series to visualise</span>
+<span class="sd">    :type df: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">day_col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">weekday_name</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span></div>
     
     
 <div class="viewcode-block" id="df_std"><a class="viewcode-back" href="../../index.html#Src.utils.df_std">[docs]</a><span class="k">def</span> <span class="nf">df_std</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the standard deviation of a dataframes column&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns the standard deviation of a dataframes column</span>
+
+<span class="sd">    :param df: a dataframe of time series</span>
+<span class="sd">    :type df: pd.DataFrame</span>
+
+<span class="sd">    :param col_name: the column of interest</span>
+<span class="sd">    :type df: pd.DataFrame</span>
+
+<span class="sd">    :return: the standard deviation of the series on interest</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="n">col_name</span><span class="p">]]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="inverse_log_returns"><a class="viewcode-back" href="../../index.html#Src.utils.inverse_log_returns">[docs]</a><span class="k">def</span> <span class="nf">inverse_log_returns</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">log_returns</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes a dataframes of predicted log returns and original </span>
-<span class="sd">    prices and returns an array of predicted absolute prices&quot;&quot;&quot;</span>
+<span class="sd">    prices and returns an array of predicted absolute prices</span>
+
+<span class="sd">    :param original_prices: a dataframe of absolute prices</span>
+<span class="sd">    :type original_prices: pd.DataFrame</span>
+
+<span class="sd">    :param log_returns: a dataframe of log returns</span>
+<span class="sd">    :type log_returns: pd.DataFrame</span>
+
+<span class="sd">    :param lag: the lag duration of the log returns</span>
+<span class="sd">    :type lag: int</span>
+
+<span class="sd">    :param shift: whether to offset the series forwards of backwards</span>
+<span class="sd">    :type shift: int</span>
+
+<span class="sd">    :return: the raw prices indicated by the log returns</span>
+<span class="sd">    :rtype:  pd.Series</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">log_returns</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
     <span class="c1"># shift is for </span>
@@ -92,7 +135,17 @@
 
 <div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../index.html#Src.utils.mean_absolute_percentage_error">[docs]</a><span class="k">def</span> <span class="nf">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculated the mean absolute percentage error metric </span>
-<span class="sd">    between two arrays&quot;&quot;&quot;</span>
+<span class="sd">    between two arrays</span>
+
+<span class="sd">    :param y_true: The observed values</span>
+<span class="sd">    :type y_true:  pd.Series</span>
+
+<span class="sd">    :param y_pred: The predicted values</span>
+<span class="sd">    :type y_pred: pd.Series</span>
+
+<span class="sd">    :return: The mean absolute percentage error of the series</span>
+<span class="sd">    :rtype:  float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">)</span></div>
@@ -100,7 +153,17 @@
 
 <div class="viewcode-block" id="mean_directional_accuracy"><a class="viewcode-back" href="../../index.html#Src.utils.mean_directional_accuracy">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculated the mean directional accuracy</span>
-<span class="sd">    error metric between two arrays&quot;&quot;&quot;</span>
+<span class="sd">    error metric between two series</span>
+
+<span class="sd">    :param y_true: The observed values</span>
+<span class="sd">    :type y_true:  pd.Series</span>
+
+<span class="sd">    :param y_pred: The predicted values</span>
+<span class="sd">    :type y_pred: pd.Series</span>
+
+<span class="sd">    :return: The mean direcional accuracy of the series</span>
+<span class="sd">    :rtype:  float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span></div>
@@ -109,10 +172,19 @@
 <div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="../../index.html#Src.utils.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">y_orig_col</span><span class="p">,</span> <span class="n">y_pred_col</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculated the error metric for a dataframe </span>
 <span class="sd">    of predictions and observed values</span>
-<span class="sd">    Returns:</span>
-<span class="sd">    MSE: Mean Squared Error</span>
-<span class="sd">    MAE: Mean Absolute Error</span>
-<span class="sd">    MDE: Mean Directional Error&quot;&quot;&quot;</span>
+
+<span class="sd">    :param df: The dataframe containing the predicted and observed values</span>
+<span class="sd">    :type df: pd.DataFrame</span>
+
+<span class="sd">    :param y_orig_col: The observed values column name</span>
+<span class="sd">    :type y_orig_col:  pd.Series</span>
+
+<span class="sd">    :param y_pred_col: The predicted values column name</span>
+<span class="sd">    :type y_pred_col: pd.Series</span>
+
+<span class="sd">    :return mse, mae, mde: Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_orig_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>

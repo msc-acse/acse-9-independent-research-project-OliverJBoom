@@ -5,7 +5,8 @@ import torch
 
 def set_seed(seed, device='cpu'):
     """Use this to set all the random seeds to a fixed value
-    and take out any randomness from cuda kernels"""
+    and take out any randomness from cuda kernels
+    """
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)

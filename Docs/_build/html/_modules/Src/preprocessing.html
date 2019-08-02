@@ -89,7 +89,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renaming the column of the dataframe values to price</span>
 <span class="sd">    </span>
-<span class="sd">    :param universe_dict: financial time series</span>
+<span class="sd">    :param universe_dict: a dictionary of financial time series</span>
 <span class="sd">    :type universe_dict: dict</span>
 <span class="sd">    </span>
 <span class="sd">    :return: financial time series</span>
@@ -135,7 +135,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a dictionary of cleaned dataframes</span>
 <span class="sd">    </span>
-<span class="sd">    :param universe_dict: the financial time series</span>
+<span class="sd">    :param universe_dict: a dictionary of financial time series</span>
 <span class="sd">    :type universe_dict: dict</span>
 <span class="sd">    </span>
 <span class="sd">    :return: the cleaned financial time series</span>
@@ -184,7 +184,7 @@
     <span class="sd">&quot;&quot;&quot;Appends the name of the instrument</span>
 <span class="sd">    name to the columns</span>
 <span class="sd">    </span>
-<span class="sd">    :param universe_dict: the financial time series</span>
+<span class="sd">    :param universe_dict: a dictionary of financial time series</span>
 <span class="sd">    :type universe_dict: dict</span>
 <span class="sd">    </span>
 <span class="sd">    :return: the financial time series</span>
@@ -225,7 +225,17 @@
 
 <div class="viewcode-block" id="generate_lg_return"><a class="viewcode-back" href="../../index.html#Src.preprocessing.generate_lg_return">[docs]</a><span class="k">def</span> <span class="nf">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a dictionary containing dataframes</span>
-<span class="sd">    with the additional log returns column&quot;&quot;&quot;</span>
+<span class="sd">    with the additional log returns column</span>
+
+<span class="sd">    :param df_full: the financial time series</span>
+<span class="sd">    :type df_full: dataframe</span>
+
+<span class="sd">    :param lag: the amount of days the returns are calculated between</span>
+<span class="sd">    :type lag: int</span>
+
+<span class="sd">    :return: the financial time series with log returns</span>
+<span class="sd">    :rtype: dataframe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_full</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="c1"># Selecting out the dataframe of interest</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[[</span><span class="n">col</span><span class="p">]]</span>
@@ -243,7 +253,23 @@
 
 <div class="viewcode-block" id="generate_dataset"><a class="viewcode-back" href="../../index.html#Src.preprocessing.generate_dataset">[docs]</a><span class="k">def</span> <span class="nf">generate_dataset</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                      <span class="n">lg_returns_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">price_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generates the full dataset&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generates the full dataset</span>
+
+<span class="sd">    :param universe_dict: a dictionary of financial time series</span>
+<span class="sd">    :type universe_dict: dict</span>
+
+<span class="sd">    :param lag: the amount of days the returns are calculated between</span>
+<span class="sd">    :type lag: int</span>
+
+<span class="sd">    :param lg_returns_only: whether to return a dataset of log returns only</span>
+<span class="sd">    :type lg_returns_only: bool</span>
+
+<span class="sd">    :param price_only: whether to return a dataset of raw prices only</span>
+<span class="sd">    :type price_only: bool</span>
+
+<span class="sd">    :return: the financial time series</span>
+<span class="sd">    :rtype: dataframe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">lg_returns_only</span><span class="p">:</span>
         <span class="k">assert</span> <span class="p">(</span><span class="n">lg_returns_only</span> <span class="o">!=</span> <span class="n">price_only</span><span class="p">)</span>
 
@@ -280,16 +306,19 @@
     <span class="k">return</span> <span class="n">df_full</span></div>
 
 
-<div class="viewcode-block" id="drop_prices"><a class="viewcode-back" href="../../index.html#Src.preprocessing.drop_prices">[docs]</a><span class="k">def</span> <span class="nf">drop_prices</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Drops the prices column from the training dataset&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-        <span class="k">if</span> <span class="s2">&quot;price&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span></div>
-
 
 <div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Performing PCA to reduce the amount of&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Performing PCA to reduce the amount of</span>
+
+<span class="sd">    :param df: dataset to perform reduction on</span>
+<span class="sd">    :type df: dataframe</span>
+
+<span class="sd">    :param n_dim: number of dimensions to reduce to</span>
+<span class="sd">    :type n_dim: int</span>
+
+<span class="sd">    :return: reduced dataset</span>
+<span class="sd">    :rtype: dataframe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
     <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="n">df_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -300,7 +329,18 @@
 
 <div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the number of dimensions that reaches the </span>
-<span class="sd">    threshold level of desired variance&quot;&quot;&quot;</span>
+<span class="sd">    threshold level of desired variance</span>
+
+<span class="sd">    :param df: dataset to perform reduction on</span>
+<span class="sd">    :type df: dataframe</span>
+
+<span class="sd">    :param thresh: the amount of variance that must be contained in reduced dataset</span>
+<span class="sd">    :type thresh: float</span>
+
+<span class="sd">    :return: the amount of dimensions needed to conatin the threshold variance</span>
+<span class="sd">    :rtype: int</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">n_dim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
         <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
         <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>

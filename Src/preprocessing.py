@@ -54,7 +54,7 @@ def price_rename(universe_dict):
     """
     Renaming the column of the dataframe values to price
     
-    :param universe_dict: financial time series
+    :param universe_dict: a dictionary of financial time series
     :type universe_dict: dict
     
     :return: financial time series
@@ -100,7 +100,7 @@ def clean_dict_gen(universe_dict):
     """
     Returns a dictionary of cleaned dataframes
     
-    :param universe_dict: the financial time series
+    :param universe_dict: a dictionary of financial time series
     :type universe_dict: dict
     
     :return: the cleaned financial time series
@@ -149,7 +149,7 @@ def column_rename(universe_dict):
     """Appends the name of the instrument
     name to the columns
     
-    :param universe_dict: the financial time series
+    :param universe_dict: a dictionary of financial time series
     :type universe_dict: dict
     
     :return: the financial time series
@@ -190,7 +190,17 @@ def generate_target(df_full, target_col="price_cu_lme", lag=5):
 
 def generate_lg_return(df_full, lag=1):
     """Returns a dictionary containing dataframes
-    with the additional log returns column"""
+    with the additional log returns column
+
+    :param df_full: the financial time series
+    :type df_full: dataframe
+
+    :param lag: the amount of days the returns are calculated between
+    :type lag: int
+
+    :return: the financial time series with log returns
+    :rtype: dataframe
+    """
     for col in df_full.columns:
         # Selecting out the dataframe of interest
         df = df_full[[col]]
@@ -208,7 +218,23 @@ def generate_lg_return(df_full, lag=1):
 
 def generate_dataset(universe_dict, lag=5,
                      lg_returns_only=True, price_only=False):
-    """Generates the full dataset"""
+    """Generates the full dataset
+
+    :param universe_dict: a dictionary of financial time series
+    :type universe_dict: dict
+
+    :param lag: the amount of days the returns are calculated between
+    :type lag: int
+
+    :param lg_returns_only: whether to return a dataset of log returns only
+    :type lg_returns_only: bool
+
+    :param price_only: whether to return a dataset of raw prices only
+    :type price_only: bool
+
+    :return: the financial time series
+    :rtype: dataframe
+    """
     if lg_returns_only:
         assert (lg_returns_only != price_only)
 
@@ -245,16 +271,19 @@ def generate_dataset(universe_dict, lag=5,
     return df_full
 
 
-def drop_prices(df):
-    """Drops the prices column from the training dataset"""
-    for col in df.columns:
-        if "price" in col:
-            df.drop(columns=col, inplace=True)
-    return df
-
 
 def dimension_reduce(df, n_dim):
-    """Performing PCA to reduce the amount of"""
+    """Performing PCA to reduce the amount of
+
+    :param df: dataset to perform reduction on
+    :type df: dataframe
+
+    :param n_dim: number of dimensions to reduce to
+    :type n_dim: int
+
+    :return: reduced dataset
+    :rtype: dataframe
+    """
     pca = PCA(n_components=n_dim)
     pca.fit(df)
     df_reduced = pca.transform(df)
@@ -265,7 +294,18 @@ def dimension_reduce(df, n_dim):
 
 def dimension_selector(df, thresh=0.98):
     """Returns the number of dimensions that reaches the 
-    threshold level of desired variance"""
+    threshold level of desired variance
+
+    :param df: dataset to perform reduction on
+    :type df: dataframe
+
+    :param thresh: the amount of variance that must be contained in reduced dataset
+    :type thresh: float
+
+    :return: the amount of dimensions needed to conatin the threshold variance
+    :rtype: int
+
+    """
     for n_dim in range(1, 11):
         pca = PCA(n_components=n_dim)
         pca.fit(df)
