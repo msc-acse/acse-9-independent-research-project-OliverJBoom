@@ -24,13 +24,13 @@ def set_seed(seed, device='cpu'):
 
 def model_save(model, name, val_score, path="Models/"):
     """Saving function to keep track of models"""
-    val = str(learning.best_val_score)[:5].replace(".", "_")
+    val = str(val_score)[:5].replace(".", "_")
     print("Saving model:", path + name + '_' + val + '.pth')
     torch.save(model, path + name + '_' + val + '.pth')
     return
 
 
-def model_load(path, model_name):
+def model_load(model_name, path="Models/"):
     """Loading function for models from google drive"""
     model = torch.load(path + model_name + '.pth')
     return model
