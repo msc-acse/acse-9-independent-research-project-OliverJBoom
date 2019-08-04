@@ -16,22 +16,20 @@ def check_length(universe_dict):
     
     
 def visualise_df(df):
-  """Visualises the features for an instrument
+    """Visualises the features for an instrument
+    :param df: the time series to visualise
+    :type df: pd.DataFrame
+    """
+    fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
 
-  :param df: the time series to visualise
-  :type df: pd.DataFrame
-  """
-  fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
-
-  for ax, df_name in zip(axarr.flatten(), df.columns):
+    for ax, df_name in zip(axarr.flatten(), df.columns):
         ax.set_title(df_name)
         ax.plot(df.index, df[df_name])
         ax.grid()
         ax.legend()
+    plt.show()
 
-plt.show()
-
-  
+    
 def visualise_universe(universe_dict):
     """Plots the price and log return for every 
     instrument in the univese dictionary
@@ -162,5 +160,71 @@ def evaluate(df, y_orig_col, y_pred_col):
     mde = mean_directional_accuracy(df[y_orig_col], df[y_pred_col])
     return mse, mae, mde
 
+
+def param_strip(param):
+    """Strips the key text info out of certain parameters"""
+    return str(param)[:str(param).find('(')]
+
+
+def full_save(model, 
+              name_tag,
+              optimiser,
+              num_epoch, 
+              learning_rate, 
+              momentum,
+              weight_decay, 
+              PCA_used, 
+              data_X_shape,
+              train_loss,
+              val_loss, 
+              test_loss,
+              train_time, 
+              path="Models/"):             
+    """Saves the models weights and hyperparameters to a pth file and csv file"""
+    ind = ["Model",
+       "Optimiser",
+       "Epoch Number", 
+       'Learning Rate', 
+       "Momentum",
+       "Weight Decay", 
+       "PCA", 
+       "Num Features",
+       "Dataset Length",
+       "Series Length",
+       "Training Loss",
+       "Validation loss", 
+       "Test Loss",
+       "Training Time"]
+
+    model_name = param_strip(model_lstm)
+
+    row = [model_name,
+       param_strip(optimiser),
+       num_epoch, 
+       learning_rate, 
+       momentum,
+       weight_decay, 
+       PCA, 
+       data_X_shape[2],
+       data_X_shape[0], 
+       data_X_shape[1],
+       train_loss,
+       val_loss, 
+       test_loss,
+       train_time]
+    
+    ind = [str(i) for i in ind] 
+    row = [str(i) for i in row] 
+
+    ind = [",".join(ind)]
+    row = [",".join(row)]
+
+    model_save(model, 
+             path = path, 
+             name="LSTM", 
+             val_score=val_loss)
+
+    np.savetxt(path + name_tag + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
+    return True
 
 

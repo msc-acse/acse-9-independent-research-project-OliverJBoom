@@ -273,32 +273,31 @@ def generate_dataset(universe_dict, lag=5,
 
 
 
-def dimension_reduce(df, n_dim):
+def dimension_reduce(data_X, n_dim):
     """Performing PCA to reduce the amount of
 
-    :param df: dataset to perform reduction on
-    :type df: dataframe
+    :param data_X: array to perform reduction on
+    :type data_X: np.array
 
     :param n_dim: number of dimensions to reduce to
     :type n_dim: int
 
     :return: reduced dataset
-    :rtype: dataframe
+    :rtype: np.array
     """
     pca = PCA(n_components=n_dim)
-    pca.fit(df)
-    df_reduced = pca.transform(df)
+    data_X = pca.fit_transform(data_X)
     print("Explained Variance:", pca.explained_variance_ratio_,
           "\nExplained Variance Sum:", sum(pca.explained_variance_ratio_))
-    return pd.DataFrame(df_reduced, index=df.index)
+    return data_X
 
 
-def dimension_selector(df, thresh=0.98):
+def dimension_selector(data_X, thresh=0.98):
     """Returns the number of dimensions that reaches the 
     threshold level of desired variance
 
-    :param df: dataset to perform reduction on
-    :type df: dataframe
+    :param data_X: dataset to perform reduction on
+    :type data_X: np.array
 
     :param thresh: the amount of variance that must be contained in reduced dataset
     :type thresh: float
@@ -309,43 +308,10 @@ def dimension_selector(df, thresh=0.98):
     """
     for n_dim in range(1, 11):
         pca = PCA(n_components=n_dim)
-        pca.fit(df)
+        pca.fit(data_X)
         if sum(pca.explained_variance_ratio_) > thresh:
             print("Number of dimensions:", n_dim)
             return n_dim
     print("No level of dimensionality reaches threshold variance level %.3f"
           % sum(pca.explained_variance_ratio_))
     return None
-
-
-
-
-def feature_spawn(df):
-    """Spawns features for each instrument
-    Returns df with the following columns for each
-    instrument
-    Log Returns
-    EWMA 1 day
-    EWMA 1 week
-    EWMA 1 month
-    EWMA 1 quarter
-    EWMA 6 months
-    EWMA 1 year
-    Rolling vol 1 week
-    Rolling vol 1 month
-    Rolling vol 1 quarter
-    """
-    hlf_dict = {"week":5, "month":22, "quarter":66, "half_year":130, "year":261}
-
-    for col in df.columns:
-        for half_life in hlf_dict:
-            df[col + "_ema_" + half_life] = df[col].ewm(span=hlf_dict[half_life]).mean()
-
-        for i, half_life in enumerate(hlf_dict):
-            if i < 3:
-                df[col + "_roll_vol_" + half_life] = df[col].rolling(window=hlf_dict[half_life]).std(ddof=0)
-
-    df.dropna(inplace=True)
-    return df
-
-
