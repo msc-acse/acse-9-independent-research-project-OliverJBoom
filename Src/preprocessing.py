@@ -254,19 +254,20 @@ def generate_dataset(universe_dict, lag=5,
     # Calculating the log returns
     df_full = generate_lg_return(df_full)
 
-    # Fill in nan to allow inverse calculations
-    df_full["target"] = np.nan
-    # As target is forecast backdated the first row values should have
-    # value and the last should have nulls
-    df_full["target"][:-lag] = generate_target(df_full,
-                                               target_col="price_cu_lme",
-                                               lag=5)[:-lag].values.ravel()
+#     # Fill in nan to allow inverse calculations
+#     df_full["target"] = np.nan
+#     # As target is forecast backdated the first row values should have
+#     # value and the last should have nulls
+#     df_full["target"][:-lag] = generate_target(df_full,
+#                                                target_col="price_cu_lme",
+#                                                lag=5)[:-lag].values.ravel()
 
     if lg_returns_only:
         df_full = df_full[df_full.columns.drop(list(df_full.filter(regex='price')))]
 
     if price_only:
-        df_full = df_full[list(df_full.filter(regex='price')) + ['target']]
+        df_full = df_full[list(df_full.filter(regex='price'))]
+#         df_full = df_full[list(df_full.filter(regex='price')) + ['target']]
 
     return df_full
 
@@ -315,3 +316,36 @@ def dimension_selector(df, thresh=0.98):
     print("No level of dimensionality reaches threshold variance level %.3f"
           % sum(pca.explained_variance_ratio_))
     return None
+
+
+
+
+def feature_spawn(df):
+    """Spawns features for each instrument
+    Returns df with the following columns for each
+    instrument
+    Log Returns
+    EWMA 1 day
+    EWMA 1 week
+    EWMA 1 month
+    EWMA 1 quarter
+    EWMA 6 months
+    EWMA 1 year
+    Rolling vol 1 week
+    Rolling vol 1 month
+    Rolling vol 1 quarter
+    """
+    hlf_dict = {"week":5, "month":22, "quarter":66, "half_year":130, "year":261}
+
+    for col in df.columns:
+        for half_life in hlf_dict:
+            df[col + "_ema_" + half_life] = df[col].ewm(span=hlf_dict[half_life]).mean()
+
+        for i, half_life in enumerate(hlf_dict):
+            if i < 3:
+                df[col + "_roll_vol_" + half_life] = df[col].rolling(window=hlf_dict[half_life]).std(ddof=0)
+
+    df.dropna(inplace=True)
+    return df
+
+
