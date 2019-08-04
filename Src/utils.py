@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy.ndimage.interpolation import shift
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
@@ -101,19 +102,37 @@ def mean_absolute_percentage_error(y_true, y_pred):
     between two arrays
 
     :param y_true: The observed values
-    :type y_true:  pd.Series
+    :type y_true:  np.array
 
     :param y_pred: The predicted values
-    :type y_pred: pd.Series
+    :type y_pred: np.array
 
     :return: The mean absolute percentage error of the series
     :rtype:  float
     """
-    assert isinstance(y_true, pd.core.series.Series)
-    assert isinstance(y_pred, pd.core.series.Series)
     return 100 * np.mean(np.abs(y_true - y_pred) / y_true)
 
 
+def evaluate(y_true, y_pred):
+    """Calculated the error metric for a dataframe 
+    of predictions and observed values
+
+    :param y_true: The observed values
+    :type y_true:  np.array
+
+    :param y_pred: The predicted values
+    :type y_pred: np.array
+
+    :return mse, mae, mde: Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics
+    :rtype: float
+    """   
+    mse = mean_squared_error(y_true, y_pred)
+    mae = mean_absolute_error(y_true, y_pred)
+    mde = mean_directional_accuracy(y_true, y_pred)
+    return mse, mae, mde
+  
+  
+  
 def mean_directional_accuracy(y_true, y_pred):
     """Calculated the mean directional accuracy
     error metric between two series
@@ -127,38 +146,7 @@ def mean_directional_accuracy(y_true, y_pred):
     :return: The mean direcional accuracy of the series
     :rtype:  float
     """
-    assert isinstance(y_true, pd.core.series.Series)
-    assert isinstance(y_pred, pd.core.series.Series)
-    return np.mean(np.sign(y_true - y_true.shift(1)) == np.sign(y_pred - y_pred.shift(1)))
-
-
-def evaluate(df, y_orig_col, y_pred_col):
-    """Calculated the error metric for a dataframe 
-    of predictions and observed values
-
-    :param df: The dataframe containing the predicted and observed values
-    :type df: pd.DataFrame
-
-    :param y_orig_col: The observed values column name
-    :type y_orig_col:  pd.Series
-
-    :param y_pred_col: The predicted values column name
-    :type y_pred_col: pd.Series
-
-    :return mse, mae, mde: Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics
-    :rtype: float
-    """
-    assert isinstance(df, pd.DataFrame)
-    assert isinstance(y_orig_col, str)
-    assert isinstance(y_pred_col, str)
-    # Dropping first NA column. Needs to be dropped because
-    # evaluate criteria can't deal with nans or zeros
-    df = df.dropna()
-    
-    mse = mean_squared_error(df[y_orig_col], df[y_pred_col])
-    mae = mean_absolute_error(df[y_orig_col], df[y_pred_col])
-    mde = mean_directional_accuracy(df[y_orig_col], df[y_pred_col])
-    return mse, mae, mde
+    return np.mean(np.sign(y_true - shift(y_true, 1)) == np.sign(y_pred - shift(y_pred,(1))))
 
 
 def param_strip(param):
@@ -174,7 +162,7 @@ def full_save(model,
               momentum,
               weight_decay, 
               PCA_used, 
-              data_X_shape,
+              data_X,
               train_loss,
               val_loss, 
               test_loss,
@@ -198,7 +186,7 @@ def full_save(model,
        "Hidden Layer Dimensions",
        "Training Time"]
 
-    model_name = param_strip(model_lstm)
+    model_name = param_strip(model)
 
     row = [model_name,
        param_strip(optimiser),
@@ -207,9 +195,9 @@ def full_save(model,
        momentum,
        weight_decay, 
        PCA, 
-       data_X_shape[2],
-       data_X_shape[0], 
-       data_X_shape[1],
+       data_X.shape[2],
+       data_X.shape[0], 
+       data_X.shape[1],
        train_loss,
        val_loss, 
        test_loss,
