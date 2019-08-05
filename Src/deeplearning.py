@@ -5,7 +5,7 @@ import time
 import torch
 from torch.utils.data import TensorDataset, DataLoader
 from sklearn.model_selection import train_test_split
-
+from statistics import median
 
 def set_seed(seed, device='cpu'):
     """Use this to set all the random seeds to a fixed value
