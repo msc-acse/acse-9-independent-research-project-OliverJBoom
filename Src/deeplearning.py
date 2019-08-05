@@ -185,7 +185,7 @@ class DeepLearning():
         self.early_stop = early_stop
         
         if self.early_stop: 
-            self.early = early_stopping(patience=patience, rel_tol=tol, early_verbose)
+            self.early = early_stopping(patience=patience, rel_tol=tol, verbose=early_verbose)
         
         
     def train_val_test(self):
