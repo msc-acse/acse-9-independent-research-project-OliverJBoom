@@ -185,7 +185,7 @@ class DeepLearning():
         self.early_stop = early_stop
         
         if self.early_stop: 
-            self.early = early_stopping(patience=patience, rel_tol=tol, verbose=early_verbose)
+            self.early = early_stopping(patience=patience, rel_tol=tol, early_verbose)
         
         
     def train_val_test(self):
@@ -422,13 +422,9 @@ class DeepLearning():
             
             # Saving the best model
             if val_loss.item() <= self.best_val_score:
-                print("saving model", val_loss)
-                
                 self.best_model = deepcopy(self.model)
                 self.best_val_score = val_loss.item()
-            
-            print("best model score", self.evaluate(self.best_model, self.val_loader))
-            
+                
             train_log.append(train_loss.item())
             val_log.append(val_loss.item())
             self.logs["Training Loss"] = train_log
