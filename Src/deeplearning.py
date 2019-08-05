@@ -1,3 +1,4 @@
+from copy import deepcopy
 import matplotlib.pyplot as plt
 import numpy as np
 import random
@@ -62,7 +63,6 @@ class early_stopping:
     
     # If the score is under the required relative tolerance
     # increase the counter is incremented
-    print(self.best_score * (1 - self.rel_tol))
     if score > self.best_score * (1 - self.rel_tol):
         self.counter += 1
     else:
@@ -339,7 +339,7 @@ class DeepLearning():
     def evaluate(self, model, test_loader):
         """Evaluates the performance of the network on unseen test data"""
         # Set the model to evaluate mode
-        model.eval()
+        model = model.eval()
 
         test_loss = 0.
 
@@ -417,11 +417,16 @@ class DeepLearning():
             
             train_loss = self.train(self.train_loader) 
             val_loss = self.validate(self.val_loader) 
+
             
             # Saving the best model
-            if val_loss <= self.best_val_score:
-                self.best_model = self.model
+            if val_loss.item() <= self.best_val_score:
+                print("saving model", val_loss)
+                
+                self.best_model = deepcopy(self.model)
                 self.best_val_score = val_loss.item()
+            
+            print("best model score", self.evaluate(self.best_model, self.val_loader))
             
             train_log.append(train_loss.item())
             val_log.append(val_loss.item())
@@ -434,6 +439,7 @@ class DeepLearning():
                 self.early(val_loss.item())
                 if self.early.stop:
                     print("Early Stopping")
+                    self.model = self.best_model
                     break
                   
             if (epoch % self.disp_freq == 0): 
@@ -442,3 +448,6 @@ class DeepLearning():
                 
             if (epoch % self.fig_disp_freq == 0):
                 self.live_pred_plot()
+                
+        # Storing the best model
+        self.model = self.best_model
