@@ -401,7 +401,7 @@ class DeepLearning():
         set_seed(int(self.seed))
         
         # Create data loaders
-        learning.create_data_loaders()
+        self.create_data_loaders()
         
         train_log = []
         val_log = []
