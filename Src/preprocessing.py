@@ -254,20 +254,11 @@ def generate_dataset(universe_dict, lag=5,
     # Calculating the log returns
     df_full = generate_lg_return(df_full)
 
-#     # Fill in nan to allow inverse calculations
-#     df_full["target"] = np.nan
-#     # As target is forecast backdated the first row values should have
-#     # value and the last should have nulls
-#     df_full["target"][:-lag] = generate_target(df_full,
-#                                                target_col="price_cu_lme",
-#                                                lag=5)[:-lag].values.ravel()
-
     if lg_returns_only:
         df_full = df_full[df_full.columns.drop(list(df_full.filter(regex='price')))]
 
     if price_only:
         df_full = df_full[list(df_full.filter(regex='price'))]
-#         df_full = df_full[list(df_full.filter(regex='price')) + ['target']]
 
     return df_full
 
@@ -315,3 +306,18 @@ def dimension_selector(data_X, thresh=0.98):
     print("No level of dimensionality reaches threshold variance level %.3f"
           % sum(pca.explained_variance_ratio_))
     return None
+
+
+
+def slice_series(data_X, data_y, series_length, dataset_pct=1.0):
+    """TODO"""
+    length = int(len(data_X) * dataset_pct)
+
+    data_X_ = []
+    data_y_ = []
+
+    for i in range(series_length, length):
+        data_X_.append(data_X[i-series_length:i, :])
+        data_y_.append(data_y[i])
+
+    return np.array(data_X_), np.array(data_y_)
