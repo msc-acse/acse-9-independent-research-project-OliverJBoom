@@ -87,7 +87,6 @@ class DeepLearning():
     df_y
     n_epochs,
     optimiser, 
-    window_size,
     loss_function
     device
     seed=42
@@ -96,7 +95,7 @@ class DeepLearning():
     def __init__(self, model, data_X, data_y,
                  n_epochs,
                  optimiser, 
-                 window_size,
+                 batch_size,
                  loss_function=torch.nn.MSELoss(size_average=False),
                  device="cpu", 
                  seed=42,
@@ -163,8 +162,8 @@ class DeepLearning():
         # Test data loader
         self.test_loader = None
         
-        # The length of the time series window
-        self.window_size = window_size
+        # Batch size
+        self.batch_size = batch_size
         
         # How frequently the loss is printed
         self.disp_freq = disp_freq
@@ -242,9 +241,9 @@ class DeepLearning():
         if self.device =='cuda': self.pin_memory=True
           
         # Data loaders
-        self.train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
-        self.val_loader = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
-        self.test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
+        self.train_loader = DataLoader(dataset=train_dataset, batch_size=self.batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
+        self.val_loader = DataLoader(dataset=val_dataset, batch_size=self.batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
+        self.test_loader = DataLoader(dataset=test_dataset, batch_size=self.batch_size, shuffle=False, num_workers=8,  pin_memory=self.pin_memory)
     
     
     def train(self, train_loader):
