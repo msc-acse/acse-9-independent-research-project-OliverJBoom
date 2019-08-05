@@ -49,7 +49,7 @@ class early_stopping:
   training
   If rel_tol is set to 0 it becomes a common counter
   """
-  def __init__(self, patience, rel_tol, verbose=True):
+  def __init__(self, patience, rel_tol, verbose=False):
     
     self.patience = patience
     self.rel_tol = rel_tol
@@ -104,6 +104,7 @@ class DeepLearning():
                  disp_freq=20,
                  fig_disp_freq=50, 
                  early_stop=True,
+                 early_verbose=False,
                  patience=50,
                  tol=0):
         
@@ -184,7 +185,7 @@ class DeepLearning():
         self.early_stop = early_stop
         
         if self.early_stop: 
-            self.early = early_stopping(patience=patience, rel_tol=tol)
+            self.early = early_stopping(patience=patience, rel_tol=tol, early_verbose)
         
         
     def train_val_test(self):
