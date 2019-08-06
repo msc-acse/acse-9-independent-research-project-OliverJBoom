@@ -235,7 +235,8 @@ class DeepLearning():
 
         if self.early_stop:
             self.early = early_stopping(patience=patience, rel_tol=rel_tol, verbose=early_verbose)
-
+    
+        self.MTL = False
 
     def train_val_test(self):
         """Splits the dataframes in to a training, validation
@@ -266,7 +267,9 @@ class DeepLearning():
         if self.debug:
             print("\nInitial Size Check:")
             self.size_check()
-
+            
+        if self.y_test.dim()!=1:
+            self.MTL = True
 
     def size_check(self):
         """Checks the size of the datasets"""
@@ -279,12 +282,9 @@ class DeepLearning():
             print("y Val Shape:\t\t", self.y_val.size())
             print("y Test Shape:\t\t", self.y_test.size())
 
-
-
     def create_data_loaders(self):
         """Forms iterators to pipeline in the data
         """
-
         # Create tensor datasets
         train_dataset = TensorDataset(self.X_train, self.y_train)
         val_dataset = TensorDataset(self.X_val, self.y_val)
@@ -313,13 +313,14 @@ class DeepLearning():
 
         train_loss = 0.
 
-        # List of each batch predictions
-        pred_list = []
-
+        # Selecting the number of output features
+        if self.MTL: 
+            pred_list = np.empty((0, self.y_test.shape[1]))
+        else: 
+            pred_list = np.empty((0, 1))
+        
         # The data loader creates batches of data to train
-        for i_batch, (X_train_batch, y_train_batch) in enumerate(train_loader):
-
-            #print('Batch : ', i_batch)
+        for i_batch, (X_train_batch, y_train_batch) in enumerate(train_loader):  
 
             # Sending the data to GPU if available
             X_train_batch = X_train_batch.to(self.device)
@@ -339,19 +340,21 @@ class DeepLearning():
 
             # Perform backward pass
             loss.backward()
-
+            
+            self.inspect = y_pred.detach().numpy()
+            
             # Adding the predictions for this batch to prediction list
-            pred_list.append(y_pred)
+            pred_list = np.concatenate([pred_list, y_pred.detach().numpy()], axis=0)
 
             # Calculate the training loss
             train_loss += (loss * X_train_batch.size()[0]).detach().cpu().numpy()
 
             # Update Parameters
-            self.optimiser.step()
-
-        # Converting an array of batches of predictions to a list of predictions
-        self.train_predictions = [single_pred for batch in pred_list for single_pred in batch.detach().cpu().numpy()]
-
+            self.optimiser.step()            
+        
+        # Saving the predictions
+        self.train_predictions = pred_list
+            
         return train_loss/len(train_loader.dataset.tensors[0])
 
 
@@ -371,7 +374,10 @@ class DeepLearning():
         val_loss = 0.
 
         # List of each batch predictions
-        val_pred_list = []
+        if self.MTL: 
+            val_pred_list = np.empty((0, self.y_test.shape[1]))
+        else: 
+            val_pred_list = np.empty((0, 1))
 
         # The data loader creates batches of data to validate
         for X_val_batch, y_val_batch in val_loader:
@@ -390,13 +396,13 @@ class DeepLearning():
                 loss = self.loss_function(y_pred, y_val_batch)
 
                 # Adding the predictions for this batch to prediction list
-                val_pred_list.append(y_pred)
-
+                val_pred_list = np.concatenate([val_pred_list, y_pred.detach().numpy()], axis=0)
+            
                 # Calculate the validation loss
                 val_loss += (loss * X_val_batch.size()[0]).detach().cpu().numpy()
 
         # Converting an array of batches of predictions to a list of predictions
-        self.val_predictions = [single_pred for batch in val_pred_list for single_pred in batch.detach().cpu().numpy()]
+        self.val_predictions = val_pred_list
 
         return val_loss/len(val_loader.dataset.tensors[0])
 
@@ -420,8 +426,11 @@ class DeepLearning():
 
         test_loss = 0.
 
-        # List of each batch predictions
-        test_pred_list = []
+        # Selecting the number of output features
+        if self.MTL: 
+            test_pred_list = np.empty((0, self.y_test.shape[1]))
+        else: 
+            test_pred_list = np.empty((0, 1))
 
         # The data loader creates batches of data to validate
         for X_test_batch, y_test_batch in test_loader:
@@ -440,13 +449,13 @@ class DeepLearning():
                 loss = self.loss_function(y_pred, y_test_batch)
 
                 # Adding the predictions for this batch to prediction list
-                test_pred_list.append(y_pred)
+                test_pred_list = np.concatenate([test_pred_list, y_pred.detach().numpy()], axis=0)
 
                 # Calculate the validation loss
                 test_loss += (loss * X_test_batch.size()[0]).detach().cpu().numpy()
 
         # Converting an array of batches of predictions to a list of predictions
-        self.test_predictions = [single_pred for batch in test_pred_list for single_pred in batch.detach().cpu().numpy()]
+        self.test_predictions = test_pred_list
 
         return test_loss/len(test_loader.dataset.tensors[0])
 
@@ -454,26 +463,49 @@ class DeepLearning():
     def live_pred_plot(self):
         """Plots the training predictions, validation predictions
         and the live training/validation losses
-        """
-        fig, ax = plt.subplots(1, 3, figsize= (20, 5))
+        """        
+        if self.MTL:
+            fig, ax = plt.subplots(1, 4, figsize= (20, 5))
 
-        ax[0].set_title("Training Predictions")
-        ax[0].plot(self.train_predictions, label="Predicted")
-        ax[0].plot(self.y_train.numpy(), label="Observed")
-        ax[0].legend()
+            ax[0].set_title("Training Predictions")
+            ax[0].plot(self.train_predictions, label="Predicted")
+            ax[0].plot(self.y_train.numpy(), '--',label="Observed")
+            ax[0].legend()
 
-        ax[1].set_title("Validation Predictions")
-        ax[1].plot(self.val_predictions, label="Predicted")
-        ax[1].plot(self.y_val.numpy(), label="Observed")
-        ax[1].legend()
+            ax[1].set_title("Validation Predictions")
+            ax[1].plot(self.val_predictions, label="Predicted")
+            ax[1].plot(self.y_val.numpy(), '--', label="Observed")
+            ax[1].legend()
 
-        ax[2].set_title("Loss Plots")
-        ax[2].plot(self.logs['Training Loss'], label="Training Loss")
-        ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
-        ax[2].legend()
-        #ax[2].set_ylim((0, median(self.logs['Validation Loss'])))
+            ax[2].set_title("Loss Plots")
+            ax[2].plot(self.logs['Training Loss'], label="Training Loss")
+            ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
+            ax[2].legend()
 
-        plt.show()
+            ax[3].set_title("Single Metal Inspection")
+            ax[3].plot(self.train_predictions[:, 0], label="Predicted")
+            ax[3].plot(self.y_train.numpy()[:, 0],label="Observed")
+            ax[3].legend()
+            plt.show()
+            
+        else: 
+            fig, ax = plt.subplots(1, 3, figsize= (20, 5))
+
+            ax[0].set_title("Training Predictions")
+            ax[0].plot(self.train_predictions, label="Predicted")
+            ax[0].plot(self.y_train.numpy(), label="Observed")
+            ax[0].legend()
+
+            ax[1].set_title("Validation Predictions")
+            ax[1].plot(self.val_predictions, label="Predicted")
+            ax[1].plot(self.y_val.numpy(), label="Observed")
+            ax[1].legend()
+
+            ax[2].set_title("Loss Plots")
+            ax[2].plot(self.logs['Training Loss'], label="Training Loss")
+            ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
+            ax[2].legend()
+            plt.show()
 
     def training_wrapper(self):
         """The wrapper that performs the training and validation
@@ -501,7 +533,6 @@ class DeepLearning():
             train_loss = self.train(self.train_loader)
             val_loss = self.validate(self.val_loader)
 
-
             # Saving the best model
             if val_loss.item() <= self.best_val_score:
                 self.best_model = deepcopy(self.model)
@@ -520,19 +551,19 @@ class DeepLearning():
                     print("Early Stopping")
                     self.model = self.best_model
                     break
-
+            
+            #  Printing key metrics to screen
             if (epoch % self.disp_freq == 0):
                 print("Epoch: %i Train: %.5f Val: %.5f  Time: %.3f  Best Val: %.5f" % (epoch, train_loss.item(),
-                                                          val_loss.item(), (time.time() - start_time)), self.best_val_score)
+                                                          val_loss.item(), (time.time() - start_time), self.best_val_score))
 
+            # Plotting predictions and training metrics
             if (epoch % self.fig_disp_freq == 0):
                 self.live_pred_plot()
 
         # Storing the best model
         self.model = self.best_model
 
-        
-        
         
 def param_strip(param):
     """Strips the key text info out of certain parameters"""
