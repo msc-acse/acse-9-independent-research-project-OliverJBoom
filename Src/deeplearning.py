@@ -531,3 +531,71 @@ class DeepLearning():
 
         # Storing the best model
         self.model = self.best_model
+
+        
+        
+        
+def param_strip(param):
+    """Strips the key text info out of certain parameters"""
+    return str(param)[:str(param).find('(')]
+
+
+def full_save(model, name_tag, optimiser, num_epoch, learning_rate, momentum, weight_decay, use_lg_returns,
+              PCA_used, data_X, train_loss, val_loss, test_loss, train_time, hidden_dim,
+              mse, mae, mde, path="Models/"):
+    """Saves the models weights and hyperparameters to a pth file and csv file"""
+    ind = ["Model",
+       "Optimiser",
+       "Epoch Number",
+       'Learning Rate',
+       "Momentum",
+       "Weight Decay",
+       "Log Returns Used",
+       "PCA",
+       "Num Features",
+       "Dataset Length",
+       "Series Length",
+       "Training Loss",
+       "Validation loss",
+       "Test Loss",
+       "Hidden Layer Dimensions",
+       "Mean Squared Error",
+       "Mean Absolute Error",
+       "Mean Directional Accuracy",
+       "Training Time"]
+
+    model_name = param_strip(model)
+
+    row = [model_name,
+       param_strip(optimiser),
+       num_epoch,
+       learning_rate,
+       momentum,
+       weight_decay,
+       use_lg_returns,
+       PCA_used,
+       data_X.shape[2],
+       data_X.shape[0],
+       data_X.shape[1],
+       train_loss,
+       val_loss,
+       test_loss,
+       hidden_dim,
+       mse,
+       mae,
+       mde,
+       train_time]
+
+    ind = [str(i) for i in ind]
+    row = [str(i) for i in row]
+
+    ind = [",".join(ind)]
+    row = [",".join(row)]
+
+    model_save(model,
+             path = path,
+             name=name_tag,
+             val_score=val_loss)
+
+    np.savetxt(path + name_tag + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
+    return True
