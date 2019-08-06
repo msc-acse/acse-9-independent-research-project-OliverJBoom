@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
 def check_length(universe_dict):
-    """Checks the name of all the dataframes in the 
+    """Checks the name of all the dataframes in the
     dictionary of instruments
 
     :param universe_dict: a dictionary of financial time series
@@ -14,8 +14,8 @@ def check_length(universe_dict):
     """
     for df_name in universe_dict:
         print(len(universe_dict[df_name]))
-    
-    
+
+
 def visualise_df(df):
     """Visualises the features for an instrument
     :param df: the time series to visualise
@@ -30,9 +30,9 @@ def visualise_df(df):
         ax.legend()
     plt.show()
 
-    
+
 def visualise_universe(universe_dict):
-    """Plots the price and log return for every 
+    """Plots the price and log return for every
     instrument in the univese dictionary
 
     :param universe_dict: a dictionary of financial time series to visualise
@@ -40,10 +40,10 @@ def visualise_universe(universe_dict):
     """
     for df_name in universe_dict:
         visualise_df(universe_dict[df_name])
-            
-    
+
+
 def check_day_frequency(df, day_col_name='ds'):
-    """Returns a barchart showing the frequency of the 
+    """Returns a barchart showing the frequency of the
     days of the week within a dataframe
 
     :param df: the time series to visualise
@@ -52,8 +52,8 @@ def check_day_frequency(df, day_col_name='ds'):
     df["day"] = df[day_col_name].apply(lambda x: x.weekday_name)
     print(df['day'].value_counts())
     df['day'].value_counts().plot(kind='bar')
-    
-    
+
+
 def df_std(df, col_name):
     """Returns the standard deviation of a dataframes column
 
@@ -70,7 +70,7 @@ def df_std(df, col_name):
 
 
 def inverse_log_returns(original_prices, log_returns, lag=5, shift=0):
-    """Takes a dataframes of predicted log returns and original 
+    """Takes a dataframes of predicted log returns and original
     prices and returns an array of predicted absolute prices
 
     :param original_prices: a dataframe of absolute prices
@@ -90,15 +90,15 @@ def inverse_log_returns(original_prices, log_returns, lag=5, shift=0):
     """
     assert isinstance(log_returns, pd.DataFrame)
     assert isinstance(original_prices, pd.DataFrame)
-    # shift is for 
+    # shift is for
     if shift == 0:
         return (original_prices.shift(shift).values[:-lag] * np.exp(log_returns[:-lag])).values.ravel()
-    else: 
+    else:
         return (original_prices.shift(shift).values * np.exp(log_returns)).values.ravel()
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
-    """Calculated the mean absolute percentage error metric 
+    """Calculated the mean absolute percentage error metric
     between two arrays
 
     :param y_true: The observed values
@@ -114,7 +114,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 
 def evaluate(y_true, y_pred):
-    """Calculated the error metric for a dataframe 
+    """Calculated the error metric for a dataframe
     of predictions and observed values
 
     :param y_true: The observed values
@@ -125,14 +125,14 @@ def evaluate(y_true, y_pred):
 
     :return mse, mae, mde: Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics
     :rtype: float
-    """   
+    """
     mse = mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
     mde = mean_directional_accuracy(y_true, y_pred)
     return mse, mae, mde
-  
-  
-  
+
+
+
 def mean_directional_accuracy(y_true, y_pred):
     """Calculated the mean directional accuracy
     error metric between two series
@@ -154,36 +154,36 @@ def param_strip(param):
     return str(param)[:str(param).find('(')]
 
 
-def full_save(model, 
+def full_save(model,
               name_tag,
               optimiser,
-              num_epoch, 
-              learning_rate, 
+              num_epoch,
+              learning_rate,
               momentum,
               weight_decay,
               use_lg_returns,
-              PCA_used, 
+              PCA_used,
               data_X,
               train_loss,
-              val_loss, 
+              val_loss,
               test_loss,
-              train_time, 
+              train_time,
               hidden_dim,
-              path="Models/"):             
+              path="Models/"):
     """Saves the models weights and hyperparameters to a pth file and csv file"""
     ind = ["Model",
        "Optimiser",
-       "Epoch Number", 
-       'Learning Rate', 
+       "Epoch Number",
+       'Learning Rate',
        "Momentum",
-       "Weight Decay", 
+       "Weight Decay",
        "Log Returns Used",
-       "PCA", 
+       "PCA",
        "Num Features",
        "Dataset Length",
        "Series Length",
        "Training Loss",
-       "Validation loss", 
+       "Validation loss",
        "Test Loss",
        "Hidden Layer Dimensions",
        "Training Time"]
@@ -192,33 +192,31 @@ def full_save(model,
 
     row = [model_name,
        param_strip(optimiser),
-       num_epoch, 
-       learning_rate, 
+       num_epoch,
+       learning_rate,
        momentum,
-       weight_decay, 
+       weight_decay,
        use_lg_returns,
-       PCA, 
+       PCA,
        data_X.shape[2],
-       data_X.shape[0], 
+       data_X.shape[0],
        data_X.shape[1],
        train_loss,
-       val_loss, 
+       val_loss,
        test_loss,
        hidden_dim,
        train_time]
-    
-    ind = [str(i) for i in ind] 
-    row = [str(i) for i in row] 
+
+    ind = [str(i) for i in ind]
+    row = [str(i) for i in row]
 
     ind = [",".join(ind)]
     row = [",".join(row)]
 
-    model_save(model, 
-             path = path, 
-             name="LSTM", 
+    model_save(model,
+             path = path,
+             name=name_tag,
              val_score=val_loss)
 
     np.savetxt(path + name_tag + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
     return True
-
-
