@@ -42,7 +42,6 @@ def model_save(model, name, val_score, path="Models/"):
     val = str(val_score)[:6].replace(".", "_")
     print("Saving model:", path + name + '_' + val + '.pth')
     torch.save(model, path + name + '_' + val + '.pth')
-    return
 
 
 def model_load(model_name, path="Models/"):
