@@ -341,8 +341,6 @@ class DeepLearning():
             # Perform backward pass
             loss.backward()
             
-            self.inspect = y_pred.detach().numpy()
-            
             # Adding the predictions for this batch to prediction list
             pred_list = np.concatenate([pred_list, y_pred.detach().numpy()], axis=0)
 
