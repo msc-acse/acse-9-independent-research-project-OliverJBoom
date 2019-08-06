@@ -93,7 +93,7 @@ def covariance_matrix(*args):
     
 def df_save(universe_dict):
     for df_name in universe_dict:
-        universe_dict[df_name].to_csv("Data/" + df_name + ".csv")
+        universe_dict[df_name].to_csv("Data/Commodity_Data/" + df_name + ".csv")
     
     
 if __name__ == "__main__":
@@ -117,12 +117,25 @@ if __name__ == "__main__":
     al_lme_s = db.get_instrument_data('al_lme_stocks')
     yuan = db.get_instrument_data('china_yuan_spot')
     
+    # Iron Specific Instruments
+    #fe_shfe = db.get_instrument_data('ironore_hfe_prices')
+    #fe_nymex = db.get_instrument_data('ironore_nymex_prices')
+    
     # Generic instruments
     bdi = db.get_instrument_data('bdi')
     ted = db.get_instrument_data('ted')
     vix = db.get_instrument_data('vix')
     skew = db.get_instrument_data('skew')
     gsci = db.get_instrument_data('gsci')
+    
+    # Tin
+    sn_lme = db.get_instrument_data("tin3m_lme_prices")
+    
+    # Lead 
+    pb_lme = db.get_instrument_data("lead3m_lme_prices")
+    
+    # Nickle
+    ni_lme = db.get_instrument_data("nickel3m_lme_prices")
     
     # Instruments for Cu
     copper_dict = {"cu_shfe":cu_shfe, "cu_lme":cu_lme, "cu_comex_p":cu_comex_p,
@@ -132,17 +145,32 @@ if __name__ == "__main__":
     aluminium_dict = {"al_shfe":al_shfe, "al_lme":al_lme, "al_comex_p":al_comex_p,
                       "al_comex_s":al_comex_s, "al_lme_s":al_lme_s, "yuan":yuan}
     
+    # Instruments for Iron
+    #fe_dict = {"fe_shfe":fe_shfe, "fe_nymex":fe_nymex}
+    
+    # Instruments for Tin
+    sn_dict = {"sn_lme": sn_lme}
+    
+    # Instruments for Lead
+    pb_dict = {"pb_lme": pb_lme}
+    
+    # Instruments for Nickle
+    ni_dict = {"ni_lme": ni_lme}
+    
     # Instruments common to both cu and al
     generic_dict =  {"bdi":bdi, "ted":ted, "vix":vix, "skew":skew, "gsci":gsci}
     
     # Saving the dataframe
     df_save(copper_dict)
     df_save(aluminium_dict)
+    #df_save(fe_dict)
+    df_save(sn_dict)
+    df_save(pb_dict)
+    df_save(ni_dict)
     df_save(generic_dict)
     
     # Visualising the different instuments
     plot_instrument(copper_dict)
-    plot_instrument(aluminium_dict)
     plot_instrument(generic_dict)
     
 #    covariance_matrix(df_cu_1["value"], df_cu_lme["value"])

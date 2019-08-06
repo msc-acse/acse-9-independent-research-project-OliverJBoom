@@ -471,7 +471,7 @@ class DeepLearning():
         ax[2].plot(self.logs['Training Loss'], label="Training Loss")
         ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
         ax[2].legend()
-        ax[2].set_ylim((0, median(self.logs['Validation Loss'])))
+        #ax[2].set_ylim((0, median(self.logs['Validation Loss'])))
 
         plt.show()
 
@@ -522,8 +522,8 @@ class DeepLearning():
                     break
 
             if (epoch % self.disp_freq == 0):
-                print("Epoch: %i Train MSE: %.5f Val MSE: %.5f  Time: %.3f" % (epoch, train_loss.item(),
-                                                          val_loss.item(), (time.time() - start_time)))
+                print("Epoch: %i Train: %.5f Val: %.5f  Time: %.3f  Best Val: %.5f" % (epoch, train_loss.item(),
+                                                          val_loss.item(), (time.time() - start_time)), self.best_val_score)
 
             if (epoch % self.fig_disp_freq == 0):
                 self.live_pred_plot()

@@ -100,4 +100,4 @@ class LSTM(nn.Module):
         # Fully connected hidden layer
         x = self.act(self.fc1(x))
         
-        return self.out(x).view(-1)
+        return self.out(x)

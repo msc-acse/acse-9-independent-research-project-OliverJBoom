@@ -45,6 +45,22 @@ def universe_select(path, commodity_name):
 
             universe_dict[instrument] = df
 
+    # Multi Task Learning
+    elif commodity_name == "MTL":
+        metals_list = ["al_shfe", "al_lme", "al_comex_p",
+                       "al_comex_s", "al_lme_s", "yuan",
+                       "cu_shfe", "cu_lme", "cu_comex_p",
+                       "cu_comex_s", "peso", "sol",
+                       "bdi", "ted", "vix", "skew", "gsci",
+                       "sn_lme", "pb_lme", "ni_lme"]
+
+        for instrument in metals_list:
+            df = pd.read_csv(path + instrument + ".csv",
+                             index_col='date', parse_dates=['date'],
+                             dayfirst=True).sort_index(ascending=True)
+
+            universe_dict[instrument] = df
+            
     else:
         print("Select an appropriate commodity")
     return universe_dict
@@ -315,7 +331,7 @@ def slice_series(data_X, data_y, series_length, dataset_pct=1.0):
 
     data_X_ = []
     data_y_ = []
-
+    
     for i in range(series_length, length):
         data_X_.append(data_X[i-series_length:i, :])
         data_y_.append(data_y[i])
