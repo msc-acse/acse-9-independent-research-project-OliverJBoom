@@ -169,6 +169,9 @@ def full_save(model,
               test_loss,
               train_time,
               hidden_dim,
+              mse,
+              mae,
+              mde,
               path="Models/"):
     """Saves the models weights and hyperparameters to a pth file and csv file"""
     ind = ["Model",
@@ -186,6 +189,9 @@ def full_save(model,
        "Validation loss",
        "Test Loss",
        "Hidden Layer Dimensions",
+       "Mean Squared Error",
+       "Mean Absolute Error",
+       "Mean Directional Accuracy",
        "Training Time"]
 
     model_name = param_strip(model)
@@ -197,7 +203,7 @@ def full_save(model,
        momentum,
        weight_decay,
        use_lg_returns,
-       PCA,
+       PCA_used,
        data_X.shape[2],
        data_X.shape[0],
        data_X.shape[1],
@@ -205,6 +211,9 @@ def full_save(model,
        val_loss,
        test_loss,
        hidden_dim,
+       mse,
+       mae,
+       mde,
        train_time]
 
     ind = [str(i) for i in ind]

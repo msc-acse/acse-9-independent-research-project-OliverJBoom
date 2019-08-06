@@ -8,10 +8,21 @@ from torch.utils.data import TensorDataset, DataLoader
 from sklearn.model_selection import train_test_split
 from statistics import median
 
+
 def set_seed(seed, device='cpu'):
-    """Use this to set all the random seeds to a fixed value
-    and take out any randomness from cuda kernels
+    """Sets the random seeds to ensure detemrinistic behaviour
+    
+    :param seed: the random seed number that is set
+    :param device: whether running on cpu or CUDA
+    
+    :type seed: int
+    :type device: string
+    
+    :return: confirmation that seeds have been set
+    :rtype: bool
     """
+        
+        
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -42,56 +53,96 @@ def model_load(model_name, path="Models/"):
 
 
 class early_stopping:
-  """
-  Counter to implement early stopping
-  If validation accuracy has not relative improved below
-  a relative tolerance set by the user than it breaks the
-  training
-  If rel_tol is set to 0 it becomes a common counter
-  """
-  def __init__(self, patience, rel_tol, verbose=False):
+    """Counter to implement early stopping
 
-    self.patience = patience
-    self.rel_tol = rel_tol
-    self.verbose = verbose
-    self.best_score = np.inf
-    self.counter = 0
-    self.stop = False
+    If validation accuracy has not relative improved below
+    a relative tolerance set by the user than it breaks the
+    training
 
+    If rel_tol is set to 0 it becomes a common counter
+  
+    :param patience: the amount of epochs without improvement before stopping
+    :param rel_tol: the relative improvement percentage that must be achieved
+    :param verbose: whether to print the count number
+    :param best_score: the best score achieved so far
+    :param counter: the amount of epochs without improvement so far
+    :param stop: whether stopping criteria is achieved
 
-  def __call__(self, score):
+    :type patience: int
+    :type rel_tol: float
+    :type verbose: bool
+    :type best_score: float
+    :type counter: int
+    :type stop: bool
+    """
+    def __init__(self, patience, rel_tol, verbose=False):
 
-    # If the score is under the required relative tolerance
-    # increase the counter is incremented
-    if score > self.best_score * (1 - self.rel_tol):
-        self.counter += 1
-    else:
+        self.patience = patience
+        self.rel_tol = rel_tol
+        self.verbose = verbose
+        self.best_score = np.inf
         self.counter = 0
+        self.stop = False
 
-    if score < self.best_score:
-        self.best_score = score
 
-    if self.counter >= self.patience:
-        self.stop = True
+    def __call__(self, score):
 
-    if self.verbose:
-        print("Count:", self.counter)
+        # If the score is under the required relative tolerance
+        # increase the counter is incremented
+        if score > self.best_score * (1 - self.rel_tol):
+            self.counter += 1
+        else:
+            self.counter = 0
+
+        if score < self.best_score:
+            self.best_score = score
+
+        if self.counter >= self.patience:
+            self.stop = True
+
+        if self.verbose:
+            print("Count:", self.counter)
 
 
 
 
 class DeepLearning():
     """Class to perform training and validation for a given model
-    :param
-    model: nn.Module the model to be trained
-    df_X
-    df_y
-    n_epochs,
-    optimiser,
-    loss_function
-    device
-    seed=42
-    debug
+    
+    :param model: the neural network model
+    :param data_X: the training dataset
+    :param data_y: the target dataset
+    :param n_epochs: the number of epochs of training
+    :param optimiser: the type of optimiser used
+    :param batch_size: the batch size
+    :param loss_function: the loss function used
+    :param device: running on cpu or CUDA
+    :param seed: the random seed set
+    :param debug: whether to print some parameters for checking
+    :param disp_freq: the frequency that training/validation metrics will be printed
+    :param fig_disp_freq: the frequency that training/validation prediction figures will be made
+    :param early_stop: whether early stopping is utilized
+    :param early_verbose: whether to print out the early stopping counter
+    :param patience: the amount of epochs without improvement before stopping
+    :param rel_tol: the relative improvement percentage that must be achieved
+    
+    :type patience: int
+    :type model: LSTM
+    :type data_X: np.array
+    :type data_y: np.array
+    :type n_epochs: int
+    :type optimiser: torch.optim
+    :type batch_size: int
+    :type loss_function: torch.nn.modules.loss
+    :type device: string
+    :type seed: int
+    :type debug: bool
+    :type disp_freq: int
+    :type fig_disp_freq: int
+    :type early_stop: bool
+    :type early_verbose: bool
+    :type patience: int
+    :type rel_tol: float
     """
     def __init__(self, model, data_X, data_y,
                  n_epochs,
@@ -106,8 +157,7 @@ class DeepLearning():
                  early_stop=True,
                  early_verbose=False,
                  patience=50,
-                 tol=0):
-
+                 rel_tol=0):
 
         # The neural network architecture
         self.model = model
@@ -185,7 +235,7 @@ class DeepLearning():
         self.early_stop = early_stop
 
         if self.early_stop:
-            self.early = early_stopping(patience=patience, rel_tol=tol, verbose=early_verbose)
+            self.early = early_stopping(patience=patience, rel_tol=rel_tol, verbose=early_verbose)
 
 
     def train_val_test(self):
@@ -233,7 +283,8 @@ class DeepLearning():
 
 
     def create_data_loaders(self):
-        """Forms iterators to pipeline in the data"""
+        """Forms iterators to pipeline in the data
+        """
 
         # Create tensor datasets
         train_dataset = TensorDataset(self.X_train, self.y_train)
@@ -250,7 +301,14 @@ class DeepLearning():
 
     def train(self, train_loader):
         """Performs a single training cycle and returns the
-        mean squared error loss for the training dataset"""
+        loss metric for the training dataset
+        
+        :param train_loader: the iterator that feeds in the training data
+        :type train_loader: torch.utils.data.dataloader.DataLoader
+
+        :return: the error metric for that epoch
+        :rtype: float
+        """
         # Sets the model to train mode
         self.model.train()
 
@@ -300,7 +358,14 @@ class DeepLearning():
 
     def validate(self, val_loader):
         """Evaluates the performance of the network
-        on unseen validation data"""
+        on unseen validation data
+        
+        :param val_loader: the iterator that feeds in the validation data
+        :type val_loader: torch.utils.data.dataloader.DataLoader
+
+        :return: the error metric for that epoch
+        :rtype: float
+        """
         # Set the model to evaluate mode
         self.model.eval()
 
@@ -338,7 +403,19 @@ class DeepLearning():
 
 
     def evaluate(self, model, test_loader):
-        """Evaluates the performance of the network on unseen test data"""
+        """Evaluates the performance of the network 
+        on given data for a given model
+        
+        A lot of overlap of code with validation. Only kept separate
+        due to inspection of attibutes made easier when running simulations
+        if kept separate
+        
+        :param test_loader: the iterator that feeds in the data of choice
+        :type test_loader: torch.utils.data.dataloader.DataLoader
+
+        :return: the error metric for that dataset
+        :rtype: float
+        """
         # Set the model to evaluate mode
         model = model.eval()
 
@@ -376,6 +453,9 @@ class DeepLearning():
 
 
     def live_pred_plot(self):
+        """Plots the training predictions, validation predictions
+        and the live training/validation losses
+        """
         fig, ax = plt.subplots(1, 3, figsize= (20, 5))
 
         ax[0].set_title("Training Predictions")
@@ -397,7 +477,8 @@ class DeepLearning():
         plt.show()
 
     def training_wrapper(self):
-
+        """The wrapper that performs the training and validation
+        """
         # start timer
         start_time = time.time()
 
