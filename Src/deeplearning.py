@@ -342,7 +342,7 @@ class DeepLearning():
             loss.backward()
             
             # Adding the predictions for this batch to prediction list
-            pred_list = np.concatenate([pred_list, y_pred.detach().numpy()], axis=0)
+            pred_list = np.concatenate([pred_list, y_pred.detach().cpu().numpy()], axis=0)
 
             # Calculate the training loss
             train_loss += (loss * X_train_batch.size()[0]).detach().cpu().numpy()
@@ -394,7 +394,7 @@ class DeepLearning():
                 loss = self.loss_function(y_pred, y_val_batch)
 
                 # Adding the predictions for this batch to prediction list
-                val_pred_list = np.concatenate([val_pred_list, y_pred.detach().numpy()], axis=0)
+                val_pred_list = np.concatenate([val_pred_list, y_pred.detach().cpu().numpy()], axis=0)
             
                 # Calculate the validation loss
                 val_loss += (loss * X_val_batch.size()[0]).detach().cpu().numpy()
@@ -447,7 +447,7 @@ class DeepLearning():
                 loss = self.loss_function(y_pred, y_test_batch)
 
                 # Adding the predictions for this batch to prediction list
-                test_pred_list = np.concatenate([test_pred_list, y_pred.detach().numpy()], axis=0)
+                test_pred_list = np.concatenate([test_pred_list, y_pred.detach().cpu().numpy()], axis=0)
 
                 # Calculate the validation loss
                 test_loss += (loss * X_test_batch.size()[0]).detach().cpu().numpy()
