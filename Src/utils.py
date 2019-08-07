@@ -113,7 +113,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
     return 100 * np.mean(np.abs(y_true - y_pred) / y_true)
 
 
-def evaluate(y_true, y_pred):
+def evaluate(y_true, y_pred, log_ret=True):
     """Calculated the error metric for a dataframe
     of predictions and observed values
 
@@ -128,9 +128,29 @@ def evaluate(y_true, y_pred):
     """
     mse = mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
-    mde = mean_directional_accuracy(y_true, y_pred)
-    return mse, mae, mde
+    
+    if log_ret:
+        mda = mean_directional_accuracy_log_ret(y_true, y_pred)
+    else:  
+        mda = mean_directional_accuracy(y_true, y_pred)
 
+    return mse, mae, mda
+
+
+def mean_directional_accuracy_log_ret(y_true, y_pred):
+    """Calculated the mean directional accuracy
+    error metric between two log return series
+
+    :param y_true: The observed values
+    :type y_true:  pd.Series
+
+    :param y_pred: The predicted values
+    :type y_pred: pd.Series
+
+    :return: The mean direcional accuracy of the series
+    :rtype:  float
+    """
+    return np.mean(np.sign(y_true) == np.sign(y_pred))
 
 
 def mean_directional_accuracy(y_true, y_pred):
@@ -146,4 +166,4 @@ def mean_directional_accuracy(y_true, y_pred):
     :return: The mean direcional accuracy of the series
     :rtype:  float
     """
-    return np.mean(np.sign(y_true - shift(y_true, 1)) == np.sign(y_pred - shift(y_pred,(1))))
+    return np.mean(np.sign(y_true[1:, :] - y_true[:-1, :]) == np.sign(y_pred[1:, :] - y_pred[:-1, :]))

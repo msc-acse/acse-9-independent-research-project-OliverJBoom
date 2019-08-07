@@ -37,11 +37,10 @@ def set_seed(seed, device='cpu'):
     return True
 
 
-def model_save(model, name, val_score, path="Models/"):
+def model_save(model, name, path="Models/"):
     """Saving function to keep track of models"""
-    val = str(val_score)[:6].replace(".", "_")
-    print("Saving model:", path + name + '_' + val + '.pth')
-    torch.save(model, path + name + '_' + val + '.pth')
+    print("Saving model:", path + name + '.pth')
+    torch.save(model, path + name + '.pth')
 
 
 def model_load(model_name, path="Models/"):
@@ -124,6 +123,8 @@ class DeepLearning():
     :param early_verbose: whether to print out the early stopping counter
     :param patience: the amount of epochs without improvement before stopping
     :param rel_tol: the relative improvement percentage that must be achieved
+    :param scaler_data_X: the data X scaler object for inverse scaling 
+    :param scaler_data_y: the dataX y scaler object for inverse scaling 
     
     :type patience: int
     :type model: LSTM
@@ -142,6 +143,9 @@ class DeepLearning():
     :type early_verbose: bool
     :type patience: int
     :type rel_tol: float
+    :rtype scaler_data_X: sklearn.preprocessing.data.MinMaxScaler
+    :rtype scaler_data_y: sklearn.preprocessing.data.MinMaxScaler
+    
     """
     def __init__(self, model, data_X, data_y,
                  n_epochs,
@@ -156,7 +160,9 @@ class DeepLearning():
                  early_stop=True,
                  early_verbose=False,
                  patience=50,
-                 rel_tol=0):
+                 rel_tol=0,
+                 scaler_data_X=None,
+                 scaler_data_y=None):
 
         # The neural network architecture
         self.model = model
@@ -237,6 +243,11 @@ class DeepLearning():
             self.early = early_stopping(patience=patience, rel_tol=rel_tol, verbose=early_verbose)
     
         self.MTL = False
+        
+        # For inverse scaling
+        self.data_X_scaler = data_X_scaler
+        self.data_y_scaler = data_y_scaler
+        
 
     def train_val_test(self):
         """Splits the dataframes in to a training, validation
@@ -463,7 +474,7 @@ class DeepLearning():
         and the live training/validation losses
         """        
         if self.MTL:
-            fig, ax = plt.subplots(1, 4, figsize= (20, 5))
+            fig, ax = plt.subplots(1, 5, figsize= (24, 5))
 
             ax[0].set_title("Training Predictions")
             ax[0].plot(self.train_predictions, label="Predicted")
@@ -480,10 +491,15 @@ class DeepLearning():
             ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
             ax[2].legend()
 
-            ax[3].set_title("Single Metal Inspection")
+            ax[3].set_title("Single Metal Inspection Train")
             ax[3].plot(self.train_predictions[:, 0], label="Predicted")
             ax[3].plot(self.y_train.numpy()[:, 0],label="Observed")
             ax[3].legend()
+            
+            ax[4].set_title("Single Metal Inspection Val")
+            ax[4].plot(self.train_predictions[:, 0], label="Predicted")
+            ax[4].plot(self.y_train.numpy()[:, 0],label="Observed")
+            ax[4].legend()
             plt.show()
             
         else: 
@@ -622,8 +638,7 @@ def full_save(model, name_tag, optimiser, num_epoch, learning_rate, momentum, we
 
     model_save(model,
              path = path,
-             name=name_tag,
-             val_score=val_loss)
+             name=name_tag)
 
     np.savetxt(path + name_tag + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
     return True

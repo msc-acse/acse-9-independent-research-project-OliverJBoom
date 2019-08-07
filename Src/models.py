@@ -56,8 +56,6 @@ class LSTM(nn.Module):
         self.out = nn.Linear(in_features=self.hidden_dim, 
                              out_features=self.output_dim)
         
-        """TODO Add fully connected layer and see if that improves"""
-        
         
     def init_hidden(self, batch_size):
         """Initialised the hidden state to be zeros"""
@@ -101,6 +99,99 @@ class LSTM(nn.Module):
         x = self.act(self.fc1(x))
         
         return self.out(x)
+    
+    
+class stateful_LSTM(nn.Module):
+    """A Long Short Term Memory network
+    model"""
+        
+    def __init__(self, num_features, hidden_dim, output_dim,
+                 batch_size, series_length, device, 
+                 dropout=0.1, num_layers=2, debug=True):
+        
+        super(stateful_LSTM, self).__init__()
+        
+        # Number of features
+        self.num_features = num_features
+        
+        # Hidden dimensions
+        self.hidden_dim = hidden_dim
+
+        # Number of hidden layers
+        self.num_layers = num_layers
+        
+        # The output dimensions
+        self.output_dim = output_dim
+        
+        # Batch Size
+        self.batch_size = batch_size
+        
+        # Length of sequence
+        self.series_length = series_length
+        
+        # Dropout Probability
+        self.dropout = dropout
+        
+        # CPU or GPU
+        self.device = device
+        
+        # Define the LSTM layer
+        self.lstm = nn.LSTM(
+            input_size = self.num_features, 
+            hidden_size =self.hidden_dim,
+            dropout = self.dropout ,
+            num_layers =self.num_layers)
+
+        # Fully Connected Layer
+        self.fc1 = nn.Linear(in_features=self.hidden_dim, 
+                             out_features=self.hidden_dim)
+        
+        # Activation function
+        self.act = nn.ReLU()
+        
+        # Output layer
+        self.out = nn.Linear(in_features=self.hidden_dim, 
+                             out_features=self.output_dim)
+        
+        self.hidden = self.init_hidden()
+        
+    def init_hidden(self):
+        """Initialised the hidden state to be zeros"""
+        return (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(self.device),
+                torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(self.device))
+    
+    
+    def forward(self, x):
+        """Forward pass through the neural network"""
+        
+        """TODO Directly switch these variables in 
+        the permute of the dataset"""
+        
+        # Adjust to a variable batch size 
+        batch_size = x.size()[0]
+        series_length = x.size()[1]
+
+        assert (series_length == self.series_length)
+        
+        # Keeps the dimensions constant regardless of batchsize
+        x = x.contiguous().view(series_length, batch_size, -1) 
+        
+        # Pass through through lstm layer
+        # Only the x is of interest
+        x, self.hidden = self.lstm(x, self.hidden)
+        
+        # Output is seq to seq but only want seq to val
+        # So only use the final value of the lstm outputted
+        # sequence
+        x = x[-1]  
+        
+        # Fully connected hidden layer
+        x = self.act(self.fc1(x))
+        
+        return self.out(x)
+    
+    
+
     
     
 
