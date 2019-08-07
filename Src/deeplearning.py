@@ -245,8 +245,8 @@ class DeepLearning():
         self.MTL = False
         
         # For inverse scaling
-        self.data_X_scaler = data_X_scaler
-        self.data_y_scaler = data_y_scaler
+        self.scaler_data_X = scaler_data_X
+        self.scaler_data_y = scaler_data_y
         
 
     def train_val_test(self):
