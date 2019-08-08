@@ -337,3 +337,33 @@ def slice_series(data_X, data_y, series_length, dataset_pct=1.0):
         data_y_.append(data_y[i])
 
     return np.array(data_X_), np.array(data_y_)
+
+
+
+def feature_spawn(df):
+    """Spawns features for each instrument
+    Returns df with the following columns for each
+    instrument
+    Log Returns
+    EWMA 1 day
+    EWMA 1 week
+    EWMA 1 month
+    EWMA 1 quarter
+    EWMA 6 months
+    EWMA 1 year
+    Rolling vol 1 week
+    Rolling vol 1 month
+    Rolling vol 1 quarter
+    """
+    hlf_dict = {"week":5, "month":22, "quarter":66, "half_year":130, "year":261}
+
+    for col in df.columns:
+        for half_life in hlf_dict:
+            df[col + "_ema_" + half_life] = df[col].ewm(span=hlf_dict[half_life]).mean()
+
+    for i, half_life in enumerate(hlf_dict):
+        if i < 3:
+            df[col + "_roll_vol_" + half_life] = df[col].rolling(window=hlf_dict[half_life]).std(ddof=0)
+
+    df.dropna(inplace=True)
+    return df
