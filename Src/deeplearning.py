@@ -584,11 +584,11 @@ def param_strip(param):
     return str(param)[:str(param).find('(')]
 
 
-def full_save(model, name_tag, optimiser, num_epoch, learning_rate, momentum, weight_decay, use_lg_returns,
+def full_save(model, model_name, optimiser, num_epoch, learning_rate, momentum, weight_decay, use_lg_returns,
               PCA_used, data_X, train_loss, val_loss, test_loss, train_time, hidden_dim,
-              mse, mae, mde, path="Models/"):
+              mse, mae, mde, path="Models/CSVs/"):
     """Saves the models weights and hyperparameters to a pth file and csv file"""
-    ind = ["Model",
+    ind = ["Model Class",
        "Optimiser",
        "Epoch Number",
        'Learning Rate',
@@ -608,9 +608,9 @@ def full_save(model, name_tag, optimiser, num_epoch, learning_rate, momentum, we
        "Mean Directional Accuracy",
        "Training Time"]
 
-    model_name = param_strip(model)
+    model_class = param_strip(model)
 
-    row = [model_name,
+    row = [model_class,
        param_strip(optimiser),
        num_epoch,
        learning_rate,
@@ -636,9 +636,5 @@ def full_save(model, name_tag, optimiser, num_epoch, learning_rate, momentum, we
     ind = [",".join(ind)]
     row = [",".join(row)]
 
-    model_save(model,
-             path = path,
-             name=name_tag)
-
-    np.savetxt(path + name_tag + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
+    np.savetxt(path + model_name + '_' + str(val_loss).replace(".", "_")[:5] + ".csv", np.r_[ind, row], fmt='%s', delimiter=',')
     return True
