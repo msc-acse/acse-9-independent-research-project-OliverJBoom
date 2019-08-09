@@ -80,6 +80,22 @@
 
             <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
 
+    <span class="c1"># Multi Task Learning</span>
+    <span class="k">elif</span> <span class="n">commodity_name</span> <span class="o">==</span> <span class="s2">&quot;MTL&quot;</span><span class="p">:</span>
+        <span class="n">metals_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;al_shfe&quot;</span><span class="p">,</span> <span class="s2">&quot;al_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;al_comex_p&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;al_comex_s&quot;</span><span class="p">,</span> <span class="s2">&quot;al_lme_s&quot;</span><span class="p">,</span> <span class="s2">&quot;yuan&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;cu_shfe&quot;</span><span class="p">,</span> <span class="s2">&quot;cu_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;cu_comex_p&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;cu_comex_s&quot;</span><span class="p">,</span> <span class="s2">&quot;peso&quot;</span><span class="p">,</span> <span class="s2">&quot;sol&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="s2">&quot;ted&quot;</span><span class="p">,</span> <span class="s2">&quot;vix&quot;</span><span class="p">,</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span> <span class="s2">&quot;gsci&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;sn_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;pb_lme&quot;</span><span class="p">,</span> <span class="s2">&quot;ni_lme&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="n">metals_list</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">instrument</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">,</span>
+                             <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>
+                             <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+            
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Select an appropriate commodity&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">universe_dict</span></div>
@@ -289,50 +305,41 @@
     <span class="c1"># Calculating the log returns</span>
     <span class="n">df_full</span> <span class="o">=</span> <span class="n">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">)</span>
 
-    <span class="c1"># Fill in nan to allow inverse calculations</span>
-    <span class="n">df_full</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="c1"># As target is forecast backdated the first row values should have</span>
-    <span class="c1"># value and the last should have nulls</span>
-    <span class="n">df_full</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">][:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_target</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span>
-                                               <span class="n">target_col</span><span class="o">=</span><span class="s2">&quot;price_cu_lme&quot;</span><span class="p">,</span>
-                                               <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">)[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-
     <span class="k">if</span> <span class="n">lg_returns_only</span><span class="p">:</span>
         <span class="n">df_full</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[</span><span class="n">df_full</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df_full</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">)))]</span>
 
     <span class="k">if</span> <span class="n">price_only</span><span class="p">:</span>
-        <span class="n">df_full</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">df_full</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]]</span>
+        <span class="n">df_full</span> <span class="o">=</span> <span class="n">df_full</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">df_full</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">))]</span>
 
     <span class="k">return</span> <span class="n">df_full</span></div>
 
 
 
-<div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
+<div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Performing PCA to reduce the amount of</span>
 
-<span class="sd">    :param df: dataset to perform reduction on</span>
-<span class="sd">    :type df: dataframe</span>
+<span class="sd">    :param data_X: array to perform reduction on</span>
+<span class="sd">    :type data_X: np.array</span>
 
 <span class="sd">    :param n_dim: number of dimensions to reduce to</span>
 <span class="sd">    :type n_dim: int</span>
 
 <span class="sd">    :return: reduced dataset</span>
-<span class="sd">    :rtype: dataframe</span>
+<span class="sd">    :rtype: np.array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
-    <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    <span class="n">df_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">data_X</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data_X</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Explained Variance:&quot;</span><span class="p">,</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">,</span>
           <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Explained Variance Sum:&quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_reduced</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">data_X</span></div>
 
 
-<div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
+<div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../index.html#Src.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the number of dimensions that reaches the </span>
 <span class="sd">    threshold level of desired variance</span>
 
-<span class="sd">    :param df: dataset to perform reduction on</span>
-<span class="sd">    :type df: dataframe</span>
+<span class="sd">    :param data_X: dataset to perform reduction on</span>
+<span class="sd">    :type data_X: np.array</span>
 
 <span class="sd">    :param thresh: the amount of variance that must be contained in reduced dataset</span>
 <span class="sd">    :type thresh: float</span>
@@ -343,13 +350,57 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">n_dim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
         <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_dim</span><span class="p">)</span>
-        <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_X</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">thresh</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of dimensions:&quot;</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">n_dim</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No level of dimensionality reaches threshold variance level </span><span class="si">%.3f</span><span class="s2">&quot;</span>
           <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">))</span>
     <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="slice_series"><a class="viewcode-back" href="../../index.html#Src.preprocessing.slice_series">[docs]</a><span class="k">def</span> <span class="nf">slice_series</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">series_length</span><span class="p">,</span> <span class="n">dataset_pct</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;TODO&quot;&quot;&quot;</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_X</span><span class="p">)</span> <span class="o">*</span> <span class="n">dataset_pct</span><span class="p">)</span>
+
+    <span class="n">data_X_</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_y_</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">series_length</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="n">data_X_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_X</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">series_length</span><span class="p">:</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">data_y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_X_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_y_</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="feature_spawn"><a class="viewcode-back" href="../../index.html#Src.preprocessing.feature_spawn">[docs]</a><span class="k">def</span> <span class="nf">feature_spawn</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Spawns features for each instrument</span>
+<span class="sd">    Returns df with the following columns for each</span>
+<span class="sd">    instrument</span>
+<span class="sd">    Log Returns</span>
+<span class="sd">    EWMA 1 day</span>
+<span class="sd">    EWMA 1 week</span>
+<span class="sd">    EWMA 1 month</span>
+<span class="sd">    EWMA 1 quarter</span>
+<span class="sd">    EWMA 6 months</span>
+<span class="sd">    EWMA 1 year</span>
+<span class="sd">    Rolling vol 1 week</span>
+<span class="sd">    Rolling vol 1 month</span>
+<span class="sd">    Rolling vol 1 quarter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hlf_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;week&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">:</span><span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;quarter&quot;</span><span class="p">:</span><span class="mi">66</span><span class="p">,</span> <span class="s2">&quot;half_year&quot;</span><span class="p">:</span><span class="mi">130</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span><span class="mi">261</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">half_life</span> <span class="ow">in</span> <span class="n">hlf_dict</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_ema_&quot;</span> <span class="o">+</span> <span class="n">half_life</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">span</span><span class="o">=</span><span class="n">hlf_dict</span><span class="p">[</span><span class="n">half_life</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">half_life</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hlf_dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;_roll_vol_&quot;</span> <span class="o">+</span> <span class="n">half_life</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">hlf_dict</span><span class="p">[</span><span class="n">half_life</span><span class="p">])</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
 </pre></div>
 
           </div>

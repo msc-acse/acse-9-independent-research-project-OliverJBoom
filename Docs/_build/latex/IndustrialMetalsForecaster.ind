@@ -1,0 +1,91 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter C
+  \item \spxentry{check\_day\_frequency()}\spxextra{in module Src.utils}, \hyperpage{9}
+  \item \spxentry{check\_length()}\spxextra{in module Src.utils}, \hyperpage{9}
+  \item \spxentry{clean\_data()}\spxextra{in module Src.preprocessing}, \hyperpage{1}
+  \item \spxentry{clean\_dict\_gen()}\spxextra{in module Src.preprocessing}, \hyperpage{1}
+  \item \spxentry{column\_rename()}\spxextra{in module Src.preprocessing}, \hyperpage{1}
+  \item \spxentry{create\_data\_loaders()}\spxextra{Src.deeplearning.DeepLearning method}, 
+		\hyperpage{5}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{DeepLearning}\spxextra{class in Src.deeplearning}, \hyperpage{5}
+  \item \spxentry{df\_std()}\spxextra{in module Src.utils}, \hyperpage{9}
+  \item \spxentry{dimension\_reduce()}\spxextra{in module Src.preprocessing}, \hyperpage{1}
+  \item \spxentry{dimension\_selector()}\spxextra{in module Src.preprocessing}, \hyperpage{1}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{early\_stopping}\spxextra{class in Src.deeplearning}, \hyperpage{6}
+  \item \spxentry{evaluate()}\spxextra{in module Src.utils}, \hyperpage{9}
+  \item \spxentry{evaluate()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{5}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{feature\_spawn()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+  \item \spxentry{full\_save()}\spxextra{in module Src.deeplearning}, \hyperpage{6}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{generate\_dataset()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+  \item \spxentry{generate\_lg\_return()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+  \item \spxentry{generate\_target()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+
+  \indexspace
+  \bigletter I
+  \item \spxentry{inverse\_log\_returns()}\spxextra{in module Src.utils}, \hyperpage{9}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{live\_pred\_plot()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{log\_returns()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Src.utils}, 
+		\hyperpage{10}
+  \item \spxentry{mean\_directional\_accuracy()}\spxextra{in module Src.utils}, \hyperpage{10}
+  \item \spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Src.utils}, 
+		\hyperpage{10}
+  \item \spxentry{model\_load()}\spxextra{in module Src.deeplearning}, \hyperpage{7}
+  \item \spxentry{model\_save()}\spxextra{in module Src.deeplearning}, \hyperpage{7}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{param\_strip()}\spxextra{in module Src.deeplearning}, \hyperpage{7}
+  \item \spxentry{price\_rename()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{set\_seed()}\spxextra{in module Src.deeplearning}, \hyperpage{7}
+  \item \spxentry{size\_check()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{slice\_series()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+  \item \spxentry{Src.deeplearning}\spxextra{module}, \hyperpage{5}
+  \item \spxentry{Src.preprocessing}\spxextra{module}, \hyperpage{1}
+  \item \spxentry{Src.utils}\spxextra{module}, \hyperpage{9}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{train()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{train\_val\_test()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{training\_wrapper()}\spxextra{Src.deeplearning.DeepLearning method}, 
+		\hyperpage{6}
+  \item \spxentry{truncate\_window\_length()}\spxextra{in module Src.preprocessing}, \hyperpage{2}
+
+  \indexspace
+  \bigletter U
+  \item \spxentry{universe\_select()}\spxextra{in module Src.preprocessing}, \hyperpage{3}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{validate()}\spxextra{Src.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{visualise\_df()}\spxextra{in module Src.utils}, \hyperpage{10}
+  \item \spxentry{visualise\_universe()}\spxextra{in module Src.utils}, \hyperpage{10}
+
+\end{sphinxtheindex}
