@@ -1,38 +1,43 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
 
 
+"""This module include functions relating to the pre-processing of raw price
+time series. They are used to create a dataset that can be used for deep 
+learning using long short term memory networks."""
+
+
 def universe_select(path, commodity_name):
-    """Selects the instruments believed to be of
-    interest for the commodity selected
+    """Selects the financial time series relevant for the commodities selected.
     
-    :param path: path to the csv folder
-    :param commodity_name: the name of the metal being inspected
+    :param path:            path to the folder containing csvs
+    :type  path:            string
+
+    :param commodity_name:  the name of the metal/s being inspected
+    :type  commodity_name:  string
     
-    :type path: type string
-    :type commodity_name: type string
-    
-    :return: financial time series relevant to the commodity
-    :rtype: dict
+    :return:                The time series relevant to the commodities
+    :rtype:                 dict
     """
-    
     universe_dict = {}
 
-    # If commodity is aluminium
+    # Time series relevant to Aluminium
     if commodity_name == "Al":
         aluminium_list = ["al_shfe", "al_lme", "al_comex_p",
                           "al_comex_s", "al_lme_s", "yuan",
                           "bdi", "ted", "vix", "skew", "gsci"]
 
         for instrument in aluminium_list:
+            # Sort by date
             df = pd.read_csv(path + instrument + ".csv",
                              index_col='date', parse_dates=['date'],
                              dayfirst=True).sort_index(ascending=True)
 
             universe_dict[instrument] = df
 
-    # If commodity is copper
+    # Time series relevant to Copper
     elif commodity_name == "Cu":
         copper_list = ["cu_shfe", "cu_lme", "cu_comex_p",
                        "cu_comex_s", "peso", "sol",
@@ -45,7 +50,8 @@ def universe_select(path, commodity_name):
 
             universe_dict[instrument] = df
 
-    # Multi Task Learning
+    # Multi Task Learning relevant to:
+    # Copper, Aluminium, Tin, Lead, Nickle
     elif commodity_name == "MTL":
         metals_list = ["al_shfe", "al_lme", "al_comex_p",
                        "al_comex_s", "al_lme_s", "yuan",
@@ -67,14 +73,14 @@ def universe_select(path, commodity_name):
 
 
 def price_rename(universe_dict):
-    """
-    Renaming the column of the dataframe values to price
-    
-    :param universe_dict: a dictionary of financial time series
-    :type universe_dict: dict
-    
-    :return: financial time series
-    :rtype: dict 
+    """Renaming the column of the DataFrame values to price.
+    This is actually the market closing price of the time series.
+
+    :param universe_dict:       The dictionary of time series
+    :type  universe_dict:       dict
+
+    :return:                    The dictionary of renamed time series
+    :rtype:                     dict
     """
     for df_name in universe_dict:
         df = universe_dict[df_name]
@@ -85,26 +91,33 @@ def price_rename(universe_dict):
 
 
 def clean_data(df, n_std=20):
+    """Removes any outliers that are further than a chosen
+    number of standard deviations from the mean.
+
+    These values are most likely wrongly inputted data,
+    and so are forward filled.
+    
+    :param df:          A time series
+    :type  df:          pd.DataFrame
+    
+    :param n_std:       The number of standard deviations from the mean
+    :type  n_std:       int
+    
+    :return:            The cleaned time series
+    :rtype:             pd.DataFrame
     """
-    Removes any outliers that are further than a chosen
-    number of standard deviations from the mean
-    
-    :param df: the finacial time series
-    :type df: dataframe
-    
-    :param n_std: the number of standard deviations from the mean
-    :type n_std: int
-    
-    :return: the cleaned financial time series
-    :rtype: dataframe
-    """
+    # Find the upper and lower bounds
     upper = df.price.mean() + n_std * (df.price.std())
     lower = df.price.mean() - n_std * (df.price.std())
-    df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
-    df.ffill(inplace=True)
 
+    # Removing erroneous datapoints
+    df.loc[((df.price > upper) | (df.price < lower)), 'price'] = None
+    # Reporting the points cleaned
     if df.price.isnull().sum() > 0:
         print("Rows removed:", df.price.isnull().sum())
+
+    # Replacing them with the previous days price
+    df.ffill(inplace=True)
 
     # Only want to keep business days
     df = df[df.index.weekday_name != "Saturday"]
@@ -113,14 +126,13 @@ def clean_data(df, n_std=20):
 
 
 def clean_dict_gen(universe_dict):
-    """
-    Returns a dictionary of cleaned dataframes
+    """Generates a dictionary of cleaned DataFrames
     
-    :param universe_dict: a dictionary of financial time series
-    :type universe_dict: dict
+    :param universe_dict:       The dictionary of time series
+    :type  universe_dict:       dict
     
-    :return: the cleaned financial time series
-    :rtype: dict
+    :return:                    The cleaned dictionary of time series
+    :rtype:                     dict
     """
     cleaned_dict = {}
     print("Included Instrument:")
@@ -133,28 +145,27 @@ def clean_dict_gen(universe_dict):
 
 
 def truncate_window_length(universe_dict):
-    """
-    Chopping the length of all of the dataframes to ensure
-    that they are all between the same dates
+    """Chopping the length of all of the DataFrames to ensure
+    that they are all between the same dates.
     
-    :param universe_dict: the financial time series
-    :type universe_dict: dict
+    :param universe_dict:           The dictionary of time series
+    :type  universe_dict:           dict
     
-    :return: the truncated financial time series
-    :rtype: dict
+    :return:                        the dictionary of truncated time series
+    :rtype:                         dict
     """
     start_date_arr = []
     end_date_arr = []
 
     for df_name in universe_dict:
-        # Finding the latest of the start dates
+        # Finding the latest of the start dates for each series
         start_date_arr.append(universe_dict[df_name].index[0])
         # Finding the earliest of the end dates
         end_date_arr.append(universe_dict[df_name].index[-1])
 
-    for i, df_name in enumerate(universe_dict):
+    for df_name in universe_dict:
         df = universe_dict[df_name]
-        # Filters the dataframe between these dates
+        # Filters the DataFrames between these dates
         universe_dict[df_name] = df.loc[((df.index <= min(end_date_arr))
                                          & (df.index >= max(start_date_arr)))]
 
@@ -162,14 +173,14 @@ def truncate_window_length(universe_dict):
 
 
 def column_rename(universe_dict):
-    """Appends the name of the instrument
-    name to the columns
+    """Appends the name of the instrument to the columns.
+    To help keep track of the instruments in the full dataset.
     
-    :param universe_dict: a dictionary of financial time series
-    :type universe_dict: dict
+    :param universe_dict:               The dictionary of time series
+    :type  universe_dict:               dict
     
-    :return: the financial time series
-    :rtype: dict
+    :return:                            The dictionary of time series
+    :rtype:                             dict
     """
     for df_name in universe_dict:
         for col in universe_dict[df_name].columns:
@@ -180,42 +191,34 @@ def column_rename(universe_dict):
 
 
 def log_returns(series, lag=1):
-    """Calculate log returns between adjacent close prices
+    """Calculates the log returns between adjacent close prices.
+    A constant lag is used across the whole series.
+    E.g a lag of one means a day to day log return.
     
-    :param series: prices to calculate the log returns on
-    :type series: numpy array
+    :param  series:                   Prices to calculate the log returns on
+    :type   series:                   np.array
     
-    :param lag: the amount of days the returns are calculated between
-    :type lag: int
+    :param  lag:                      The lag between the series (in days)
+    :type   lag:                      int
     
-    :return: the series of log returns
-    :rtype: numpy array
+    :return:                          The series of log returns
+    :rtype:                           np.array
     """
     return np.log(series) - np.log(series.shift(lag))
 
 
-def generate_target(df_full, target_col="price_cu_lme", lag=5):
-    """Generate the target variable"""
-    df_target = df_full[[target_col]].apply(log_returns, lag=lag)
-    df_target = df_target.shift(-lag)
-    df_target.rename(columns={"price_cu_lme": target_col.replace(
-        "price_", str(lag) + "_day_forecast_")}, inplace=True)
-
-    return df_target
-
-
 def generate_lg_return(df_full, lag=1):
-    """Returns a dictionary containing dataframes
-    with the additional log returns column
+    """Creates the log return series for each column in the DataFrame
+    and returns the full dataset with log returns.
 
-    :param df_full: the financial time series
-    :type df_full: dataframe
+    :param df_full:              The time series
+    :type  df_full:              pd.DataFrame
 
-    :param lag: the amount of days the returns are calculated between
-    :type lag: int
+    :param lag:                  The lag between the series (in days)
+    :type  lag:                  int
 
-    :return: the financial time series with log returns
-    :rtype: dataframe
+    :return:                     The DataFrame of time series with log returns
+    :rtype:                      pd.DataFrame
     """
     for col in df_full.columns:
         # Selecting out the dataframe of interest
@@ -232,46 +235,54 @@ def generate_lg_return(df_full, lag=1):
     return df_full
 
 
-def generate_dataset(universe_dict, lag=5,
-                     lg_returns_only=True, price_only=False):
-    """Generates the full dataset
+def generate_dataset(universe_dict, price_only=True, lg_only=False):
+    """Generates the full dataset.
 
-    :param universe_dict: a dictionary of financial time series
-    :type universe_dict: dict
+    :param universe_dict:      The dictionary of time series
+    :type  universe_dict:      dict
 
-    :param lag: the amount of days the returns are calculated between
-    :type lag: int
+    :param lag:                The lag in days between series
+    :type  lag:                int
 
-    :param lg_returns_only: whether to return a dataset of log returns only
-    :type lg_returns_only: bool
+    :param lg_only:            Whether to return a dataset of log returns only
+    :type  lg_only:            bool
 
-    :param price_only: whether to return a dataset of raw prices only
-    :type price_only: bool
+    :param price_only:         Whether to return a dataset of raw prices only
+    :type  price_only:         bool
 
-    :return: the financial time series
-    :rtype: dataframe
+    :return:                   The time series
+    :rtype:                    pd.DataFrame
     """
-    if lg_returns_only:
-        assert (lg_returns_only != price_only)
+    # Can't have both log returns only and price only
+    if lg_only:
+        assert (lg_only != price_only)
 
     if price_only:
-        assert (lg_returns_only != price_only)
+        assert (lg_only != price_only)
 
-    # Renames the columns with the name of the instrument series
+    # Renames the columns with the name of the time series
+    # Naming pre-processing is done using a dict because of naming convenience
+    # But then moved to DataFrame for further operations
     universe_dict = column_rename(universe_dict)
     universe = []
 
     for df_name in universe_dict:
         universe.append(universe_dict[df_name])
 
+    # Creating the full dataset
     df_full = pd.concat(universe, axis=1)
-    # Must do log returns calculations after this forwards fill
+
+    # Doing a forward fill to ensure that every time series has entries on
+    # every day. (Different series might have gaps on different holidays)
     df_full.ffill(inplace=True)
-    # Calculating the log returns
+
+    # Generating the log returns of each series
     df_full = generate_lg_return(df_full)
 
-    if lg_returns_only:
-        df_full = df_full[df_full.columns.drop(list(df_full.filter(regex='price')))]
+    # Dropping the price or log returns columns depending on preference
+    if lg_only:
+        df_full = df_full[df_full.columns.drop(
+            list(df_full.filter(regex='price')))]
 
     if price_only:
         df_full = df_full[list(df_full.filter(regex='price'))]
@@ -279,90 +290,154 @@ def generate_dataset(universe_dict, lag=5,
     return df_full
 
 
-
 def dimension_reduce(data_X, n_dim):
-    """Performing PCA to reduce the amount of
+    """Performing PCA to reduce the dimensionality of the data.
 
-    :param data_X: array to perform reduction on
-    :type data_X: np.array
+    :param data_X:                  The dataset to perform reduction on
+    :type  data_X:                  np.array
 
-    :param n_dim: number of dimensions to reduce to
-    :type n_dim: int
+    :param n_dim:                   Number of dimensions to reduce to
+    :type  n_dim:                   int
 
-    :return: reduced dataset
-    :rtype: np.array
+    :return:                        The reduced dataset
+    :rtype:                         np.array
     """
+    # Determining how many dimensions will be reduced down to
     pca = PCA(n_components=n_dim)
+    # Performing reduction
     data_X = pca.fit_transform(data_X)
-    print("Explained Variance:", pca.explained_variance_ratio_,
-          "\nExplained Variance Sum:", sum(pca.explained_variance_ratio_))
+
+    print("Explained Variance Sum: %.3f\nExplained Variance Composition"
+          % sum(pca.explained_variance_ratio_), pca.explained_variance_ratio_)
+
     return data_X
 
 
 def dimension_selector(data_X, thresh=0.98):
-    """Returns the number of dimensions that reaches the 
-    threshold level of desired variance
+    """Calculated the number of dimensions required to reach a threshold level
+    of variance.
 
-    :param data_X: dataset to perform reduction on
-    :type data_X: np.array
+    Completes a PCA reduction to an increasing number of dimensions
+    and calculates the total variance achieved for each reduction. If the
+    reduction is above the threshold then that number of dimensions is returned
 
-    :param thresh: the amount of variance that must be contained in reduced dataset
-    :type thresh: float
+    :param data_X:                  The dataset to perform reduction on
+    :type  data_X:                  np.array
 
-    :return: the amount of dimensions needed to conatin the threshold variance
-    :rtype: int
+    :param thresh:                  The amount of variance that must be
+                                    contained the in reduced dataset
 
+    :type  thresh:                  float
+
+    :return:                        The column dimensionality required to
+                                    contain the threshold variance
+    :rtype:                         int
     """
-    for n_dim in range(1, 11):
+    n_dim = 1
+    # data_X.shape[0] is the number of time series in the dataset
+    while n_dim < data_X.shape[0]:
+        # Completing a PCA reduction
         pca = PCA(n_components=n_dim)
         pca.fit(data_X)
+        # Discerning if the total variance post reduction is adequate
         if sum(pca.explained_variance_ratio_) > thresh:
             print("Number of dimensions:", n_dim)
+
             return n_dim
+
+        n_dim += 1
+
     print("No level of dimensionality reaches threshold variance level %.3f"
           % sum(pca.explained_variance_ratio_))
+
     return None
 
 
+def slice_series(data_X, data_y, series_len, dataset_pct=1.0):
+    """Slices the train and target dataset time series.
 
-def slice_series(data_X, data_y, series_length, dataset_pct=1.0):
-    """TODO"""
+    Turns each time series into a series of time series, with each series
+    displaced by one step forward to the previous series. And for each
+    of these windows there is an accompanying target value
+
+    The effect of this is to create an array of time series (which is the depth
+    equal to the amount of instruments in the dataset) with each entry in this
+    array having a target series in the data_y array
+
+    The resulting data_X array shape:
+    [amount of rolling windows, length of each series, number of instruments]
+
+    The resulting data_y array shape:
+    [amount of rolling windows, number of instruments]
+
+    :param data_X:              The dataset of time series
+    :type  data_X:              np.array
+
+    :param data_y:              The target dataset of time series
+    :type  data_y:              np.array
+
+    :param series_len:          The length of each time series window
+    :type  series_len:          int
+
+    :param dataset_pct:        The percentage of the full dataset to include
+    :type  dataset_pct:        float
+
+    :return:
+    :rtype:
+    """
+    # Selecting the length of the full dataset
     length = int(len(data_X) * dataset_pct)
 
     data_X_ = []
     data_y_ = []
     
-    for i in range(series_length, length):
-        data_X_.append(data_X[i-series_length:i, :])
+    for i in range(series_len, length):
+        data_X_.append(data_X[i-series_len:i, :])
         data_y_.append(data_y[i])
 
     return np.array(data_X_), np.array(data_y_)
 
 
 def feature_spawn(df):
-    """Spawns features for each instrument
-    Returns df with the following columns for each
-    instrument
-    Log Returns
-    EWMA 1 day
-    EWMA 1 week
-    EWMA 1 month
-    EWMA 1 quarter
-    EWMA 6 months
-    EWMA 1 year
-    Rolling vol 1 week
-    Rolling vol 1 month
-    Rolling vol 1 quarter
-    """
-    hlf_dict = {"week":5, "month":22, "quarter":66, "half_year":130, "year":261}
+    """Takes a time series and spawns several new features that explicitly
+    detail information about the series.
 
+    The DataFrame spawned contains the following features
+    spawned for each column in the input DataFrame:
+
+        Exponentially Weighted Moving Average of various half lives:
+            Half Life:      1 day
+            Half Life:      1 week
+            Half Life:      1 month
+            Half Life:      1 quarter
+            Half Life:      6 months
+            Half Life:      1 year
+
+        Rolling vol of different window sizes:
+            Window Size:    1 week
+            Window Size:    1 month
+            Window Size:    1 quarter
+
+    :param df:              The dataset of independent variables
+    :type  df:              pd.DataFrame
+
+    :return:                The DataFrame containing spawned features
+    :rtype:                 pd.DataFrame
+    """
+    # The half live span to calculate the EWMA with
+    hlf_dict = {"week": 5, "month": 22, "quarter": 66,
+                "half_year": 132, "year": 260}
+
+    # Spawning the signals for each column in the DataFrame
     for col in df.columns:
         for half_life in hlf_dict:
-            df[col + "_ema_" + half_life] = df[col].ewm(span=hlf_dict[half_life]).mean()
+            df[col + "_ema_" + half_life] = \
+                df[col].ewm(span=hlf_dict[half_life]).mean()
 
     for i, half_life in enumerate(hlf_dict):
         if i < 3:
-            df[col + "_roll_vol_" + half_life] = df[col].rolling(window=hlf_dict[half_life]).std(ddof=0)
+            df[col + "_roll_vol_" + half_life] = \
+                df[col].rolling(window=hlf_dict[half_life]).std(ddof=0)
 
     df.dropna(inplace=True)
     return df

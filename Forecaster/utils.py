@@ -5,165 +5,183 @@ from scipy.ndimage.interpolation import shift
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
-def check_length(universe_dict):
-    """Checks the name of all the dataframes in the
-    dictionary of instruments
+"""This module include a set of functions that are used to evaluate and 
+inspect the time series in the dataset."""
 
-    :param universe_dict: a dictionary of financial time series
-    :type universe_dict: dict
+
+def check_length(universe_dict):
+    """Checks the name of all the DataFrames in the dictionary of time series.
+
+    :param universe_dict:       The dictionary of time series
+    :type  universe_dict:       dict
     """
     for df_name in universe_dict:
         print(len(universe_dict[df_name]))
 
 
 def visualise_df(df):
-    """Visualises the features for an instrument
-    :param df: the time series to visualise
-    :type df: pd.DataFrame
-    """
-    fig, axarr = plt.subplots(int(len(df.columns) / 2), 2, figsize=(4 * 10, 4 * len(df.columns)))
+    """Visualises each time series in a DataFrame.
 
-    for ax, df_name in zip(axarr.flatten(), df.columns):
+    :param df:                  The DataFrame of time series to visualise
+    :type  df:                  pd.DataFrame
+    """
+    fig, ax_arr = plt.subplots(int(len(df.columns) / 2), 2,
+                               figsize=(4 * 10, 4 * len(df.columns)))
+
+    for ax, df_name in zip(ax_arr.flatten(), df.columns):
         ax.set_title(df_name)
         ax.plot(df.index, df[df_name])
         ax.grid()
         ax.legend()
+
     plt.show()
 
 
-def visualise_universe(universe_dict):
-    """Plots the price and log return for every
-    instrument in the univese dictionary
+def check_day_frequency(df, col_name='ds'):
+    """Creates a bar chart showing the frequency of the days of the week.
 
-    :param universe_dict: a dictionary of financial time series to visualise
-    :type universe_dict: dict
+    Used to check that only business days are included in the dataset, and
+    that there is a roughly equal distribution of entries across the week.
+
+    :param df:               A DataFrame containing the time series to check
+    :type  df:               pd.DataFrame
+
+    :param col_name:     The name of the column of interest
+    :type  col_name:     string
     """
-    for df_name in universe_dict:
-        visualise_df(universe_dict[df_name])
-
-
-def check_day_frequency(df, day_col_name='ds'):
-    """Returns a barchart showing the frequency of the
-    days of the week within a dataframe
-
-    :param df: the time series to visualise
-    :type df: pd.DataFrame
-    """
-    df["day"] = df[day_col_name].apply(lambda x: x.weekday_name)
+    df["day"] = df[col_name].apply(lambda x: x.weekday_name)
     print(df['day'].value_counts())
     df['day'].value_counts().plot(kind='bar')
 
 
 def df_std(df, col_name):
-    """Returns the standard deviation of a dataframes column
+    """Calculates standard deviation of a DataFrames column.
 
-    :param df: a dataframe of time series
-    :type df: pd.DataFrame
+    :param df:                    A DataFrame of time series
+    :type  df:                    pd.DataFrame
 
-    :param col_name: the column of interest
-    :type df: pd.DataFrame
+    :param col_name:              The column of interest
+    :type  col_name:              string
 
-    :return: the standard deviation of the series on interest
-    :rtype: float
+    :return:                      The standard deviation of the series
+    :rtype:                       float
     """
     return df[[col_name]].stack().std()
 
 
-def inverse_log_returns(original_prices, log_returns, lag=5, shift=0):
-    """Takes a dataframes of predicted log returns and original
+def inverse_log_returns(original_prices, log_returns, lag=5, offset=0):
+    """Takes a DataFrame of predicted log returns and original
     prices and returns an array of predicted absolute prices
 
-    :param original_prices: a dataframe of absolute prices
-    :type original_prices: pd.DataFrame
+    The offset parameter moves the series forwards or backwards to
+    align the series with the DataFrame it might be appended to.
 
-    :param log_returns: a dataframe of log returns
-    :type log_returns: pd.DataFrame
+    :param original_prices:  A DataFrame of absolute prices
+    :type  original_prices:  pd.DataFrame
 
-    :param lag: the lag duration of the log returns
-    :type lag: int
+    :param log_returns:      A DataFrame of log returns
+    :type  log_returns:      pd.DataFrame
 
-    :param shift: whether to offset the series forwards of backwards
-    :type shift: int
+    :param lag:              The lag in days between series
+    :type  lag:              int
 
-    :return: the raw prices indicated by the log returns
-    :rtype:  pd.Series
+    :param offset:          Amount to offset the series forwards of backwards
+    :type  offset:          int
+
+    :return:                The raw prices given by the log returns
+    :rtype:                 pd.Series
     """
     assert isinstance(log_returns, pd.DataFrame)
     assert isinstance(original_prices, pd.DataFrame)
-    # shift is for
-    if shift == 0:
-        return (original_prices.shift(shift).values[:-lag] * np.exp(log_returns[:-lag])).values.ravel()
+    if offset == 0:
+        return (original_prices.shift(offset).values[:-lag] *
+                np.exp(log_returns[:-lag])).values.ravel()
     else:
-        return (original_prices.shift(shift).values * np.exp(log_returns)).values.ravel()
+        return (original_prices.shift(offset).values *
+                np.exp(log_returns)).values.ravel()
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
-    """Calculated the mean absolute percentage error metric
-    between two arrays
+    """Calculates the mean absolute percentage error between two arrays.
 
-    :param y_true: The observed values
-    :type y_true:  np.array
+    :param y_true:            The observed values
+    :type  y_true:            np.array
 
-    :param y_pred: The predicted values
-    :type y_pred: np.array
+    :param y_pred:            The predicted values
+    :type  y_pred:            np.array
 
-    :return: The mean absolute percentage error of the series
-    :rtype:  float
+    :return:                  The mean absolute percentage error of the series
+    :rtype:                   float
     """
     return 100 * np.mean(np.abs(y_true - y_pred) / y_true)
 
 
 def evaluate(y_true, y_pred, log_ret=False):
-    """Calculated the error metric for a dataframe
-    of predictions and observed values
+    """Calculates the error metrics for between two arrays.
 
-    :param y_true: The observed values
-    :type y_true:  np.array
+    The error metrics calculated are:
+        Means Squared Error
+        Mean Absolute Error
+        Mean Directional Accuracy
 
-    :param y_pred: The predicted values
-    :type y_pred: np.array
+    For a log returns series the definition of mean directional accuracy
+    changes. This is as for a log return series it is the signum values of the
+    series that details which direction the series has moved. This is as a log
+    return series is the first difference of the original series. For raw price
+    The signal needs to be differenced before the signum function is applied.
 
-    :return mse, mae, mde: Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics
-    :rtype: float
+
+    :param y_true:            The observed values
+    :type  y_true:            np.array
+
+    :param y_pred:            The predicted values
+    :type  y_pred:            np.array
+
+    :param log_ret:           Whether the series compared are log returns
+    :type  log_ret:           bool
+
+    :return error_metrics:    The error metrics of the series
+    :rtype:                   List
     """
     mse = mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
     
     if log_ret:
         mda = mean_directional_accuracy_log_ret(y_true, y_pred)
-    else:  
+    else:
         mda = mean_directional_accuracy(y_true, y_pred)
 
-    return mse, mae, mda
+    error_metrics = [mse, mae, mda]
+    return error_metrics
 
 
 def mean_directional_accuracy_log_ret(y_true, y_pred):
-    """Calculated the mean directional accuracy
-    error metric between two log return series
+    """Calculates the mean directional accuracy error metric between
+    two series of log returns.
 
-    :param y_true: The observed values
-    :type y_true:  pd.Series
+    :param y_true:           The observed values
+    :type  y_true:           np.array
 
-    :param y_pred: The predicted values
-    :type y_pred: pd.Series
+    :param y_pred:           The predicted values
+    :type  y_pred:           np.array
 
-    :return: The mean direcional accuracy of the series
-    :rtype:  float
+    :return:                 The mean directional accuracy of the series
+    :rtype:                  float
     """
     return np.mean(np.sign(y_true) == np.sign(y_pred))
 
 
 def mean_directional_accuracy(y_true, y_pred):
-    """Calculated the mean directional accuracy
-    error metric between two series
+    """Calculated the mean directional accuracy error metric
+    between two series.
 
-    :param y_true: The observed values
-    :type y_true:  pd.Series
+    :param y_true:           The observed values
+    :type  y_true:           np.array
 
-    :param y_pred: The predicted values
-    :type y_pred: pd.Series
+    :param y_pred:           The predicted values
+    :type  y_pred:           np.array
 
-    :return: The mean direcional accuracy of the series
-    :rtype:  float
+    :return:                 The mean directional accuracy of the series
+    :rtype:                  float
     """
     return np.mean(np.sign(y_true[1:, :] - y_true[:-1, :]) == np.sign(y_pred[1:, :] - y_pred[:-1, :]))

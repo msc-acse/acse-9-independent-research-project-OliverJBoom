@@ -1,3 +1,12 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="Ollie" />
+  <dictionary name="Ollie">
+    <words>
+      <w>cuda</w>
+      <w>dataloader</w>
+      <w>dataset</w>
+      <w>datasets</w>
+      <w>differenced</w>
+      <w>pred</w>
+    </words>
+  </dictionary>
 </component>
