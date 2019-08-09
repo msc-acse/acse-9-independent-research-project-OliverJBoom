@@ -113,7 +113,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
     return 100 * np.mean(np.abs(y_true - y_pred) / y_true)
 
 
-def evaluate(y_true, y_pred, log_ret=True):
+def evaluate(y_true, y_pred, log_ret=False):
     """Calculated the error metric for a dataframe
     of predictions and observed values
 

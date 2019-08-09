@@ -339,7 +339,6 @@ def slice_series(data_X, data_y, series_length, dataset_pct=1.0):
     return np.array(data_X_), np.array(data_y_)
 
 
-
 def feature_spawn(df):
     """Spawns features for each instrument
     Returns df with the following columns for each

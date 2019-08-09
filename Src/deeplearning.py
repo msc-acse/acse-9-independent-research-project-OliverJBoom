@@ -497,8 +497,8 @@ class DeepLearning():
             ax[3].legend()
             
             ax[4].set_title("Single Metal Inspection Val")
-            ax[4].plot(self.train_predictions[:, 0], label="Predicted")
-            ax[4].plot(self.y_train.numpy()[:, 0],label="Observed")
+            ax[4].plot(self.val_predictions[:, 0], label="Predicted")
+            ax[4].plot(self.y_val.numpy()[:, 0],label="Observed")
             ax[4].legend()
             plt.show()
             
