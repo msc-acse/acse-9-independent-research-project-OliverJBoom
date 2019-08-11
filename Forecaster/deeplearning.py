@@ -95,12 +95,12 @@ class early_stopping:
     :type  stop:       bool
     """
 
-    def __init__(self, patience, rel_tol, verbose=False):
+    def __init__(self, patience, rel_tol, verbose=True):
 
         self.patience = patience
         self.rel_tol = rel_tol
         self.verbose = verbose
-        self.best = np.inf
+        self.best_score = np.inf
         self.counter = 0
         self.stop = False
 
@@ -108,17 +108,16 @@ class early_stopping:
         """Every time the object is called the score is checked to see if it
         has improved. If it hasn't the counter is incremented, if it has
         improved then the counter resets"""
-        if score > self.best * (1 - self.rel_tol):
+        if score >= self.best_score * (1 - self.rel_tol):
             self.counter += 1
         else:
             self.counter = 0
 
-        if score < self.best:
-            self.score = score
+        if score < self.best_score:
+            self.best_score = score
 
-        # The self.stop is used as a break clause
         if self.counter >= self.patience:
-            self.stop = True
+            self.stop = True    
 
         if self.verbose:
             print("Count:", self.counter)
@@ -335,14 +334,14 @@ class DeepLearning():
         # Creating data loaders
         self.train_loader = DataLoader(dataset=train_dataset,
                                        batch_size=self.batch_size,
-                                       shuffle=False, num_workers=8,
+                                       shuffle=False, num_workers=4,
                                        pin_memory=self.pin_memory)
         self.val_loader = DataLoader(dataset=val_dataset,
                                      batch_size=self.batch_size, shuffle=False,
-                                     num_workers=8, pin_memory=self.pin_memory)
+                                     num_workers=4, pin_memory=self.pin_memory)
         self.test_loader = DataLoader(dataset=test_dataset,
                                       batch_size=self.batch_size,
-                                      shuffle=False, num_workers=8,
+                                      shuffle=False, num_workers=4,
                                       pin_memory=self.pin_memory)
 
     def train(self, train_loader):

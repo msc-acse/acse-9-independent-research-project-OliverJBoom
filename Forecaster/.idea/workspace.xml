@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6948d668-6444-4509-90f3-aeaa25e55104" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/LSTM-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/LSTM-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LSTM MTL.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM MTL.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LSTM.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/LSTM.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval_inspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval_inspect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +83,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LSTM.patch">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2354" />
+            <state relative-caret-position="-14" />
           </provider>
         </entry>
       </file>
@@ -333,7 +333,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LSTM.patch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2354" />
+        <state relative-caret-position="-14" />
       </provider>
     </entry>
   </component>
