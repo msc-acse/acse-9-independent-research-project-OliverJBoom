@@ -64,8 +64,8 @@ def test_train_val_test():
     assert(list(learning.X_test.shape) == [20, 20, 5])
     
     
-def test_splice_series():
-    
+def test_slice_series():
+    """Check that a series is correctly sliced into windows"""
     data_X = rand(100, 5)
     data_y = rand(100, 5)
     series_length = 10
@@ -122,6 +122,7 @@ def test_evaluate():
     
     
 def test_validate():
+    """Check that an output is obtained for single task mode;"""
     data_X = rand(10, 250, 1)
     data_y = rand(10, 1)
     device = 'cpu'
@@ -142,3 +143,26 @@ def test_validate():
     learning.training_wrapper()
     assert(learning.best_val_score < np.inf)
     
+    
+def test_mtl():
+    """Check that an output is obtained for MTL model"""
+    data_X = rand(100, 132, 5)
+    data_y = rand(100, 5)
+    device = 'cpu'
+
+    model = model_load("MTL_Auto_F5", device, path="Results/Pths/MTL/Univariate/")
+    model.device = device
+    model.to(device)
+
+    learning = DeepLearning(model=model, 
+                            data_X=data_X, 
+                            data_y=data_y,
+                            optimiser=Adam(model.parameters()),
+                            n_epochs=1,
+                           debug=False)
+
+
+    learning.train_val_test()
+    learning.create_data_loaders()
+    learning.training_wrapper()
+    assert(learning.best_val_score < np.inf)
