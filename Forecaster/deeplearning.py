@@ -64,7 +64,7 @@ def model_load(model_name, path="Results/Pths/"):
     return model
 
 
-class EarlyStopping:
+class early_stopping:
     """Used to facilitate early stopping during the training
     of neural networks.
 
@@ -261,7 +261,7 @@ class DeepLearning():
 
         # Initialising the early stop object
         if self.early_stop:
-            self.early = EarlyStopping(patience=patience,
+            self.early = early_stopping(patience=patience,
                                        rel_tol=rel_tol,
                                        verbose=early_verbose)
 
