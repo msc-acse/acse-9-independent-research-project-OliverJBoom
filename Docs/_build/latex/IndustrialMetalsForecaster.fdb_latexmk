@@ -1,9 +1,10 @@
 # Fdb version 3
-["makeindex IndustrialMetalsForecaster.idx"] 1565347225 "IndustrialMetalsForecaster.idx" "IndustrialMetalsForecaster.ind" "IndustrialMetalsForecaster" 1565347227
-  "IndustrialMetalsForecaster.idx" 1565347227 5777 f18e658de0ee91ac2c16576129f33c56 ""
+["makeindex IndustrialMetalsForecaster.idx"] 1565370413 "IndustrialMetalsForecaster.idx" "IndustrialMetalsForecaster.ind" "IndustrialMetalsForecaster" 1565370414
+  "IndustrialMetalsForecaster.idx" 1565370414 6700 246364e6e9bdd9270c70df0e994578da ""
   (generated)
   "IndustrialMetalsForecaster.ind"
-["pdflatex"] 1565347226 "IndustrialMetalsForecaster.tex" "IndustrialMetalsForecaster.pdf" "IndustrialMetalsForecaster" 1565347227
+  "IndustrialMetalsForecaster.ilg"
+["pdflatex"] 1565370413 "IndustrialMetalsForecaster.tex" "IndustrialMetalsForecaster.pdf" "IndustrialMetalsForecaster" 1565370414
   "/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm" 1136768653 1292 3059476c50a24578715759f22652f3d0 ""
@@ -150,20 +151,20 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1487441738 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1487441789 3873397 ca70660595a361e1a908deed3ce2290b ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "IndustrialMetalsForecaster.aux" 1565347227 5775 7e95db799b5d4f8636b02680a7dfc77e ""
-  "IndustrialMetalsForecaster.ind" 1565347225 4300 b2cd8702c7913116310ad780e0259894 "makeindex IndustrialMetalsForecaster.idx"
-  "IndustrialMetalsForecaster.out" 1565347227 759 9051b0638a439018e955a240ecd03550 ""
-  "IndustrialMetalsForecaster.tex" 1565347220 38968 7097faf69f2c537a42b18cb5a80b4789 ""
-  "IndustrialMetalsForecaster.toc" 1565347227 431 bb2ea39d2a957774630b9d8332e03eb4 ""
+  "IndustrialMetalsForecaster.aux" 1565370414 6771 b71e0a48956007fb0a42a8ec8fed805c ""
+  "IndustrialMetalsForecaster.ind" 1565370413 4829 8f372c407c83b146e554e9ccbd05abf8 "makeindex IndustrialMetalsForecaster.idx"
+  "IndustrialMetalsForecaster.out" 1565370414 976 49171b2b788c9cf6f1b0b6a95a8ccfe0 ""
+  "IndustrialMetalsForecaster.tex" 1565370412 52104 03e17451638e0ac181555ac56e0f8baf ""
+  "IndustrialMetalsForecaster.toc" 1565370414 520 2ecab9372c2e35cb540ed466936ccf32 ""
   "footnotehyper-sphinx.sty" 1552140457 8888 1bbd7bdeae8c8bed1d10d551bddb1cc9 ""
   "sphinx.sty" 1552204022 76220 63a32157b97240a297c69d4d077e82ab ""
-  "sphinxhighlight.sty" 1565347220 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1565370411 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxmanual.cls" 1552204022 3622 686a4f202ad31ad9dfe0d7d6ebdb7066 ""
   "sphinxmulticell.sty" 1552140457 14618 0defbdc8536ad2e67f1eac6a1431bc55 ""
   (generated)
-  "IndustrialMetalsForecaster.pdf"
   "IndustrialMetalsForecaster.out"
+  "IndustrialMetalsForecaster.pdf"
   "IndustrialMetalsForecaster.idx"
-  "IndustrialMetalsForecaster.log"
-  "IndustrialMetalsForecaster.aux"
   "IndustrialMetalsForecaster.toc"
+  "IndustrialMetalsForecaster.aux"
+  "IndustrialMetalsForecaster.log"

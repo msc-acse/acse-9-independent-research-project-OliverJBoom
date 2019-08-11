@@ -1,7 +1,8 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Preprocessing Module}{1}{chapter.1}
 \contentsline {chapter}{\numberline {2}Deeplearning Module}{5}{chapter.2}
-\contentsline {chapter}{\numberline {3}Utils Module}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Indices and tables}{10}{section.3.1}
-\contentsline {chapter}{Python Module Index}{11}{section*.42}
-\contentsline {chapter}{Index}{13}{section*.43}
+\contentsline {chapter}{\numberline {3}Evaluation and Inspection Module}{9}{chapter.3}
+\contentsline {chapter}{\numberline {4}Models Module}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Indices and tables}{11}{section.4.1}
+\contentsline {chapter}{Python Module Index}{13}{section*.43}
+\contentsline {chapter}{Index}{15}{section*.44}

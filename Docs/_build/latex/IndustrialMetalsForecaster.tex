@@ -77,43 +77,46 @@
 
 
 \chapter{Preprocessing Module}
-\label{\detokenize{index:module-Src.preprocessing}}\label{\detokenize{index:preprocessing-module}}\index{Src.preprocessing (module)@\spxentry{Src.preprocessing}\spxextra{module}}\index{clean\_data() (in module Src.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Src.preprocessing}}
+\label{\detokenize{index:module-Forecaster.preprocessing}}\label{\detokenize{index:preprocessing-module}}\index{Forecaster.preprocessing (module)@\spxentry{Forecaster.preprocessing}\spxextra{module}}\index{clean\_data() (in module Forecaster.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.clean_data}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_data}}}{\emph{df}, \emph{n\_std=20}}{}
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.clean_data}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_data}}}{\emph{df}, \emph{n\_std=20}}{}
 Removes any outliers that are further than a chosen
-number of standard deviations from the mean
+number of standard deviations from the mean.
+
+These values are most likely wrongly inputted data,
+and so are forward filled.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{dataframe}}) \textendash{} the finacial time series
+\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} A time series
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{n\_std}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the number of standard deviations from the mean
+\sphinxstyleliteralstrong{\sphinxupquote{n\_std}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of standard deviations from the mean
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-the cleaned financial time series
+The cleaned time series
 
 \item[{Return type}] \leavevmode
-dataframe
+pd.DataFrame
 
 \end{description}\end{quote}
 
 \end{fulllineitems}
 
-\index{clean\_dict\_gen() (in module Src.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Src.preprocessing}}
+\index{clean\_dict\_gen() (in module Forecaster.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}}{}
-Returns a dictionary of cleaned dataframes
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}}{}
+Generates a dictionary of cleaned DataFrames
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
 
 \item[{Returns}] \leavevmode
-the cleaned financial time series
+The cleaned dictionary of time series
 
 \item[{Return type}] \leavevmode
 dict
@@ -122,18 +125,18 @@ dict
 
 \end{fulllineitems}
 
-\index{column\_rename() (in module Src.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Src.preprocessing}}
+\index{column\_rename() (in module Forecaster.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.column_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{column\_rename}}}{\emph{universe\_dict}}{}
-Appends the name of the instrument
-name to the columns
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.column_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{column\_rename}}}{\emph{universe\_dict}}{}
+Appends the name of the instrument to the columns.
+To help keep track of the instruments in the full dataset.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
 
 \item[{Returns}] \leavevmode
-the financial time series
+The dictionary of time series
 
 \item[{Return type}] \leavevmode
 dict
@@ -142,23 +145,23 @@ dict
 
 \end{fulllineitems}
 
-\index{dimension\_reduce() (in module Src.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Src.preprocessing}}
+\index{dimension\_reduce() (in module Forecaster.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}}{}
-Performing PCA to reduce the amount of
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}}{}
+Performing PCA to reduce the dimensionality of the data.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} array to perform reduction on
+\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The dataset to perform reduction on
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{n\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} number of dimensions to reduce to
+\sphinxstyleliteralstrong{\sphinxupquote{n\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Number of dimensions to reduce to
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-reduced dataset
+The reduced dataset
 
 \item[{Return type}] \leavevmode
 np.array
@@ -167,24 +170,30 @@ np.array
 
 \end{fulllineitems}
 
-\index{dimension\_selector() (in module Src.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Src.preprocessing}}
+\index{dimension\_selector() (in module Forecaster.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}}{}
-Returns the number of dimensions that reaches the
-threshold level of desired variance
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}}{}
+Calculated the number of dimensions required to reach a threshold level
+of variance.
+
+Completes a PCA reduction to an increasing number of dimensions
+and calculates the total variance achieved for each reduction. If the
+reduction is above the threshold then that number of dimensions is returned
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} dataset to perform reduction on
+\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The dataset to perform reduction on
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{thresh}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} the amount of variance that must be contained in reduced dataset
+\sphinxstyleliteralstrong{\sphinxupquote{thresh}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The amount of variance that must be
+contained the in reduced dataset
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-the amount of dimensions needed to conatin the threshold variance
+The column dimensionality required to
+contain the threshold variance
 
 \item[{Return type}] \leavevmode
 int
@@ -193,127 +202,142 @@ int
 
 \end{fulllineitems}
 
-\index{feature\_spawn() (in module Src.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Src.preprocessing}}
+\index{feature\_spawn() (in module Forecaster.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.feature_spawn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{feature\_spawn}}}{\emph{df}}{}
-Spawns features for each instrument
-Returns df with the following columns for each
-instrument
-Log Returns
-EWMA 1 day
-EWMA 1 week
-EWMA 1 month
-EWMA 1 quarter
-EWMA 6 months
-EWMA 1 year
-Rolling vol 1 week
-Rolling vol 1 month
-Rolling vol 1 quarter
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.feature_spawn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{feature\_spawn}}}{\emph{df}}{}
+Takes a time series and spawns several new features that explicitly
+detail information about the series.
 
-\end{fulllineitems}
+The DataFrame spawned contains the following features
+spawned for each column in the input DataFrame:
+\begin{quote}
+\begin{description}
+\item[{Exponentially Weighted Moving Average of various half lives:}] \leavevmode
+Half Life:      1 day
+Half Life:      1 week
+Half Life:      1 month
+Half Life:      1 quarter
+Half Life:      6 months
+Half Life:      1 year
 
-\index{generate\_dataset() (in module Src.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Src.preprocessing}}
+\item[{Rolling vol of different window sizes:}] \leavevmode
+Window Size:    1 week
+Window Size:    1 month
+Window Size:    1 quarter
 
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.generate_dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_dataset}}}{\emph{universe\_dict}, \emph{lag=5}, \emph{lg\_returns\_only=True}, \emph{price\_only=False}}{}
-Generates the full dataset
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of days the returns are calculated between
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{lg\_returns\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether to return a dataset of log returns only
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{price\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether to return a dataset of raw prices only
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-the financial time series
-
-\item[{Return type}] \leavevmode
-dataframe
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{generate\_lg\_return() (in module Src.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Src.preprocessing}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.generate_lg_return}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_lg\_return}}}{\emph{df\_full}, \emph{lag=1}}{}
-Returns a dictionary containing dataframes
-with the additional log returns column
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{df\_full}} (\sphinxstyleliteralemphasis{\sphinxupquote{dataframe}}) \textendash{} the financial time series
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of days the returns are calculated between
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-the financial time series with log returns
-
-\item[{Return type}] \leavevmode
-dataframe
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{generate\_target() (in module Src.preprocessing)@\spxentry{generate\_target()}\spxextra{in module Src.preprocessing}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.generate_target}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_target}}}{\emph{df\_full}, \emph{target\_col='price\_cu\_lme'}, \emph{lag=5}}{}
-Generate the target variable
-
-\end{fulllineitems}
-
-\index{log\_returns() (in module Src.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Src.preprocessing}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{log\_returns}}}{\emph{series}, \emph{lag=1}}{}
-Calculate log returns between adjacent close prices
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{series}} (\sphinxstyleliteralemphasis{\sphinxupquote{numpy array}}) \textendash{} prices to calculate the log returns on
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of days the returns are calculated between
-
-\end{itemize}
-
-\item[{Returns}] \leavevmode
-the series of log returns
-
-\item[{Return type}] \leavevmode
-numpy array
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{price\_rename() (in module Src.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Src.preprocessing}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.price_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{price\_rename}}}{\emph{universe\_dict}}{}
-Renaming the column of the dataframe values to price
+\end{description}
+\end{quote}
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series
+\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} The dataset of independent variables
 
 \item[{Returns}] \leavevmode
-financial time series
+The DataFrame containing spawned features
+
+\item[{Return type}] \leavevmode
+pd.DataFrame
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{generate\_dataset() (in module Forecaster.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Forecaster.preprocessing}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.generate_dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_dataset}}}{\emph{universe\_dict}, \emph{price\_only=True}, \emph{lg\_only=False}}{}
+Generates the full dataset.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The lag in days between series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{lg\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to return a dataset of log returns only
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{price\_only}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to return a dataset of raw prices only
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The time series
+
+\item[{Return type}] \leavevmode
+pd.DataFrame
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{generate\_lg\_return() (in module Forecaster.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Forecaster.preprocessing}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.generate_lg_return}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_lg\_return}}}{\emph{df\_full}, \emph{lag=1}}{}
+Creates the log return series for each column in the DataFrame
+and returns the full dataset with log returns.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{df\_full}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} The time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The lag between the series (in days)
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The DataFrame of time series with log returns
+
+\item[{Return type}] \leavevmode
+pd.DataFrame
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{log\_returns() (in module Forecaster.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Forecaster.preprocessing}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{log\_returns}}}{\emph{series}, \emph{lag=1}}{}
+Calculates the log returns between adjacent close prices.
+A constant lag is used across the whole series.
+E.g a lag of one means a day to day log return.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} Prices to calculate the log returns on
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The lag between the series (in days)
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+The series of log returns
+
+\item[{Return type}] \leavevmode
+np.array
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{price\_rename() (in module Forecaster.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Forecaster.preprocessing}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.price_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{price\_rename}}}{\emph{universe\_dict}}{}
+Renaming the column of the DataFrame values to price.
+This is actually the market closing price of the time series.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
+
+\item[{Returns}] \leavevmode
+The dictionary of renamed time series
 
 \item[{Return type}] \leavevmode
 dict
@@ -322,26 +346,63 @@ dict
 
 \end{fulllineitems}
 
-\index{slice\_series() (in module Src.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Src.preprocessing}}
+\index{slice\_series() (in module Forecaster.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.slice_series}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{slice\_series}}}{\emph{data\_X}, \emph{data\_y}, \emph{series\_length}, \emph{dataset\_pct=1.0}}{}
-TODO
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.slice_series}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{slice\_series}}}{\emph{data\_X}, \emph{data\_y}, \emph{series\_len}, \emph{dataset\_pct=1.0}}{}
+Slices the train and target dataset time series.
+
+Turns each time series into a series of time series, with each series
+displaced by one step forward to the previous series. And for each
+of these windows there is an accompanying target value
+
+The effect of this is to create an array of time series (which is the depth
+equal to the amount of instruments in the dataset) with each entry in this
+array having a target series in the data\_y array
+
+The resulting data\_X array shape:
+{[}amount of rolling windows, length of each series, number of instruments{]}
+
+The resulting data\_y array shape:
+{[}amount of rolling windows, number of instruments{]}
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The dataset of time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{data\_y}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The target dataset of time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_len}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The length of each time series window
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dataset\_pct}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The percentage of the full dataset to include
+
+\end{itemize}
+
+\item[{Returns}] \leavevmode
+
+
+\item[{Return type}] \leavevmode
+
+
+\end{description}\end{quote}
 
 \end{fulllineitems}
 
-\index{truncate\_window\_length() (in module Src.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Src.preprocessing}}
+\index{truncate\_window\_length() (in module Forecaster.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.truncate_window_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{truncate\_window\_length}}}{\emph{universe\_dict}}{}
-Chopping the length of all of the dataframes to ensure
-that they are all between the same dates
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.truncate_window_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{truncate\_window\_length}}}{\emph{universe\_dict}}{}
+Chopping the length of all of the DataFrames to ensure
+that they are all between the same dates.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} the financial time series
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
 
 \item[{Returns}] \leavevmode
-the truncated financial time series
+the dictionary of truncated time series
 
 \item[{Return type}] \leavevmode
 dict
@@ -350,24 +411,23 @@ dict
 
 \end{fulllineitems}
 
-\index{universe\_select() (in module Src.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Src.preprocessing}}
+\index{universe\_select() (in module Forecaster.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Forecaster.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.preprocessing.universe_select}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.preprocessing.}}\sphinxbfcode{\sphinxupquote{universe\_select}}}{\emph{path}, \emph{commodity\_name}}{}
-Selects the instruments believed to be of
-interest for the commodity selected
+\phantomsection\label{\detokenize{index:Forecaster.preprocessing.universe_select}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{universe\_select}}}{\emph{path}, \emph{commodity\_name}}{}
+Selects the financial time series relevant for the commodities selected.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{type string}}) \textendash{} path to the csv folder
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} path to the folder containing csvs
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{commodity\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{type string}}) \textendash{} the name of the metal being inspected
+\sphinxstyleliteralstrong{\sphinxupquote{commodity\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} the name of the metal/s being inspected
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-financial time series relevant to the commodity
+The time series relevant to the commodities
 
 \item[{Return type}] \leavevmode
 dict
@@ -379,100 +439,103 @@ dict
 
 
 \chapter{Deeplearning Module}
-\label{\detokenize{index:module-Src.deeplearning}}\label{\detokenize{index:deeplearning-module}}\index{Src.deeplearning (module)@\spxentry{Src.deeplearning}\spxextra{module}}\index{DeepLearning (class in Src.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Src.deeplearning}}
+\label{\detokenize{index:module-Forecaster.deeplearning}}\label{\detokenize{index:deeplearning-module}}\index{Forecaster.deeplearning (module)@\spxentry{Forecaster.deeplearning}\spxextra{module}}\index{DeepLearning (class in Forecaster.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Forecaster.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{DeepLearning}}}{\emph{model}, \emph{data\_X}, \emph{data\_y}, \emph{n\_epochs}, \emph{optimiser}, \emph{batch\_size}, \emph{loss\_function=MSELoss()}, \emph{device='cpu'}, \emph{seed=42}, \emph{debug=True}, \emph{disp\_freq=20}, \emph{fig\_disp\_freq=50}, \emph{early\_stop=True}, \emph{early\_verbose=False}, \emph{patience=50}, \emph{rel\_tol=0}, \emph{scaler\_data\_X=None}, \emph{scaler\_data\_y=None}}{}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{DeepLearning}}}{\emph{model}, \emph{data\_X}, \emph{data\_y}, \emph{n\_epochs}, \emph{optimiser}, \emph{batch\_size}, \emph{loss\_function=MSELoss()}, \emph{device='cpu'}, \emph{seed=42}, \emph{debug=True}, \emph{disp\_freq=20}, \emph{fig\_disp\_freq=50}, \emph{early\_stop=True}, \emph{early\_verbose=False}, \emph{patience=50}, \emph{rel\_tol=0}, \emph{scaler\_data\_X=None}, \emph{scaler\_data\_y=None}}{}
 Class to perform training and validation for a given model
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{model}} (\sphinxstyleliteralemphasis{\sphinxupquote{LSTM}}) \textendash{} the neural network model
+\sphinxstyleliteralstrong{\sphinxupquote{model}} (\sphinxstyleliteralemphasis{\sphinxupquote{nn.module}}) \textendash{} The neural network model
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} the training dataset
+\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The training dataset
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{data\_y}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} the target dataset
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{n\_epochs}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the number of epochs of training
+\sphinxstyleliteralstrong{\sphinxupquote{n\_epochs}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of epochs of training
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{optimiser}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.optim}}) \textendash{} the type of optimiser used
+\sphinxstyleliteralstrong{\sphinxupquote{optimiser}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.optim}}) \textendash{} The type of optimiser used
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the batch size
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The batch size
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{loss\_function}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.nn.modules.loss}}) \textendash{} the loss function used
+\sphinxstyleliteralstrong{\sphinxupquote{loss\_function}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.nn.modules.loss}}) \textendash{} The loss function used
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} running on cpu or CUDA
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{seed}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the random seed set
+\sphinxstyleliteralstrong{\sphinxupquote{seed}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number that is set for the random seeds
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{debug}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether to print some parameters for checking
+\sphinxstyleliteralstrong{\sphinxupquote{debug}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to print some parameters for checking
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{disp\_freq}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the frequency that training/validation metrics will be printed
+\sphinxstyleliteralstrong{\sphinxupquote{disp\_freq}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The epoch frequency that training/validation
+metrics will be printed on
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{fig\_disp\_freq}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the frequency that training/validation prediction figures will be made
+\sphinxstyleliteralstrong{\sphinxupquote{fig\_disp\_freq}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The frequency that training/validation prediction
+figures will be made
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{early\_stop}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether early stopping is utilized
+\sphinxstyleliteralstrong{\sphinxupquote{early\_stop}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether early stopping is utilized
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{early\_verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether to print out the early stopping counter
+\sphinxstyleliteralstrong{\sphinxupquote{early\_verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to print out the early stopping counter
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{patience}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of epochs without improvement before stopping
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} (\sphinxstyleliteralemphasis{\sphinxupquote{stopping int}}) \textendash{} The amount of epochs without improvement before
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{rel\_tol}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} the relative improvement percentage that must be achieved
+\sphinxstyleliteralstrong{\sphinxupquote{rel\_tol}} \textendash{} The relative improvement percentage that must be
+achieved float
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{scaler\_data\_X}} \textendash{} the data X scaler object for inverse scaling
+\sphinxstyleliteralstrong{\sphinxupquote{scaler\_data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{sklearn.preprocessing.data.MinMaxScaler}}) \textendash{} The data X scaler object for inverse scaling
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{scaler\_data\_y}} \textendash{} the dataX y scaler object for inverse scaling
+\sphinxstyleliteralstrong{\sphinxupquote{scaler\_data\_y}} (\sphinxstyleliteralemphasis{\sphinxupquote{sklearn.preprocessing.data.MinMaxScaler}}) \textendash{} The dataX y scaler object for inverse scaling
 
 \end{itemize}
 
-\item[{Rtype scaler\_data\_X}] \leavevmode
-sklearn.preprocessing.data.MinMaxScaler
-
-\item[{Rtype scaler\_data\_y}] \leavevmode
-sklearn.preprocessing.data.MinMaxScaler
-
 \end{description}\end{quote}
-\index{create\_data\_loaders() (Src.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{create\_data\_loaders() (Forecaster.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.create_data_loaders}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_data\_loaders}}}{}{}
-Forms iterators to pipeline in the data
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.create_data_loaders}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_data\_loaders}}}{}{}
+Forms iterators to pipeline in the data/labels
 
 \end{fulllineitems}
 
-\index{evaluate() (Src.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{evaluate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.evaluate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{model}, \emph{test\_loader}}{}
-Evaluates the performance of the network
-on given data for a given model
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.evaluate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{model}, \emph{test\_loader}}{}
+Evaluates the performance of the network on given data for a given
+model.
 
-A lot of overlap of code with validation. Only kept separate
-due to inspection of attibutes made easier when running simulations
-if kept separate
+A lot of overlap of code with validation. Only kept separate due to the
+inspection of attributes being made easier when running simulations
+if kept separate.
 \begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{test\_loader}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.utils.data.dataloader.DataLoader}}) \textendash{} the iterator that feeds in the data of choice
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{model}} (\sphinxstyleliteralemphasis{\sphinxupquote{nn.module}}) \textendash{} The model to evaluate
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{test\_loader}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.utils.data.dataloader.DataLoader}}) \textendash{} The iterator that feeds in the data of choice
+
+\end{itemize}
 
 \item[{Returns}] \leavevmode
-the error metric for that dataset
+The error metric for that dataset
 
 \item[{Return type}] \leavevmode
 float
@@ -481,35 +544,35 @@ float
 
 \end{fulllineitems}
 
-\index{live\_pred\_plot() (Src.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{live\_pred\_plot() (Forecaster.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.live_pred_plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{live\_pred\_plot}}}{}{}
-Plots the training predictions, validation predictions
-and the live training/validation losses
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.live_pred_plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{live\_pred\_plot}}}{}{}
+Plots the training predictions, validation predictions and the
+training/validation losses as they are predicted.
 
 \end{fulllineitems}
 
-\index{size\_check() (Src.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{size\_check() (Forecaster.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.size_check}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{size\_check}}}{}{}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.size_check}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{size\_check}}}{}{}
 Checks the size of the datasets
 
 \end{fulllineitems}
 
-\index{train() (Src.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{train() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.train}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train}}}{\emph{train\_loader}}{}
-Performs a single training cycle and returns the
-loss metric for the training dataset
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.train}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train}}}{\emph{train\_loader}}{}
+Performs a single training epoch and returns the loss metric
+for the training dataset.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{train\_loader}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.utils.data.dataloader.DataLoader}}) \textendash{} the iterator that feeds in the training data
+\sphinxstyleliteralstrong{\sphinxupquote{train\_loader}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.utils.data.dataloader.DataLoader}}) \textendash{} The iterator that feeds in the training data
 
 \item[{Returns}] \leavevmode
-the error metric for that epoch
+The error metric for that epoch
 
 \item[{Return type}] \leavevmode
 float
@@ -518,30 +581,29 @@ float
 
 \end{fulllineitems}
 
-\index{train\_val\_test() (Src.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{train\_val\_test() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.train_val_test}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train\_val\_test}}}{}{}
-Splits the dataframes in to a training, validation
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.train_val_test}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train\_val\_test}}}{}{}
+Splits the DataFrames in to a training, validation
 and test set and creates torch tensors from the underlying
 numpy arrays
 
 \end{fulllineitems}
 
-\index{training\_wrapper() (Src.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{training\_wrapper() (Forecaster.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.training_wrapper}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{training\_wrapper}}}{}{}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.training_wrapper}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{training\_wrapper}}}{}{}
 The wrapper that performs the training and validation
 
 \end{fulllineitems}
 
-\index{validate() (Src.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Src.deeplearning.DeepLearning method}}
+\index{validate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.DeepLearning.validate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{validate}}}{\emph{val\_loader}}{}
-Evaluates the performance of the network
-on unseen validation data
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.validate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{validate}}}{\emph{val\_loader}}{}
+Evaluates the performance of the network on unseen validation data.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
 \sphinxstyleliteralstrong{\sphinxupquote{val\_loader}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.utils.data.dataloader.DataLoader}}) \textendash{} the iterator that feeds in the validation data
@@ -559,36 +621,39 @@ float
 
 \end{fulllineitems}
 
-\index{early\_stopping (class in Src.deeplearning)@\spxentry{early\_stopping}\spxextra{class in Src.deeplearning}}
+\index{EarlyStopping (class in Forecaster.deeplearning)@\spxentry{EarlyStopping}\spxextra{class in Forecaster.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.early_stopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{early\_stopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=False}}{}
-Counter to implement early stopping
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.EarlyStopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{EarlyStopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=False}}{}
+Used to facilitate early stopping during the training
+of neural networks.
 
-If validation accuracy has not relative improved below
-a relative tolerance set by the user than it breaks the
-training
+When called if the validation accuracy has not relative improved below a
+relative tolerance set by the user the a counter is incremented. If the
+counter passes a set value then the stop attribute is set to true. This
+should be used as a break condition in the training loop.
 
-If rel\_tol is set to 0 it becomes a common counter
+If rel\_tol is set to 0 then the metric just needs to improve from it’s
+existing value
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{patience}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of epochs without improvement before stopping
+\sphinxstyleliteralstrong{\sphinxupquote{patience}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The amount of epochs without improvement before stopping
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{rel\_tol}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} the relative improvement percentage that must be achieved
+\sphinxstyleliteralstrong{\sphinxupquote{rel\_tol}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The relative improvement \% that must be achieved
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether to print the count number
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to print the count number
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{best\_score}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} the best score achieved so far
+\sphinxstyleliteralstrong{\sphinxupquote{best}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The best score achieved so far
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{counter}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the amount of epochs without improvement so far
+\sphinxstyleliteralstrong{\sphinxupquote{counter}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The amount of epochs without improvement so far
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{stop}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} whether stopping criteria is achieved
+\sphinxstyleliteralstrong{\sphinxupquote{stop}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether stopping criteria is achieved
 
 \end{itemize}
 
@@ -596,55 +661,141 @@ If rel\_tol is set to 0 it becomes a common counter
 
 \end{fulllineitems}
 
-\index{full\_save() (in module Src.deeplearning)@\spxentry{full\_save()}\spxextra{in module Src.deeplearning}}
+\index{full\_save() (in module Forecaster.deeplearning)@\spxentry{full\_save()}\spxextra{in module Forecaster.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.full_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{full\_save}}}{\emph{model}, \emph{model\_name}, \emph{optimiser}, \emph{num\_epoch}, \emph{learning\_rate}, \emph{momentum}, \emph{weight\_decay}, \emph{use\_lg\_returns}, \emph{PCA\_used}, \emph{data\_X}, \emph{train\_loss}, \emph{val\_loss}, \emph{test\_loss}, \emph{train\_time}, \emph{hidden\_dim}, \emph{mse}, \emph{mae}, \emph{mde}, \emph{path='Models/CSVs/'}}{}
-Saves the models weights and hyperparameters to a pth file and csv file
-
-\end{fulllineitems}
-
-\index{model\_load() (in module Src.deeplearning)@\spxentry{model\_load()}\spxextra{in module Src.deeplearning}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.model_load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_load}}}{\emph{model\_name}, \emph{path='Models/'}}{}
-Loading function for models from google drive
-
-\end{fulllineitems}
-
-\index{model\_save() (in module Src.deeplearning)@\spxentry{model\_save()}\spxextra{in module Src.deeplearning}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.model_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_save}}}{\emph{model}, \emph{name}, \emph{path='Models/'}}{}
-Saving function to keep track of models
-
-\end{fulllineitems}
-
-\index{param\_strip() (in module Src.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Src.deeplearning}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.param_strip}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{param\_strip}}}{\emph{param}}{}
-Strips the key text info out of certain parameters
-
-\end{fulllineitems}
-
-\index{set\_seed() (in module Src.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Src.deeplearning}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.deeplearning.set_seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.deeplearning.}}\sphinxbfcode{\sphinxupquote{set\_seed}}}{\emph{seed}, \emph{device='cpu'}}{}
-Sets the random seeds to ensure detemrinistic behaviour
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.full_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{full\_save}}}{\emph{model}, \emph{model\_name}, \emph{optimiser}, \emph{num\_epoch}, \emph{learning\_rate}, \emph{momentum}, \emph{weight\_decay}, \emph{use\_lg\_returns}, \emph{PCA\_used}, \emph{data\_X}, \emph{train\_loss}, \emph{val\_loss}, \emph{test\_loss}, \emph{train\_time}, \emph{hidden\_dim}, \emph{mse}, \emph{mae}, \emph{mde}, \emph{path='Models/CSVs/'}}{}
+Saves the models run details and hyper-parameters to a csv file
+:param model:               The model run
+:type  model:               nn.module
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{seed}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the random seed number that is set
+\sphinxstyleliteralstrong{\sphinxupquote{model\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{strin}}) \textendash{} The name the model is saved under
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} whether running on cpu or CUDA
+\sphinxstyleliteralstrong{\sphinxupquote{optimiser}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.optim}}) \textendash{} The optimiser type used
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_epoch}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of epochs run for
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{learning\_rate}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The learning rate learning hyper-parameter
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{momentum}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The momentum learning hyper-parameter
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{weight\_decay}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The weight decay learning hyper-parameter
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{use\_lg\_returns}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether log returns was used
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{PCA\_used}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether PCA was used
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{data\_X}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The training dataset (used to save the shape)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{train\_loss}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The loss on the training dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{val\_loss}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The loss on the validation dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{test\_loss}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The loss on the test dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{train\_time}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The amount of time to train
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the hidden layers
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{mse}} (\sphinxstyleliteralemphasis{\sphinxupquote{floot}}) \textendash{} The mean squared error metric
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{mae}} (\sphinxstyleliteralemphasis{\sphinxupquote{floot}}) \textendash{} The mean absolute error metric
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{mde}} (\sphinxstyleliteralemphasis{\sphinxupquote{floot}}) \textendash{} The mean direction error metric
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The directory path to save in
 
 \end{itemize}
 
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{model\_load() (in module Forecaster.deeplearning)@\spxentry{model\_load()}\spxextra{in module Forecaster.deeplearning}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.model_load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_load}}}{\emph{model\_name}, \emph{path='Results/Pths/'}}{}
+Loading function for the models.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{model\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The model name to load
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The directory path to load the model from
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{model\_save() (in module Forecaster.deeplearning)@\spxentry{model\_save()}\spxextra{in module Forecaster.deeplearning}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.model_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_save}}}{\emph{model}, \emph{name}, \emph{path='Results/Pths/'}}{}
+Saving function for the model.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{model}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.nn}}) \textendash{} The model to save
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The name to save the model under
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The directory path to save the model in
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{param\_strip() (in module Forecaster.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Forecaster.deeplearning}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.param_strip}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{param\_strip}}}{\emph{param}}{}
+Strips the key text info out of certain parameters.
+Used to save the text info of which models/optimiser objects are used
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{param}} (\sphinxstyleliteralemphasis{\sphinxupquote{object}}) \textendash{} The parameter object to find the name of
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{set\_seed() (in module Forecaster.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Forecaster.deeplearning}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.deeplearning.set_seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{set\_seed}}}{\emph{seed}}{}
+Sets the random seeds to ensure deterministic behaviour.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{seed}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number that is set for the random seeds
+
 \item[{Returns}] \leavevmode
-confirmation that seeds have been set
+Confirmation that seeds have been set
 
 \item[{Return type}] \leavevmode
 bool
@@ -655,52 +806,59 @@ bool
 
 
 
-\chapter{Utils Module}
-\label{\detokenize{index:module-Src.utils}}\label{\detokenize{index:utils-module}}\index{Src.utils (module)@\spxentry{Src.utils}\spxextra{module}}\index{check\_day\_frequency() (in module Src.utils)@\spxentry{check\_day\_frequency()}\spxextra{in module Src.utils}}
+\chapter{Evaluation and Inspection Module}
+\label{\detokenize{index:module-Forecaster.eval_inspect}}\label{\detokenize{index:evaluation-and-inspection-module}}\index{Forecaster.eval\_inspect (module)@\spxentry{Forecaster.eval\_inspect}\spxextra{module}}\index{check\_day\_frequency() (in module Forecaster.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.check_day_frequency}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{check\_day\_frequency}}}{\emph{df}, \emph{day\_col\_name='ds'}}{}
-Returns a barchart showing the frequency of the
-days of the week within a dataframe
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} the time series to visualise
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.check_day_frequency}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_day\_frequency}}}{\emph{df}, \emph{col\_name='ds'}}{}
+Creates a bar chart showing the frequency of the days of the week.
 
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{check\_length() (in module Src.utils)@\spxentry{check\_length()}\spxextra{in module Src.utils}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.check_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{check\_length}}}{\emph{universe\_dict}}{}
-Checks the name of all the dataframes in the
-dictionary of instruments
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{df\_std() (in module Src.utils)@\spxentry{df\_std()}\spxextra{in module Src.utils}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.df_std}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{df\_std}}}{\emph{df}, \emph{col\_name}}{}
-Returns the standard deviation of a dataframes column
+Used to check that only business days are included in the dataset, and
+that there is a roughly equal distribution of entries across the week.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} a dataframe of time series
+\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} A DataFrame containing the time series to check
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{col\_name}} \textendash{} the column of interest
+\sphinxstyleliteralstrong{\sphinxupquote{col\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The name of the column of interest
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{check\_length() (in module Forecaster.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Forecaster.eval\_inspect}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.check_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_length}}}{\emph{universe\_dict}}{}
+Checks the name of all the DataFrames in the dictionary of time series.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{df\_std() (in module Forecaster.eval\_inspect)@\spxentry{df\_std()}\spxextra{in module Forecaster.eval\_inspect}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.df_std}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{df\_std}}}{\emph{df}, \emph{col\_name}}{}
+Calculates standard deviation of a DataFrames column.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} A DataFrame of time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{col\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The column of interest
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-the standard deviation of the series on interest
+The standard deviation of the series
 
 \item[{Return type}] \leavevmode
 float
@@ -709,12 +867,24 @@ float
 
 \end{fulllineitems}
 
-\index{evaluate() (in module Src.utils)@\spxentry{evaluate()}\spxextra{in module Src.utils}}
+\index{evaluate() (in module Forecaster.eval\_inspect)@\spxentry{evaluate()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.evaluate}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{y\_true}, \emph{y\_pred}, \emph{log\_ret=False}}{}
-Calculated the error metric for a dataframe
-of predictions and observed values
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.evaluate}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{y\_true}, \emph{y\_pred}, \emph{log\_ret=False}}{}
+Calculates the error metrics for between two arrays.
+\begin{description}
+\item[{The error metrics calculated are:}] \leavevmode
+Means Squared Error
+Mean Absolute Error
+Mean Directional Accuracy
+
+\end{description}
+
+For a log returns series the definition of mean directional accuracy
+changes. This is as for a log return series it is the signum values of the
+series that details which direction the series has moved. This is as a log
+return series is the first difference of the original series. For raw price
+The signal needs to be differenced before the signum function is applied.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -723,42 +893,48 @@ of predictions and observed values
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{y\_pred}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The predicted values
 
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{log\_ret}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether the series compared are log returns
+
 \end{itemize}
 
-\item[{Return mse, mae, mde}] \leavevmode
-Returns the mean squared error, mean absolute accuracy and mean directional accuracy metrics
+\item[{Return error\_metrics}] \leavevmode
+The error metrics of the series
 
 \item[{Return type}] \leavevmode
-float
+List
 
 \end{description}\end{quote}
 
 \end{fulllineitems}
 
-\index{inverse\_log\_returns() (in module Src.utils)@\spxentry{inverse\_log\_returns()}\spxextra{in module Src.utils}}
+\index{inverse\_log\_returns() (in module Forecaster.eval\_inspect)@\spxentry{inverse\_log\_returns()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.inverse_log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{inverse\_log\_returns}}}{\emph{original\_prices}, \emph{log\_returns}, \emph{lag=5}, \emph{shift=0}}{}
-Takes a dataframes of predicted log returns and original
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.inverse_log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{inverse\_log\_returns}}}{\emph{original\_prices}, \emph{log\_returns}, \emph{lag=5}, \emph{offset=0}}{}
+Takes a DataFrame of predicted log returns and original
 prices and returns an array of predicted absolute prices
+
+The offset parameter moves the series forwards or backwards to
+align the series with the DataFrame it might be appended to.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{original\_prices}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} a dataframe of absolute prices
+\sphinxstyleliteralstrong{\sphinxupquote{original\_prices}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} A DataFrame of absolute prices
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{log\_returns}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} a dataframe of log returns
+\sphinxstyleliteralstrong{\sphinxupquote{log\_returns}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} A DataFrame of log returns
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} the lag duration of the log returns
+\sphinxstyleliteralstrong{\sphinxupquote{lag}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The lag in days between series
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{shift}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} whether to offset the series forwards of backwards
+\sphinxstyleliteralstrong{\sphinxupquote{offset}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Amount to offset the series forwards of backwards
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-the raw prices indicated by the log returns
+The raw prices given by the log returns
 
 \item[{Return type}] \leavevmode
 pd.Series
@@ -767,12 +943,11 @@ pd.Series
 
 \end{fulllineitems}
 
-\index{mean\_absolute\_percentage\_error() (in module Src.utils)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Src.utils}}
+\index{mean\_absolute\_percentage\_error() (in module Forecaster.eval\_inspect)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.mean_absolute_percentage_error}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{mean\_absolute\_percentage\_error}}}{\emph{y\_true}, \emph{y\_pred}}{}
-Calculated the mean absolute percentage error metric
-between two arrays
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_absolute_percentage_error}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_absolute\_percentage\_error}}}{\emph{y\_true}, \emph{y\_pred}}{}
+Calculates the mean absolute percentage error between two arrays.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
@@ -793,24 +968,24 @@ float
 
 \end{fulllineitems}
 
-\index{mean\_directional\_accuracy() (in module Src.utils)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Src.utils}}
+\index{mean\_directional\_accuracy() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.mean_directional_accuracy}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy}}}{\emph{y\_true}, \emph{y\_pred}}{}
-Calculated the mean directional accuracy
-error metric between two series
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_directional_accuracy}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy}}}{\emph{y\_true}, \emph{y\_pred}}{}
+Calculated the mean directional accuracy error metric
+between two series.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{y\_true}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.Series}}) \textendash{} The observed values
+\sphinxstyleliteralstrong{\sphinxupquote{y\_true}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The observed values
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{y\_pred}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.Series}}) \textendash{} The predicted values
+\sphinxstyleliteralstrong{\sphinxupquote{y\_pred}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The predicted values
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-The mean direcional accuracy of the series
+The mean directional accuracy of the series
 
 \item[{Return type}] \leavevmode
 float
@@ -819,24 +994,24 @@ float
 
 \end{fulllineitems}
 
-\index{mean\_directional\_accuracy\_log\_ret() (in module Src.utils)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Src.utils}}
+\index{mean\_directional\_accuracy\_log\_ret() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.mean_directional_accuracy_log_ret}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy\_log\_ret}}}{\emph{y\_true}, \emph{y\_pred}}{}
-Calculated the mean directional accuracy
-error metric between two log return series
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_directional_accuracy_log_ret}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy\_log\_ret}}}{\emph{y\_true}, \emph{y\_pred}}{}
+Calculates the mean directional accuracy error metric between
+two series of log returns.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{y\_true}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.Series}}) \textendash{} The observed values
+\sphinxstyleliteralstrong{\sphinxupquote{y\_true}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The observed values
 
 \item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{y\_pred}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.Series}}) \textendash{} The predicted values
+\sphinxstyleliteralstrong{\sphinxupquote{y\_pred}} (\sphinxstyleliteralemphasis{\sphinxupquote{np.array}}) \textendash{} The predicted values
 
 \end{itemize}
 
 \item[{Returns}] \leavevmode
-The mean direcional accuracy of the series
+The mean directional accuracy of the series
 
 \item[{Return type}] \leavevmode
 float
@@ -845,27 +1020,91 @@ float
 
 \end{fulllineitems}
 
-\index{visualise\_df() (in module Src.utils)@\spxentry{visualise\_df()}\spxextra{in module Src.utils}}
+\index{visualise\_df() (in module Forecaster.eval\_inspect)@\spxentry{visualise\_df()}\spxextra{in module Forecaster.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.visualise_df}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{visualise\_df}}}{\emph{df}}{}
-Visualises the features for an instrument
-:param df: the time series to visualise
-:type df: pd.DataFrame
-
-\end{fulllineitems}
-
-\index{visualise\_universe() (in module Src.utils)@\spxentry{visualise\_universe()}\spxextra{in module Src.utils}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Src.utils.visualise_universe}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Src.utils.}}\sphinxbfcode{\sphinxupquote{visualise\_universe}}}{\emph{universe\_dict}}{}
-Plots the price and log return for every
-instrument in the univese dictionary
+\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.visualise_df}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{visualise\_df}}}{\emph{df}}{}
+Visualises each time series in a DataFrame.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} a dictionary of financial time series to visualise
+\sphinxstyleliteralstrong{\sphinxupquote{df}} (\sphinxstyleliteralemphasis{\sphinxupquote{pd.DataFrame}}) \textendash{} The DataFrame of time series to visualise
 
 \end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+
+\chapter{Models Module}
+\label{\detokenize{index:module-Forecaster.models}}\label{\detokenize{index:models-module}}\index{Forecaster.models (module)@\spxentry{Forecaster.models}\spxextra{module}}\index{LSTM (class in Forecaster.models)@\spxentry{LSTM}\spxextra{class in Forecaster.models}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.models.LSTM}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.models.}}\sphinxbfcode{\sphinxupquote{LSTM}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{dense\_hidden}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
+A Long Short Term Memory network model with an additional dense layer
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dense\_hidden}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the dense layers
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{forward() (Forecaster.models.LSTM method)@\spxentry{forward()}\spxextra{Forecaster.models.LSTM method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.models.LSTM.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
+Forward pass through the neural network
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{init\_hidden() (Forecaster.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Forecaster.models.LSTM method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{index:Forecaster.models.LSTM.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
+Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.
+
+To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
 
 \end{fulllineitems}
 
@@ -888,10 +1127,11 @@ instrument in the univese dictionary
 \renewcommand{\indexname}{Python Module Index}
 \begin{sphinxtheindex}
 \let\bigletter\sphinxstyleindexlettergroup
-\bigletter{s}
-\item\relax\sphinxstyleindexentry{Src.deeplearning}\sphinxstyleindexpageref{index:\detokenize{module-Src.deeplearning}}
-\item\relax\sphinxstyleindexentry{Src.preprocessing}\sphinxstyleindexpageref{index:\detokenize{module-Src.preprocessing}}
-\item\relax\sphinxstyleindexentry{Src.utils}\sphinxstyleindexpageref{index:\detokenize{module-Src.utils}}
+\bigletter{f}
+\item\relax\sphinxstyleindexentry{Forecaster.deeplearning}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.deeplearning}}
+\item\relax\sphinxstyleindexentry{Forecaster.eval\_inspect}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.eval_inspect}}
+\item\relax\sphinxstyleindexentry{Forecaster.models}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.models}}
+\item\relax\sphinxstyleindexentry{Forecaster.preprocessing}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.preprocessing}}
 \end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}

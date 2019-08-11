@@ -7,19 +7,25 @@ Welcome to Industrial Metals Forecaster's documentation!
 Preprocessing Module
 --------------------
 
-.. automodule:: Src.preprocessing
+.. automodule:: Forecaster.preprocessing
     :members:
 
 Deeplearning Module
 -------------------
 
-.. automodule:: Src.deeplearning
+.. automodule:: Forecaster.deeplearning
     :members:
 
-Utils Module
-------------
+Evaluation and Inspection Module
+--------------------------------
 
-.. automodule:: Src.utils
+.. automodule:: Forecaster.eval_inspect
+    :members:
+
+Models Module
+-------------
+
+.. automodule:: Forecaster.models
     :members:
 
 .. toctree::
