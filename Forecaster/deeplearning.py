@@ -51,7 +51,7 @@ def model_save(model, name, path="Results/Pths/"):
     torch.save(model, path + name + '.pth')
 
 
-def model_load(model_name, path="Results/Pths/"):
+def model_load(model_name, device, path="Results/Pths/"):
     """Loading function for the models.
 
     :param model_name:     The model name to load
@@ -60,7 +60,7 @@ def model_load(model_name, path="Results/Pths/"):
     :param path:           The directory path to load the model from
     :type  path:           string
     """
-    model = torch.load(path + model_name + '.pth')
+    model = torch.load(path + model_name + '.pth', map_location=device)
     return model
 
 
@@ -186,10 +186,10 @@ class DeepLearning():
     """
 
     def __init__(self, model, data_X, data_y,
-                 n_epochs,
                  optimiser,
-                 batch_size,
-                 loss_function=torch.nn.MSELoss(size_average=False),
+                 batch_size=128,
+                 n_epochs=100,
+                 loss_function=torch.nn.MSELoss(reduction='sum'),
                  device="cpu",
                  seed=42,
                  debug=True,
@@ -309,7 +309,7 @@ class DeepLearning():
             self.size_check()
 
         # If the labels have more than one target feature then using MTL
-        if self.y_test.dim() != 1:
+        if self.y_test.shape[1] > 1:
             self.MTL = True
 
     def size_check(self):
