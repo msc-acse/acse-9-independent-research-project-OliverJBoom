@@ -1,6 +1,6 @@
 --- /home/jupyter/acse-9-independent-research-project-OliverJBoom/Src/models.py
 +++ /home/jupyter/acse-9-independent-research-project-OliverJBoom/Src/models.py
-@@ -1,127 +1,96 @@
+@@ -1,125 +1,82 @@
  class LSTM(nn.Module):
 -    """A Long Short Term Memory network model with an additional dense layer
 -
@@ -32,14 +32,12 @@
 -    :type  num_layers:        int
 -    """
 -
--    def __init__(self, num_features, hidden_dim, dense_hidden, output_dim,
--                 batch_size, series_length, device,
--                 dropout=0.1, num_layers=2):
 +    """A Long Short Term Memory network
-+    model"""
++    model with an additional dense layer"""
 +        
-+    def __init__(self, num_features, hidden_dim, output_dim,
-+                 batch_size, series_length, device, 
+     def __init__(self, num_features, hidden_dim, dense_hidden, output_dim,
+                  batch_size, series_length, device,
+-                 dropout=0.1, num_layers=2):
 +                 dropout=0.1, num_layers=2, debug=True):
 +        
          super(LSTM, self).__init__()
@@ -71,14 +69,14 @@
          self.series_length = series_length
 -
 +        
-+        # Dropout Probability
-+        self.dropout = dropout
-+        
          # CPU or GPU
          self.device = device
 -
 -        self.dropout = dropout
 -
++        
++        # Dense Layer Neuron Amount
++        self.dense_hidden = dense_hidden
 +        
          # Define the LSTM layer
          self.lstm = nn.LSTM(
@@ -86,29 +84,22 @@
 -            hidden_size=self.hidden_dim,
 -            dropout=self.dropout,
 -            num_layers=self.num_layers)
+-
 +            input_size = self.num_features, 
 +            hidden_size =self.hidden_dim,
-+            dropout = self.dropout ,
++            dropout = dropout,
 +            num_layers =self.num_layers)
- 
--        # Defining the Dense Layers
--        self.fc = nn.Sequential(
++        
+         # Defining the Dense Layers
+         self.fc = nn.Sequential(
 -            nn.Linear(self.hidden_dim, self.dense_hidden),
--            nn.ReLU(),
++            nn.Linear(hidden_dim, self.dense_hidden),
+             nn.ReLU(),
 -            nn.Dropout(self.dropout),
 -            nn.Linear(self.dense_hidden, self.output_dim))
--
-+        # Fully Connected Layer
-+        self.fc1 = nn.Linear(in_features=self.hidden_dim, 
-+                             out_features=self.hidden_dim)
-+        
-+        # Activation function
-+        self.act = nn.ReLU()
-+        
-+        # Output layer
-+        self.out = nn.Linear(in_features=self.hidden_dim, 
-+                             out_features=self.output_dim)
-+        
++            nn.Dropout(dropout),
++            nn.Linear(self.dense_hidden, self.output_dim)) 
+ 
 +        
      def init_hidden(self, batch_size):
 -        """Initialised the hidden state to be zeros. This clears the hidden
@@ -140,16 +131,10 @@
 -        :param x:          The input into the network
 -        :type  x:          torch.Tensor
 -        """
-+        """Forward pass through the neural network"""
-+        
-+        """TODO Directly switch these variables in 
-+        the permute of the dataset"""
-+        
++        """Forward pass through the neural network"""  
          # Adjust to a variable batch size 
          batch_size = x.size()[0]
          series_length = x.size()[1]
-+        
-+        #print("series_length, batch_size", series_length, batch_size)
  
 -        # Making sure the series and batch haven't been mis-permuted
          assert (series_length == self.series_length)
@@ -157,13 +142,11 @@
 -        # Keeps the dimensions constant regardless of batch size
 -        x = x.contiguous().view(series_length, batch_size, -1)
 +        
-+        """TODO Check output of contiguous and non 
-+        contigious memory"""
-+        
 +        # Keeps the dimensions constant regardless of batchsize
 +        x = x.contiguous().view(series_length, batch_size, -1) 
  
          # Initialises the hidden states
++        # Not a stateful LSTM
          h0, c0 = self.init_hidden(batch_size)
 -
 -        # Pass through through LSTM layer
@@ -171,23 +154,16 @@
 +        # Pass through through lstm layer
          # Only the x is of interest
          x, (hn, cn) = self.lstm(x, (h0, c0))
+-
 +        
-+        # Output is seq to seq but only want seq to val
+         # Output is seq to seq but only want seq to val
+-        # So only use the final slice of the LSTM outputted sequence
+-        x = x[-1]
+-
 +        # So only use the final value of the lstm outputted
 +        # sequence
 +        x = x[-1]  
 +        
-+        # Fully connected hidden layer
-+        x = self.act(self.fc1(x))
-+        
-+        return self.out(x)
+         # Fully connected dense layers with dropout
+         x = self.fc(x)
  
--        # Output is seq to seq but only want seq to val
--        # So only use the final slice of the LSTM outputted sequence
--        x = x[-1]
--
--        # Fully connected dense layers with dropout
--        x = self.fc(x)
--
--        return x
--

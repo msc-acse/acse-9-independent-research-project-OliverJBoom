@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from scipy.ndimage.interpolation import shift
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
