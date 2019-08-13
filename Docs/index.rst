@@ -2,8 +2,10 @@
 Welcome to Foresight's documentation!
 =====================================
 
+Contents
+========
+
 .. toctree::
-   :caption: Contents:
    :maxdepth: 2
 
    intro

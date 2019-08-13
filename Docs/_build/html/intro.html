@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>What is Foresight? &mdash; Foresight 1.0.0 documentation</title>
+  <title>Introduction &mdash; Foresight 1.0.0 documentation</title>
   
 
   
@@ -81,14 +81,17 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">What is Foresight?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-foresight">What is Foresight?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-and-usage">Examples and Usage</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#module-Foresight.deeplearning">Deeplearning Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#module-Foresight.eval_inspect">Evaluation and Inspection Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#module-Foresight.models">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval_inspect.html">Evaluation and Inspection Module</a></li>
 </ul>
 
             
@@ -134,7 +137,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>What is Foresight?</li>
+      <li>Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,21 +156,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="what-is-foresight">
-<h1>What is Foresight?<a class="headerlink" href="#what-is-foresight" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-foresight">
+<h2>What is Foresight?<a class="headerlink" href="#what-is-foresight" title="Permalink to this headline">¶</a></h2>
 <p>Foresight is a collection of tools built to forecast the future price movements of industrial metals, using Long Short Term Memory networks. It can take univariate or multivariate datasets and make predictions using single-input single-output (SISO), multi-input single-output (MISO) or multi-input multi-output (MIMO) frameworks.</p>
 <p>It was built for the purpose of testing the hypothesis that improved predictive performance can be achieved by applying the multi-task learning paradigm to commodity price forecasting. As such many of the example notebooks are built for this purpose.</p>
-<p>However the tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the Proof of Concept (POC) notebooks.</p>
+<p>The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the Proof of Concept (POC) notebooks.</p>
 </div>
 <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To install</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">msc</span><span class="o">-</span><span class="n">acse</span><span class="o">/</span><span class="n">acse</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">independent</span><span class="o">-</span><span class="n">research</span><span class="o">-</span><span class="n">project</span><span class="o">-</span><span class="n">OliverJBoom</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="requirements">
-<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>There are package dependancies on the following files:</p>
 <ul class="simple">
 <li>numpy==1.16.2</li>
@@ -181,9 +186,10 @@
 </ul>
 </div>
 <div class="section" id="examples-and-usage">
-<h1>Examples and Usage<a class="headerlink" href="#examples-and-usage" title="Permalink to this headline">¶</a></h1>
+<h2>Examples and Usage<a class="headerlink" href="#examples-and-usage" title="Permalink to this headline">¶</a></h2>
 <p>Generic regression examples for univariate and multi-variate problems are contained within the POC (proof of concept) notebooks.</p>
-<p>For examples relating to industrial metal forecasting, univariate and multivariate examples can be found in the LSTM notebook, while a multi-task learning example can be found in the LSTM MTL notebook.</p>
+<p>For examples relating to industrial metal price forecasting, univariate and multivariate examples can be found in the LSTM notebook, while a multi-task learning example can be found in the LSTM MTL notebook.</p>
+</div>
 </div>
 
 
