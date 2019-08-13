@@ -9,7 +9,7 @@ time series. They are used to create a dataset that can be used for deep
 learning using long short term memory networks."""
 
 
-def universe_select(path, commodity_name):
+def universe_select(path, commodity_name, custom_list=None):
     """Selects the financial time series relevant for the commodities selected.
     
     :param path:            path to the folder containing csvs
@@ -17,6 +17,9 @@ def universe_select(path, commodity_name):
 
     :param commodity_name:  the name of the metal/s being inspected
     :type  commodity_name:  string
+    
+    :param custom_list:     the names of csvs to be included in the dataset
+    :type  custom_list:     list
     
     :return:                The time series relevant to the commodities
     :rtype:                 dict
@@ -61,6 +64,14 @@ def universe_select(path, commodity_name):
                        "sn_lme", "pb_lme", "ni_lme"]
 
         for instrument in metals_list:
+            df = pd.read_csv(path + instrument + ".csv",
+                             index_col='date', parse_dates=['date'],
+                             dayfirst=True).sort_index(ascending=True)
+
+            universe_dict[instrument] = df
+            
+    elif ((commodity_name == "custom") and (custom_list!=None)):
+        for instrument in custom_list:
             df = pd.read_csv(path + instrument + ".csv",
                              index_col='date', parse_dates=['date'],
                              dayfirst=True).sort_index(ascending=True)
