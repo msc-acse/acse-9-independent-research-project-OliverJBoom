@@ -33,4 +33,4 @@ With the exception of parts of the ChaiDB class (the init, get_instrument_data, 
 
 ## License
 
-Foresight is licensed under the MIT license. See [LICENSE].(https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE)
+Foresight is licensed under the MIT license. See [LICENSE](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE).
