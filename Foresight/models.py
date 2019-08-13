@@ -1,7 +1,12 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 import torch
 import torch.nn as nn
 
-"""This module contains the architectures for long short term memory 
+"""This module contains the architectures for long short term memory
 neural networks"""
 
 
@@ -106,7 +111,7 @@ class LSTM(nn.Module):
         :param x:          The input into the network
         :type  x:          torch.Tensor
         """
-        # Adjust to a variable batch size 
+        # Adjust to a variable batch size
         batch_size = x.size()[0]
         series_length = x.size()[1]
 
@@ -224,7 +229,7 @@ class LSTM_shallow(nn.Module):
         :param x:          The input into the network
         :type  x:          torch.Tensor
         """
-        # Adjust to a variable batch size 
+        # Adjust to a variable batch size
         batch_size = x.size()[0]
         series_length = x.size()[1]
 
@@ -249,7 +254,7 @@ class LSTM_shallow(nn.Module):
         x = self.fc(x)
 
         return x
-    
+
 
 class LSTM_deeper(nn.Module):
     """A Long Short Term Memory network model with two additional dense layers
@@ -262,7 +267,7 @@ class LSTM_deeper(nn.Module):
 
     :param dense_hidden:      The number of neurons in the first dense layer
     :type  dense_hidden:      int
-    
+
     :param dense_hidden_2:    The number of neurons in the second dense layer
     :type  dense_hidden_2:    int
 
@@ -297,7 +302,7 @@ class LSTM_deeper(nn.Module):
 
         # Number of neurons in the dense layer
         self.dense_hidden = dense_hidden
-        
+
         # Number of neurons in the dense layer
         self.dense_hidden_2 = dense_hidden_2
 
@@ -360,7 +365,7 @@ class LSTM_deeper(nn.Module):
         :param x:          The input into the network
         :type  x:          torch.Tensor
         """
-        # Adjust to a variable batch size 
+        # Adjust to a variable batch size
         batch_size = x.size()[0]
         series_length = x.size()[1]
 

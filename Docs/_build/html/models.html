@@ -211,6 +211,123 @@ shouldn’t make a big difference. Hence a stateful LSTM was not used.</p>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="Foresight.models.LSTM_deeper">
+<em class="property">class </em><code class="descclassname">Foresight.models.</code><code class="descname">LSTM_deeper</code><span class="sig-paren">(</span><em>num_features</em>, <em>hidden_dim</em>, <em>dense_hidden</em>, <em>dense_hidden_2</em>, <em>output_dim</em>, <em>batch_size</em>, <em>series_length</em>, <em>device</em>, <em>dropout=0.1</em>, <em>num_layers=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_deeper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_deeper" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Long Short Term Memory network model with two additional dense layers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>num_features</strong> (<em>int</em>) – The number of features in the dataset</li>
+<li><strong>hidden_dim</strong> (<em>int</em>) – The number of neurons in the LSTMs hidden layer/s</li>
+<li><strong>dense_hidden</strong> (<em>int</em>) – The number of neurons in the first dense layer</li>
+<li><strong>dense_hidden_2</strong> (<em>int</em>) – The number of neurons in the second dense layer</li>
+<li><strong>output_dim</strong> (<em>int</em>) – The number of neurons in the output layer</li>
+<li><strong>batch_size</strong> (<em>int</em>) – The number of items in each batch</li>
+<li><strong>series_length</strong> (<em>Int</em>) – The length of the time series</li>
+<li><strong>device</strong> (<em>string</em>) – The device to run on (Cpu or CUDA)</li>
+<li><strong>dropout</strong> (<em>float</em>) – The probability of dropout</li>
+<li><strong>num_layers</strong> (<em>int</em>) – The number of stacked LSTM layers</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Foresight.models.LSTM_deeper.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_deeper.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_deeper.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward pass through the neural network</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>torch.Tensor</em>) – The input into the network</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.models.LSTM_deeper.init_hidden">
+<code class="descname">init_hidden</code><span class="sig-paren">(</span><em>batch_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_deeper.init_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_deeper.init_hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.</p>
+<p>To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>batch_size</strong> (<em>string</em>) – The batch size to be zeroed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Foresight.models.LSTM_shallow">
+<em class="property">class </em><code class="descclassname">Foresight.models.</code><code class="descname">LSTM_shallow</code><span class="sig-paren">(</span><em>num_features</em>, <em>hidden_dim</em>, <em>output_dim</em>, <em>batch_size</em>, <em>series_length</em>, <em>device</em>, <em>dropout=0.1</em>, <em>num_layers=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_shallow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_shallow" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Long Short Term Memory network model that passes staight
+from the LSTM layer to predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>num_features</strong> (<em>int</em>) – The number of features in the dataset</li>
+<li><strong>hidden_dim</strong> (<em>int</em>) – The number of neurons in the LSTMs hidden layer/s</li>
+<li><strong>output_dim</strong> (<em>int</em>) – The number of neurons in the output layer</li>
+<li><strong>batch_size</strong> (<em>int</em>) – The number of items in each batch</li>
+<li><strong>series_length</strong> (<em>Int</em>) – The length of the time series</li>
+<li><strong>device</strong> (<em>string</em>) – The device to run on (Cpu or CUDA)</li>
+<li><strong>dropout</strong> (<em>float</em>) – The probability of dropout</li>
+<li><strong>num_layers</strong> (<em>int</em>) – The number of stacked LSTM layers</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Foresight.models.LSTM_shallow.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_shallow.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_shallow.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward pass through the neural network</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<em>torch.Tensor</em>) – The input into the network</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.models.LSTM_shallow.init_hidden">
+<code class="descname">init_hidden</code><span class="sig-paren">(</span><em>batch_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/models.html#LSTM_shallow.init_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.models.LSTM_shallow.init_hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.</p>
+<p>To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>batch_size</strong> (<em>string</em>) – The batch size to be zeroed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

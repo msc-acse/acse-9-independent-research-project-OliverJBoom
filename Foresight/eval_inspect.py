@@ -1,10 +1,15 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
-"""This module include a set of functions that are used to evaluate and 
+"""This module include a set of functions that are used to evaluate and
 inspect the time series in the dataset."""
 
 
@@ -144,7 +149,7 @@ def evaluate(y_true, y_pred, log_ret=False):
     """
     mse = mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
-    
+
     if log_ret:
         mda = mean_directional_accuracy_log_ret(y_true, y_pred)
     else:

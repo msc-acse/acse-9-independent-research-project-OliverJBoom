@@ -280,6 +280,260 @@
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">x</span></div></div>
+
+
+<div class="viewcode-block" id="LSTM_shallow"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_shallow">[docs]</a><span class="k">class</span> <span class="nc">LSTM_shallow</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A Long Short Term Memory network model that passes staight</span>
+<span class="sd">    from the LSTM layer to predictions</span>
+
+<span class="sd">    :param num_features:      The number of features in the dataset</span>
+<span class="sd">    :type  num_features:      int</span>
+
+<span class="sd">    :param hidden_dim:        The number of neurons in the LSTMs hidden layer/s</span>
+<span class="sd">    :type  hidden_dim:        int</span>
+
+<span class="sd">    :param output_dim:        The number of neurons in the output layer</span>
+<span class="sd">    :type  output_dim:        int</span>
+
+<span class="sd">    :param batch_size:        The number of items in each batch</span>
+<span class="sd">    :type  batch_size:        int</span>
+
+<span class="sd">    :param series_length:     The length of the time series</span>
+<span class="sd">    :type  series_length:     Int</span>
+
+<span class="sd">    :param device:            The device to run on (Cpu or CUDA)</span>
+<span class="sd">    :type  device:            string</span>
+
+<span class="sd">    :param dropout:           The probability of dropout</span>
+<span class="sd">    :type  dropout:           float</span>
+
+<span class="sd">    :param num_layers:        The number of stacked LSTM layers</span>
+<span class="sd">    :type  num_layers:        int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span>
+                 <span class="n">batch_size</span><span class="p">,</span> <span class="n">series_length</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LSTM_shallow</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Number of features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_features</span> <span class="o">=</span> <span class="n">num_features</span>
+
+        <span class="c1"># Hidden dimensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+
+        <span class="c1"># Number of hidden layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span> <span class="o">=</span> <span class="n">num_layers</span>
+
+        <span class="c1"># The output dimensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">output_dim</span>
+
+        <span class="c1"># Batch Size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+
+        <span class="c1"># Length of sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series_length</span> <span class="o">=</span> <span class="n">series_length</span>
+
+        <span class="c1"># CPU or GPU</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+
+        <span class="c1"># Define the LSTM layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">)</span>
+
+        <span class="c1"># Defining the Dense Layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LSTM_shallow.init_hidden"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_shallow.init_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">init_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialised the hidden state to be zeros. This clears the hidden</span>
+<span class="sd">        state between batches. If you are running a stateful LSTM then this</span>
+<span class="sd">        needs to be changed.</span>
+
+<span class="sd">        To change to a stateful LSTM requires not detaching the backprop and</span>
+<span class="sd">        storing the computational graph. This strongly increases runtime and</span>
+<span class="sd">        shouldn&#39;t make a big difference. Hence a stateful LSTM was not used.</span>
+
+<span class="sd">        :param batch_size:          The batch size to be zeroed</span>
+<span class="sd">        :type  batch_size:          string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c0</span><span class="p">,</span> <span class="n">h0</span></div>
+
+<div class="viewcode-block" id="LSTM_shallow.forward"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_shallow.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Forward pass through the neural network</span>
+
+<span class="sd">        :param x:          The input into the network</span>
+<span class="sd">        :type  x:          torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Adjust to a variable batch size </span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">series_length</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Making sure the series and batch haven&#39;t been mis-permuted</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">series_length</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">series_length</span><span class="p">)</span>
+
+        <span class="c1"># Keeps the dimensions constant regardless of batch size</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">series_length</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Initialises the hidden states</span>
+        <span class="n">h0</span><span class="p">,</span> <span class="n">c0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_hidden</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="c1"># Pass through through LSTM layer</span>
+        <span class="c1"># Only the x is of interest</span>
+        <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">hn</span><span class="p">,</span> <span class="n">cn</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">h0</span><span class="p">,</span> <span class="n">c0</span><span class="p">))</span>
+
+        <span class="c1"># Output is seq to seq but only want seq to val</span>
+        <span class="c1"># So only use the final slice of the LSTM outputted sequence</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Passes staight from LSMT through to prediction layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span></div></div>
+    
+
+<div class="viewcode-block" id="LSTM_deeper"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_deeper">[docs]</a><span class="k">class</span> <span class="nc">LSTM_deeper</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A Long Short Term Memory network model with two additional dense layers</span>
+
+<span class="sd">    :param num_features:      The number of features in the dataset</span>
+<span class="sd">    :type  num_features:      int</span>
+
+<span class="sd">    :param hidden_dim:        The number of neurons in the LSTMs hidden layer/s</span>
+<span class="sd">    :type  hidden_dim:        int</span>
+
+<span class="sd">    :param dense_hidden:      The number of neurons in the first dense layer</span>
+<span class="sd">    :type  dense_hidden:      int</span>
+<span class="sd">    </span>
+<span class="sd">    :param dense_hidden_2:    The number of neurons in the second dense layer</span>
+<span class="sd">    :type  dense_hidden_2:    int</span>
+
+<span class="sd">    :param output_dim:        The number of neurons in the output layer</span>
+<span class="sd">    :type  output_dim:        int</span>
+
+<span class="sd">    :param batch_size:        The number of items in each batch</span>
+<span class="sd">    :type  batch_size:        int</span>
+
+<span class="sd">    :param series_length:     The length of the time series</span>
+<span class="sd">    :type  series_length:     Int</span>
+
+<span class="sd">    :param device:            The device to run on (Cpu or CUDA)</span>
+<span class="sd">    :type  device:            string</span>
+
+<span class="sd">    :param dropout:           The probability of dropout</span>
+<span class="sd">    :type  dropout:           float</span>
+
+<span class="sd">    :param num_layers:        The number of stacked LSTM layers</span>
+<span class="sd">    :type  num_layers:        int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">dense_hidden</span><span class="p">,</span> <span class="n">dense_hidden_2</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span>
+                 <span class="n">batch_size</span><span class="p">,</span> <span class="n">series_length</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LSTM_deeper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Number of features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_features</span> <span class="o">=</span> <span class="n">num_features</span>
+
+        <span class="c1"># Hidden dimensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">hidden_dim</span>
+
+        <span class="c1"># Number of neurons in the dense layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden</span> <span class="o">=</span> <span class="n">dense_hidden</span>
+        
+        <span class="c1"># Number of neurons in the dense layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden_2</span> <span class="o">=</span> <span class="n">dense_hidden_2</span>
+
+        <span class="c1"># Number of hidden layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span> <span class="o">=</span> <span class="n">num_layers</span>
+
+        <span class="c1"># The output dimensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">output_dim</span>
+
+        <span class="c1"># Batch Size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+
+        <span class="c1"># Length of sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series_length</span> <span class="o">=</span> <span class="n">series_length</span>
+
+        <span class="c1"># CPU or GPU</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+
+        <span class="c1"># Define the LSTM layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_features</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">)</span>
+
+        <span class="c1"># Defining the Dense Layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden_2</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden_2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">),)</span>
+
+<div class="viewcode-block" id="LSTM_deeper.init_hidden"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_deeper.init_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">init_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialised the hidden state to be zeros. This clears the hidden</span>
+<span class="sd">        state between batches. If you are running a stateful LSTM then this</span>
+<span class="sd">        needs to be changed.</span>
+
+<span class="sd">        To change to a stateful LSTM requires not detaching the backprop and</span>
+<span class="sd">        storing the computational graph. This strongly increases runtime and</span>
+<span class="sd">        shouldn&#39;t make a big difference. Hence a stateful LSTM was not used.</span>
+
+<span class="sd">        :param batch_size:          The batch size to be zeroed</span>
+<span class="sd">        :type  batch_size:          string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">h0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c0</span><span class="p">,</span> <span class="n">h0</span></div>
+
+<div class="viewcode-block" id="LSTM_deeper.forward"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM_deeper.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Forward pass through the neural network</span>
+
+<span class="sd">        :param x:          The input into the network</span>
+<span class="sd">        :type  x:          torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Adjust to a variable batch size </span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">series_length</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Making sure the series and batch haven&#39;t been mis-permuted</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">series_length</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">series_length</span><span class="p">)</span>
+
+        <span class="c1"># Keeps the dimensions constant regardless of batch size</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">series_length</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Initialises the hidden states</span>
+        <span class="n">h0</span><span class="p">,</span> <span class="n">c0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_hidden</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="c1"># Pass through through LSTM layer</span>
+        <span class="c1"># Only the x is of interest</span>
+        <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">hn</span><span class="p">,</span> <span class="n">cn</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">h0</span><span class="p">,</span> <span class="n">c0</span><span class="p">))</span>
+
+        <span class="c1"># Output is seq to seq but only want seq to val</span>
+        <span class="c1"># So only use the final slice of the LSTM outputted sequence</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Fully connected dense layers with dropout</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">x</span></div></div>
 </pre></div>
 
            </div>

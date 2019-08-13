@@ -1,3 +1,8 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 from copy import deepcopy
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,16 +12,16 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 from sklearn.model_selection import train_test_split
 
-"""This module include a set of functions relating to the training, 
+"""This module include a set of functions relating to the training,
 validation and testing of neural networks."""
 
 
 def set_seed(seed):
     """Sets the random seeds to ensure deterministic behaviour.
-    
+
     :param seed:            The number that is set for the random seeds
     :type  seed:            int
-    
+
     :return:                Confirmation that seeds have been set
     :rtype:                 bool
     """
@@ -75,7 +80,7 @@ class early_stopping:
 
     If rel_tol is set to 0 then the metric just needs to improve from it's
     existing value
-  
+
     :param patience:   The amount of epochs without improvement before stopping
     :type  patience:   int
 
@@ -117,7 +122,7 @@ class early_stopping:
             self.best_score = score
 
         if self.counter >= self.patience:
-            self.stop = True    
+            self.stop = True
 
         if self.verbose:
             print("Count:", self.counter)
@@ -125,7 +130,7 @@ class early_stopping:
 
 class DeepLearning():
     """Class to perform training and validation for a given model
-    
+
     :param model:           The neural network model
     :type  model:           nn.module
 
@@ -347,7 +352,7 @@ class DeepLearning():
     def train(self, train_loader):
         """Performs a single training epoch and returns the loss metric
         for the training dataset.
-        
+
         :param train_loader:     The iterator that feeds in the training data
         :type  train_loader:     torch.utils.data.dataloader.DataLoader
 
@@ -406,7 +411,7 @@ class DeepLearning():
 
     def validate(self, val_loader):
         """Evaluates the performance of the network on unseen validation data.
-        
+
         :param val_loader:      the iterator that feeds in the validation data
         :type  val_loader:      torch.utils.data.dataloader.DataLoader
 
@@ -454,10 +459,10 @@ class DeepLearning():
     def evaluate(self, model, test_loader):
         """Evaluates the performance of the network on given data for a given
         model.
-        
+
         A lot of overlap of code with validation. Only kept separate due to the
         inspection of attributes being made easier when running simulations
-        if kept separate. 
+        if kept separate.
 
         :param model:         The model to evaluate
         :type  model:         nn.module
@@ -580,7 +585,7 @@ class DeepLearning():
             train_loss = self.train(self.train_loader)
             val_loss = self.validate(self.val_loader)
 
-            # Saves a copy of the model if it improves on previous 
+            # Saves a copy of the model if it improves on previous
             # best val score
             if val_loss <= self.best_val_score:
                 self.best_model = deepcopy(self.model)
@@ -623,7 +628,7 @@ class DeepLearning():
 def param_strip(param):
     """Strips the key text info out of certain parameters.
     Used to save the text info of which models/optimiser objects are used
-    
+
     :param param:      The parameter object to find the name of
     :type  param:      object
     """
@@ -637,58 +642,58 @@ def full_save(model, model_name, optimiser, num_epoch, learning_rate, momentum,
     """Saves the models run details and hyper-parameters to a csv file
     :param model:               The model run
     :type  model:               nn.module
-    
+
     :param model_name:          The name the model is saved under
     :type  model_name:          strin
-        
-    :param optimiser:           The optimiser type used  
+
+    :param optimiser:           The optimiser type used
     :type  optimiser:           torch.optim
-        
+
     :param num_epoch:           The number of epochs run for
     :type  num_epoch:           int
-    
+
     :param learning_rate:       The learning rate learning hyper-parameter
     :type  learning_rate:       float
-    
+
     :param momentum:            The momentum learning hyper-parameter
     :type  momentum:            float
-    
+
     :param weight_decay:        The weight decay learning hyper-parameter
     :type  weight_decay:        float
-    
+
     :param use_lg_returns:      Whether log returns was used
     :type  use_lg_returns:      bool
-    
+
     :param PCA_used:            Whether PCA was used
     :type  PCA_used:            bool
-    
+
     :param data_X:              The training dataset (used to save the shape)
     :type  data_X:              np.array
-    
+
     :param train_loss:          The loss on the training dataset
     :type  train_loss:          float
-    
+
     :param val_loss:            The loss on the validation dataset
     :type  val_loss:            float
-    
+
     :param test_loss:           The loss on the test dataset
     :type  test_loss:           float
-    
+
     :param train_time:          The amount of time to train
     :type  train_time:          float
-    
+
     :param hidden_dim:          The number of neurons in the hidden layers
     :type  hidden_dim:          int
-    
+
     :param mse:                 The mean squared error metric
     :type  mse:                 floot
-    
+
     :param mae:                 The mean absolute error metric
     :type  mae:                 floot
-    
+
     :param mde:                 The mean direction error metric
     :type  mde:                 floot
-    
+
     :param path:                The directory path to save in
     :type  path:                string
     """

@@ -1,3 +1,8 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 # Importing database access information
 from config import USER, PASSWORD, HOST, DB_NAME
 import datetime
@@ -9,7 +14,7 @@ import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
 
-"""This module contains functions relating to the loading of data from an 
+"""This module contains functions relating to the loading of data from an
 external PostGre SQL database"""
 
 
@@ -35,9 +40,9 @@ class ChaiDB:
         :return:                  A DataFrame containing the time series
         :rtype:                   pd.DataFrame
         """
-        query = """SELECT date, value 
-                    FROM new_instrument_data 
-                    WHERE instrument = '%s' 
+        query = """SELECT date, value
+                    FROM new_instrument_data
+                    WHERE instrument = '%s'
                     AND source = '%s'""" % (instrument, 'DATASCOPE')
 
         df = pd.read_sql_query(query, self.engine, index_col='date')
@@ -54,8 +59,8 @@ class ChaiDB:
         :return:                  List of those instruments
         :rtype:                   list
         """
-        query = """SELECT distinct(instrument) 
-                  FROM new_instrument_data 
+        query = """SELECT distinct(instrument)
+                  FROM new_instrument_data
                   WHERE source = 'DATASCOPE'"""
 
         df = pd.read_sql_query(query, self.engine)
@@ -147,7 +152,7 @@ if __name__ == "__main__":
     # Tin
     sn_lme = db.get_instrument_data("tin3m_lme_prices")
 
-    # Lead 
+    # Lead
     pb_lme = db.get_instrument_data("lead3m_lme_prices")
 
     # Nickle

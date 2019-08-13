@@ -1,3 +1,8 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 from deeplearning import model_load, DeepLearning
 from eval_inspect import mean_directional_accuracy, mean_directional_accuracy_log_ret
 from models import LSTM

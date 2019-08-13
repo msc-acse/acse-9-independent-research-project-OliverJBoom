@@ -1,3 +1,8 @@
+"""
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -418,7 +423,7 @@ def feature_spawn(df):
 
         Exponentially Weighted Moving Average of various Half Lives:
             1 day,
-            1 week, 
+            1 week,
             1 month,
             1 quarter,
             6 months,
