@@ -1,4 +1,5 @@
-# Industrial Metal Prices Prediction [![Build Status](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master)](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom)
+# Industrial Metal Prices Prediction [![Build Status](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom.svg?branch=master)](https://travis-ci.com/msc-acse/acse-9-independent-research-project-OliverJBoom) [![Documentation Status](https://readthedocs.org/projects/industrial-metals-forecaster/badge/?version=latest)](https://industrial-metals-forecaster.readthedocs.io/en/latest/?badge=latest)
+
 
 MSC Applied Computational Science & Engineering
 
