@@ -1,10 +1,10 @@
 
-====================================
-Welcome to Foresights documentation!
-====================================
+=====================================
+Welcome to Foresight's documentation!
+=====================================
 
 
-What is Foresight
+What is Foresight?
 ------------------
 
 Foresight is a collection of tools built to forecast the future price movements of industrial metals, using Long Short Term Memory networks. It can take univariate or multi-variate datasets and can make predictions using single-input single-output (SISO), multi-input single-output (MISO) or multi-input multi-output (MIMO) frameworks. 
