@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Evaluation and Inspection Module &mdash; Foresight 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Models Module" href="models.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Foresight
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Evaluation and Inspection Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Foresight</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Evaluation and Inspection Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/eval_inspect.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="evaluation-and-inspection-module">
+<h1>Evaluation and Inspection Module<a class="headerlink" href="#evaluation-and-inspection-module" title="Permalink to this headline">¶</a></h1>
+<p>Here are contained the functions that related to the evaluation of the performance of the networks predictions, and also functions that relate to the inspection of data.</p>
+<span class="target" id="module-Foresight.eval_inspect"></span><dl class="function">
+<dt id="Foresight.eval_inspect.check_day_frequency">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">check_day_frequency</code><span class="sig-paren">(</span><em>df</em>, <em>col_name='ds'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#check_day_frequency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.check_day_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a bar chart showing the frequency of the days of the week.</p>
+<p>Used to check that only business days are included in the dataset, and
+that there is a roughly equal distribution of entries across the week.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>df</strong> (<em>pd.DataFrame</em>) – A DataFrame containing the time series to check</li>
+<li><strong>col_name</strong> (<em>string</em>) – The name of the column of interest</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.check_length">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">check_length</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#check_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.check_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the name of all the DataFrames in the dictionary of time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.df_std">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">df_std</code><span class="sig-paren">(</span><em>df</em>, <em>col_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#df_std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.df_std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates standard deviation of a DataFrames column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>pd.DataFrame</em>) – A DataFrame of time series</li>
+<li><strong>col_name</strong> (<em>string</em>) – The column of interest</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The standard deviation of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.evaluate">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em>, <em>log_ret=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the error metrics for between two arrays.</p>
+<dl class="docutils">
+<dt>The error metrics calculated are:</dt>
+<dd>Means Squared Error
+Mean Absolute Error
+Mean Directional Accuracy</dd>
+</dl>
+<p>For a log returns series the definition of mean directional accuracy
+changes. This is as for a log return series it is the signum values of the
+series that details which direction the series has moved. This is as a log
+return series is the first difference of the original series. For raw price
+The signal needs to be differenced before the signum function is applied.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>np.array</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>np.array</em>) – The predicted values</li>
+<li><strong>log_ret</strong> (<em>bool</em>) – Whether the series compared are log returns</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return error_metrics:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">The error metrics of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.inverse_log_returns">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">inverse_log_returns</code><span class="sig-paren">(</span><em>original_prices</em>, <em>log_returns</em>, <em>lag=5</em>, <em>offset=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#inverse_log_returns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.inverse_log_returns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a DataFrame of predicted log returns and original
+prices and returns an array of predicted absolute prices</p>
+<p>The offset parameter moves the series forwards or backwards to
+align the series with the DataFrame it might be appended to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>original_prices</strong> (<em>pd.DataFrame</em>) – A DataFrame of absolute prices</li>
+<li><strong>log_returns</strong> (<em>pd.DataFrame</em>) – A DataFrame of log returns</li>
+<li><strong>lag</strong> (<em>int</em>) – The lag in days between series</li>
+<li><strong>offset</strong> (<em>int</em>) – Amount to offset the series forwards of backwards</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The raw prices given by the log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pd.Series</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.mean_absolute_percentage_error">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">mean_absolute_percentage_error</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#mean_absolute_percentage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.mean_absolute_percentage_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mean absolute percentage error between two arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>np.array</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>np.array</em>) – The predicted values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mean absolute percentage error of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.mean_directional_accuracy">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">mean_directional_accuracy</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#mean_directional_accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.mean_directional_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated the mean directional accuracy error metric
+between two series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>np.array</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>np.array</em>) – The predicted values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mean directional accuracy of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.mean_directional_accuracy_log_ret">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">mean_directional_accuracy_log_ret</code><span class="sig-paren">(</span><em>y_true</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#mean_directional_accuracy_log_ret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.mean_directional_accuracy_log_ret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mean directional accuracy error metric between
+two series of log returns.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y_true</strong> (<em>np.array</em>) – The observed values</li>
+<li><strong>y_pred</strong> (<em>np.array</em>) – The predicted values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mean directional accuracy of the series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.eval_inspect.visualise_df">
+<code class="descclassname">Foresight.eval_inspect.</code><code class="descname">visualise_df</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/eval_inspect.html#visualise_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.eval_inspect.visualise_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualises each time series in a DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>pd.DataFrame</em>) – The DataFrame of time series to visualise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="models.html" class="btn btn-neutral float-left" title="Models Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oliver Boom
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

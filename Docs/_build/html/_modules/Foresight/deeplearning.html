@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Foresight.deeplearning &mdash; Industrial Metals Forecaster 1.0.0 documentation</title>
+  <title>Foresight.deeplearning &mdash; Foresight 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Industrial Metals Forecaster
+            <a href="../../index.html" class="icon icon-home"> Foresight
           
 
           
@@ -78,8 +78,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
             
           
         </div>
@@ -92,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Industrial Metals Forecaster</a>
+          <a href="../../index.html">Foresight</a>
         
       </nav>
 
@@ -154,7 +164,7 @@
 <span class="sd">validation and testing of neural networks.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="set_seed"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.set_seed">[docs]</a><span class="k">def</span> <span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+<div class="viewcode-block" id="set_seed"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.set_seed">[docs]</a><span class="k">def</span> <span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Sets the random seeds to ensure deterministic behaviour.</span>
 <span class="sd">    </span>
 <span class="sd">    :param seed:            The number that is set for the random seeds</span>
@@ -178,7 +188,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="model_save"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.model_save">[docs]</a><span class="k">def</span> <span class="nf">model_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="model_save"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.model_save">[docs]</a><span class="k">def</span> <span class="nf">model_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Saving function for the model.</span>
 
 <span class="sd">    :param model:          The model to save</span>
@@ -194,7 +204,7 @@
     <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.pth&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="model_load"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.model_load">[docs]</a><span class="k">def</span> <span class="nf">model_load</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="model_load"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.model_load">[docs]</a><span class="k">def</span> <span class="nf">model_load</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Loading function for the models.</span>
 
 <span class="sd">    :param model_name:     The model name to load</span>
@@ -207,7 +217,7 @@
     <span class="k">return</span> <span class="n">model</span></div>
 
 
-<div class="viewcode-block" id="early_stopping"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.early_stopping">[docs]</a><span class="k">class</span> <span class="nc">early_stopping</span><span class="p">:</span>
+<div class="viewcode-block" id="early_stopping"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.early_stopping">[docs]</a><span class="k">class</span> <span class="nc">early_stopping</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Used to facilitate early stopping during the training</span>
 <span class="sd">    of neural networks.</span>
 
@@ -266,7 +276,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="DeepLearning"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning">[docs]</a><span class="k">class</span> <span class="nc">DeepLearning</span><span class="p">():</span>
+<div class="viewcode-block" id="DeepLearning"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning">[docs]</a><span class="k">class</span> <span class="nc">DeepLearning</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Class to perform training and validation for a given model</span>
 <span class="sd">    </span>
 <span class="sd">    :param model:           The neural network model</span>
@@ -413,7 +423,7 @@
         <span class="c1"># The tracker for the best validation score</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-<div class="viewcode-block" id="DeepLearning.train_val_test"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.train_val_test">[docs]</a>    <span class="k">def</span> <span class="nf">train_val_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.train_val_test"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.train_val_test">[docs]</a>    <span class="k">def</span> <span class="nf">train_val_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Splits the DataFrames in to a training, validation</span>
 <span class="sd">        and test set and creates torch tensors from the underlying</span>
 <span class="sd">        numpy arrays&quot;&quot;&quot;</span>
@@ -454,7 +464,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span> <span class="o">=</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="DeepLearning.size_check"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.size_check">[docs]</a>    <span class="k">def</span> <span class="nf">size_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.size_check"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.size_check">[docs]</a>    <span class="k">def</span> <span class="nf">size_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks the size of the datasets&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">X Train Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X Val Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
@@ -464,7 +474,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y Val Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y Test Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">size</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="DeepLearning.create_data_loaders"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.create_data_loaders">[docs]</a>    <span class="k">def</span> <span class="nf">create_data_loaders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.create_data_loaders"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.create_data_loaders">[docs]</a>    <span class="k">def</span> <span class="nf">create_data_loaders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forms iterators to pipeline in the data/labels&quot;&quot;&quot;</span>
         <span class="c1"># Creating Tensor datasets</span>
         <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
@@ -487,7 +497,7 @@
                                       <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                                       <span class="n">pin_memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DeepLearning.train"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.train"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Performs a single training epoch and returns the loss metric</span>
 <span class="sd">        for the training dataset.</span>
 <span class="sd">        </span>
@@ -547,7 +557,7 @@
 
         <span class="k">return</span> <span class="n">train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DeepLearning.validate"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.validate"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on unseen validation data.</span>
 <span class="sd">        </span>
 <span class="sd">        :param val_loader:      the iterator that feeds in the validation data</span>
@@ -594,7 +604,7 @@
 
         <span class="k">return</span> <span class="n">val_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DeepLearning.evaluate"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.evaluate"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on given data for a given</span>
 <span class="sd">        model.</span>
 <span class="sd">        </span>
@@ -649,7 +659,7 @@
 
         <span class="k">return</span> <span class="n">test_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="DeepLearning.live_pred_plot"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.live_pred_plot">[docs]</a>    <span class="k">def</span> <span class="nf">live_pred_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.live_pred_plot"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.live_pred_plot">[docs]</a>    <span class="k">def</span> <span class="nf">live_pred_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plots the training predictions, validation predictions and the</span>
 <span class="sd">         training/validation losses as they are predicted.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -702,7 +712,7 @@
             <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DeepLearning.training_wrapper"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.training_wrapper">[docs]</a>    <span class="k">def</span> <span class="nf">training_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeepLearning.training_wrapper"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.training_wrapper">[docs]</a>    <span class="k">def</span> <span class="nf">training_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The wrapper that performs the training and validation&quot;&quot;&quot;</span>
         <span class="c1"># start timer</span>
         <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -763,7 +773,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span></div></div>
 
 
-<div class="viewcode-block" id="param_strip"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.param_strip">[docs]</a><span class="k">def</span> <span class="nf">param_strip</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+<div class="viewcode-block" id="param_strip"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.param_strip">[docs]</a><span class="k">def</span> <span class="nf">param_strip</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Strips the key text info out of certain parameters.</span>
 <span class="sd">    Used to save the text info of which models/optimiser objects are used</span>
 <span class="sd">    </span>
@@ -773,7 +783,7 @@
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)[:</span><span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)]</span></div>
 
 
-<div class="viewcode-block" id="full_save"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.full_save">[docs]</a><span class="k">def</span> <span class="nf">full_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span><span class="p">,</span>
+<div class="viewcode-block" id="full_save"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.full_save">[docs]</a><span class="k">def</span> <span class="nf">full_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span><span class="p">,</span>
               <span class="n">weight_decay</span><span class="p">,</span> <span class="n">use_lg_returns</span><span class="p">,</span>
               <span class="n">PCA_used</span><span class="p">,</span> <span class="n">data_X</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">test_loss</span><span class="p">,</span> <span class="n">train_time</span><span class="p">,</span>
               <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mde</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Models/CSVs/&quot;</span><span class="p">):</span>

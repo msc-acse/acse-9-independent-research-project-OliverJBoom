@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deeplearning Module &mdash; Foresight 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models Module" href="models.html" />
+    <link rel="prev" title="Preprocessing Module" href="preprocessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Foresight
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Foresight</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Deeplearning Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/deeplearning.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deeplearning-module">
+<h1>Deeplearning Module<a class="headerlink" href="#deeplearning-module" title="Permalink to this headline">¶</a></h1>
+<p>Here are contained the set of functions relating to the training,
+validation and testing of the neural networks.</p>
+<span class="target" id="module-Foresight.deeplearning"></span><dl class="class">
+<dt id="Foresight.deeplearning.DeepLearning">
+<em class="property">class </em><code class="descclassname">Foresight.deeplearning.</code><code class="descname">DeepLearning</code><span class="sig-paren">(</span><em>model</em>, <em>data_X</em>, <em>data_y</em>, <em>optimiser</em>, <em>batch_size=128</em>, <em>n_epochs=100</em>, <em>loss_function=MSELoss()</em>, <em>device='cpu'</em>, <em>seed=42</em>, <em>debug=True</em>, <em>disp_freq=20</em>, <em>fig_disp_freq=50</em>, <em>early_stop=True</em>, <em>early_verbose=False</em>, <em>patience=50</em>, <em>rel_tol=0</em>, <em>scaler_data_X=None</em>, <em>scaler_data_y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to perform training and validation for a given model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>nn.module</em>) – The neural network model</li>
+<li><strong>data_X</strong> (<em>np.array</em>) – The training dataset</li>
+<li><strong>data_y</strong> (<em>np.array</em>) – the target dataset</li>
+<li><strong>n_epochs</strong> (<em>int</em>) – The number of epochs of training</li>
+<li><strong>optimiser</strong> (<em>torch.optim</em>) – The type of optimiser used</li>
+<li><strong>batch_size</strong> (<em>int</em>) – The batch size</li>
+<li><strong>loss_function</strong> (<em>torch.nn.modules.loss</em>) – The loss function used</li>
+<li><strong>device</strong> (<em>string</em>) – The device to run on (Cpu or CUDA)</li>
+<li><strong>seed</strong> (<em>int</em>) – The number that is set for the random seeds</li>
+<li><strong>debug</strong> (<em>bool</em>) – Whether to print some parameters for checking</li>
+<li><strong>disp_freq</strong> (<em>int</em>) – The epoch frequency that training/validation
+metrics will be printed on</li>
+<li><strong>fig_disp_freq</strong> (<em>int</em>) – The frequency that training/validation prediction
+figures will be made</li>
+<li><strong>early_stop</strong> (<em>bool</em>) – Whether early stopping is utilized</li>
+<li><strong>early_verbose</strong> (<em>bool</em>) – Whether to print out the early stopping counter</li>
+<li><strong>patience</strong> (<em>stopping int</em>) – The amount of epochs without improvement before</li>
+<li><strong>rel_tol</strong> – The relative improvement percentage that must be
+achieved float</li>
+<li><strong>scaler_data_X</strong> (<em>sklearn.preprocessing.data.MinMaxScaler</em>) – The data X scaler object for inverse scaling</li>
+<li><strong>scaler_data_y</strong> (<em>sklearn.preprocessing.data.MinMaxScaler</em>) – The dataX y scaler object for inverse scaling</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.create_data_loaders">
+<code class="descname">create_data_loaders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.create_data_loaders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.create_data_loaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forms iterators to pipeline in the data/labels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>model</em>, <em>test_loader</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the performance of the network on given data for a given
+model.</p>
+<p>A lot of overlap of code with validation. Only kept separate due to the
+inspection of attributes being made easier when running simulations
+if kept separate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>nn.module</em>) – The model to evaluate</li>
+<li><strong>test_loader</strong> (<em>torch.utils.data.dataloader.DataLoader</em>) – The iterator that feeds in the data of choice</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The error metric for that dataset</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.live_pred_plot">
+<code class="descname">live_pred_plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.live_pred_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.live_pred_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the training predictions, validation predictions and the
+training/validation losses as they are predicted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.size_check">
+<code class="descname">size_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.size_check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.size_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the size of the datasets</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>train_loader</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single training epoch and returns the loss metric
+for the training dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>train_loader</strong> (<em>torch.utils.data.dataloader.DataLoader</em>) – The iterator that feeds in the training data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The error metric for that epoch</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.train_val_test">
+<code class="descname">train_val_test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.train_val_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.train_val_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the DataFrames in to a training, validation
+and test set and creates torch tensors from the underlying
+numpy arrays</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.training_wrapper">
+<code class="descname">training_wrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.training_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.training_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>The wrapper that performs the training and validation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Foresight.deeplearning.DeepLearning.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>val_loader</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the performance of the network on unseen validation data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val_loader</strong> (<em>torch.utils.data.dataloader.DataLoader</em>) – the iterator that feeds in the validation data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the error metric for that epoch</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Foresight.deeplearning.early_stopping">
+<em class="property">class </em><code class="descclassname">Foresight.deeplearning.</code><code class="descname">early_stopping</code><span class="sig-paren">(</span><em>patience</em>, <em>rel_tol</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#early_stopping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.early_stopping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to facilitate early stopping during the training
+of neural networks.</p>
+<p>When called if the validation accuracy has not relative improved below a
+relative tolerance set by the user the a counter is incremented. If the
+counter passes a set value then the stop attribute is set to true. This
+should be used as a break condition in the training loop.</p>
+<p>If rel_tol is set to 0 then the metric just needs to improve from it’s
+existing value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>patience</strong> (<em>int</em>) – The amount of epochs without improvement before stopping</li>
+<li><strong>rel_tol</strong> (<em>float</em>) – The relative improvement % that must be achieved</li>
+<li><strong>verbose</strong> (<em>bool</em>) – Whether to print the count number</li>
+<li><strong>best</strong> (<em>float</em>) – The best score achieved so far</li>
+<li><strong>counter</strong> (<em>int</em>) – The amount of epochs without improvement so far</li>
+<li><strong>stop</strong> (<em>bool</em>) – Whether stopping criteria is achieved</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.deeplearning.full_save">
+<code class="descclassname">Foresight.deeplearning.</code><code class="descname">full_save</code><span class="sig-paren">(</span><em>model</em>, <em>model_name</em>, <em>optimiser</em>, <em>num_epoch</em>, <em>learning_rate</em>, <em>momentum</em>, <em>weight_decay</em>, <em>use_lg_returns</em>, <em>PCA_used</em>, <em>data_X</em>, <em>train_loss</em>, <em>val_loss</em>, <em>test_loss</em>, <em>train_time</em>, <em>hidden_dim</em>, <em>mse</em>, <em>mae</em>, <em>mde</em>, <em>path='Models/CSVs/'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#full_save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.full_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the models run details and hyper-parameters to a csv file
+:param model:               The model run
+:type  model:               nn.module</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_name</strong> (<em>strin</em>) – The name the model is saved under</li>
+<li><strong>optimiser</strong> (<em>torch.optim</em>) – The optimiser type used</li>
+<li><strong>num_epoch</strong> (<em>int</em>) – The number of epochs run for</li>
+<li><strong>learning_rate</strong> (<em>float</em>) – The learning rate learning hyper-parameter</li>
+<li><strong>momentum</strong> (<em>float</em>) – The momentum learning hyper-parameter</li>
+<li><strong>weight_decay</strong> (<em>float</em>) – The weight decay learning hyper-parameter</li>
+<li><strong>use_lg_returns</strong> (<em>bool</em>) – Whether log returns was used</li>
+<li><strong>PCA_used</strong> (<em>bool</em>) – Whether PCA was used</li>
+<li><strong>data_X</strong> (<em>np.array</em>) – The training dataset (used to save the shape)</li>
+<li><strong>train_loss</strong> (<em>float</em>) – The loss on the training dataset</li>
+<li><strong>val_loss</strong> (<em>float</em>) – The loss on the validation dataset</li>
+<li><strong>test_loss</strong> (<em>float</em>) – The loss on the test dataset</li>
+<li><strong>train_time</strong> (<em>float</em>) – The amount of time to train</li>
+<li><strong>hidden_dim</strong> (<em>int</em>) – The number of neurons in the hidden layers</li>
+<li><strong>mse</strong> (<em>floot</em>) – The mean squared error metric</li>
+<li><strong>mae</strong> (<em>floot</em>) – The mean absolute error metric</li>
+<li><strong>mde</strong> (<em>floot</em>) – The mean direction error metric</li>
+<li><strong>path</strong> (<em>string</em>) – The directory path to save in</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.deeplearning.model_load">
+<code class="descclassname">Foresight.deeplearning.</code><code class="descname">model_load</code><span class="sig-paren">(</span><em>model_name</em>, <em>device</em>, <em>path='Results/Pths/'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#model_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.model_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loading function for the models.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_name</strong> (<em>string</em>) – The model name to load</li>
+<li><strong>path</strong> (<em>string</em>) – The directory path to load the model from</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.deeplearning.model_save">
+<code class="descclassname">Foresight.deeplearning.</code><code class="descname">model_save</code><span class="sig-paren">(</span><em>model</em>, <em>name</em>, <em>path='Results/Pths/'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#model_save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.model_save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saving function for the model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>torch.nn</em>) – The model to save</li>
+<li><strong>name</strong> (<em>string</em>) – The name to save the model under</li>
+<li><strong>path</strong> (<em>string</em>) – The directory path to save the model in</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.deeplearning.param_strip">
+<code class="descclassname">Foresight.deeplearning.</code><code class="descname">param_strip</code><span class="sig-paren">(</span><em>param</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#param_strip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.param_strip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strips the key text info out of certain parameters.
+Used to save the text info of which models/optimiser objects are used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>param</strong> (<em>object</em>) – The parameter object to find the name of</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.deeplearning.set_seed">
+<code class="descclassname">Foresight.deeplearning.</code><code class="descname">set_seed</code><span class="sig-paren">(</span><em>seed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#set_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.set_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the random seeds to ensure deterministic behaviour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seed</strong> (<em>int</em>) – The number that is set for the random seeds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Confirmation that seeds have been set</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="models.html" class="btn btn-neutral float-right" title="Models Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="preprocessing.html" class="btn btn-neutral float-left" title="Preprocessing Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oliver Boom
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

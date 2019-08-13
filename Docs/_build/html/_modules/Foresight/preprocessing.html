@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Foresight.preprocessing &mdash; Industrial Metals Forecaster 1.0.0 documentation</title>
+  <title>Foresight.preprocessing &mdash; Foresight 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Industrial Metals Forecaster
+            <a href="../../index.html" class="icon icon-home"> Foresight
           
 
           
@@ -78,8 +78,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
             
           
         </div>
@@ -92,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Industrial Metals Forecaster</a>
+          <a href="../../index.html">Foresight</a>
         
       </nav>
 
@@ -147,23 +157,23 @@
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
 
 
-<span class="sd">&quot;&quot;&quot;This module include functions relating to the pre-processing of raw price</span>
-<span class="sd">time series. They are used to create a dataset that can be used for deep </span>
+<span class="sd">&quot;&quot;&quot;This module includes functions relating to the pre-processing of raw price</span>
+<span class="sd">time series. They are used to create a dataset that can be used for deep</span>
 <span class="sd">learning using long short term memory networks.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="universe_select"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.universe_select">[docs]</a><span class="k">def</span> <span class="nf">universe_select</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">commodity_name</span><span class="p">,</span> <span class="n">custom_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="universe_select"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.universe_select">[docs]</a><span class="k">def</span> <span class="nf">universe_select</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">commodity_name</span><span class="p">,</span> <span class="n">custom_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Selects the financial time series relevant for the commodities selected.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param path:            path to the folder containing csvs</span>
 <span class="sd">    :type  path:            string</span>
 
 <span class="sd">    :param commodity_name:  the name of the metal/s being inspected</span>
 <span class="sd">    :type  commodity_name:  string</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param custom_list:     the names of csvs to be included in the dataset</span>
 <span class="sd">    :type  custom_list:     list</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                The time series relevant to the commodities</span>
 <span class="sd">    :rtype:                 dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -212,7 +222,7 @@
                              <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
-            
+
     <span class="k">elif</span> <span class="p">((</span><span class="n">commodity_name</span> <span class="o">==</span> <span class="s2">&quot;custom&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">custom_list</span><span class="o">!=</span><span class="kc">None</span><span class="p">)):</span>
         <span class="k">for</span> <span class="n">instrument</span> <span class="ow">in</span> <span class="n">custom_list</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">instrument</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">,</span>
@@ -220,13 +230,13 @@
                              <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="n">universe_dict</span><span class="p">[</span><span class="n">instrument</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
-            
+
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Select an appropriate commodity&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">universe_dict</span></div>
 
 
-<div class="viewcode-block" id="price_rename"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.price_rename">[docs]</a><span class="k">def</span> <span class="nf">price_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="price_rename"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.price_rename">[docs]</a><span class="k">def</span> <span class="nf">price_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Renaming the column of the DataFrame values to price.</span>
 <span class="sd">    This is actually the market closing price of the time series.</span>
 
@@ -244,19 +254,19 @@
     <span class="k">return</span> <span class="n">universe_dict</span></div>
 
 
-<div class="viewcode-block" id="clean_data"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.clean_data">[docs]</a><span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_std</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<div class="viewcode-block" id="clean_data"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.clean_data">[docs]</a><span class="k">def</span> <span class="nf">clean_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_std</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Removes any outliers that are further than a chosen</span>
 <span class="sd">    number of standard deviations from the mean.</span>
 
 <span class="sd">    These values are most likely wrongly inputted data,</span>
 <span class="sd">    and so are forward filled.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param df:          A time series</span>
 <span class="sd">    :type  df:          pd.DataFrame</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param n_std:       The number of standard deviations from the mean</span>
 <span class="sd">    :type  n_std:       int</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:            The cleaned time series</span>
 <span class="sd">    :rtype:             pd.DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -279,12 +289,12 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="clean_dict_gen"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.clean_dict_gen">[docs]</a><span class="k">def</span> <span class="nf">clean_dict_gen</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="clean_dict_gen"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.clean_dict_gen">[docs]</a><span class="k">def</span> <span class="nf">clean_dict_gen</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates a dictionary of cleaned DataFrames</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param universe_dict:       The dictionary of time series</span>
 <span class="sd">    :type  universe_dict:       dict</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                    The cleaned dictionary of time series</span>
 <span class="sd">    :rtype:                     dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -298,13 +308,13 @@
     <span class="k">return</span> <span class="n">cleaned_dict</span></div>
 
 
-<div class="viewcode-block" id="truncate_window_length"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.truncate_window_length">[docs]</a><span class="k">def</span> <span class="nf">truncate_window_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="truncate_window_length"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.truncate_window_length">[docs]</a><span class="k">def</span> <span class="nf">truncate_window_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Chopping the length of all of the DataFrames to ensure</span>
 <span class="sd">    that they are all between the same dates.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param universe_dict:           The dictionary of time series</span>
 <span class="sd">    :type  universe_dict:           dict</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                        the dictionary of truncated time series</span>
 <span class="sd">    :rtype:                         dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -326,13 +336,13 @@
     <span class="k">return</span> <span class="n">universe_dict</span></div>
 
 
-<div class="viewcode-block" id="column_rename"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.column_rename">[docs]</a><span class="k">def</span> <span class="nf">column_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="column_rename"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.column_rename">[docs]</a><span class="k">def</span> <span class="nf">column_rename</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Appends the name of the instrument to the columns.</span>
 <span class="sd">    To help keep track of the instruments in the full dataset.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param universe_dict:               The dictionary of time series</span>
 <span class="sd">    :type  universe_dict:               dict</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                            The dictionary of time series</span>
 <span class="sd">    :rtype:                             dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -344,24 +354,24 @@
     <span class="k">return</span> <span class="n">universe_dict</span></div>
 
 
-<div class="viewcode-block" id="log_returns"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.log_returns">[docs]</a><span class="k">def</span> <span class="nf">log_returns</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="log_returns"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.log_returns">[docs]</a><span class="k">def</span> <span class="nf">log_returns</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the log returns between adjacent close prices.</span>
 <span class="sd">    A constant lag is used across the whole series.</span>
 <span class="sd">    E.g a lag of one means a day to day log return.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param  series:                   Prices to calculate the log returns on</span>
 <span class="sd">    :type   series:                   np.array</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param  lag:                      The lag between the series (in days)</span>
 <span class="sd">    :type   lag:                      int</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                          The series of log returns</span>
 <span class="sd">    :rtype:                           np.array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="generate_lg_return"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.generate_lg_return">[docs]</a><span class="k">def</span> <span class="nf">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_lg_return"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.generate_lg_return">[docs]</a><span class="k">def</span> <span class="nf">generate_lg_return</span><span class="p">(</span><span class="n">df_full</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Creates the log return series for each column in the DataFrame</span>
 <span class="sd">    and returns the full dataset with log returns.</span>
 
@@ -389,7 +399,7 @@
     <span class="k">return</span> <span class="n">df_full</span></div>
 
 
-<div class="viewcode-block" id="generate_dataset"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.generate_dataset">[docs]</a><span class="k">def</span> <span class="nf">generate_dataset</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">,</span> <span class="n">price_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lg_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_dataset"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.generate_dataset">[docs]</a><span class="k">def</span> <span class="nf">generate_dataset</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">,</span> <span class="n">price_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lg_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates the full dataset.</span>
 
 <span class="sd">    :param universe_dict:      The dictionary of time series</span>
@@ -444,7 +454,7 @@
     <span class="k">return</span> <span class="n">df_full</span></div>
 
 
-<div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
+<div class="viewcode-block" id="dimension_reduce"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.dimension_reduce">[docs]</a><span class="k">def</span> <span class="nf">dimension_reduce</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Performing PCA to reduce the dimensionality of the data.</span>
 
 <span class="sd">    :param data_X:                  The dataset to perform reduction on</span>
@@ -467,7 +477,7 @@
     <span class="k">return</span> <span class="n">data_X</span></div>
 
 
-<div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
+<div class="viewcode-block" id="dimension_selector"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.dimension_selector">[docs]</a><span class="k">def</span> <span class="nf">dimension_selector</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.98</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculated the number of dimensions required to reach a threshold level</span>
 <span class="sd">    of variance.</span>
 
@@ -507,7 +517,7 @@
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="slice_series"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.slice_series">[docs]</a><span class="k">def</span> <span class="nf">slice_series</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">series_len</span><span class="p">,</span> <span class="n">dataset_pct</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="viewcode-block" id="slice_series"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.slice_series">[docs]</a><span class="k">def</span> <span class="nf">slice_series</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">series_len</span><span class="p">,</span> <span class="n">dataset_pct</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Slices the train and target dataset time series.</span>
 
 <span class="sd">    Turns each time series into a series of time series, with each series</span>
@@ -544,7 +554,7 @@
 
     <span class="n">data_X_</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">data_y_</span> <span class="o">=</span> <span class="p">[]</span>
-    
+
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">series_len</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
         <span class="n">data_X_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_X</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">series_len</span><span class="p">:</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
         <span class="n">data_y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -552,25 +562,25 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_X_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_y_</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="feature_spawn"><a class="viewcode-back" href="../../index.html#Foresight.preprocessing.feature_spawn">[docs]</a><span class="k">def</span> <span class="nf">feature_spawn</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="feature_spawn"><a class="viewcode-back" href="../../preprocessing.html#Foresight.preprocessing.feature_spawn">[docs]</a><span class="k">def</span> <span class="nf">feature_spawn</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes a time series and spawns several new features that explicitly</span>
 <span class="sd">    detail information about the series.</span>
 
 <span class="sd">    The DataFrame spawned contains the following features</span>
 <span class="sd">    spawned for each column in the input DataFrame:</span>
 
-<span class="sd">        Exponentially Weighted Moving Average of various half lives:</span>
-<span class="sd">            Half Life:      1 day</span>
-<span class="sd">            Half Life:      1 week</span>
-<span class="sd">            Half Life:      1 month</span>
-<span class="sd">            Half Life:      1 quarter</span>
-<span class="sd">            Half Life:      6 months</span>
-<span class="sd">            Half Life:      1 year</span>
+<span class="sd">        Exponentially Weighted Moving Average of various Half Lives:</span>
+<span class="sd">            1 day,</span>
+<span class="sd">            1 week, </span>
+<span class="sd">            1 month,</span>
+<span class="sd">            1 quarter,</span>
+<span class="sd">            6 months,</span>
+<span class="sd">            1 year</span>
 
 <span class="sd">        Rolling vol of different window sizes:</span>
-<span class="sd">            Window Size:    1 week</span>
-<span class="sd">            Window Size:    1 month</span>
-<span class="sd">            Window Size:    1 quarter</span>
+<span class="sd">            1 week,</span>
+<span class="sd">            1 month,</span>
+<span class="sd">            1 quarter</span>
 
 <span class="sd">    :param df:              The dataset of independent variables</span>
 <span class="sd">    :type  df:              pd.DataFrame</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Foresight.eval_inspect &mdash; Industrial Metals Forecaster 1.0.0 documentation</title>
+  <title>Foresight.eval_inspect &mdash; Foresight 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Industrial Metals Forecaster
+            <a href="../../index.html" class="icon icon-home"> Foresight
           
 
           
@@ -78,8 +78,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
             
           
         </div>
@@ -92,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Industrial Metals Forecaster</a>
+          <a href="../../index.html">Foresight</a>
         
       </nav>
 
@@ -151,7 +161,7 @@
 <span class="sd">inspect the time series in the dataset.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="check_length"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.check_length">[docs]</a><span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="check_length"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.check_length">[docs]</a><span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks the name of all the DataFrames in the dictionary of time series.</span>
 
 <span class="sd">    :param universe_dict:       The dictionary of time series</span>
@@ -161,7 +171,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">[</span><span class="n">df_name</span><span class="p">]))</span></div>
 
 
-<div class="viewcode-block" id="visualise_df"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.visualise_df">[docs]</a><span class="k">def</span> <span class="nf">visualise_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<div class="viewcode-block" id="visualise_df"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.visualise_df">[docs]</a><span class="k">def</span> <span class="nf">visualise_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Visualises each time series in a DataFrame.</span>
 
 <span class="sd">    :param df:                  The DataFrame of time series to visualise</span>
@@ -179,7 +189,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="check_day_frequency"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.check_day_frequency">[docs]</a><span class="k">def</span> <span class="nf">check_day_frequency</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="check_day_frequency"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.check_day_frequency">[docs]</a><span class="k">def</span> <span class="nf">check_day_frequency</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="o">=</span><span class="s1">&#39;ds&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Creates a bar chart showing the frequency of the days of the week.</span>
 
 <span class="sd">    Used to check that only business days are included in the dataset, and</span>
@@ -196,7 +206,7 @@
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="df_std"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.df_std">[docs]</a><span class="k">def</span> <span class="nf">df_std</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">):</span>
+<div class="viewcode-block" id="df_std"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.df_std">[docs]</a><span class="k">def</span> <span class="nf">df_std</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates standard deviation of a DataFrames column.</span>
 
 <span class="sd">    :param df:                    A DataFrame of time series</span>
@@ -211,7 +221,7 @@
     <span class="k">return</span> <span class="n">df</span><span class="p">[[</span><span class="n">col_name</span><span class="p">]]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="inverse_log_returns"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.inverse_log_returns">[docs]</a><span class="k">def</span> <span class="nf">inverse_log_returns</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">log_returns</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="inverse_log_returns"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.inverse_log_returns">[docs]</a><span class="k">def</span> <span class="nf">inverse_log_returns</span><span class="p">(</span><span class="n">original_prices</span><span class="p">,</span> <span class="n">log_returns</span><span class="p">,</span> <span class="n">lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes a DataFrame of predicted log returns and original</span>
 <span class="sd">    prices and returns an array of predicted absolute prices</span>
 
@@ -243,7 +253,7 @@
                 <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.mean_absolute_percentage_error">[docs]</a><span class="k">def</span> <span class="nf">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.mean_absolute_percentage_error">[docs]</a><span class="k">def</span> <span class="nf">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the mean absolute percentage error between two arrays.</span>
 
 <span class="sd">    :param y_true:            The observed values</span>
@@ -258,7 +268,7 @@
     <span class="k">return</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">log_ret</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">log_ret</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the error metrics for between two arrays.</span>
 
 <span class="sd">    The error metrics calculated are:</span>
@@ -297,7 +307,7 @@
     <span class="k">return</span> <span class="n">error_metrics</span></div>
 
 
-<div class="viewcode-block" id="mean_directional_accuracy_log_ret"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.mean_directional_accuracy_log_ret">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy_log_ret</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="viewcode-block" id="mean_directional_accuracy_log_ret"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.mean_directional_accuracy_log_ret">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy_log_ret</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the mean directional accuracy error metric between</span>
 <span class="sd">    two series of log returns.</span>
 
@@ -313,7 +323,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="mean_directional_accuracy"><a class="viewcode-back" href="../../index.html#Foresight.eval_inspect.mean_directional_accuracy">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<div class="viewcode-block" id="mean_directional_accuracy"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.mean_directional_accuracy">[docs]</a><span class="k">def</span> <span class="nf">mean_directional_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculated the mean directional accuracy error metric</span>
 <span class="sd">    between two series.</span>
 

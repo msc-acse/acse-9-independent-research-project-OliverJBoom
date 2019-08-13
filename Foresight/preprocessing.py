@@ -4,23 +4,23 @@ import pandas as pd
 from sklearn.decomposition import PCA
 
 
-"""This module include functions relating to the pre-processing of raw price
-time series. They are used to create a dataset that can be used for deep 
+"""This module includes functions relating to the pre-processing of raw price
+time series. They are used to create a dataset that can be used for deep
 learning using long short term memory networks."""
 
 
 def universe_select(path, commodity_name, custom_list=None):
     """Selects the financial time series relevant for the commodities selected.
-    
+
     :param path:            path to the folder containing csvs
     :type  path:            string
 
     :param commodity_name:  the name of the metal/s being inspected
     :type  commodity_name:  string
-    
+
     :param custom_list:     the names of csvs to be included in the dataset
     :type  custom_list:     list
-    
+
     :return:                The time series relevant to the commodities
     :rtype:                 dict
     """
@@ -69,7 +69,7 @@ def universe_select(path, commodity_name, custom_list=None):
                              dayfirst=True).sort_index(ascending=True)
 
             universe_dict[instrument] = df
-            
+
     elif ((commodity_name == "custom") and (custom_list!=None)):
         for instrument in custom_list:
             df = pd.read_csv(path + instrument + ".csv",
@@ -77,7 +77,7 @@ def universe_select(path, commodity_name, custom_list=None):
                              dayfirst=True).sort_index(ascending=True)
 
             universe_dict[instrument] = df
-            
+
     else:
         print("Select an appropriate commodity")
     return universe_dict
@@ -107,13 +107,13 @@ def clean_data(df, n_std=20):
 
     These values are most likely wrongly inputted data,
     and so are forward filled.
-    
+
     :param df:          A time series
     :type  df:          pd.DataFrame
-    
+
     :param n_std:       The number of standard deviations from the mean
     :type  n_std:       int
-    
+
     :return:            The cleaned time series
     :rtype:             pd.DataFrame
     """
@@ -138,10 +138,10 @@ def clean_data(df, n_std=20):
 
 def clean_dict_gen(universe_dict):
     """Generates a dictionary of cleaned DataFrames
-    
+
     :param universe_dict:       The dictionary of time series
     :type  universe_dict:       dict
-    
+
     :return:                    The cleaned dictionary of time series
     :rtype:                     dict
     """
@@ -158,10 +158,10 @@ def clean_dict_gen(universe_dict):
 def truncate_window_length(universe_dict):
     """Chopping the length of all of the DataFrames to ensure
     that they are all between the same dates.
-    
+
     :param universe_dict:           The dictionary of time series
     :type  universe_dict:           dict
-    
+
     :return:                        the dictionary of truncated time series
     :rtype:                         dict
     """
@@ -186,10 +186,10 @@ def truncate_window_length(universe_dict):
 def column_rename(universe_dict):
     """Appends the name of the instrument to the columns.
     To help keep track of the instruments in the full dataset.
-    
+
     :param universe_dict:               The dictionary of time series
     :type  universe_dict:               dict
-    
+
     :return:                            The dictionary of time series
     :rtype:                             dict
     """
@@ -205,13 +205,13 @@ def log_returns(series, lag=1):
     """Calculates the log returns between adjacent close prices.
     A constant lag is used across the whole series.
     E.g a lag of one means a day to day log return.
-    
+
     :param  series:                   Prices to calculate the log returns on
     :type   series:                   np.array
-    
+
     :param  lag:                      The lag between the series (in days)
     :type   lag:                      int
-    
+
     :return:                          The series of log returns
     :rtype:                           np.array
     """
@@ -401,7 +401,7 @@ def slice_series(data_X, data_y, series_len, dataset_pct=1.0):
 
     data_X_ = []
     data_y_ = []
-    
+
     for i in range(series_len, length):
         data_X_.append(data_X[i-series_len:i, :])
         data_y_.append(data_y[i])
@@ -416,18 +416,18 @@ def feature_spawn(df):
     The DataFrame spawned contains the following features
     spawned for each column in the input DataFrame:
 
-        Exponentially Weighted Moving Average of various half lives:
-            Half Life:      1 day
-            Half Life:      1 week
-            Half Life:      1 month
-            Half Life:      1 quarter
-            Half Life:      6 months
-            Half Life:      1 year
+        Exponentially Weighted Moving Average of various Half Lives:
+            1 day,
+            1 week, 
+            1 month,
+            1 quarter,
+            6 months,
+            1 year
 
         Rolling vol of different window sizes:
-            Window Size:    1 week
-            Window Size:    1 month
-            Window Size:    1 quarter
+            1 week,
+            1 month,
+            1 quarter
 
     :param df:              The dataset of independent variables
     :type  df:              pd.DataFrame

@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Preprocessing Module &mdash; Foresight 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deeplearning Module" href="deeplearning.html" />
+    <link rel="prev" title="What is Foresight?" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Foresight
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Foresight</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Preprocessing Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/preprocessing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="preprocessing-module">
+<h1>Preprocessing Module<a class="headerlink" href="#preprocessing-module" title="Permalink to this headline">¶</a></h1>
+<p>Here are contained the functions related to the preprocessing of time series prior to any model training.</p>
+<span class="target" id="module-Foresight.preprocessing"></span><dl class="function">
+<dt id="Foresight.preprocessing.clean_data">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">clean_data</code><span class="sig-paren">(</span><em>df</em>, <em>n_std=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#clean_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.clean_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes any outliers that are further than a chosen
+number of standard deviations from the mean.</p>
+<p>These values are most likely wrongly inputted data,
+and so are forward filled.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>pd.DataFrame</em>) – A time series</li>
+<li><strong>n_std</strong> (<em>int</em>) – The number of standard deviations from the mean</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The cleaned time series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pd.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.clean_dict_gen">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">clean_dict_gen</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#clean_dict_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.clean_dict_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a dictionary of cleaned DataFrames</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The cleaned dictionary of time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.column_rename">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">column_rename</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#column_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.column_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends the name of the instrument to the columns.
+To help keep track of the instruments in the full dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The dictionary of time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.dimension_reduce">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_reduce</code><span class="sig-paren">(</span><em>data_X</em>, <em>n_dim</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performing PCA to reduce the dimensionality of the data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_X</strong> (<em>np.array</em>) – The dataset to perform reduction on</li>
+<li><strong>n_dim</strong> (<em>int</em>) – Number of dimensions to reduce to</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The reduced dataset</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.dimension_selector">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_selector</code><span class="sig-paren">(</span><em>data_X</em>, <em>thresh=0.98</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculated the number of dimensions required to reach a threshold level
+of variance.</p>
+<p>Completes a PCA reduction to an increasing number of dimensions
+and calculates the total variance achieved for each reduction. If the
+reduction is above the threshold then that number of dimensions is returned</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_X</strong> (<em>np.array</em>) – The dataset to perform reduction on</li>
+<li><strong>thresh</strong> (<em>float</em>) – The amount of variance that must be
+contained the in reduced dataset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The column dimensionality required to
+contain the threshold variance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.feature_spawn">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">feature_spawn</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#feature_spawn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.feature_spawn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a time series and spawns several new features that explicitly
+detail information about the series.</p>
+<p>The DataFrame spawned contains the following features
+spawned for each column in the input DataFrame:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Exponentially Weighted Moving Average of various Half Lives:</dt>
+<dd>1 day,
+1 week,
+1 month,
+1 quarter,
+6 months,
+1 year</dd>
+<dt>Rolling vol of different window sizes:</dt>
+<dd>1 week,
+1 month,
+1 quarter</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>pd.DataFrame</em>) – The dataset of independent variables</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The DataFrame containing spawned features</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pd.DataFrame</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.generate_dataset">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">generate_dataset</code><span class="sig-paren">(</span><em>universe_dict</em>, <em>price_only=True</em>, <em>lg_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#generate_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.generate_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the full dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</li>
+<li><strong>lag</strong> (<em>int</em>) – The lag in days between series</li>
+<li><strong>lg_only</strong> (<em>bool</em>) – Whether to return a dataset of log returns only</li>
+<li><strong>price_only</strong> (<em>bool</em>) – Whether to return a dataset of raw prices only</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The time series</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pd.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.generate_lg_return">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">generate_lg_return</code><span class="sig-paren">(</span><em>df_full</em>, <em>lag=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#generate_lg_return"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.generate_lg_return" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the log return series for each column in the DataFrame
+and returns the full dataset with log returns.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df_full</strong> (<em>pd.DataFrame</em>) – The time series</li>
+<li><strong>lag</strong> (<em>int</em>) – The lag between the series (in days)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The DataFrame of time series with log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pd.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.log_returns">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">log_returns</code><span class="sig-paren">(</span><em>series</em>, <em>lag=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#log_returns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.log_returns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the log returns between adjacent close prices.
+A constant lag is used across the whole series.
+E.g a lag of one means a day to day log return.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>series</strong> (<em>np.array</em>) – Prices to calculate the log returns on</li>
+<li><strong>lag</strong> (<em>int</em>) – The lag between the series (in days)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The series of log returns</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.price_rename">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">price_rename</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#price_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.price_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renaming the column of the DataFrame values to price.
+This is actually the market closing price of the time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The dictionary of renamed time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.slice_series">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">slice_series</code><span class="sig-paren">(</span><em>data_X</em>, <em>data_y</em>, <em>series_len</em>, <em>dataset_pct=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#slice_series"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.slice_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slices the train and target dataset time series.</p>
+<p>Turns each time series into a series of time series, with each series
+displaced by one step forward to the previous series. And for each
+of these windows there is an accompanying target value</p>
+<p>The effect of this is to create an array of time series (which is the depth
+equal to the amount of instruments in the dataset) with each entry in this
+array having a target series in the data_y array</p>
+<p>The resulting data_X array shape:
+[amount of rolling windows, length of each series, number of instruments]</p>
+<p>The resulting data_y array shape:
+[amount of rolling windows, number of instruments]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_X</strong> (<em>np.array</em>) – The dataset of time series</li>
+<li><strong>data_y</strong> (<em>np.array</em>) – The target dataset of time series</li>
+<li><strong>series_len</strong> (<em>int</em>) – The length of each time series window</li>
+<li><strong>dataset_pct</strong> (<em>float</em>) – The percentage of the full dataset to include</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.truncate_window_length">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">truncate_window_length</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#truncate_window_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.truncate_window_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chopping the length of all of the DataFrames to ensure
+that they are all between the same dates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the dictionary of truncated time series</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Foresight.preprocessing.universe_select">
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">universe_select</code><span class="sig-paren">(</span><em>path</em>, <em>commodity_name</em>, <em>custom_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#universe_select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.universe_select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the financial time series relevant for the commodities selected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>string</em>) – path to the folder containing csvs</li>
+<li><strong>commodity_name</strong> (<em>string</em>) – the name of the metal/s being inspected</li>
+<li><strong>custom_list</strong> (<em>list</em>) – the names of csvs to be included in the dataset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The time series relevant to the commodities</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deeplearning.html" class="btn btn-neutral float-right" title="Deeplearning Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral float-left" title="What is Foresight?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oliver Boom
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Foresight.models &mdash; Industrial Metals Forecaster 1.0.0 documentation</title>
+  <title>Foresight.models &mdash; Foresight 1.0.0 documentation</title>
   
 
   
@@ -48,7 +48,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> Industrial Metals Forecaster
+            <a href="../../index.html" class="icon icon-home"> Foresight
           
 
           
@@ -78,8 +78,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">What is Foresight?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#examples-and-usage">Examples and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html">Preprocessing Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deeplearning.html">Deeplearning Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../eval_inspect.html">Evaluation and Inspection Module</a></li>
+</ul>
+
             
           
         </div>
@@ -92,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Industrial Metals Forecaster</a>
+          <a href="../../index.html">Foresight</a>
         
       </nav>
 
@@ -148,7 +158,7 @@
 <span class="sd">neural networks&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="LSTM"><a class="viewcode-back" href="../../index.html#Foresight.models.LSTM">[docs]</a><span class="k">class</span> <span class="nc">LSTM</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="LSTM"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM">[docs]</a><span class="k">class</span> <span class="nc">LSTM</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A Long Short Term Memory network model with an additional dense layer</span>
 
 <span class="sd">    :param num_features:      The number of features in the dataset</span>
@@ -224,7 +234,7 @@
             <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dense_hidden</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">))</span>
 
-<div class="viewcode-block" id="LSTM.init_hidden"><a class="viewcode-back" href="../../index.html#Foresight.models.LSTM.init_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">init_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+<div class="viewcode-block" id="LSTM.init_hidden"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM.init_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">init_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialised the hidden state to be zeros. This clears the hidden</span>
 <span class="sd">        state between batches. If you are running a stateful LSTM then this</span>
 <span class="sd">        needs to be changed.</span>
@@ -243,7 +253,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">c0</span><span class="p">,</span> <span class="n">h0</span></div>
 
-<div class="viewcode-block" id="LSTM.forward"><a class="viewcode-back" href="../../index.html#Foresight.models.LSTM.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="LSTM.forward"><a class="viewcode-back" href="../../models.html#Foresight.models.LSTM.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward pass through the neural network</span>
 
 <span class="sd">        :param x:          The input into the network</span>
