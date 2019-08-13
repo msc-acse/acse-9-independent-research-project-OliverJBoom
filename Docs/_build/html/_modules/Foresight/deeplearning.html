@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Foresight.deeplearning &mdash; Industrial Metals Forecaster 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Industrial Metals Forecaster
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Industrial Metals Forecaster</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>Foresight.deeplearning</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for Foresight.deeplearning</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+
+<span class="sd">&quot;&quot;&quot;This module include a set of functions relating to the training, </span>
+<span class="sd">validation and testing of neural networks.&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="set_seed"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.set_seed">[docs]</a><span class="k">def</span> <span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sets the random seeds to ensure deterministic behaviour.</span>
+<span class="sd">    </span>
+<span class="sd">    :param seed:            The number that is set for the random seeds</span>
+<span class="sd">    :type  seed:            int</span>
+<span class="sd">    </span>
+<span class="sd">    :return:                Confirmation that seeds have been set</span>
+<span class="sd">    :rtype:                 bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># If running on CUDA additional seeds need to be set</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="model_save"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.model_save">[docs]</a><span class="k">def</span> <span class="nf">model_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Saving function for the model.</span>
+
+<span class="sd">    :param model:          The model to save</span>
+<span class="sd">    :type  model:          torch.nn</span>
+
+<span class="sd">    :param name:           The name to save the model under</span>
+<span class="sd">    :type  name:           string</span>
+
+<span class="sd">    :param path:           The directory path to save the model in</span>
+<span class="sd">    :type  path:           string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving model:&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.pth&#39;</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.pth&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="model_load"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.model_load">[docs]</a><span class="k">def</span> <span class="nf">model_load</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Loading function for the models.</span>
+
+<span class="sd">    :param model_name:     The model name to load</span>
+<span class="sd">    :type  model_name:     string</span>
+
+<span class="sd">    :param path:           The directory path to load the model from</span>
+<span class="sd">    :type  path:           string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s1">&#39;.pth&#39;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="early_stopping"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.early_stopping">[docs]</a><span class="k">class</span> <span class="nc">early_stopping</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Used to facilitate early stopping during the training</span>
+<span class="sd">    of neural networks.</span>
+
+<span class="sd">    When called if the validation accuracy has not relative improved below a</span>
+<span class="sd">    relative tolerance set by the user the a counter is incremented. If the</span>
+<span class="sd">    counter passes a set value then the stop attribute is set to true. This</span>
+<span class="sd">    should be used as a break condition in the training loop.</span>
+
+<span class="sd">    If rel_tol is set to 0 then the metric just needs to improve from it&#39;s</span>
+<span class="sd">    existing value</span>
+<span class="sd">  </span>
+<span class="sd">    :param patience:   The amount of epochs without improvement before stopping</span>
+<span class="sd">    :type  patience:   int</span>
+
+<span class="sd">    :param rel_tol:    The relative improvement % that must be achieved</span>
+<span class="sd">    :type  rel_tol:    float</span>
+
+<span class="sd">    :param verbose:    Whether to print the count number</span>
+<span class="sd">    :type  verbose:    bool</span>
+
+<span class="sd">    :param best:       The best score achieved so far</span>
+<span class="sd">    :type  best:       float</span>
+
+<span class="sd">    :param counter:    The amount of epochs without improvement so far</span>
+<span class="sd">    :type  counter:    int</span>
+
+<span class="sd">    :param stop:       Whether stopping criteria is achieved</span>
+<span class="sd">    :type  stop:       bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patience</span><span class="p">,</span> <span class="n">rel_tol</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="n">patience</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rel_tol</span> <span class="o">=</span> <span class="n">rel_tol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Every time the object is called the score is checked to see if it</span>
+<span class="sd">        has improved. If it hasn&#39;t the counter is incremented, if it has</span>
+<span class="sd">        improved then the counter resets&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">rel_tol</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>    
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DeepLearning"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning">[docs]</a><span class="k">class</span> <span class="nc">DeepLearning</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Class to perform training and validation for a given model</span>
+<span class="sd">    </span>
+<span class="sd">    :param model:           The neural network model</span>
+<span class="sd">    :type  model:           nn.module</span>
+
+<span class="sd">    :param data_X:          The training dataset</span>
+<span class="sd">    :type  data_X:          np.array</span>
+
+<span class="sd">    :param data_y:          the target dataset</span>
+<span class="sd">    :type  data_y:          np.array</span>
+
+<span class="sd">    :param n_epochs:        The number of epochs of training</span>
+<span class="sd">    :type  n_epochs:        int</span>
+
+<span class="sd">    :param optimiser:       The type of optimiser used</span>
+<span class="sd">    :type  optimiser:       torch.optim</span>
+
+<span class="sd">    :param batch_size:      The batch size</span>
+<span class="sd">    :type  batch_size:       int</span>
+
+<span class="sd">    :param loss_function:   The loss function used</span>
+<span class="sd">    :type  loss_function:   torch.nn.modules.loss</span>
+
+<span class="sd">    :param device:          The device to run on (Cpu or CUDA)</span>
+<span class="sd">    :type  device:          string</span>
+
+<span class="sd">    :param seed:            The number that is set for the random seeds</span>
+<span class="sd">    :type  seed:            int</span>
+
+<span class="sd">    :param debug:           Whether to print some parameters for checking</span>
+<span class="sd">    :type debug:            bool</span>
+
+<span class="sd">    :param disp_freq:       The epoch frequency that training/validation</span>
+<span class="sd">                            metrics will be printed on</span>
+<span class="sd">    :type disp_freq:        int</span>
+
+<span class="sd">    :param fig_disp_freq:   The frequency that training/validation prediction</span>
+<span class="sd">                            figures will be made</span>
+<span class="sd">    :type fig_disp_freq:    int</span>
+
+<span class="sd">    :param early_stop:      Whether early stopping is utilized</span>
+<span class="sd">    :type  early_stop:      bool</span>
+
+<span class="sd">    :param early_verbose:   Whether to print out the early stopping counter</span>
+<span class="sd">    :type  early_verbose:    bool</span>
+
+<span class="sd">    :param patience:        The amount of epochs without improvement before</span>
+<span class="sd">    :type  patience:        stopping int</span>
+
+<span class="sd">    :param rel_tol:         The relative improvement percentage that must be</span>
+<span class="sd">                            achieved float</span>
+<span class="sd">    :type rel_tol:</span>
+
+<span class="sd">    :param scaler_data_X:   The data X scaler object for inverse scaling</span>
+<span class="sd">    :type  scaler_data_X:   sklearn.preprocessing.data.MinMaxScaler</span>
+
+<span class="sd">    :param scaler_data_y:   The dataX y scaler object for inverse scaling</span>
+<span class="sd">    :type scaler_data_y:    sklearn.preprocessing.data.MinMaxScaler</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data_X</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span>
+                 <span class="n">optimiser</span><span class="p">,</span>
+                 <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+                 <span class="n">n_epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">loss_function</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+                 <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+                 <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">disp_freq</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                 <span class="n">fig_disp_freq</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                 <span class="n">early_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">early_verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">patience</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                 <span class="n">rel_tol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">scaler_data_X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">scaler_data_y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1"># Given parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimiser</span> <span class="o">=</span> <span class="n">optimiser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_X</span> <span class="o">=</span> <span class="n">data_X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_y</span> <span class="o">=</span> <span class="n">data_y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_epochs</span> <span class="o">=</span> <span class="n">n_epochs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_function</span> <span class="o">=</span> <span class="n">loss_function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disp_freq</span> <span class="o">=</span> <span class="n">disp_freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig_disp_freq</span> <span class="o">=</span> <span class="n">fig_disp_freq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">early_stop</span> <span class="o">=</span> <span class="n">early_stop</span>
+
+        <span class="c1"># The maxminscaler objects used to scale the data.</span>
+        <span class="c1"># Stored so can be used for inverse scaling later if loading</span>
+        <span class="c1"># pickled objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_data_X</span> <span class="o">=</span> <span class="n">scaler_data_X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaler_data_y</span> <span class="o">=</span> <span class="n">scaler_data_y</span>
+
+        <span class="c1"># Store for training/val logs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># The array of predicted values calculated using the training function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_predictions</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The array of predicted values calculated using the validate function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_predictions</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The array of predicted values calculated using the evaluate function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_predictions</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_val</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The targets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The data loader</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Storing the best model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+
+        <span class="c1"># Dummy variable for inspecting quantities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inspect</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Used to running data loaders on CUDA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Initialising the early stop object</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">early_stop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">early</span> <span class="o">=</span> <span class="n">early_stopping</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">,</span>
+                                       <span class="n">rel_tol</span><span class="o">=</span><span class="n">rel_tol</span><span class="p">,</span>
+                                       <span class="n">verbose</span><span class="o">=</span><span class="n">early_verbose</span><span class="p">)</span>
+
+        <span class="c1"># Tag for using multi task learning</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># The tracker for the best validation score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<div class="viewcode-block" id="DeepLearning.train_val_test"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.train_val_test">[docs]</a>    <span class="k">def</span> <span class="nf">train_val_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Splits the DataFrames in to a training, validation</span>
+<span class="sd">        and test set and creates torch tensors from the underlying</span>
+<span class="sd">        numpy arrays&quot;&quot;&quot;</span>
+        <span class="c1"># Splitting the datasets into (train/val) and test.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> \
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Splitting the (train/val) dataset into train and val datasets.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="p">,</span> \
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train Length: </span><span class="se">\t\t</span><span class="si">%i</span><span class="se">\n</span><span class="s2">&quot;</span>
+                  <span class="s2">&quot;Validation Length: </span><span class="se">\t</span><span class="si">%i</span><span class="se">\n</span><span class="s2">&quot;</span>
+                  <span class="s2">&quot;Test Length:</span><span class="se">\t\t</span><span class="si">%i</span><span class="s2">&quot;</span>
+                  <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">)))</span>
+
+        <span class="c1"># Tensor of training data/labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="c1"># Tensor of validation data/labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_val</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="c1">#  Tensor of test data/labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="c1"># Size Check</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Initial Size Check:&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">size_check</span><span class="p">()</span>
+
+        <span class="c1"># If the labels have more than one target feature then using MTL</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="DeepLearning.size_check"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.size_check">[docs]</a>    <span class="k">def</span> <span class="nf">size_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks the size of the datasets&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">X Train Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X Val Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X Test Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">y Train Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y Val Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y Test Shape:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">size</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="DeepLearning.create_data_loaders"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.create_data_loaders">[docs]</a>    <span class="k">def</span> <span class="nf">create_data_loaders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Forms iterators to pipeline in the data/labels&quot;&quot;&quot;</span>
+        <span class="c1"># Creating Tensor datasets</span>
+        <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="n">val_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="p">)</span>
+        <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="s1">&#39;cuda&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Creating data loaders</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
+                                       <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+                                       <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                       <span class="n">pin_memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">val_dataset</span><span class="p">,</span>
+                                     <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                     <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span>
+                                      <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+                                      <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                      <span class="n">pin_memory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DeepLearning.train"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Performs a single training epoch and returns the loss metric</span>
+<span class="sd">        for the training dataset.</span>
+<span class="sd">        </span>
+<span class="sd">        :param train_loader:     The iterator that feeds in the training data</span>
+<span class="sd">        :type  train_loader:     torch.utils.data.dataloader.DataLoader</span>
+
+<span class="sd">        :return:                 The error metric for that epoch</span>
+<span class="sd">        :rtype:                  float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Sets the model to train mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+        <span class="n">train_loss</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="c1"># Initialising the empty array for target predictions</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span><span class="p">:</span>
+            <span class="n">pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># The data loader creates batches of data to train</span>
+        <span class="k">for</span> <span class="n">X_train_batch</span><span class="p">,</span> <span class="n">y_train_batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+            <span class="c1"># Sending the data to GPU if available</span>
+            <span class="n">X_train_batch</span> <span class="o">=</span> <span class="n">X_train_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">y_train_batch</span> <span class="o">=</span> <span class="n">y_train_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="c1"># Zeros the gradients</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimiser</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+            <span class="c1"># Some background operation in the underlying CUDA optimisation</span>
+            <span class="c1"># code changes the seeds, so resetting it here ensures</span>
+            <span class="c1"># deterministic results</span>
+            <span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+            <span class="c1"># Perform forward pass</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">X_train_batch</span><span class="p">)</span>
+
+            <span class="c1"># Calculate loss for the batch</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_function</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train_batch</span><span class="p">)</span>
+
+            <span class="c1"># Perform backward pass</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+            <span class="c1"># Adding the predictions for this batch to prediction list</span>
+            <span class="n">pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">pred_list</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Calculate the training loss</span>
+            <span class="n">train_loss</span> <span class="o">+=</span> <span class="p">(</span>
+                    <span class="n">loss</span> <span class="o">*</span> <span class="n">X_train_batch</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+            <span class="c1"># Update Parameters</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimiser</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Storing the predictions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_predictions</span> <span class="o">=</span> <span class="n">pred_list</span>
+
+        <span class="k">return</span> <span class="n">train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DeepLearning.validate"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on unseen validation data.</span>
+<span class="sd">        </span>
+<span class="sd">        :param val_loader:      the iterator that feeds in the validation data</span>
+<span class="sd">        :type  val_loader:      torch.utils.data.dataloader.DataLoader</span>
+
+<span class="sd">        :return:                the error metric for that epoch</span>
+<span class="sd">        :rtype:                 float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Set the model to evaluate mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">val_loss</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="c1"># Initialising the empty array for target predictions</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span><span class="p">:</span>
+            <span class="n">val_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">val_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># The data loader creates batches of data to validate</span>
+        <span class="k">for</span> <span class="n">X_val_batch</span><span class="p">,</span> <span class="n">y_val_batch</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+            <span class="c1"># Ensures that the gradients are not updated</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="c1"># Sending the data to GPU if available</span>
+                <span class="n">X_val_batch</span> <span class="o">=</span> <span class="n">X_val_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">y_val_batch</span> <span class="o">=</span> <span class="n">y_val_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+                <span class="c1"># Perform forward pass</span>
+                <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">X_val_batch</span><span class="p">)</span>
+
+                <span class="c1"># Calculate loss for the batch</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_function</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_val_batch</span><span class="p">)</span>
+
+                <span class="c1"># Adding the predictions for this batch to prediction list</span>
+                <span class="n">val_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">val_pred_list</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Calculate the validation loss</span>
+                <span class="n">val_loss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">X_val_batch</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span>
+                    <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+        <span class="c1"># Storing the predictions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_predictions</span> <span class="o">=</span> <span class="n">val_pred_list</span>
+
+        <span class="k">return</span> <span class="n">val_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DeepLearning.evaluate"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on given data for a given</span>
+<span class="sd">        model.</span>
+<span class="sd">        </span>
+<span class="sd">        A lot of overlap of code with validation. Only kept separate due to the</span>
+<span class="sd">        inspection of attributes being made easier when running simulations</span>
+<span class="sd">        if kept separate. </span>
+
+<span class="sd">        :param model:         The model to evaluate</span>
+<span class="sd">        :type  model:         nn.module</span>
+
+<span class="sd">        :param test_loader:   The iterator that feeds in the data of choice</span>
+<span class="sd">        :type  test_loader:   torch.utils.data.dataloader.DataLoader</span>
+
+<span class="sd">        :return:              The error metric for that dataset</span>
+<span class="sd">        :rtype:               float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Set the model to evaluate mode</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">test_loss</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="c1"># Selecting the number of output features</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span><span class="p">:</span>
+            <span class="n">test_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">test_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># The data loader creates batches of data to validate</span>
+        <span class="k">for</span> <span class="n">X_test_batch</span><span class="p">,</span> <span class="n">y_test_batch</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
+            <span class="c1"># Ensures that the gradients are not updated</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="c1"># Sending the data to GPU if available</span>
+                <span class="n">X_test_batch</span> <span class="o">=</span> <span class="n">X_test_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">y_test_batch</span> <span class="o">=</span> <span class="n">y_test_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+                <span class="c1"># Perform forward pass</span>
+                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X_test_batch</span><span class="p">)</span>
+
+                <span class="c1"># Calculate loss for the batch</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_function</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test_batch</span><span class="p">)</span>
+
+                <span class="c1"># Adding the predictions for this batch to prediction list</span>
+                <span class="n">test_pred_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">test_pred_list</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Calculate the validation loss</span>
+                <span class="n">test_loss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">*</span> <span class="n">X_test_batch</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span>
+                    <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+        <span class="c1"># Storing the predictions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_predictions</span> <span class="o">=</span> <span class="n">test_pred_list</span>
+
+        <span class="k">return</span> <span class="n">test_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DeepLearning.live_pred_plot"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.live_pred_plot">[docs]</a>    <span class="k">def</span> <span class="nf">live_pred_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plots the training predictions, validation predictions and the</span>
+<span class="sd">         training/validation losses as they are predicted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># More plots are required for MTL then single task</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">MTL</span><span class="p">:</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Training Predictions&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Validation Predictions&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Loss Plots&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;Validation Loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation Loss&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Single Metal Inspection Train&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_predictions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Single Metal Inspection Val&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val_predictions</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Training Predictions&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Validation Predictions&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_val</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Observed&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Loss Plots&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s1">&#39;Validation Loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation Loss&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DeepLearning.training_wrapper"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.DeepLearning.training_wrapper">[docs]</a>    <span class="k">def</span> <span class="nf">training_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The wrapper that performs the training and validation&quot;&quot;&quot;</span>
+        <span class="c1"># start timer</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># set seed</span>
+        <span class="n">set_seed</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">))</span>
+
+        <span class="c1"># Create data loaders</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_data_loaders</span><span class="p">()</span>
+
+        <span class="n">train_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">val_log</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Begin training</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_epochs</span><span class="p">):</span>
+
+            <span class="c1"># Train and validate the model</span>
+            <span class="n">train_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span><span class="p">)</span>
+            <span class="n">val_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span><span class="p">)</span>
+
+            <span class="c1"># Saves a copy of the model if it improves on previous </span>
+            <span class="c1"># best val score</span>
+            <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span> <span class="o">=</span> <span class="n">val_loss</span>
+
+            <span class="c1"># Logging the performance of the models</span>
+            <span class="n">train_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
+            <span class="n">val_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val_loss</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_log</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s2">&quot;Validation Loss&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_log</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+            <span class="c1"># Checking stopping criteria</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">early_stop</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">early</span><span class="p">(</span><span class="n">val_loss</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">early</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Early Stopping&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span>
+                    <span class="k">break</span>
+
+            <span class="c1">#  Printing key metrics to screen</span>
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">disp_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch: </span><span class="si">%i</span><span class="s2"> &quot;</span>
+                      <span class="s2">&quot;Train: </span><span class="si">%.5f</span><span class="s2"> &quot;</span>
+                      <span class="s2">&quot;Val: </span><span class="si">%.5f</span><span class="s2">  &quot;</span>
+                      <span class="s2">&quot;Time: </span><span class="si">%.3f</span><span class="s2">  &quot;</span>
+                      <span class="s2">&quot;Best Val: </span><span class="si">%.5f</span><span class="s2">&quot;</span>
+                      <span class="o">%</span> <span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span>
+                         <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">),</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span><span class="p">))</span>
+
+            <span class="c1"># Plotting predictions and training metrics</span>
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig_disp_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">live_pred_plot</span><span class="p">()</span>
+
+        <span class="c1"># Storing the best model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span></div></div>
+
+
+<div class="viewcode-block" id="param_strip"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.param_strip">[docs]</a><span class="k">def</span> <span class="nf">param_strip</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Strips the key text info out of certain parameters.</span>
+<span class="sd">    Used to save the text info of which models/optimiser objects are used</span>
+<span class="sd">    </span>
+<span class="sd">    :param param:      The parameter object to find the name of</span>
+<span class="sd">    :type  param:      object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)[:</span><span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="full_save"><a class="viewcode-back" href="../../index.html#Foresight.deeplearning.full_save">[docs]</a><span class="k">def</span> <span class="nf">full_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span><span class="p">,</span>
+              <span class="n">weight_decay</span><span class="p">,</span> <span class="n">use_lg_returns</span><span class="p">,</span>
+              <span class="n">PCA_used</span><span class="p">,</span> <span class="n">data_X</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">test_loss</span><span class="p">,</span> <span class="n">train_time</span><span class="p">,</span>
+              <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mde</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Models/CSVs/&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Saves the models run details and hyper-parameters to a csv file</span>
+<span class="sd">    :param model:               The model run</span>
+<span class="sd">    :type  model:               nn.module</span>
+<span class="sd">    </span>
+<span class="sd">    :param model_name:          The name the model is saved under</span>
+<span class="sd">    :type  model_name:          strin</span>
+<span class="sd">        </span>
+<span class="sd">    :param optimiser:           The optimiser type used  </span>
+<span class="sd">    :type  optimiser:           torch.optim</span>
+<span class="sd">        </span>
+<span class="sd">    :param num_epoch:           The number of epochs run for</span>
+<span class="sd">    :type  num_epoch:           int</span>
+<span class="sd">    </span>
+<span class="sd">    :param learning_rate:       The learning rate learning hyper-parameter</span>
+<span class="sd">    :type  learning_rate:       float</span>
+<span class="sd">    </span>
+<span class="sd">    :param momentum:            The momentum learning hyper-parameter</span>
+<span class="sd">    :type  momentum:            float</span>
+<span class="sd">    </span>
+<span class="sd">    :param weight_decay:        The weight decay learning hyper-parameter</span>
+<span class="sd">    :type  weight_decay:        float</span>
+<span class="sd">    </span>
+<span class="sd">    :param use_lg_returns:      Whether log returns was used</span>
+<span class="sd">    :type  use_lg_returns:      bool</span>
+<span class="sd">    </span>
+<span class="sd">    :param PCA_used:            Whether PCA was used</span>
+<span class="sd">    :type  PCA_used:            bool</span>
+<span class="sd">    </span>
+<span class="sd">    :param data_X:              The training dataset (used to save the shape)</span>
+<span class="sd">    :type  data_X:              np.array</span>
+<span class="sd">    </span>
+<span class="sd">    :param train_loss:          The loss on the training dataset</span>
+<span class="sd">    :type  train_loss:          float</span>
+<span class="sd">    </span>
+<span class="sd">    :param val_loss:            The loss on the validation dataset</span>
+<span class="sd">    :type  val_loss:            float</span>
+<span class="sd">    </span>
+<span class="sd">    :param test_loss:           The loss on the test dataset</span>
+<span class="sd">    :type  test_loss:           float</span>
+<span class="sd">    </span>
+<span class="sd">    :param train_time:          The amount of time to train</span>
+<span class="sd">    :type  train_time:          float</span>
+<span class="sd">    </span>
+<span class="sd">    :param hidden_dim:          The number of neurons in the hidden layers</span>
+<span class="sd">    :type  hidden_dim:          int</span>
+<span class="sd">    </span>
+<span class="sd">    :param mse:                 The mean squared error metric</span>
+<span class="sd">    :type  mse:                 floot</span>
+<span class="sd">    </span>
+<span class="sd">    :param mae:                 The mean absolute error metric</span>
+<span class="sd">    :type  mae:                 floot</span>
+<span class="sd">    </span>
+<span class="sd">    :param mde:                 The mean direction error metric</span>
+<span class="sd">    :type  mde:                 floot</span>
+<span class="sd">    </span>
+<span class="sd">    :param path:                The directory path to save in</span>
+<span class="sd">    :type  path:                string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Model Class&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Optimiser&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Epoch Number&quot;</span><span class="p">,</span>
+           <span class="s1">&#39;Learning Rate&#39;</span><span class="p">,</span>
+           <span class="s2">&quot;Momentum&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Weight Decay&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Log Returns Used&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Num Features&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Dataset Length&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Series Length&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Training Loss&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Validation loss&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Test Loss&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Hidden Layer Dimensions&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Mean Squared Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Mean Absolute Error&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Mean Directional Accuracy&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Training Time&quot;</span><span class="p">]</span>
+
+    <span class="n">model_class</span> <span class="o">=</span> <span class="n">param_strip</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">model_class</span><span class="p">,</span>
+           <span class="n">param_strip</span><span class="p">(</span><span class="n">optimiser</span><span class="p">),</span>
+           <span class="n">num_epoch</span><span class="p">,</span>
+           <span class="n">learning_rate</span><span class="p">,</span>
+           <span class="n">momentum</span><span class="p">,</span>
+           <span class="n">weight_decay</span><span class="p">,</span>
+           <span class="n">use_lg_returns</span><span class="p">,</span>
+           <span class="n">PCA_used</span><span class="p">,</span>
+           <span class="n">data_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+           <span class="n">data_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+           <span class="n">data_X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+           <span class="n">train_loss</span><span class="p">,</span>
+           <span class="n">val_loss</span><span class="p">,</span>
+           <span class="n">test_loss</span><span class="p">,</span>
+           <span class="n">hidden_dim</span><span class="p">,</span>
+           <span class="n">mse</span><span class="p">,</span>
+           <span class="n">mae</span><span class="p">,</span>
+           <span class="n">mde</span><span class="p">,</span>
+           <span class="n">train_time</span><span class="p">]</span>
+
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ind</span><span class="p">]</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ind</span><span class="p">)]</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span>
+        <span class="n">path</span> <span class="o">+</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val_loss</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">row</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oliver Boom
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
