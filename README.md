@@ -10,13 +10,13 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 
 ## Documentation
 
-Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/
+Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/.
 
 ## Testing
 
-Continuous integration best practices has been utilized, using Travis CL
+Continuous integration best practices has been utilized, using Travis CL. With the tests methodology used being unit testing written deveoped using the Pytest library.
 
-## Relevant Course Author and Course Information 
+## Relevant Author and Course Information 
 
 Author: Oliver Boom
 Github: OliverJBoom
@@ -26,4 +26,7 @@ This collection of tools was built as part of the Applied Computational Science 
 
 With the exception of parts of the ChaiDB class (the init, get_instrument_data, close_db_connection and get_list_datascope_instruments functions), all of the work contained within this repository is my own.
 
-Language: Python 3
+
+## License
+
+Foresight is licensed under the MIT license. See [LICENSE].(https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE)
