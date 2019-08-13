@@ -16,7 +16,7 @@ Full documentation can be found on https://industrial-metals-forecaster.readthed
 
 Continuous integration best practices has been utilized, using Travis CL
 
-## Relevant Course Author and Course Information 
+## Relevant Course Author and Course Information 
 
 Author: Oliver Boom
 Github: OliverJBoom
