@@ -18,9 +18,9 @@ Continuous integration best practices has been utilized, using Travis CL. With t
 
 ## Relevant Author and Course Information 
 
-Author: Oliver Boom
-Github: OliverJBoom
-CID: 01593306
+__Author:__ Oliver Boom
+__Github:__ OliverJBoom
+__CID:__ 01593306
 
 This collection of tools was built as part of the Applied Computational Science & Engineering MSc, completed at Imperial College London. It forms a composite part of the Independent Research Project (Module Code: ASCE9) and was conducted under the supervision of Dr Stephen Neethling. This project is also understaken in partnership with Commodities AI (ChAI), under the supervision of Dr Tristan Fletcher. 
 
