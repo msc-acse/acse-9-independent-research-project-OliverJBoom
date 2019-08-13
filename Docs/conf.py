@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Industrial Metals Forecaster'
+project = 'Foresight'
 copyright = '2019, Oliver Boom'
 author = 'Oliver Boom'
 
