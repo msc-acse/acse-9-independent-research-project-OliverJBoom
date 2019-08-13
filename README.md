@@ -12,6 +12,10 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 
 Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/.
 
+## Repository Structure
+
+TODO
+
 ## Testing
 
 Continuous integration best practices has been utilized, using Travis CL. With the tests methodology used being unit testing written deveoped using the Pytest library.
