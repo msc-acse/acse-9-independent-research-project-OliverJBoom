@@ -6,7 +6,7 @@ Foresight is a collection of tools built in Python 3 to forecast the future pric
 
 It was built for the purpose of testing the hypothesis that improved predictive performance can be achieved by applying the multi-task learning paradigm to commodity price forecasting. As such many of the example notebooks are built for this purpose.
 
-The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the Proof of Concept (POC) notebooks.
+The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the "generic" notebooks.
 
 ## Documentation
 
