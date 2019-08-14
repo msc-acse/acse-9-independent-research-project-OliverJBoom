@@ -14,7 +14,19 @@ Full documentation can be found on https://industrial-metals-forecaster.readthed
 
 ## Repository Structure
 
-TODO
+* __Docs__                          -  Contains all files relating to the documentation
+
+* __Foresight__                    -  Contains the collection of python files relating to Foresight
+
+* __Foresight/Data/Commodity_Data__ -  Contains the time series used to forecast industrial metals prices
+
+* __Foresight/Notebooks__          -  Contains example notebooks for SISO, MISO and MIMO regression
+
+* __Foresight/Results/Pths__        -  Contains saved model weights
+
+* __Foresight/Results/Pickles__     -  Contains saved deeplearning objects
+
+* __Foresight/Results/Plots__       -  Contains images of predictions and training/val losses 
 
 ## Testing
 
