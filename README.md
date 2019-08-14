@@ -12,6 +12,10 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 
 Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/.
 
+## Repository Structure
+
+TODO
+
 ## Testing
 
 Continuous integration best practices has been utilized, using Travis CL. With the tests methodology used being unit testing written deveoped using the Pytest library.
@@ -29,4 +33,4 @@ With the exception of parts of the ChaiDB class (the init, get_instrument_data, 
 
 ## License
 
-Foresight is licensed under the MIT license. See [LICENSE].(https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE)
+Foresight is licensed under the MIT license. See [LICENSE](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE).
