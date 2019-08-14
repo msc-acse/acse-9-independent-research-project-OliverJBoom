@@ -37,6 +37,8 @@ There are package dependancies on the following files:
 Examples and Usage
 ------------------
 
-Generic regression examples for univariate and multi-variate problems are contained within the POC (proof of concept) notebooks. 
+All examples can be found within the Forecaster/Notebooks folder.
 
-For examples relating to industrial metal price forecasting, univariate and multivariate examples can be found in the LSTM notebook, while a multi-task learning example can be found in the LSTM MTL notebook.
+Generic regression examples for univariate and multi-variate problems are contained within the "generic" notebooks. 
+
+For examples relating to industrial metal price forecasting; univariate, multivariate and multi-task examples can be found in the "metals forecaster" notebooks.
