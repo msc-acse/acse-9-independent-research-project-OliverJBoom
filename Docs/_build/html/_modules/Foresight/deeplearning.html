@@ -147,7 +147,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for Foresight.deeplearning</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Author: Oliver Boom</span>
+<span class="sd">Github Alias: OliverJBoom</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -156,16 +161,16 @@
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 
-<span class="sd">&quot;&quot;&quot;This module include a set of functions relating to the training, </span>
+<span class="sd">&quot;&quot;&quot;This module include a set of functions relating to the training,</span>
 <span class="sd">validation and testing of neural networks.&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="set_seed"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.set_seed">[docs]</a><span class="k">def</span> <span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Sets the random seeds to ensure deterministic behaviour.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param seed:            The number that is set for the random seeds</span>
 <span class="sd">    :type  seed:            int</span>
-<span class="sd">    </span>
+
 <span class="sd">    :return:                Confirmation that seeds have been set</span>
 <span class="sd">    :rtype:                 bool</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -224,7 +229,7 @@
 
 <span class="sd">    If rel_tol is set to 0 then the metric just needs to improve from it&#39;s</span>
 <span class="sd">    existing value</span>
-<span class="sd">  </span>
+
 <span class="sd">    :param patience:   The amount of epochs without improvement before stopping</span>
 <span class="sd">    :type  patience:   int</span>
 
@@ -266,7 +271,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span></div>
@@ -274,7 +279,7 @@
 
 <div class="viewcode-block" id="DeepLearning"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning">[docs]</a><span class="k">class</span> <span class="nc">DeepLearning</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Class to perform training and validation for a given model</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param model:           The neural network model</span>
 <span class="sd">    :type  model:           nn.module</span>
 
@@ -496,7 +501,7 @@
 <div class="viewcode-block" id="DeepLearning.train"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Performs a single training epoch and returns the loss metric</span>
 <span class="sd">        for the training dataset.</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param train_loader:     The iterator that feeds in the training data</span>
 <span class="sd">        :type  train_loader:     torch.utils.data.dataloader.DataLoader</span>
 
@@ -555,7 +560,7 @@
 
 <div class="viewcode-block" id="DeepLearning.validate"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on unseen validation data.</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param val_loader:      the iterator that feeds in the validation data</span>
 <span class="sd">        :type  val_loader:      torch.utils.data.dataloader.DataLoader</span>
 
@@ -603,10 +608,10 @@
 <div class="viewcode-block" id="DeepLearning.evaluate"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.DeepLearning.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">test_loader</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Evaluates the performance of the network on given data for a given</span>
 <span class="sd">        model.</span>
-<span class="sd">        </span>
+
 <span class="sd">        A lot of overlap of code with validation. Only kept separate due to the</span>
 <span class="sd">        inspection of attributes being made easier when running simulations</span>
-<span class="sd">        if kept separate. </span>
+<span class="sd">        if kept separate.</span>
 
 <span class="sd">        :param model:         The model to evaluate</span>
 <span class="sd">        :type  model:         nn.module</span>
@@ -729,7 +734,7 @@
             <span class="n">train_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span><span class="p">)</span>
             <span class="n">val_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span><span class="p">)</span>
 
-            <span class="c1"># Saves a copy of the model if it improves on previous </span>
+            <span class="c1"># Saves a copy of the model if it improves on previous</span>
             <span class="c1"># best val score</span>
             <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_val_score</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">best_model</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
@@ -772,7 +777,7 @@
 <div class="viewcode-block" id="param_strip"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.param_strip">[docs]</a><span class="k">def</span> <span class="nf">param_strip</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Strips the key text info out of certain parameters.</span>
 <span class="sd">    Used to save the text info of which models/optimiser objects are used</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param param:      The parameter object to find the name of</span>
 <span class="sd">    :type  param:      object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -786,58 +791,58 @@
     <span class="sd">&quot;&quot;&quot;Saves the models run details and hyper-parameters to a csv file</span>
 <span class="sd">    :param model:               The model run</span>
 <span class="sd">    :type  model:               nn.module</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param model_name:          The name the model is saved under</span>
 <span class="sd">    :type  model_name:          strin</span>
-<span class="sd">        </span>
-<span class="sd">    :param optimiser:           The optimiser type used  </span>
+
+<span class="sd">    :param optimiser:           The optimiser type used</span>
 <span class="sd">    :type  optimiser:           torch.optim</span>
-<span class="sd">        </span>
+
 <span class="sd">    :param num_epoch:           The number of epochs run for</span>
 <span class="sd">    :type  num_epoch:           int</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param learning_rate:       The learning rate learning hyper-parameter</span>
 <span class="sd">    :type  learning_rate:       float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param momentum:            The momentum learning hyper-parameter</span>
 <span class="sd">    :type  momentum:            float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param weight_decay:        The weight decay learning hyper-parameter</span>
 <span class="sd">    :type  weight_decay:        float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param use_lg_returns:      Whether log returns was used</span>
 <span class="sd">    :type  use_lg_returns:      bool</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param PCA_used:            Whether PCA was used</span>
 <span class="sd">    :type  PCA_used:            bool</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param data_X:              The training dataset (used to save the shape)</span>
 <span class="sd">    :type  data_X:              np.array</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param train_loss:          The loss on the training dataset</span>
 <span class="sd">    :type  train_loss:          float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param val_loss:            The loss on the validation dataset</span>
 <span class="sd">    :type  val_loss:            float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param test_loss:           The loss on the test dataset</span>
 <span class="sd">    :type  test_loss:           float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param train_time:          The amount of time to train</span>
 <span class="sd">    :type  train_time:          float</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param hidden_dim:          The number of neurons in the hidden layers</span>
 <span class="sd">    :type  hidden_dim:          int</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param mse:                 The mean squared error metric</span>
 <span class="sd">    :type  mse:                 floot</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param mae:                 The mean absolute error metric</span>
 <span class="sd">    :type  mae:                 floot</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param mde:                 The mean direction error metric</span>
 <span class="sd">    :type  mde:                 floot</span>
-<span class="sd">    </span>
+
 <span class="sd">    :param path:                The directory path to save in</span>
 <span class="sd">    :type  path:                string</span>
 <span class="sd">    &quot;&quot;&quot;</span>

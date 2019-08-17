@@ -5,4 +5,3 @@ Here are contained the functions related to the preprocessing of time series pri
 
 .. automodule:: Foresight.preprocessing
     :members:
-

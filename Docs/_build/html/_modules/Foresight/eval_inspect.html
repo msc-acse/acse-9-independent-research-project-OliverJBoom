@@ -147,13 +147,18 @@
            <div itemprop="articleBody">
             
   <h1>Source code for Foresight.eval_inspect</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Author: Oliver Boom</span>
+<span class="sd">Github Alias: OliverJBoom</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
 
 
-<span class="sd">&quot;&quot;&quot;This module include a set of functions that are used to evaluate and </span>
+<span class="sd">&quot;&quot;&quot;This module include a set of functions that are used to evaluate and</span>
 <span class="sd">inspect the time series in the dataset.&quot;&quot;&quot;</span>
 
 
@@ -293,7 +298,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    
+
     <span class="k">if</span> <span class="n">log_ret</span><span class="p">:</span>
         <span class="n">mda</span> <span class="o">=</span> <span class="n">mean_directional_accuracy_log_ret</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
