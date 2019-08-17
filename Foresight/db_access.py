@@ -1,7 +1,6 @@
-"""
-Author: Oliver Boom
-Github Alias: OliverJBoom
-"""
+# Author: Oliver Boom
+# Github Alias: OliverJBoom
+
 
 # Importing database access information
 from config import USER, PASSWORD, HOST, DB_NAME

@@ -1,7 +1,5 @@
-"""
-Author: Oliver Boom
-Github Alias: OliverJBoom
-"""
+# Author: Oliver Boom
+# Github Alias: OliverJBoom
 
 from copy import deepcopy
 import matplotlib.pyplot as plt

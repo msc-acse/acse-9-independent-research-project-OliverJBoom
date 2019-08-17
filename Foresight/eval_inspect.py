@@ -1,7 +1,6 @@
-"""
-Author: Oliver Boom
-Github Alias: OliverJBoom
-"""
+# Author: Oliver Boom
+# Github Alias: OliverJBoom
+
 
 import numpy as np
 import matplotlib.pyplot as plt
