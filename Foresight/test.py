@@ -155,7 +155,7 @@ def test_mtl():
     data_y = rand(100, 5)
     device = 'cpu'
 
-    model = model_load("MTL_Auto_F5", device, path="Results/Pths/MTL/Univariate/")
+    model = model_load("MTL_Auto_F5", device, path="Results/Pths/MTL/Autoregressive/")
     model.device = device
     model.to(device)
 
