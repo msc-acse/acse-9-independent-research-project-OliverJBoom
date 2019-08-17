@@ -50,4 +50,6 @@ With the exception of parts of the ChaiDB class (the init, get_instrument_data, 
 Foresight is licensed under the MIT license. See [LICENSE](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE).
 
 
-<sup>1</sup>: Pytorch is too heavy a dependency for Read the Docs Docker containers. And so requires mocking when passing through the Sphinx autodocumentation. However, inheritance from mocked classes is not supported. It is a known issue in Read the Docs. 
+
+## Footnotes
+<sup>1</sup> Pytorch is too heavy a dependency for Read the Docs Docker containers. And so requires mocking when passing through the Sphinx autodocumentation. However, inheritance from mocked classes is not supported. It is a known issue in Read the Docs. 
