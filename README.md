@@ -12,6 +12,8 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 
 Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/.
 
+Read the docs will not show the models module online. For more information on the models module refer to the [PDF Documentation](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/Docs/_build/latex/IndustrialMetalsForecaster.pdf)<sup>1</sup>
+
 ## Repository Structure
 
 * __Docs__                          -  Contains all files relating to the documentation
@@ -46,3 +48,6 @@ With the exception of parts of the ChaiDB class (the init, get_instrument_data, 
 ## License
 
 Foresight is licensed under the MIT license. See [LICENSE](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE).
+
+
+<sup>1</sup>: Pytorch is too heavy a dependency for Read the Docs Docker containers. And so requires mocking when passing through the Sphinx autodocumentation. However, inheritance from mocked classes is not supported. It is a known issue in Read the Docs. 
