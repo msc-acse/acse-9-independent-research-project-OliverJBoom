@@ -165,5 +165,6 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
+# Issues with memory build in RTD
+autodoc_mock_imports = ["torch"]
 
