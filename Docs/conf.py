@@ -166,17 +166,4 @@ texinfo_documents = [
 ]
 
 # Issues with memory build in RTD
-#autodoc_mock_imports = ["torch", "torch.nn"]
-
-
-
-import sys
-from unittest.mock import MagicMock
-
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return MagicMock()
-
-MOCK_MODULES = ['torch']
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+autodoc_mock_imports = ["torch"]
