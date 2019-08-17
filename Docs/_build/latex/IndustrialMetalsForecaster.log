@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.18)  9 AUG 2019 18:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.18)  17 AUG 2019 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -981,30 +981,30 @@ Writing index file IndustrialMetalsForecaster.idx
 (./IndustrialMetalsForecaster.aux)
 \openout1 = `IndustrialMetalsForecaster.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 68.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 67.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 67.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 68.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 67.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -1072,7 +1072,7 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box44
-Package hyperref Info: Link coloring ON on input line 68.
+Package hyperref Info: Link coloring ON on input line 67.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1081,47 +1081,47 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count136
 )
-LaTeX Info: Redefining \ref on input line 68.
-LaTeX Info: Redefining \pageref on input line 68.
-LaTeX Info: Redefining \nameref on input line 68.
+LaTeX Info: Redefining \ref on input line 67.
+LaTeX Info: Redefining \pageref on input line 67.
+LaTeX Info: Redefining \nameref on input line 67.
 
 (./IndustrialMetalsForecaster.out) (./IndustrialMetalsForecaster.out)
 \@outlinefile=\write5
 \openout5 = `IndustrialMetalsForecaster.out'.
 
-Package hyperref Info: Option `pageanchor' set `false' on input line 71.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 71.
+Package hyperref Info: Option `pageanchor' set `false' on input line 70.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 70.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 70.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
 <<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Try loading font information for U+msa on input line 71.
+LaTeX Font Info:    Try loading font information for U+msa on input line 70.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 71.
+LaTeX Font Info:    Try loading font information for U+msb on input line 70.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 71.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
@@ -1129,7 +1129,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 73.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
 
 (./IndustrialMetalsForecaster.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
@@ -1144,95 +1144,106 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 
 ]
 Chapter 1.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 83.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 97.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 83.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 91.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 106.
+
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
+) [1
+
+]
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 149.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 92.
- [1
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 248--248
-[]\T1/ptm/m/it/10 universe_dict\T1/ptm/m/n/10 , \T1/ptm/m/it/10 price_only=True
-\T1/ptm/m/n/10 ,
- []
-
-[2] [3] [4
-
-]
-Chapter 2.
-
-Underfull \hbox (badness 7221) in paragraph at lines 445--445
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 158.
+ [2]
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
 []\T1/ptm/m/it/10 model\T1/ptm/m/n/10 , \T1/ptm/m/it/10 data_X\T1/ptm/m/n/10 , 
-\T1/ptm/m/it/10 data_y\T1/ptm/m/n/10 , \T1/ptm/m/it/10 n_epochs\T1/ptm/m/n/10 ,
- \T1/ptm/m/it/10 op-ti-
+\T1/ptm/m/it/10 data_y\T1/ptm/m/n/10 , \T1/ptm/m/it/10 op-ti-miser\T1/ptm/m/n/1
+0 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 445--445
-\T1/ptm/m/it/10 de-vice='cpu'\T1/ptm/m/n/10 , \T1/ptm/m/it/10 seed=42\T1/ptm/m/
-n/10 , \T1/ptm/m/it/10 de-bug=True\T1/ptm/m/n/10 ,
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
+\T1/ptm/m/it/10 batch_size=128\T1/ptm/m/n/10 , \T1/ptm/m/it/10 n_epochs=100\T1/
+ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 445--445
-\T1/ptm/m/it/10 disp_freq=20\T1/ptm/m/n/10 , \T1/ptm/m/it/10 fig_disp_freq=50\T
-1/ptm/m/n/10 ,
+Overfull \hbox (41.4327pt too wide) in paragraph at lines 518--518
+\T1/ptm/m/it/10 loss_function=<sphinx.ext.autodoc.importer._MockObject
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 504--505
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
+\T1/ptm/m/it/10 ob-ject>\T1/ptm/m/n/10 , \T1/ptm/m/it/10 de-vice='cpu'\T1/ptm/m
+/n/10 , \T1/ptm/m/it/10 seed=42\T1/ptm/m/n/10 , \T1/ptm/m/it/10 de-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
+\T1/ptm/m/it/10 bug=True\T1/ptm/m/n/10 , \T1/ptm/m/it/10 disp_freq=20\T1/ptm/m/
+n/10 , \T1/ptm/m/it/10 fig_disp_freq=50\T1/ptm/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 518--518
+\T1/ptm/m/it/10 early_stop=True\T1/ptm/m/n/10 , \T1/ptm/m/it/10 early_verbose=F
+alse\T1/ptm/m/n/10 , \T1/ptm/m/it/10 pa-
+ []
+
+
+Underfull \hbox (badness 6893) in paragraph at lines 518--518
+\T1/ptm/m/it/10 tience=50\T1/ptm/m/n/10 , \T1/ptm/m/it/10 rel_tol=0\T1/ptm/m/n/
+10 , \T1/ptm/m/it/10 scaler_data_X=None\T1/ptm/m/n/10 ,
+ []
+
+[4]
+Underfull \hbox (badness 6380) in paragraph at lines 577--578
 []\T1/pcr/b/n/10 scaler_data_y \T1/ptm/m/n/10 (\T1/pcr/m/sl/10 sklearn.preproce
 ssing.data.MinMaxScaler\T1/ptm/m/n/10 ) ^^U The
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 571--573
+Underfull \hbox (badness 10000) in paragraph at lines 644--646
 []\T1/pcr/b/n/10 train_loader \T1/ptm/m/n/10 (\T1/pcr/m/sl/10 torch.utils.data.
 dataloader.DataLoader\T1/ptm/m/n/10 ) ^^U
  []
 
-[6]
-Underfull \hbox (badness 6412) in paragraph at lines 667--667
+
+Underfull \hbox (badness 10000) in paragraph at lines 740--740
 \T1/ptm/m/it/10 mo-men-tum\T1/ptm/m/n/10 , \T1/ptm/m/it/10 weight_decay\T1/ptm/
 m/n/10 , \T1/ptm/m/it/10 use_lg_returns\T1/ptm/m/n/10 , \T1/ptm/m/it/10 PCA_use
 d\T1/ptm/m/n/10 ,
  []
 
-[7] [8]
-Chapter 3.
-[9
+[6] [7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1030
+[]\T1/ptm/m/it/10 num_features\T1/ptm/m/n/10 , \T1/ptm/m/it/10 hid-den_dim\T1/p
+tm/m/n/10 , \T1/ptm/m/it/10 dense_hidden\T1/ptm/m/n/10 ,
+ []
 
-] [10]
-Chapter 4.
-[11
+[9] [10] [11] [12
 
-] [12
+]
+Chapter 2.
+[13] [14
 
-] [13
+] [15
 
 
-] (./IndustrialMetalsForecaster.ind [14
+] (./IndustrialMetalsForecaster.ind [16
 
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 []\T1/pcr/m/n/10 check_day_frequency() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-u
 le Fore-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
-[]\T1/pcr/m/n/10 check_length() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule Fore
--
  []
 
 
@@ -1254,7 +1265,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 14--16
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 14--16
-\T1/ptm/m/it/10 caster.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
+\T1/ptm/m/it/10 sight.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
  []
 
 
@@ -1264,19 +1275,19 @@ Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--24
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
 []\T1/pcr/m/n/10 dimension_selector() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ul
 e Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-[]\T1/pcr/m/n/10 evaluate() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-caster.deeplea
-rning.DeepLearning
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+[]\T1/pcr/m/n/10 evaluate() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-sight.deeplear
+ning.DeepLearning
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--34
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 []\T1/pcr/m/n/10 feature_spawn() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule For
 e-
  []
@@ -1294,130 +1305,138 @@ e Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--52
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+[]\T1/pcr/m/n/10 init_hidden() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-sight.model
+s.LSTM_deeper
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+[]\T1/pcr/m/n/10 init_hidden() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-sight.model
+s.LSTM_shallow
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--54
 []\T1/pcr/m/n/10 inverse_log_returns() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-u
 le Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--57
+Underfull \hbox (badness 10000) in paragraph at lines 57--59
 []\T1/pcr/m/n/10 live_pred_plot() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--57
-\T1/ptm/m/it/10 caster.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
+Underfull \hbox (badness 10000) in paragraph at lines 57--59
+\T1/ptm/m/it/10 sight.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
  []
 
 
-Underfull \hbox (badness 7291) in paragraph at lines 66--68
+Underfull \hbox (badness 7291) in paragraph at lines 70--72
 []\T1/pcr/m/n/10 mean_directional_accuracy_log_ret() \T1/ptm/m/n/10 (\T1/ptm/m/
 it/10 in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 74--75
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 []\T1/pcr/m/n/10 price_rename() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule Fore
 -
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--81
+Underfull \hbox (badness 10000) in paragraph at lines 83--85
 []\T1/pcr/m/n/10 size_check() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--81
-\T1/ptm/m/it/10 caster.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
+Underfull \hbox (badness 10000) in paragraph at lines 83--85
+\T1/ptm/m/it/10 sight.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
  []
 
+[17
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+]
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
 []\T1/pcr/m/n/10 slice_series() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule Fore
 -
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
-[]\T1/pcr/m/n/10 train() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-caster.deeplearni
-ng.DeepLearning
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+[]\T1/pcr/m/n/10 train() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-sight.deeplearnin
+g.DeepLearning
  []
 
-[15
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 86--88
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
 []\T1/pcr/m/n/10 train_val_test() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--88
-\T1/ptm/m/it/10 caster.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
+\T1/ptm/m/it/10 sight.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--90
+Underfull \hbox (badness 10000) in paragraph at lines 92--94
 []\T1/pcr/m/n/10 training_wrapper() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--90
-\T1/ptm/m/it/10 caster.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
+Underfull \hbox (badness 10000) in paragraph at lines 92--94
+\T1/ptm/m/it/10 sight.deeplearning.DeepLearning method\T1/ptm/m/n/10 ),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
 []\T1/pcr/m/n/10 universe_select() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule F
 ore-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
-[]\T1/pcr/m/n/10 validate() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-caster.deeplea
-rning.DeepLearning
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+[]\T1/pcr/m/n/10 validate() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 Fore-sight.deeplear
+ning.DeepLearning
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
-[]\T1/pcr/m/n/10 visualise_df() \T1/ptm/m/n/10 (\T1/ptm/m/it/10 in mod-ule Fore
--
- []
-
-[16
+[18
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1139.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1139.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1361.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1361.
  (./IndustrialMetalsForecaster.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1139.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1139.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1361.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1361.
 
 Package rerunfilecheck Info: File `IndustrialMetalsForecaster.out' has not chan
 ged.
-(rerunfilecheck)             Checksum: 49171B2B788C9CF6F1B0B6A95A8CCFE0;976.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1139.
+(rerunfilecheck)             Checksum: A8E6BA146AB93E45AAAA90E128EAD4BA;1206.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1361.
  ) 
 Here is how much of TeX's memory you used:
- 13617 strings out of 493014
- 190555 string characters out of 6133351
- 281265 words of memory out of 5000000
- 16794 multiletter control sequences out of 15000+600000
- 44331 words of font info for 65 fonts, out of 8000000 for 9000
+ 13672 strings out of 493014
+ 191784 string characters out of 6133351
+ 282057 words of memory out of 5000000
+ 16826 multiletter control sequences out of 15000+600000
+ 50298 words of font info for 71 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 37i,12n,45p,690b,593s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,45p,766b,651s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2016/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/u
-rw/helvetic/uhvr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/time
-s/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on IndustrialMetalsForecaster.pdf (20 pages, 133686 bytes).
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/urw/courier/ucrro8a.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/h
+elvetic/uhvr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/ut
+mb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on IndustrialMetalsForecaster.pdf (22 pages, 154207 bytes).
 PDF statistics:
- 275 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 68 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 322 PDF objects out of 1000 (max. 8388607)
+ 279 compressed objects within 3 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

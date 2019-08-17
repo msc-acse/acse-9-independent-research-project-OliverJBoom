@@ -34,7 +34,6 @@
 \usepackage{hypcap}% it must be loaded after hyperref.
 % Set up styles of URL: it should be placed after hyperref.
 \urlstyle{same}
-\addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
 
 \addto\captionsenglish{\renewcommand{\figurename}{Fig.\@ }}
 \makeatletter
@@ -59,7 +58,7 @@
 
 
 \title{Industrial Metals Forecaster Documentation}
-\date{Aug 09, 2019}
+\date{Aug 17, 2019}
 \release{1.0.0}
 \author{Oliver Boom}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -76,11 +75,78 @@
 
 
 
-\chapter{Preprocessing Module}
-\label{\detokenize{index:module-Forecaster.preprocessing}}\label{\detokenize{index:preprocessing-module}}\index{Forecaster.preprocessing (module)@\spxentry{Forecaster.preprocessing}\spxextra{module}}\index{clean\_data() (in module Forecaster.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Forecaster.preprocessing}}
+\chapter{Contents}
+\label{\detokenize{index:contents}}
+
+\section{Introduction}
+\label{\detokenize{intro:introduction}}\label{\detokenize{intro::doc}}
+
+\subsection{What is Foresight?}
+\label{\detokenize{intro:what-is-foresight}}
+Foresight is a collection of tools built to forecast the future price movements of industrial metals, using Long Short Term Memory networks. It can take univariate or multivariate datasets and make predictions using single-input single-output (SISO), multi-input single-output (MISO) or multi-input multi-output (MIMO) frameworks.
+
+It was built for the purpose of testing the hypothesis that improved predictive performance can be achieved by applying the multi-task learning paradigm to commodity price forecasting. As such many of the example notebooks are built for this purpose.
+
+The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the Proof of Concept (POC) notebooks.
+
+
+\subsection{Installation}
+\label{\detokenize{intro:installation}}
+To install
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{git} \PYG{n}{clone} \PYG{n}{https}\PYG{p}{:}\PYG{o}{/}\PYG{o}{/}\PYG{n}{github}\PYG{o}{.}\PYG{n}{com}\PYG{o}{/}\PYG{n}{msc}\PYG{o}{\PYGZhy{}}\PYG{n}{acse}\PYG{o}{/}\PYG{n}{acse}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{9}\PYG{o}{\PYGZhy{}}\PYG{n}{independent}\PYG{o}{\PYGZhy{}}\PYG{n}{research}\PYG{o}{\PYGZhy{}}\PYG{n}{project}\PYG{o}{\PYGZhy{}}\PYG{n}{OliverJBoom}\PYG{o}{.}\PYG{n}{git}
+\end{sphinxVerbatim}
+
+
+\subsection{Requirements}
+\label{\detokenize{intro:requirements}}
+There are package dependancies on the following files:
+\begin{itemize}
+\item {} 
+numpy==1.16.2
+
+\item {} 
+pandas==0.24.2
+
+\item {} 
+pmdarima==1.2.1
+
+\item {} 
+matplotlib==3.0.3
+
+\item {} 
+psycopg2==2.7.6.1
+
+\item {} 
+scikit-learn==0.20.3
+
+\item {} 
+statsmodels==0.9.0
+
+\item {} 
+torch==1.1.0
+
+\end{itemize}
+
+
+\subsection{Examples and Usage}
+\label{\detokenize{intro:examples-and-usage}}
+All examples can be found within the Forecaster/Notebooks folder.
+
+Generic regression examples for univariate and multi-variate problems are contained within the “generic” notebooks.
+
+For examples relating to industrial metal price forecasting; univariate, multivariate and multi-task examples can be found in the “metals forecaster” notebooks.
+
+
+\section{Preprocessing Module}
+\label{\detokenize{preprocessing:preprocessing-module}}\label{\detokenize{preprocessing::doc}}
+Here are contained the functions related to the preprocessing of time series prior to any model training.
+
+\phantomsection\label{\detokenize{preprocessing:module-Foresight.preprocessing}}\index{Foresight.preprocessing (module)@\spxentry{Foresight.preprocessing}\spxextra{module}}\index{clean\_data() (in module Foresight.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.clean_data}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_data}}}{\emph{df}, \emph{n\_std=20}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.clean_data}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_data}}}{\emph{df}, \emph{n\_std=20}}{}
 Removes any outliers that are further than a chosen
 number of standard deviations from the mean.
 
@@ -106,10 +172,10 @@ pd.DataFrame
 
 \end{fulllineitems}
 
-\index{clean\_dict\_gen() (in module Forecaster.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Forecaster.preprocessing}}
+\index{clean\_dict\_gen() (in module Foresight.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}}{}
 Generates a dictionary of cleaned DataFrames
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
@@ -125,10 +191,10 @@ dict
 
 \end{fulllineitems}
 
-\index{column\_rename() (in module Forecaster.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Forecaster.preprocessing}}
+\index{column\_rename() (in module Foresight.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.column_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{column\_rename}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.column_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{column\_rename}}}{\emph{universe\_dict}}{}
 Appends the name of the instrument to the columns.
 To help keep track of the instruments in the full dataset.
 \begin{quote}\begin{description}
@@ -145,10 +211,10 @@ dict
 
 \end{fulllineitems}
 
-\index{dimension\_reduce() (in module Forecaster.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Forecaster.preprocessing}}
+\index{dimension\_reduce() (in module Foresight.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}}{}
 Performing PCA to reduce the dimensionality of the data.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -170,10 +236,10 @@ np.array
 
 \end{fulllineitems}
 
-\index{dimension\_selector() (in module Forecaster.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Forecaster.preprocessing}}
+\index{dimension\_selector() (in module Foresight.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}}{}
 Calculated the number of dimensions required to reach a threshold level
 of variance.
 
@@ -202,10 +268,10 @@ int
 
 \end{fulllineitems}
 
-\index{feature\_spawn() (in module Forecaster.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Forecaster.preprocessing}}
+\index{feature\_spawn() (in module Foresight.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.feature_spawn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{feature\_spawn}}}{\emph{df}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.feature_spawn}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{feature\_spawn}}}{\emph{df}}{}
 Takes a time series and spawns several new features that explicitly
 detail information about the series.
 
@@ -213,18 +279,18 @@ The DataFrame spawned contains the following features
 spawned for each column in the input DataFrame:
 \begin{quote}
 \begin{description}
-\item[{Exponentially Weighted Moving Average of various half lives:}] \leavevmode
-Half Life:      1 day
-Half Life:      1 week
-Half Life:      1 month
-Half Life:      1 quarter
-Half Life:      6 months
-Half Life:      1 year
+\item[{Exponentially Weighted Moving Average of various Half Lives:}] \leavevmode
+1 day,
+1 week,
+1 month,
+1 quarter,
+6 months,
+1 year
 
 \item[{Rolling vol of different window sizes:}] \leavevmode
-Window Size:    1 week
-Window Size:    1 month
-Window Size:    1 quarter
+1 week,
+1 month,
+1 quarter
 
 \end{description}
 \end{quote}
@@ -242,10 +308,10 @@ pd.DataFrame
 
 \end{fulllineitems}
 
-\index{generate\_dataset() (in module Forecaster.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Forecaster.preprocessing}}
+\index{generate\_dataset() (in module Foresight.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.generate_dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_dataset}}}{\emph{universe\_dict}, \emph{price\_only=True}, \emph{lg\_only=False}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.generate_dataset}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_dataset}}}{\emph{universe\_dict}, \emph{price\_only=True}, \emph{lg\_only=False}}{}
 Generates the full dataset.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -273,10 +339,10 @@ pd.DataFrame
 
 \end{fulllineitems}
 
-\index{generate\_lg\_return() (in module Forecaster.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Forecaster.preprocessing}}
+\index{generate\_lg\_return() (in module Foresight.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.generate_lg_return}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_lg\_return}}}{\emph{df\_full}, \emph{lag=1}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.generate_lg_return}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{generate\_lg\_return}}}{\emph{df\_full}, \emph{lag=1}}{}
 Creates the log return series for each column in the DataFrame
 and returns the full dataset with log returns.
 \begin{quote}\begin{description}
@@ -299,10 +365,10 @@ pd.DataFrame
 
 \end{fulllineitems}
 
-\index{log\_returns() (in module Forecaster.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Forecaster.preprocessing}}
+\index{log\_returns() (in module Foresight.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{log\_returns}}}{\emph{series}, \emph{lag=1}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{log\_returns}}}{\emph{series}, \emph{lag=1}}{}
 Calculates the log returns between adjacent close prices.
 A constant lag is used across the whole series.
 E.g a lag of one means a day to day log return.
@@ -326,10 +392,10 @@ np.array
 
 \end{fulllineitems}
 
-\index{price\_rename() (in module Forecaster.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Forecaster.preprocessing}}
+\index{price\_rename() (in module Foresight.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.price_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{price\_rename}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.price_rename}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{price\_rename}}}{\emph{universe\_dict}}{}
 Renaming the column of the DataFrame values to price.
 This is actually the market closing price of the time series.
 \begin{quote}\begin{description}
@@ -346,10 +412,10 @@ dict
 
 \end{fulllineitems}
 
-\index{slice\_series() (in module Forecaster.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Forecaster.preprocessing}}
+\index{slice\_series() (in module Foresight.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.slice_series}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{slice\_series}}}{\emph{data\_X}, \emph{data\_y}, \emph{series\_len}, \emph{dataset\_pct=1.0}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.slice_series}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{slice\_series}}}{\emph{data\_X}, \emph{data\_y}, \emph{series\_len}, \emph{dataset\_pct=1.0}}{}
 Slices the train and target dataset time series.
 
 Turns each time series into a series of time series, with each series
@@ -391,10 +457,10 @@ The resulting data\_y array shape:
 
 \end{fulllineitems}
 
-\index{truncate\_window\_length() (in module Forecaster.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Forecaster.preprocessing}}
+\index{truncate\_window\_length() (in module Foresight.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.truncate_window_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{truncate\_window\_length}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.truncate_window_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{truncate\_window\_length}}}{\emph{universe\_dict}}{}
 Chopping the length of all of the DataFrames to ensure
 that they are all between the same dates.
 \begin{quote}\begin{description}
@@ -411,10 +477,10 @@ dict
 
 \end{fulllineitems}
 
-\index{universe\_select() (in module Forecaster.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Forecaster.preprocessing}}
+\index{universe\_select() (in module Foresight.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.preprocessing.universe_select}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.preprocessing.}}\sphinxbfcode{\sphinxupquote{universe\_select}}}{\emph{path}, \emph{commodity\_name}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.universe_select}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{universe\_select}}}{\emph{path}, \emph{commodity\_name}, \emph{custom\_list=None}}{}
 Selects the financial time series relevant for the commodities selected.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -423,6 +489,9 @@ Selects the financial time series relevant for the commodities selected.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{commodity\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} the name of the metal/s being inspected
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{custom\_list}} (\sphinxstyleliteralemphasis{\sphinxupquote{list}}) \textendash{} the names of csvs to be included in the dataset
 
 \end{itemize}
 
@@ -438,11 +507,15 @@ dict
 
 
 
-\chapter{Deeplearning Module}
-\label{\detokenize{index:module-Forecaster.deeplearning}}\label{\detokenize{index:deeplearning-module}}\index{Forecaster.deeplearning (module)@\spxentry{Forecaster.deeplearning}\spxextra{module}}\index{DeepLearning (class in Forecaster.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Forecaster.deeplearning}}
+\section{Deeplearning Module}
+\label{\detokenize{deeplearning:deeplearning-module}}\label{\detokenize{deeplearning::doc}}
+Here are contained the set of functions relating to the training,
+validation and testing of the neural networks.
+
+\phantomsection\label{\detokenize{deeplearning:module-Foresight.deeplearning}}\index{Foresight.deeplearning (module)@\spxentry{Foresight.deeplearning}\spxextra{module}}\index{DeepLearning (class in Foresight.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{DeepLearning}}}{\emph{model}, \emph{data\_X}, \emph{data\_y}, \emph{n\_epochs}, \emph{optimiser}, \emph{batch\_size}, \emph{loss\_function=MSELoss()}, \emph{device='cpu'}, \emph{seed=42}, \emph{debug=True}, \emph{disp\_freq=20}, \emph{fig\_disp\_freq=50}, \emph{early\_stop=True}, \emph{early\_verbose=False}, \emph{patience=50}, \emph{rel\_tol=0}, \emph{scaler\_data\_X=None}, \emph{scaler\_data\_y=None}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{DeepLearning}}}{\emph{model}, \emph{data\_X}, \emph{data\_y}, \emph{optimiser}, \emph{batch\_size=128}, \emph{n\_epochs=100}, \emph{loss\_function=\textless{}sphinx.ext.autodoc.importer.\_MockObject object\textgreater{}}, \emph{device='cpu'}, \emph{seed=42}, \emph{debug=True}, \emph{disp\_freq=20}, \emph{fig\_disp\_freq=50}, \emph{early\_stop=True}, \emph{early\_verbose=False}, \emph{patience=50}, \emph{rel\_tol=0}, \emph{scaler\_data\_X=None}, \emph{scaler\_data\_y=None}}{}
 Class to perform training and validation for a given model
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -506,18 +579,18 @@ achieved float
 \end{itemize}
 
 \end{description}\end{quote}
-\index{create\_data\_loaders() (Forecaster.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{create\_data\_loaders() (Foresight.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.create_data_loaders}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_data\_loaders}}}{}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.create_data_loaders}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_data\_loaders}}}{}{}
 Forms iterators to pipeline in the data/labels
 
 \end{fulllineitems}
 
-\index{evaluate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{evaluate() (Foresight.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.evaluate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{model}, \emph{test\_loader}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.evaluate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{model}, \emph{test\_loader}}{}
 Evaluates the performance of the network on given data for a given
 model.
 
@@ -544,27 +617,27 @@ float
 
 \end{fulllineitems}
 
-\index{live\_pred\_plot() (Forecaster.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{live\_pred\_plot() (Foresight.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.live_pred_plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{live\_pred\_plot}}}{}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.live_pred_plot}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{live\_pred\_plot}}}{}{}
 Plots the training predictions, validation predictions and the
 training/validation losses as they are predicted.
 
 \end{fulllineitems}
 
-\index{size\_check() (Forecaster.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{size\_check() (Foresight.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.size_check}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{size\_check}}}{}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.size_check}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{size\_check}}}{}{}
 Checks the size of the datasets
 
 \end{fulllineitems}
 
-\index{train() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{train() (Foresight.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.train}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train}}}{\emph{train\_loader}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.train}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train}}}{\emph{train\_loader}}{}
 Performs a single training epoch and returns the loss metric
 for the training dataset.
 \begin{quote}\begin{description}
@@ -581,28 +654,28 @@ float
 
 \end{fulllineitems}
 
-\index{train\_val\_test() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{train\_val\_test() (Foresight.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.train_val_test}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train\_val\_test}}}{}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.train_val_test}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{train\_val\_test}}}{}{}
 Splits the DataFrames in to a training, validation
 and test set and creates torch tensors from the underlying
 numpy arrays
 
 \end{fulllineitems}
 
-\index{training\_wrapper() (Forecaster.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{training\_wrapper() (Foresight.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.training_wrapper}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{training\_wrapper}}}{}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.training_wrapper}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{training\_wrapper}}}{}{}
 The wrapper that performs the training and validation
 
 \end{fulllineitems}
 
-\index{validate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Forecaster.deeplearning.DeepLearning method}}
+\index{validate() (Foresight.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Foresight.deeplearning.DeepLearning method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.DeepLearning.validate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{validate}}}{\emph{val\_loader}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning.validate}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{validate}}}{\emph{val\_loader}}{}
 Evaluates the performance of the network on unseen validation data.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
@@ -621,10 +694,10 @@ float
 
 \end{fulllineitems}
 
-\index{EarlyStopping (class in Forecaster.deeplearning)@\spxentry{EarlyStopping}\spxextra{class in Forecaster.deeplearning}}
+\index{early\_stopping (class in Foresight.deeplearning)@\spxentry{early\_stopping}\spxextra{class in Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.EarlyStopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{EarlyStopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=False}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.early_stopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{early\_stopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=True}}{}
 Used to facilitate early stopping during the training
 of neural networks.
 
@@ -661,10 +734,10 @@ existing value
 
 \end{fulllineitems}
 
-\index{full\_save() (in module Forecaster.deeplearning)@\spxentry{full\_save()}\spxextra{in module Forecaster.deeplearning}}
+\index{full\_save() (in module Foresight.deeplearning)@\spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.full_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{full\_save}}}{\emph{model}, \emph{model\_name}, \emph{optimiser}, \emph{num\_epoch}, \emph{learning\_rate}, \emph{momentum}, \emph{weight\_decay}, \emph{use\_lg\_returns}, \emph{PCA\_used}, \emph{data\_X}, \emph{train\_loss}, \emph{val\_loss}, \emph{test\_loss}, \emph{train\_time}, \emph{hidden\_dim}, \emph{mse}, \emph{mae}, \emph{mde}, \emph{path='Models/CSVs/'}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.full_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{full\_save}}}{\emph{model}, \emph{model\_name}, \emph{optimiser}, \emph{num\_epoch}, \emph{learning\_rate}, \emph{momentum}, \emph{weight\_decay}, \emph{use\_lg\_returns}, \emph{PCA\_used}, \emph{data\_X}, \emph{train\_loss}, \emph{val\_loss}, \emph{test\_loss}, \emph{train\_time}, \emph{hidden\_dim}, \emph{mse}, \emph{mae}, \emph{mde}, \emph{path='Models/CSVs/'}}{}
 Saves the models run details and hyper-parameters to a csv file
 :param model:               The model run
 :type  model:               nn.module
@@ -730,10 +803,10 @@ Saves the models run details and hyper-parameters to a csv file
 
 \end{fulllineitems}
 
-\index{model\_load() (in module Forecaster.deeplearning)@\spxentry{model\_load()}\spxextra{in module Forecaster.deeplearning}}
+\index{model\_load() (in module Foresight.deeplearning)@\spxentry{model\_load()}\spxextra{in module Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.model_load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_load}}}{\emph{model\_name}, \emph{path='Results/Pths/'}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.model_load}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_load}}}{\emph{model\_name}, \emph{device}, \emph{path='Results/Pths/'}}{}
 Loading function for the models.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -749,10 +822,10 @@ Loading function for the models.
 
 \end{fulllineitems}
 
-\index{model\_save() (in module Forecaster.deeplearning)@\spxentry{model\_save()}\spxextra{in module Forecaster.deeplearning}}
+\index{model\_save() (in module Foresight.deeplearning)@\spxentry{model\_save()}\spxextra{in module Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.model_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_save}}}{\emph{model}, \emph{name}, \emph{path='Results/Pths/'}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.model_save}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{model\_save}}}{\emph{model}, \emph{name}, \emph{path='Results/Pths/'}}{}
 Saving function for the model.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -771,10 +844,10 @@ Saving function for the model.
 
 \end{fulllineitems}
 
-\index{param\_strip() (in module Forecaster.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Forecaster.deeplearning}}
+\index{param\_strip() (in module Foresight.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.param_strip}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{param\_strip}}}{\emph{param}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.param_strip}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{param\_strip}}}{\emph{param}}{}
 Strips the key text info out of certain parameters.
 Used to save the text info of which models/optimiser objects are used
 \begin{quote}\begin{description}
@@ -785,10 +858,10 @@ Used to save the text info of which models/optimiser objects are used
 
 \end{fulllineitems}
 
-\index{set\_seed() (in module Forecaster.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Forecaster.deeplearning}}
+\index{set\_seed() (in module Foresight.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.deeplearning.set_seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.deeplearning.}}\sphinxbfcode{\sphinxupquote{set\_seed}}}{\emph{seed}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.set_seed}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{set\_seed}}}{\emph{seed}}{}
 Sets the random seeds to ensure deterministic behaviour.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
@@ -806,11 +879,236 @@ bool
 
 
 
-\chapter{Evaluation and Inspection Module}
-\label{\detokenize{index:module-Forecaster.eval_inspect}}\label{\detokenize{index:evaluation-and-inspection-module}}\index{Forecaster.eval\_inspect (module)@\spxentry{Forecaster.eval\_inspect}\spxextra{module}}\index{check\_day\_frequency() (in module Forecaster.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Forecaster.eval\_inspect}}
+\section{Models Module}
+\label{\detokenize{models:models-module}}\label{\detokenize{models::doc}}
+Here are contained the LSTM models developed for price prediction.
+\index{LSTM (class in Foresight.models)@\spxentry{LSTM}\spxextra{class in Foresight.models}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.check_day_frequency}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_day\_frequency}}}{\emph{df}, \emph{col\_name='ds'}}{}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.models.}}\sphinxbfcode{\sphinxupquote{LSTM}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{dense\_hidden}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
+A Long Short Term Memory network model with an additional dense layer
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dense\_hidden}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the dense layers
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{forward() (Foresight.models.LSTM method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
+Forward pass through the neural network
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{init\_hidden() (Foresight.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
+Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.
+
+To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.models.}}\sphinxbfcode{\sphinxupquote{LSTM\_shallow}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
+A Long Short Term Memory network model that passes staight
+from the LSTM layer to predictions
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
+Forward pass through the neural network
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
+Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.
+
+To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{LSTM\_deeper (class in Foresight.models)@\spxentry{LSTM\_deeper}\spxextra{class in Foresight.models}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_deeper}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.models.}}\sphinxbfcode{\sphinxupquote{LSTM\_deeper}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{dense\_hidden}, \emph{dense\_hidden\_2}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
+A Long Short Term Memory network model with two additional dense layers
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dense\_hidden}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the first dense layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dense\_hidden\_2}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the second dense layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{forward() (Foresight.models.LSTM\_deeper method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_deeper.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
+Forward pass through the neural network
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{init\_hidden() (Foresight.models.LSTM\_deeper method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_deeper.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
+Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.
+
+To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+
+
+\section{Evaluation and Inspection Module}
+\label{\detokenize{eval_inspect:evaluation-and-inspection-module}}\label{\detokenize{eval_inspect::doc}}
+Here are contained the functions that related to the evaluation of the performance of the networks predictions, and also functions that relate to the inspection of data.
+
+\phantomsection\label{\detokenize{eval_inspect:module-Foresight.eval_inspect}}\index{Foresight.eval\_inspect (module)@\spxentry{Foresight.eval\_inspect}\spxextra{module}}\index{check\_day\_frequency() (in module Foresight.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Foresight.eval\_inspect}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.check_day_frequency}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_day\_frequency}}}{\emph{df}, \emph{col\_name='ds'}}{}
 Creates a bar chart showing the frequency of the days of the week.
 
 Used to check that only business days are included in the dataset, and
@@ -829,10 +1127,10 @@ that there is a roughly equal distribution of entries across the week.
 
 \end{fulllineitems}
 
-\index{check\_length() (in module Forecaster.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{check\_length() (in module Foresight.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.check_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_length}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.check_length}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_length}}}{\emph{universe\_dict}}{}
 Checks the name of all the DataFrames in the dictionary of time series.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
@@ -842,10 +1140,10 @@ Checks the name of all the DataFrames in the dictionary of time series.
 
 \end{fulllineitems}
 
-\index{df\_std() (in module Forecaster.eval\_inspect)@\spxentry{df\_std()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{df\_std() (in module Foresight.eval\_inspect)@\spxentry{df\_std()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.df_std}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{df\_std}}}{\emph{df}, \emph{col\_name}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.df_std}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{df\_std}}}{\emph{df}, \emph{col\_name}}{}
 Calculates standard deviation of a DataFrames column.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -867,10 +1165,10 @@ float
 
 \end{fulllineitems}
 
-\index{evaluate() (in module Forecaster.eval\_inspect)@\spxentry{evaluate()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{evaluate() (in module Foresight.eval\_inspect)@\spxentry{evaluate()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.evaluate}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{y\_true}, \emph{y\_pred}, \emph{log\_ret=False}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.evaluate}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{evaluate}}}{\emph{y\_true}, \emph{y\_pred}, \emph{log\_ret=False}}{}
 Calculates the error metrics for between two arrays.
 \begin{description}
 \item[{The error metrics calculated are:}] \leavevmode
@@ -908,10 +1206,10 @@ List
 
 \end{fulllineitems}
 
-\index{inverse\_log\_returns() (in module Forecaster.eval\_inspect)@\spxentry{inverse\_log\_returns()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{inverse\_log\_returns() (in module Foresight.eval\_inspect)@\spxentry{inverse\_log\_returns()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.inverse_log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{inverse\_log\_returns}}}{\emph{original\_prices}, \emph{log\_returns}, \emph{lag=5}, \emph{offset=0}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.inverse_log_returns}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{inverse\_log\_returns}}}{\emph{original\_prices}, \emph{log\_returns}, \emph{lag=5}, \emph{offset=0}}{}
 Takes a DataFrame of predicted log returns and original
 prices and returns an array of predicted absolute prices
 
@@ -943,10 +1241,10 @@ pd.Series
 
 \end{fulllineitems}
 
-\index{mean\_absolute\_percentage\_error() (in module Forecaster.eval\_inspect)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{mean\_absolute\_percentage\_error() (in module Foresight.eval\_inspect)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_absolute_percentage_error}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_absolute\_percentage\_error}}}{\emph{y\_true}, \emph{y\_pred}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.mean_absolute_percentage_error}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_absolute\_percentage\_error}}}{\emph{y\_true}, \emph{y\_pred}}{}
 Calculates the mean absolute percentage error between two arrays.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -968,10 +1266,10 @@ float
 
 \end{fulllineitems}
 
-\index{mean\_directional\_accuracy() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{mean\_directional\_accuracy() (in module Foresight.eval\_inspect)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_directional_accuracy}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy}}}{\emph{y\_true}, \emph{y\_pred}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.mean_directional_accuracy}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy}}}{\emph{y\_true}, \emph{y\_pred}}{}
 Calculated the mean directional accuracy error metric
 between two series.
 \begin{quote}\begin{description}
@@ -994,10 +1292,10 @@ float
 
 \end{fulllineitems}
 
-\index{mean\_directional\_accuracy\_log\_ret() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{mean\_directional\_accuracy\_log\_ret() (in module Foresight.eval\_inspect)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.mean_directional_accuracy_log_ret}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy\_log\_ret}}}{\emph{y\_true}, \emph{y\_pred}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.mean_directional_accuracy_log_ret}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{mean\_directional\_accuracy\_log\_ret}}}{\emph{y\_true}, \emph{y\_pred}}{}
 Calculates the mean directional accuracy error metric between
 two series of log returns.
 \begin{quote}\begin{description}
@@ -1020,10 +1318,10 @@ float
 
 \end{fulllineitems}
 
-\index{visualise\_df() (in module Forecaster.eval\_inspect)@\spxentry{visualise\_df()}\spxextra{in module Forecaster.eval\_inspect}}
+\index{visualise\_df() (in module Foresight.eval\_inspect)@\spxentry{visualise\_df()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.eval_inspect.visualise_df}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Forecaster.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{visualise\_df}}}{\emph{df}}{}
+\phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.visualise_df}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{visualise\_df}}}{\emph{df}}{}
 Visualises each time series in a DataFrame.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode
@@ -1035,82 +1333,7 @@ Visualises each time series in a DataFrame.
 
 
 
-\chapter{Models Module}
-\label{\detokenize{index:module-Forecaster.models}}\label{\detokenize{index:models-module}}\index{Forecaster.models (module)@\spxentry{Forecaster.models}\spxextra{module}}\index{LSTM (class in Forecaster.models)@\spxentry{LSTM}\spxextra{class in Forecaster.models}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.models.LSTM}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Forecaster.models.}}\sphinxbfcode{\sphinxupquote{LSTM}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{dense\_hidden}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
-A Long Short Term Memory network model with an additional dense layer
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{dense\_hidden}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the dense layers
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
-
-\end{itemize}
-
-\end{description}\end{quote}
-\index{forward() (Forecaster.models.LSTM method)@\spxentry{forward()}\spxextra{Forecaster.models.LSTM method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.models.LSTM.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
-Forward pass through the neural network
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{init\_hidden() (Forecaster.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Forecaster.models.LSTM method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{index:Forecaster.models.LSTM.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
-Initialised the hidden state to be zeros. This clears the hidden
-state between batches. If you are running a stateful LSTM then this
-needs to be changed.
-
-To change to a stateful LSTM requires not detaching the backprop and
-storing the computational graph. This strongly increases runtime and
-shouldn’t make a big difference. Hence a stateful LSTM was not used.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\section{Indices and tables}
+\chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \DUrole{xref,std,std-ref}{genindex}
@@ -1128,10 +1351,9 @@ shouldn’t make a big difference. Hence a stateful LSTM was not used.
 \begin{sphinxtheindex}
 \let\bigletter\sphinxstyleindexlettergroup
 \bigletter{f}
-\item\relax\sphinxstyleindexentry{Forecaster.deeplearning}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.deeplearning}}
-\item\relax\sphinxstyleindexentry{Forecaster.eval\_inspect}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.eval_inspect}}
-\item\relax\sphinxstyleindexentry{Forecaster.models}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.models}}
-\item\relax\sphinxstyleindexentry{Forecaster.preprocessing}\sphinxstyleindexpageref{index:\detokenize{module-Forecaster.preprocessing}}
+\item\relax\sphinxstyleindexentry{Foresight.deeplearning}\sphinxstyleindexpageref{deeplearning:\detokenize{module-Foresight.deeplearning}}
+\item\relax\sphinxstyleindexentry{Foresight.eval\_inspect}\sphinxstyleindexpageref{eval_inspect:\detokenize{module-Foresight.eval_inspect}}
+\item\relax\sphinxstyleindexentry{Foresight.preprocessing}\sphinxstyleindexpageref{preprocessing:\detokenize{module-Foresight.preprocessing}}
 \end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}

@@ -1,44 +1,49 @@
-\indexentry{Forecaster.preprocessing (module)@\spxentry{Forecaster.preprocessing}\spxextra{module}|hyperpage}{1}
-\indexentry{clean\_data() (in module Forecaster.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{1}
-\indexentry{clean\_dict\_gen() (in module Forecaster.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{1}
-\indexentry{column\_rename() (in module Forecaster.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{1}
-\indexentry{dimension\_reduce() (in module Forecaster.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{1}
-\indexentry{dimension\_selector() (in module Forecaster.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{1}
-\indexentry{feature\_spawn() (in module Forecaster.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{2}
-\indexentry{generate\_dataset() (in module Forecaster.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{2}
-\indexentry{generate\_lg\_return() (in module Forecaster.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{2}
-\indexentry{log\_returns() (in module Forecaster.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{2}
-\indexentry{price\_rename() (in module Forecaster.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{3}
-\indexentry{slice\_series() (in module Forecaster.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{3}
-\indexentry{truncate\_window\_length() (in module Forecaster.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{3}
-\indexentry{universe\_select() (in module Forecaster.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Forecaster.preprocessing}|hyperpage}{3}
-\indexentry{Forecaster.deeplearning (module)@\spxentry{Forecaster.deeplearning}\spxextra{module}|hyperpage}{5}
-\indexentry{DeepLearning (class in Forecaster.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Forecaster.deeplearning}|hyperpage}{5}
-\indexentry{create\_data\_loaders() (Forecaster.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{5}
-\indexentry{evaluate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{live\_pred\_plot() (Forecaster.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{size\_check() (Forecaster.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{train() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{train\_val\_test() (Forecaster.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{training\_wrapper() (Forecaster.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{validate() (Forecaster.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Forecaster.deeplearning.DeepLearning method}|hyperpage}{6}
-\indexentry{EarlyStopping (class in Forecaster.deeplearning)@\spxentry{EarlyStopping}\spxextra{class in Forecaster.deeplearning}|hyperpage}{6}
-\indexentry{full\_save() (in module Forecaster.deeplearning)@\spxentry{full\_save()}\spxextra{in module Forecaster.deeplearning}|hyperpage}{7}
-\indexentry{model\_load() (in module Forecaster.deeplearning)@\spxentry{model\_load()}\spxextra{in module Forecaster.deeplearning}|hyperpage}{7}
-\indexentry{model\_save() (in module Forecaster.deeplearning)@\spxentry{model\_save()}\spxextra{in module Forecaster.deeplearning}|hyperpage}{7}
-\indexentry{param\_strip() (in module Forecaster.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Forecaster.deeplearning}|hyperpage}{8}
-\indexentry{set\_seed() (in module Forecaster.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Forecaster.deeplearning}|hyperpage}{8}
-\indexentry{Forecaster.eval\_inspect (module)@\spxentry{Forecaster.eval\_inspect}\spxextra{module}|hyperpage}{9}
-\indexentry{check\_day\_frequency() (in module Forecaster.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{9}
-\indexentry{check\_length() (in module Forecaster.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{9}
-\indexentry{df\_std() (in module Forecaster.eval\_inspect)@\spxentry{df\_std()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{9}
-\indexentry{evaluate() (in module Forecaster.eval\_inspect)@\spxentry{evaluate()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{9}
-\indexentry{inverse\_log\_returns() (in module Forecaster.eval\_inspect)@\spxentry{inverse\_log\_returns()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{9}
-\indexentry{mean\_absolute\_percentage\_error() (in module Forecaster.eval\_inspect)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{10}
-\indexentry{mean\_directional\_accuracy() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{10}
-\indexentry{mean\_directional\_accuracy\_log\_ret() (in module Forecaster.eval\_inspect)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{10}
-\indexentry{visualise\_df() (in module Forecaster.eval\_inspect)@\spxentry{visualise\_df()}\spxextra{in module Forecaster.eval\_inspect}|hyperpage}{10}
-\indexentry{Forecaster.models (module)@\spxentry{Forecaster.models}\spxextra{module}|hyperpage}{11}
-\indexentry{LSTM (class in Forecaster.models)@\spxentry{LSTM}\spxextra{class in Forecaster.models}|hyperpage}{11}
-\indexentry{forward() (Forecaster.models.LSTM method)@\spxentry{forward()}\spxextra{Forecaster.models.LSTM method}|hyperpage}{11}
-\indexentry{init\_hidden() (Forecaster.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Forecaster.models.LSTM method}|hyperpage}{11}
+\indexentry{Foresight.preprocessing (module)@\spxentry{Foresight.preprocessing}\spxextra{module}|hyperpage}{2}
+\indexentry{clean\_data() (in module Foresight.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{clean\_dict\_gen() (in module Foresight.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{column\_rename() (in module Foresight.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{dimension\_reduce() (in module Foresight.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{dimension\_selector() (in module Foresight.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{feature\_spawn() (in module Foresight.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
+\indexentry{generate\_dataset() (in module Foresight.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
+\indexentry{generate\_lg\_return() (in module Foresight.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
+\indexentry{log\_returns() (in module Foresight.preprocessing)@\spxentry{log\_returns()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
+\indexentry{price\_rename() (in module Foresight.preprocessing)@\spxentry{price\_rename()}\spxextra{in module Foresight.preprocessing}|hyperpage}{4}
+\indexentry{slice\_series() (in module Foresight.preprocessing)@\spxentry{slice\_series()}\spxextra{in module Foresight.preprocessing}|hyperpage}{4}
+\indexentry{truncate\_window\_length() (in module Foresight.preprocessing)@\spxentry{truncate\_window\_length()}\spxextra{in module Foresight.preprocessing}|hyperpage}{4}
+\indexentry{universe\_select() (in module Foresight.preprocessing)@\spxentry{universe\_select()}\spxextra{in module Foresight.preprocessing}|hyperpage}{4}
+\indexentry{Foresight.deeplearning (module)@\spxentry{Foresight.deeplearning}\spxextra{module}|hyperpage}{5}
+\indexentry{DeepLearning (class in Foresight.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}|hyperpage}{5}
+\indexentry{create\_data\_loaders() (Foresight.deeplearning.DeepLearning method)@\spxentry{create\_data\_loaders()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{5}
+\indexentry{evaluate() (Foresight.deeplearning.DeepLearning method)@\spxentry{evaluate()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{5}
+\indexentry{live\_pred\_plot() (Foresight.deeplearning.DeepLearning method)@\spxentry{live\_pred\_plot()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{size\_check() (Foresight.deeplearning.DeepLearning method)@\spxentry{size\_check()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{train() (Foresight.deeplearning.DeepLearning method)@\spxentry{train()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{train\_val\_test() (Foresight.deeplearning.DeepLearning method)@\spxentry{train\_val\_test()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{training\_wrapper() (Foresight.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{validate() (Foresight.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
+\indexentry{early\_stopping (class in Foresight.deeplearning)@\spxentry{early\_stopping}\spxextra{class in Foresight.deeplearning}|hyperpage}{6}
+\indexentry{full\_save() (in module Foresight.deeplearning)@\spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{6}
+\indexentry{model\_load() (in module Foresight.deeplearning)@\spxentry{model\_load()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
+\indexentry{model\_save() (in module Foresight.deeplearning)@\spxentry{model\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
+\indexentry{param\_strip() (in module Foresight.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
+\indexentry{set\_seed() (in module Foresight.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
+\indexentry{LSTM (class in Foresight.models)@\spxentry{LSTM}\spxextra{class in Foresight.models}|hyperpage}{8}
+\indexentry{forward() (Foresight.models.LSTM method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM method}|hyperpage}{8}
+\indexentry{init\_hidden() (Foresight.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM method}|hyperpage}{8}
+\indexentry{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}|hyperpage}{8}
+\indexentry{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{9}
+\indexentry{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{9}
+\indexentry{LSTM\_deeper (class in Foresight.models)@\spxentry{LSTM\_deeper}\spxextra{class in Foresight.models}|hyperpage}{9}
+\indexentry{forward() (Foresight.models.LSTM\_deeper method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{9}
+\indexentry{init\_hidden() (Foresight.models.LSTM\_deeper method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{9}
+\indexentry{Foresight.eval\_inspect (module)@\spxentry{Foresight.eval\_inspect}\spxextra{module}|hyperpage}{10}
+\indexentry{check\_day\_frequency() (in module Foresight.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
+\indexentry{check\_length() (in module Foresight.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
+\indexentry{df\_std() (in module Foresight.eval\_inspect)@\spxentry{df\_std()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
+\indexentry{evaluate() (in module Foresight.eval\_inspect)@\spxentry{evaluate()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
+\indexentry{inverse\_log\_returns() (in module Foresight.eval\_inspect)@\spxentry{inverse\_log\_returns()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
+\indexentry{mean\_absolute\_percentage\_error() (in module Foresight.eval\_inspect)@\spxentry{mean\_absolute\_percentage\_error()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{11}
+\indexentry{mean\_directional\_accuracy() (in module Foresight.eval\_inspect)@\spxentry{mean\_directional\_accuracy()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{11}
+\indexentry{mean\_directional\_accuracy\_log\_ret() (in module Foresight.eval\_inspect)@\spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{11}
+\indexentry{visualise\_df() (in module Foresight.eval\_inspect)@\spxentry{visualise\_df()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{11}
