@@ -9,6 +9,7 @@ import time
 import torch
 from torch.utils.data import TensorDataset, DataLoader
 from sklearn.model_selection import train_test_split
+from .models import *
 
 """This module include a set of functions relating to the training,
 validation and testing of neural networks."""
