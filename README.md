@@ -26,9 +26,9 @@ Read the docs will not show the models module online. For more information on th
 
 * __Results/Pths__                   -  Contains saved model weights
 
-* __/Results/Pickles__                -  Contains saved deeplearning objects
+* __Results/Pickles__                -  Contains saved deeplearning objects
 
-* __/Results/Plots__                  -  Contains images of predictions and training/val losses 
+* __Results/Plots__                  -  Contains images of predictions and training/val losses 
 
 ## Testing
 
