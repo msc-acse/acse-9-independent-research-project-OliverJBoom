@@ -16,19 +16,19 @@ Read the docs will not show the models module online. For more information on th
 
 ## Repository Structure
 
-* __Docs__                          -  Contains all files relating to the documentation
+* __Docs__                           -  Contains all files relating to the documentation
 
-* __Foresight__                    -  Contains the collection of python files relating to Foresight
+* __Foresight__                      -  Contains the collection of python files relating to Foresight
 
-* __Foresight/Data/Commodity_Data__ -  Contains the time series used to forecast industrial metals prices
+* __Data__                           -  Contains the time series used to forecast industrial metals prices
 
-* __Foresight/Notebooks__          -  Contains example notebooks for SISO, MISO and MIMO regression
+* __Notebooks__                      -  Contains example notebooks for SISO, MISO and MIMO regression
 
-* __Foresight/Results/Pths__        -  Contains saved model weights
+* __Results/Pths__                   -  Contains saved model weights
 
-* __Foresight/Results/Pickles__     -  Contains saved deeplearning objects
+* __/Results/Pickles__                -  Contains saved deeplearning objects
 
-* __Foresight/Results/Plots__       -  Contains images of predictions and training/val losses 
+* __/Results/Plots__                  -  Contains images of predictions and training/val losses 
 
 ## Testing
 
