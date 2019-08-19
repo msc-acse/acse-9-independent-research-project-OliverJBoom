@@ -166,4 +166,4 @@ texinfo_documents = [
 ]
 
 # Issues with memory build in RTD
-autodoc_mock_imports = ['torch', 'torch.nn', 'torch.nn.Module']
+autodoc_mock_imports = ['torch']
