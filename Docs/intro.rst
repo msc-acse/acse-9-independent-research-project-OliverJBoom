@@ -37,7 +37,7 @@ There are package dependancies on the following files:
 Examples and Usage
 ------------------
 
-All examples can be found within the Forecaster/Notebooks folder.
+All examples can be found within the Notebooks folder.
 
 Generic regression examples for univariate and multi-variate problems are contained within the "generic" notebooks. 
 
