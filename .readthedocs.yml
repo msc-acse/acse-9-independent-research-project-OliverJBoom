@@ -14,4 +14,4 @@ formats: []
 python:
     version: 3.6
     install:
-    - requirements: requirements_rtd.txt
+    - requirements: Docs/requirements.txt
