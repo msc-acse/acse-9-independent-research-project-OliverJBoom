@@ -10,5 +10,4 @@ Foresight/preprocessing.py
 Foresight_Py.egg-info/PKG-INFO
 Foresight_Py.egg-info/SOURCES.txt
 Foresight_Py.egg-info/dependency_links.txt
-Foresight_Py.egg-info/requires.txt
 Foresight_Py.egg-info/top_level.txt
