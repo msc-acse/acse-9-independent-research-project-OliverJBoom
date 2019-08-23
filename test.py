@@ -1,14 +1,10 @@
 # Author: Oliver Boom
 # Github Alias: OliverJBoom
 
-# from Foresight.deeplearning import model_load, DeepLearning
-# from Foresight.eval_inspect import mean_directional_accuracy, mean_directional_accuracy_log_ret
-# from Foresight.models import LSTM
-from Foresight import *
+from ForesightPy import *
 import numpy as np
 from numpy.random import rand
 import pytest
-# from Foresight.preprocessing import slice_series, universe_select
 import torch
 from torch.optim import Adam
 
