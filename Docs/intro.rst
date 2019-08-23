@@ -15,13 +15,13 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 Installation
 ------------
 
-To install
+To install:
 ::
     pip install ForesightPy
 
-Ensure all requirements are installed.
+Ensure all requirements in requirements.txt are installed.
 
-Example notebooks and datasets are contained within the source repo. This can be using the following:
+Example notebooks and datasets are contained within the source repo. This can be downloaded using the following:
 ::
     git clone https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom.git
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.18)  17 AUG 2019 19:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.18)  23 AUG 2019 17:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1148,7 +1148,9 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 97.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 106.
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 112.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 120.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ts1ptm.fd
@@ -1157,73 +1159,73 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 
 ]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 149.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 160.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 158.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 169.
  [2]
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 518--518
+[3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
 []\T1/ptm/m/it/10 model\T1/ptm/m/n/10 , \T1/ptm/m/it/10 data_X\T1/ptm/m/n/10 , 
 \T1/ptm/m/it/10 data_y\T1/ptm/m/n/10 , \T1/ptm/m/it/10 op-ti-miser\T1/ptm/m/n/1
 0 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--518
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
 \T1/ptm/m/it/10 batch_size=128\T1/ptm/m/n/10 , \T1/ptm/m/it/10 n_epochs=100\T1/
 ptm/m/n/10 ,
  []
 
 
-Overfull \hbox (41.4327pt too wide) in paragraph at lines 518--518
+Overfull \hbox (41.4327pt too wide) in paragraph at lines 529--529
 \T1/ptm/m/it/10 loss_function=<sphinx.ext.autodoc.importer._MockObject
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--518
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
 \T1/ptm/m/it/10 ob-ject>\T1/ptm/m/n/10 , \T1/ptm/m/it/10 de-vice='cpu'\T1/ptm/m
 /n/10 , \T1/ptm/m/it/10 seed=42\T1/ptm/m/n/10 , \T1/ptm/m/it/10 de-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--518
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
 \T1/ptm/m/it/10 bug=True\T1/ptm/m/n/10 , \T1/ptm/m/it/10 disp_freq=20\T1/ptm/m/
 n/10 , \T1/ptm/m/it/10 fig_disp_freq=50\T1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--518
+Underfull \hbox (badness 10000) in paragraph at lines 529--529
 \T1/ptm/m/it/10 early_stop=True\T1/ptm/m/n/10 , \T1/ptm/m/it/10 early_verbose=F
 alse\T1/ptm/m/n/10 , \T1/ptm/m/it/10 pa-
  []
 
 
-Underfull \hbox (badness 6893) in paragraph at lines 518--518
+Underfull \hbox (badness 6893) in paragraph at lines 529--529
 \T1/ptm/m/it/10 tience=50\T1/ptm/m/n/10 , \T1/ptm/m/it/10 rel_tol=0\T1/ptm/m/n/
 10 , \T1/ptm/m/it/10 scaler_data_X=None\T1/ptm/m/n/10 ,
  []
 
-[4]
-Underfull \hbox (badness 6380) in paragraph at lines 577--578
+
+Underfull \hbox (badness 6380) in paragraph at lines 588--589
 []\T1/pcr/b/n/10 scaler_data_y \T1/ptm/m/n/10 (\T1/pcr/m/sl/10 sklearn.preproce
 ssing.data.MinMaxScaler\T1/ptm/m/n/10 ) ^^U The
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 644--646
+Underfull \hbox (badness 10000) in paragraph at lines 655--657
 []\T1/pcr/b/n/10 train_loader \T1/ptm/m/n/10 (\T1/pcr/m/sl/10 torch.utils.data.
 dataloader.DataLoader\T1/ptm/m/n/10 ) ^^U
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 740--740
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 751--751
 \T1/ptm/m/it/10 mo-men-tum\T1/ptm/m/n/10 , \T1/ptm/m/it/10 weight_decay\T1/ptm/
 m/n/10 , \T1/ptm/m/it/10 use_lg_returns\T1/ptm/m/n/10 , \T1/ptm/m/it/10 PCA_use
 d\T1/ptm/m/n/10 ,
  []
 
-[6] [7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 1030--1030
+[7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 1041--1041
 []\T1/ptm/m/it/10 num_features\T1/ptm/m/n/10 , \T1/ptm/m/it/10 hid-den_dim\T1/p
 tm/m/n/10 , \T1/ptm/m/it/10 dense_hidden\T1/ptm/m/n/10 ,
  []
@@ -1403,25 +1405,25 @@ ning.DeepLearning
 [18
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1361.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1361.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1372.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1372.
  (./IndustrialMetalsForecaster.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1361.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1361.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1372.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1372.
 
 Package rerunfilecheck Info: File `IndustrialMetalsForecaster.out' has not chan
 ged.
 (rerunfilecheck)             Checksum: A8E6BA146AB93E45AAAA90E128EAD4BA;1206.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1361.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1372.
  ) 
 Here is how much of TeX's memory you used:
- 13672 strings out of 493014
- 191784 string characters out of 6133351
- 282057 words of memory out of 5000000
- 16826 multiletter control sequences out of 15000+600000
- 50298 words of font info for 71 fonts, out of 8000000 for 9000
+ 13676 strings out of 493014
+ 191831 string characters out of 6133351
+ 283057 words of memory out of 5000000
+ 16828 multiletter control sequences out of 15000+600000
+ 50919 words of font info for 73 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 37i,12n,45p,766b,651s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,11n,45p,766b,595s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texli
@@ -1433,7 +1435,7 @@ s/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 elvetic/uhvr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/ut
 mb8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on IndustrialMetalsForecaster.pdf (22 pages, 154207 bytes).
+Output written on IndustrialMetalsForecaster.pdf (22 pages, 155105 bytes).
 PDF statistics:
  322 PDF objects out of 1000 (max. 8388607)
  279 compressed objects within 3 object streams

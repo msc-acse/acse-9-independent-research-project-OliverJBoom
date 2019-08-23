@@ -3,7 +3,7 @@
 \indexentry{clean\_dict\_gen() (in module Foresight.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
 \indexentry{column\_rename() (in module Foresight.preprocessing)@\spxentry{column\_rename()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
 \indexentry{dimension\_reduce() (in module Foresight.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
-\indexentry{dimension\_selector() (in module Foresight.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}|hyperpage}{2}
+\indexentry{dimension\_selector() (in module Foresight.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
 \indexentry{feature\_spawn() (in module Foresight.preprocessing)@\spxentry{feature\_spawn()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
 \indexentry{generate\_dataset() (in module Foresight.preprocessing)@\spxentry{generate\_dataset()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
 \indexentry{generate\_lg\_return() (in module Foresight.preprocessing)@\spxentry{generate\_lg\_return()}\spxextra{in module Foresight.preprocessing}|hyperpage}{3}
@@ -23,10 +23,10 @@
 \indexentry{training\_wrapper() (Foresight.deeplearning.DeepLearning method)@\spxentry{training\_wrapper()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
 \indexentry{validate() (Foresight.deeplearning.DeepLearning method)@\spxentry{validate()}\spxextra{Foresight.deeplearning.DeepLearning method}|hyperpage}{6}
 \indexentry{early\_stopping (class in Foresight.deeplearning)@\spxentry{early\_stopping}\spxextra{class in Foresight.deeplearning}|hyperpage}{6}
-\indexentry{full\_save() (in module Foresight.deeplearning)@\spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{6}
+\indexentry{full\_save() (in module Foresight.deeplearning)@\spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
 \indexentry{model\_load() (in module Foresight.deeplearning)@\spxentry{model\_load()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
 \indexentry{model\_save() (in module Foresight.deeplearning)@\spxentry{model\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
-\indexentry{param\_strip() (in module Foresight.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}|hyperpage}{7}
+\indexentry{param\_strip() (in module Foresight.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
 \indexentry{set\_seed() (in module Foresight.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
 \indexentry{LSTM (class in Foresight.models)@\spxentry{LSTM}\spxextra{class in Foresight.models}|hyperpage}{8}
 \indexentry{forward() (Foresight.models.LSTM method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM method}|hyperpage}{8}

@@ -19,7 +19,7 @@
   \item \spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}, \hyperpage{5}
   \item \spxentry{df\_std()}\spxextra{in module Foresight.eval\_inspect}, \hyperpage{10}
   \item \spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}, \hyperpage{2}
-  \item \spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}, \hyperpage{2}
+  \item \spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}, \hyperpage{3}
 
   \indexspace
   \bigletter E
@@ -36,7 +36,7 @@
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM method}, \hyperpage{8}
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{9}
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{9}
-  \item \spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}, \hyperpage{6}
+  \item \spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}, \hyperpage{7}
 
   \indexspace
   \bigletter G
@@ -74,7 +74,7 @@
 
   \indexspace
   \bigletter P
-  \item \spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}, \hyperpage{7}
+  \item \spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}, \hyperpage{8}
   \item \spxentry{price\_rename()}\spxextra{in module Foresight.preprocessing}, \hyperpage{4}
 
   \indexspace

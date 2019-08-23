@@ -58,7 +58,7 @@
 
 
 \title{Industrial Metals Forecaster Documentation}
-\date{Aug 17, 2019}
+\date{Aug 23, 2019}
 \release{1.0.0}
 \author{Oliver Boom}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -87,15 +87,29 @@ Foresight is a collection of tools built to forecast the future price movements 
 
 It was built for the purpose of testing the hypothesis that improved predictive performance can be achieved by applying the multi-task learning paradigm to commodity price forecasting. As such many of the example notebooks are built for this purpose.
 
-The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the Proof of Concept (POC) notebooks.
+The tools can equally be applied to any user chosen datasets, provided the datasets are loaded in the format shown in the example csvs, or are inputed directly as shown in the “generic” notebooks.
 
 
 \subsection{Installation}
 \label{\detokenize{intro:installation}}
-To install
+To install:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{pip} \PYG{n}{install} \PYG{n}{ForesightPy}
+\end{sphinxVerbatim}
+
+Ensure all requirements in requirements.txt are installed.
+
+Example notebooks and datasets are contained within the source repo. This can be downloaded using the following:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{n}{git} \PYG{n}{clone} \PYG{n}{https}\PYG{p}{:}\PYG{o}{/}\PYG{o}{/}\PYG{n}{github}\PYG{o}{.}\PYG{n}{com}\PYG{o}{/}\PYG{n}{msc}\PYG{o}{\PYGZhy{}}\PYG{n}{acse}\PYG{o}{/}\PYG{n}{acse}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{9}\PYG{o}{\PYGZhy{}}\PYG{n}{independent}\PYG{o}{\PYGZhy{}}\PYG{n}{research}\PYG{o}{\PYGZhy{}}\PYG{n}{project}\PYG{o}{\PYGZhy{}}\PYG{n}{OliverJBoom}\PYG{o}{.}\PYG{n}{git}
+\end{sphinxVerbatim}
+
+To import package
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{ForesightPy} \PYG{k}{import} \PYG{o}{*}
 \end{sphinxVerbatim}
 
 
@@ -116,9 +130,6 @@ pmdarima==1.2.1
 matplotlib==3.0.3
 
 \item {} 
-psycopg2==2.7.6.1
-
-\item {} 
 scikit-learn==0.20.3
 
 \item {} 
@@ -132,7 +143,7 @@ torch==1.1.0
 
 \subsection{Examples and Usage}
 \label{\detokenize{intro:examples-and-usage}}
-All examples can be found within the Forecaster/Notebooks folder.
+All examples can be found within the Notebooks folder.
 
 Generic regression examples for univariate and multi-variate problems are contained within the “generic” notebooks.
 
