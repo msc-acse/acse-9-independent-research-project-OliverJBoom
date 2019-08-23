@@ -1,7 +1,7 @@
 # Author: Oliver Boom
 # Github Alias: OliverJBoom
 
-from ForesightPy import *
+from Foresight import *
 import numpy as np
 from numpy.random import rand
 import pytest
