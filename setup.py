@@ -3,7 +3,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-     name='Foresight',
+     name='Foresight-Py',
      version='1.0.0',
      author="Oliver Boom",
      author_email="ob3618@ic.ac.uk",
