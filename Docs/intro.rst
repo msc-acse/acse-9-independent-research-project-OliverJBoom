@@ -17,11 +17,17 @@ Installation
 
 To install
 ::
+    pip install ForesightPy
+
+Ensure all requirements are installed.
+
+Example notebooks and datasets are contained within the source repo. This can be downloaded here:
+::
     git clone https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom.git
 
 To import package
 ::
-    from Foresight import *
+    from ForesightPy import *
 
 Requirements
 ------------
