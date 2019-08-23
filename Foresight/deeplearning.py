@@ -608,19 +608,21 @@ class DeepLearning():
                     break
 
             #  Printing key metrics to screen
-            if epoch % self.disp_freq == 0:
-                print("Epoch: %i "
-                      "Train: %.5f "
-                      "Val: %.5f  "
-                      "Time: %.3f  "
-                      "Best Val: %.5f"
-                      % (epoch, train_loss, val_loss,
-                         (time.time() - start_time),
-                         self.best_val_score))
+            if self.fig_disp_freq > 0:
+                if epoch % self.disp_freq == 0:
+                    print("Epoch: %i "
+                          "Train: %.5f "
+                          "Val: %.5f  "
+                          "Time: %.3f  "
+                          "Best Val: %.5f"
+                          % (epoch, train_loss, val_loss,
+                             (time.time() - start_time),
+                             self.best_val_score))
 
-            # Plotting predictions and training metrics
-            if epoch % self.fig_disp_freq == 0:
-                self.live_pred_plot()
+            if self.fig_disp_freq > 0:
+                # Plotting predictions and training metrics
+                if epoch % self.fig_disp_freq == 0:
+                    self.live_pred_plot()
 
         # Storing the best model
         self.model = self.best_model

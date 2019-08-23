@@ -1,0 +1,11 @@
+README.md
+setup.py
+Foresight/__init__.py
+Foresight/deeplearning.py
+Foresight/eval_inspect.py
+Foresight/models.py
+Foresight/preprocessing.py
+ForesightPy.egg-info/PKG-INFO
+ForesightPy.egg-info/SOURCES.txt
+ForesightPy.egg-info/dependency_links.txt
+ForesightPy.egg-info/top_level.txt
