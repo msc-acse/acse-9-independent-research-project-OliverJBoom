@@ -14,6 +14,8 @@ Full documentation can be found on https://industrial-metals-forecaster.readthed
 
 Read the docs will not show the models module online. For more information on the models module refer to the [PDF Documentation](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/Docs/_build/latex/IndustrialMetalsForecaster.pdf)<sup>1</sup>
 
+Foresight is hosted on PyPi under ForesightPy: https://pypi.org/project/ForesightPy/
+
 ## Repository Structure
 
 * __Docs__                           -  Contains all files relating to the documentation
