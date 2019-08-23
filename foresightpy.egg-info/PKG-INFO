@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: foresightpy
+Name: ForesightPy
 Version: 1.0.1
 Summary: A package for price forecasting using LSTM networks
 Home-page: https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom

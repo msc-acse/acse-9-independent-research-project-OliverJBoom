@@ -3,7 +3,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-     name='foresightpy',
+     name='ForesightPy',
+     packages = ['ForesightPy'],
      version='1.0.1',
      author="Oliver Boom",
      author_email="ob3618@ic.ac.uk",
@@ -13,7 +14,6 @@ setuptools.setup(
    long_description_content_type="text/markdown",
      url="https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom",
      download_url = "https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/archive/1.0.1.tar.gz",
-     packages=setuptools.find_packages(),
      classifiers=[
          "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",
