@@ -103,7 +103,7 @@ def covariance_matrix(*args):
     return cov
 
 
-def df_save(universe_dict, path="Data/Commodity_Data/"):
+def df_save(universe_dict, path="Data/"):
     """Saves the DataFrames of interest as csv files
 
     :param universe_dict:        The dictionary of time series

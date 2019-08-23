@@ -1,5 +1,5 @@
 =====================================
-Welcome to ForesightPy's documentation!
+Welcome to Foresight's documentation!
 =====================================
 
 Contents

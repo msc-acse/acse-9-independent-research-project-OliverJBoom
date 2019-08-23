@@ -21,7 +21,7 @@ To install
 
 Ensure all requirements are installed.
 
-Example notebooks and datasets are contained within the source repo. This can be downloaded here:
+Example notebooks and datasets are contained within the source repo. This can be using the following:
 ::
     git clone https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom.git
 
@@ -38,8 +38,6 @@ There are package dependancies on the following files:
 - pandas==0.24.2
 - pmdarima==1.2.1
 - matplotlib==3.0.3
-- pytest==4.3.1
-- psycopg2==2.7.6.1
 - scikit-learn==0.20.3
 - statsmodels==0.9.0
 - torch==1.1.0
