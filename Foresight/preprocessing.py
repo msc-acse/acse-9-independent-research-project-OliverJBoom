@@ -304,7 +304,7 @@ def generate_dataset(universe_dict, price_only=True, lg_only=False):
     return df_full
 
 
-def dimension_reduce(data_X, n_dim):
+def dimension_reduce(data_X, n_dim, verbose=True):
     """Performing PCA to reduce the dimensionality of the data.
 
     :param data_X:                  The dataset to perform reduction on
@@ -313,6 +313,9 @@ def dimension_reduce(data_X, n_dim):
     :param n_dim:                   Number of dimensions to reduce to
     :type  n_dim:                   int
 
+    :param verbose:                 Whether to display the explained variance
+    :type  verbose:                 bool
+
     :return:                        The reduced dataset
     :rtype:                         np.array
     """
@@ -320,14 +323,14 @@ def dimension_reduce(data_X, n_dim):
     pca = PCA(n_components=n_dim)
     # Performing reduction
     data_X = pca.fit_transform(data_X)
-
-    print("Explained Variance Sum: %.3f\nExplained Variance Composition"
-          % sum(pca.explained_variance_ratio_), pca.explained_variance_ratio_)
+    if verbose:
+        print("Explained Variance Sum: %.3f\nExplained Variance Composition"
+              % sum(pca.explained_variance_ratio_), pca.explained_variance_ratio_)
 
     return data_X
 
 
-def dimension_selector(data_X, thresh=0.98):
+def dimension_selector(data_X, thresh=0.98, verbose=True):
     """Calculated the number of dimensions required to reach a threshold level
     of variance.
 
@@ -343,6 +346,9 @@ def dimension_selector(data_X, thresh=0.98):
 
     :type  thresh:                  float
 
+    :param verbose:                 Whether to display the number of dimensions
+    :type  verbose:                 bool
+
     :return:                        The column dimensionality required to
                                     contain the threshold variance
     :rtype:                         int
@@ -355,7 +361,8 @@ def dimension_selector(data_X, thresh=0.98):
         pca.fit(data_X)
         # Discerning if the total variance post reduction is adequate
         if sum(pca.explained_variance_ratio_) > thresh:
-            print("Number of dimensions:", n_dim)
+            if verbose:
+                print("Number of dimensions:", n_dim)
 
             return n_dim
 
