@@ -55,4 +55,5 @@ Foresight is licensed under the MIT license. See [LICENSE](https://github.com/ms
 
 ## Footnotes
 <sup>1</sup> Pytorch is too heavy a dependency for Read the Docs Docker containers. And so requires mocking when passing through the Sphinx autodocumentation. However, inheritance from mocked classes is not supported. It is a known issue in Read the Docs. 
+
 <sup>2</sup> As is explained in the deeplearning documentation. It is a pre-requisite of Pytorch's serialization routines that pickled files and model pths are loaded in the same computational environment as they are created. So the pickled files in this folder must be loaded in the same computational configuration as they were initialized on (in terms of processing units and parallelisation framework).
