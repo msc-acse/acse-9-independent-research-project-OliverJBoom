@@ -139,11 +139,14 @@ def clean_data(df, n_std=20):
     return df
 
 
-def clean_dict_gen(universe_dict):
+def clean_dict_gen(universe_dict, verbose=True):
     """Generates a dictionary of cleaned DataFrames
 
     :param universe_dict:       The dictionary of time series
     :type  universe_dict:       dict
+
+    :param verbose:             Whether to display the included instruments
+    :type  verbose:             bool
 
     :return:                    The cleaned dictionary of time series
     :rtype:                     dict
@@ -152,7 +155,9 @@ def clean_dict_gen(universe_dict):
     print("Included Instrument:")
 
     for df_name in universe_dict:
-        print(df_name)
+        if verbose:
+            print(df_name)
+
         cleaned_dict[df_name] = clean_data(universe_dict[df_name])
 
     return cleaned_dict

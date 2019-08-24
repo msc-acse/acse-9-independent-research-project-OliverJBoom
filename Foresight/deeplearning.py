@@ -608,7 +608,7 @@ class DeepLearning():
                     break
 
             #  Printing key metrics to screen
-            if self.fig_disp_freq > 0:
+            if self.disp_freq > 0:
                 if epoch % self.disp_freq == 0:
                     print("Epoch: %i "
                           "Train: %.5f "
