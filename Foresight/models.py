@@ -250,7 +250,7 @@ class LSTM_shallow(nn.Module):
         # So only use the final slice of the LSTM outputted sequence
         x = x[-1]
 
-        # Passes staight from LSTM through to prediction layer
+        # Passes staight from LSMT through to prediction layer
         x = self.fc(x)
 
         return x

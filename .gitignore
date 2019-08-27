@@ -3,5 +3,7 @@ config.py
 *.__pycache__
 *.ipynb_checkpoints
 *.idea
-*.pytest_cache
-
+*pytest_cache
+__pycache__/
+dist
+ForesightPy.egg-info

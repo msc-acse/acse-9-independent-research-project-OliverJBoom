@@ -399,7 +399,7 @@
         <span class="c1"># So only use the final slice of the LSTM outputted sequence</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1"># Passes staight from LSTM through to prediction layer</span>
+        <span class="c1"># Passes staight from LSMT through to prediction layer</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">x</span></div></div>
