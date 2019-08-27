@@ -32,6 +32,8 @@ Foresight is hosted on PyPi under ForesightPy: https://pypi.org/project/Foresigh
 
 * __Results/Plots__                  -  Contains images of predictions and training/val losses 
 
+* __Tuning__                         -  Contains python files that can be used to hyper-parameter tune the networks 
+
 ## Testing
 
 Continuous integration best practices has been utilized, using Travis CL. With the tests methodology used being unit testing written deveoped using the Pytest library.
