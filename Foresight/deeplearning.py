@@ -45,7 +45,7 @@ def set_seed(seed):
     return True
 
 
-def model_save(model, name, path="Results/Pths/"):
+def model_save(model, name, path="../Results/Pths/"):
     """Saving function for the model.
 
     :param model:          The model to save
