@@ -5,5 +5,5 @@ config.py
 *.idea
 *pytest_cache
 __pycache__/
-dist
-ForesightPy.egg-info
+dist/
+ForesightPy.egg-info/
