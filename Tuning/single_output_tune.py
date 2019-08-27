@@ -1,5 +1,6 @@
 """
-This file performs hyper-parameter tuning for an MV framework
+This file performs hyper-parameter tuning for an univariate or
+multivariate framework
 
 Author: Oliver Boom
 Github Alias: OliverJBoom
