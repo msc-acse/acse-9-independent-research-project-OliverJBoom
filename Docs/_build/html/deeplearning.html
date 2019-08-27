@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Deeplearning Module &mdash; Foresight 1.0.0 documentation</title>
+  <title>Deeplearning Module &mdash; Foresight 1.0.9 documentation</title>
   
 
   
@@ -154,7 +154,18 @@
 <h1>Deeplearning Module<a class="headerlink" href="#deeplearning-module" title="Permalink to this headline">¶</a></h1>
 <p>Here are contained the set of functions relating to the training,
 validation and testing of the neural networks.</p>
-<span class="target" id="module-Foresight.deeplearning"></span><dl class="class">
+<p>If the user intends to load pickles of saved DeepLearning objects or model pth
+files it is important to remember that the models must be loaded in the same
+computational environment as they were initialised in. Both in terms of
+parallelisation and the processing units they are loaded on.</p>
+<p>For example if a model was trained on 16 GPUs in parallel, it will be required
+that that model is loaded on 16 GPUs in parallel. This is a pre-requisite
+required by Pytorch in their serialization routines.</p>
+<span class="target" id="module-Foresight.deeplearning"></span><p>This module include a set of functions relating to the training,
+validation and testing of neural networks.</p>
+<p>Author: Oliver Boom
+Github Alias: OliverJBoom</p>
+<dl class="class">
 <dt id="Foresight.deeplearning.DeepLearning">
 <em class="property">class </em><code class="descclassname">Foresight.deeplearning.</code><code class="descname">DeepLearning</code><span class="sig-paren">(</span><em>model</em>, <em>data_X</em>, <em>data_y</em>, <em>optimiser</em>, <em>batch_size=128</em>, <em>n_epochs=100</em>, <em>loss_function=&lt;sphinx.ext.autodoc.importer._MockObject object&gt;</em>, <em>device='cpu'</em>, <em>seed=42</em>, <em>debug=True</em>, <em>disp_freq=20</em>, <em>fig_disp_freq=50</em>, <em>early_stop=True</em>, <em>early_verbose=False</em>, <em>patience=50</em>, <em>rel_tol=0</em>, <em>scaler_data_X=None</em>, <em>scaler_data_y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#DeepLearning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.DeepLearning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to perform training and validation for a given model</p>
@@ -290,8 +301,8 @@ numpy arrays</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="Foresight.deeplearning.early_stopping">
-<em class="property">class </em><code class="descclassname">Foresight.deeplearning.</code><code class="descname">early_stopping</code><span class="sig-paren">(</span><em>patience</em>, <em>rel_tol</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#early_stopping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.early_stopping" title="Permalink to this definition">¶</a></dt>
+<dt id="Foresight.deeplearning.EarlyStopping">
+<em class="property">class </em><code class="descclassname">Foresight.deeplearning.</code><code class="descname">EarlyStopping</code><span class="sig-paren">(</span><em>patience</em>, <em>rel_tol</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/deeplearning.html#EarlyStopping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.deeplearning.EarlyStopping" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to facilitate early stopping during the training
 of neural networks.</p>
 <p>When called if the validation accuracy has not relative improved below a
@@ -364,6 +375,7 @@ existing value</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>model_name</strong> (<em>string</em>) – The model name to load</li>
+<li><strong>device</strong> (<em>string</em>) – The device to run on (Cpu or CUDA)</li>
 <li><strong>path</strong> (<em>string</em>) – The directory path to load the model from</li>
 </ul>
 </td>

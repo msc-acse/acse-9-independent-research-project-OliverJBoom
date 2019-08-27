@@ -58,8 +58,8 @@
 
 
 \title{Industrial Metals Forecaster Documentation}
-\date{Aug 23, 2019}
-\release{1.0.0}
+\date{Aug 27, 2019}
+\release{1.0.9}
 \author{Oliver Boom}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -100,6 +100,9 @@ To install:
 
 Ensure all requirements in requirements.txt are installed.
 
+Most requirements can be installed by using  \sphinxcode{\sphinxupquote{\DUrole{name}{pip} \DUrole{name}{install} \DUrole{operator}{-}\DUrole{name}{r} \DUrole{name}{requirements}\DUrole{operator}{.}\DUrole{name}{txt}}}.
+Except Pytorch, which requires a more specific installation procedure. This can be found on \sphinxurl{https://pytorch.org/get-started/locally/}.
+
 Example notebooks and datasets are contained within the source repo. This can be downloaded using the following:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -118,25 +121,25 @@ To import package
 There are package dependancies on the following files:
 \begin{itemize}
 \item {} 
-numpy==1.16.2
+numpy\textgreater{}=1.16.2
 
 \item {} 
-pandas==0.24.2
+pandas\textgreater{}=0.24.2
 
 \item {} 
-pmdarima==1.2.1
+pmdarima\textgreater{}=1.2.1
 
 \item {} 
-matplotlib==3.0.3
+matplotlib\textgreater{}=3.0.3
 
 \item {} 
-scikit-learn==0.20.3
+scikit-learn\textgreater{}=0.20.3
 
 \item {} 
-statsmodels==0.9.0
+statsmodels\textgreater{}=0.9.0
 
 \item {} 
-torch==1.1.0
+torch\textgreater{}=1.1.0
 
 \end{itemize}
 
@@ -154,7 +157,14 @@ For examples relating to industrial metal price forecasting; univariate, multiva
 \label{\detokenize{preprocessing:preprocessing-module}}\label{\detokenize{preprocessing::doc}}
 Here are contained the functions related to the preprocessing of time series prior to any model training.
 
-\phantomsection\label{\detokenize{preprocessing:module-Foresight.preprocessing}}\index{Foresight.preprocessing (module)@\spxentry{Foresight.preprocessing}\spxextra{module}}\index{clean\_data() (in module Foresight.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Foresight.preprocessing}}
+\phantomsection\label{\detokenize{preprocessing:module-Foresight.preprocessing}}\index{Foresight.preprocessing (module)@\spxentry{Foresight.preprocessing}\spxextra{module}}
+This module includes functions relating to the pre-processing of raw price
+time series. They are used to create a dataset that can be used for deep
+learning using long short term memory networks.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
+\index{clean\_data() (in module Foresight.preprocessing)@\spxentry{clean\_data()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.clean_data}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_data}}}{\emph{df}, \emph{n\_std=20}}{}
@@ -186,11 +196,17 @@ pd.DataFrame
 \index{clean\_dict\_gen() (in module Foresight.preprocessing)@\spxentry{clean\_dict\_gen()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.clean_dict_gen}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{clean\_dict\_gen}}}{\emph{universe\_dict}, \emph{verbose=True}}{}
 Generates a dictionary of cleaned DataFrames
 \begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{universe\_dict}} (\sphinxstyleliteralemphasis{\sphinxupquote{dict}}) \textendash{} The dictionary of time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to display the included instruments
+
+\end{itemize}
 
 \item[{Returns}] \leavevmode
 The cleaned dictionary of time series
@@ -225,7 +241,7 @@ dict
 \index{dimension\_reduce() (in module Foresight.preprocessing)@\spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_reduce}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_reduce}}}{\emph{data\_X}, \emph{n\_dim}, \emph{verbose=True}}{}
 Performing PCA to reduce the dimensionality of the data.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
@@ -234,6 +250,9 @@ Performing PCA to reduce the dimensionality of the data.
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{n\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} Number of dimensions to reduce to
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to display the explained variance
 
 \end{itemize}
 
@@ -250,7 +269,7 @@ np.array
 \index{dimension\_selector() (in module Foresight.preprocessing)@\spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}}{}
+\phantomsection\label{\detokenize{preprocessing:Foresight.preprocessing.dimension_selector}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.preprocessing.}}\sphinxbfcode{\sphinxupquote{dimension\_selector}}}{\emph{data\_X}, \emph{thresh=0.98}, \emph{verbose=True}}{}
 Calculated the number of dimensions required to reach a threshold level
 of variance.
 
@@ -265,6 +284,9 @@ reduction is above the threshold then that number of dimensions is returned
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{thresh}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The amount of variance that must be
 contained the in reduced dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{verbose}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} Whether to display the number of dimensions
 
 \end{itemize}
 
@@ -523,7 +545,22 @@ dict
 Here are contained the set of functions relating to the training,
 validation and testing of the neural networks.
 
-\phantomsection\label{\detokenize{deeplearning:module-Foresight.deeplearning}}\index{Foresight.deeplearning (module)@\spxentry{Foresight.deeplearning}\spxextra{module}}\index{DeepLearning (class in Foresight.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}}
+If the user intends to load pickles of saved DeepLearning objects or model pth
+files it is important to remember that the models must be loaded in the same
+computational environment as they were initialised in. Both in terms of
+parallelisation and the processing units they are loaded on.
+
+For example if a model was trained on 16 GPUs in parallel, it will be required
+that that model is loaded on 16 GPUs in parallel. This is a pre-requisite
+required by Pytorch in their serialization routines.
+
+\phantomsection\label{\detokenize{deeplearning:module-Foresight.deeplearning}}\index{Foresight.deeplearning (module)@\spxentry{Foresight.deeplearning}\spxextra{module}}
+This module include a set of functions relating to the training,
+validation and testing of neural networks.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
+\index{DeepLearning (class in Foresight.deeplearning)@\spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.DeepLearning}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{DeepLearning}}}{\emph{model}, \emph{data\_X}, \emph{data\_y}, \emph{optimiser}, \emph{batch\_size=128}, \emph{n\_epochs=100}, \emph{loss\_function=\textless{}sphinx.ext.autodoc.importer.\_MockObject object\textgreater{}}, \emph{device='cpu'}, \emph{seed=42}, \emph{debug=True}, \emph{disp\_freq=20}, \emph{fig\_disp\_freq=50}, \emph{early\_stop=True}, \emph{early\_verbose=False}, \emph{patience=50}, \emph{rel\_tol=0}, \emph{scaler\_data\_X=None}, \emph{scaler\_data\_y=None}}{}
@@ -705,10 +742,10 @@ float
 
 \end{fulllineitems}
 
-\index{early\_stopping (class in Foresight.deeplearning)@\spxentry{early\_stopping}\spxextra{class in Foresight.deeplearning}}
+\index{EarlyStopping (class in Foresight.deeplearning)@\spxentry{EarlyStopping}\spxextra{class in Foresight.deeplearning}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.early_stopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{early\_stopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=True}}{}
+\phantomsection\label{\detokenize{deeplearning:Foresight.deeplearning.EarlyStopping}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.deeplearning.}}\sphinxbfcode{\sphinxupquote{EarlyStopping}}}{\emph{patience}, \emph{rel\_tol}, \emph{verbose=True}}{}
 Used to facilitate early stopping during the training
 of neural networks.
 
@@ -823,6 +860,9 @@ Loading function for the models.
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{model\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The model name to load
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
 
 \item {} 
 \sphinxstyleliteralstrong{\sphinxupquote{path}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The directory path to load the model from
@@ -1116,7 +1156,13 @@ shouldn’t make a big difference. Hence a stateful LSTM was not used.
 \label{\detokenize{eval_inspect:evaluation-and-inspection-module}}\label{\detokenize{eval_inspect::doc}}
 Here are contained the functions that related to the evaluation of the performance of the networks predictions, and also functions that relate to the inspection of data.
 
-\phantomsection\label{\detokenize{eval_inspect:module-Foresight.eval_inspect}}\index{Foresight.eval\_inspect (module)@\spxentry{Foresight.eval\_inspect}\spxextra{module}}\index{check\_day\_frequency() (in module Foresight.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Foresight.eval\_inspect}}
+\phantomsection\label{\detokenize{eval_inspect:module-Foresight.eval_inspect}}\index{Foresight.eval\_inspect (module)@\spxentry{Foresight.eval\_inspect}\spxextra{module}}
+This module include a set of functions that are used to evaluate and
+inspect the time series in the dataset.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
+\index{check\_day\_frequency() (in module Foresight.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Foresight.eval\_inspect}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{eval_inspect:Foresight.eval_inspect.check_day_frequency}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{Foresight.eval\_inspect.}}\sphinxbfcode{\sphinxupquote{check\_day\_frequency}}}{\emph{df}, \emph{col\_name='ds'}}{}
@@ -1192,8 +1238,9 @@ Mean Directional Accuracy
 For a log returns series the definition of mean directional accuracy
 changes. This is as for a log return series it is the signum values of the
 series that details which direction the series has moved. This is as a log
-return series is the first difference of the original series. For raw price
-The signal needs to be differenced before the signum function is applied.
+return series is the first difference of the original series. For raw
+price. The signal needs to be differenced before the signum function
+is applied.
 \begin{quote}\begin{description}
 \item[{Parameters}] \leavevmode\begin{itemize}
 \item {} 

@@ -1,3 +1,8 @@
+
+.. role:: python(code)
+   :language: python
+
+
 Introduction
 ============
 
@@ -21,6 +26,9 @@ To install:
 
 Ensure all requirements in requirements.txt are installed.
 
+Most requirements can be installed by using  :python:`pip install -r requirements.txt`.
+Except Pytorch, which requires a more specific installation procedure. This can be found on https://pytorch.org/get-started/locally/.
+
 Example notebooks and datasets are contained within the source repo. This can be downloaded using the following:
 ::
     git clone https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom.git
@@ -34,13 +42,13 @@ Requirements
 
 There are package dependancies on the following files:
 
-- numpy==1.16.2
-- pandas==0.24.2
-- pmdarima==1.2.1
-- matplotlib==3.0.3
-- scikit-learn==0.20.3
-- statsmodels==0.9.0
-- torch==1.1.0
+- numpy>=1.16.2
+- pandas>=0.24.2
+- pmdarima>=1.2.1
+- matplotlib>=3.0.3
+- scikit-learn>=0.20.3
+- statsmodels>=0.9.0
+- torch>=1.1.0
 
 Examples and Usage
 ------------------

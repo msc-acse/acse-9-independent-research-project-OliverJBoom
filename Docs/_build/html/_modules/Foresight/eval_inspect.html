@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Foresight.eval_inspect &mdash; Foresight 1.0.0 documentation</title>
+  <title>Foresight.eval_inspect &mdash; Foresight 1.0.9 documentation</title>
   
 
   
@@ -147,18 +147,18 @@
            <div itemprop="articleBody">
             
   <h1>Source code for Foresight.eval_inspect</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Author: Oliver Boom</span>
-<span class="c1"># Github Alias: OliverJBoom</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module include a set of functions that are used to evaluate and</span>
+<span class="sd">inspect the time series in the dataset.</span>
 
+<span class="sd">Author: Oliver Boom</span>
+<span class="sd">Github Alias: OliverJBoom</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
-
-
-<span class="sd">&quot;&quot;&quot;This module include a set of functions that are used to evaluate and</span>
-<span class="sd">inspect the time series in the dataset.&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="check_length"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.check_length">[docs]</a><span class="k">def</span> <span class="nf">check_length</span><span class="p">(</span><span class="n">universe_dict</span><span class="p">):</span>
@@ -177,14 +177,14 @@
 <span class="sd">    :param df:                  The DataFrame of time series to visualise</span>
 <span class="sd">    :type  df:                  pd.DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax_arr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span>
-                               <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ax_arr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span>
+                             <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
 
-    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax_arr</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">df_name</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">axes</span><span class="p">,</span> <span class="n">df_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax_arr</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">df_name</span><span class="p">)</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df_name</span><span class="p">])</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
@@ -248,9 +248,9 @@
     <span class="k">if</span> <span class="n">offset</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">original_prices</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]</span> <span class="o">*</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">[:</span><span class="o">-</span><span class="n">lag</span><span class="p">]))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">original_prices</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">original_prices</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_returns</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="mean_absolute_percentage_error"><a class="viewcode-back" href="../../eval_inspect.html#Foresight.eval_inspect.mean_absolute_percentage_error">[docs]</a><span class="k">def</span> <span class="nf">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
@@ -279,8 +279,9 @@
 <span class="sd">    For a log returns series the definition of mean directional accuracy</span>
 <span class="sd">    changes. This is as for a log return series it is the signum values of the</span>
 <span class="sd">    series that details which direction the series has moved. This is as a log</span>
-<span class="sd">    return series is the first difference of the original series. For raw price</span>
-<span class="sd">    The signal needs to be differenced before the signum function is applied.</span>
+<span class="sd">    return series is the first difference of the original series. For raw</span>
+<span class="sd">    price. The signal needs to be differenced before the signum function</span>
+<span class="sd">    is applied.</span>
 
 
 <span class="sd">    :param y_true:            The observed values</span>
@@ -336,7 +337,8 @@
 <span class="sd">    :return:                 The mean directional accuracy of the series</span>
 <span class="sd">    :rtype:                  float</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_true</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]))</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+                   <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y_true</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]))</span></div>
 </pre></div>
 
            </div>

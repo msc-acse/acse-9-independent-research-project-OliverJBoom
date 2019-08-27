@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Preprocessing Module &mdash; Foresight 1.0.0 documentation</title>
+  <title>Preprocessing Module &mdash; Foresight 1.0.9 documentation</title>
   
 
   
@@ -153,7 +153,12 @@
   <div class="section" id="preprocessing-module">
 <h1>Preprocessing Module<a class="headerlink" href="#preprocessing-module" title="Permalink to this headline">¶</a></h1>
 <p>Here are contained the functions related to the preprocessing of time series prior to any model training.</p>
-<span class="target" id="module-Foresight.preprocessing"></span><dl class="function">
+<span class="target" id="module-Foresight.preprocessing"></span><p>This module includes functions relating to the pre-processing of raw price
+time series. They are used to create a dataset that can be used for deep
+learning using long short term memory networks.</p>
+<p>Author: Oliver Boom
+Github Alias: OliverJBoom</p>
+<dl class="function">
 <dt id="Foresight.preprocessing.clean_data">
 <code class="descclassname">Foresight.preprocessing.</code><code class="descname">clean_data</code><span class="sig-paren">(</span><em>df</em>, <em>n_std=20</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#clean_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.clean_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes any outliers that are further than a chosen
@@ -182,17 +187,23 @@ and so are forward filled.</p>
 
 <dl class="function">
 <dt id="Foresight.preprocessing.clean_dict_gen">
-<code class="descclassname">Foresight.preprocessing.</code><code class="descname">clean_dict_gen</code><span class="sig-paren">(</span><em>universe_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#clean_dict_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.clean_dict_gen" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">clean_dict_gen</code><span class="sig-paren">(</span><em>universe_dict</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#clean_dict_gen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.clean_dict_gen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a dictionary of cleaned DataFrames</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>universe_dict</strong> (<em>dict</em>) – The dictionary of time series</li>
+<li><strong>verbose</strong> (<em>bool</em>) – Whether to display the included instruments</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The cleaned dictionary of time series</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The cleaned dictionary of time series</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -219,7 +230,7 @@ To help keep track of the instruments in the full dataset.</p>
 
 <dl class="function">
 <dt id="Foresight.preprocessing.dimension_reduce">
-<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_reduce</code><span class="sig-paren">(</span><em>data_X</em>, <em>n_dim</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_reduce" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_reduce</code><span class="sig-paren">(</span><em>data_X</em>, <em>n_dim</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performing PCA to reduce the dimensionality of the data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -228,6 +239,7 @@ To help keep track of the instruments in the full dataset.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>data_X</strong> (<em>np.array</em>) – The dataset to perform reduction on</li>
 <li><strong>n_dim</strong> (<em>int</em>) – Number of dimensions to reduce to</li>
+<li><strong>verbose</strong> (<em>bool</em>) – Whether to display the explained variance</li>
 </ul>
 </td>
 </tr>
@@ -243,7 +255,7 @@ To help keep track of the instruments in the full dataset.</p>
 
 <dl class="function">
 <dt id="Foresight.preprocessing.dimension_selector">
-<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_selector</code><span class="sig-paren">(</span><em>data_X</em>, <em>thresh=0.98</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_selector" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Foresight.preprocessing.</code><code class="descname">dimension_selector</code><span class="sig-paren">(</span><em>data_X</em>, <em>thresh=0.98</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Foresight/preprocessing.html#dimension_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Foresight.preprocessing.dimension_selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculated the number of dimensions required to reach a threshold level
 of variance.</p>
 <p>Completes a PCA reduction to an increasing number of dimensions
@@ -257,6 +269,7 @@ reduction is above the threshold then that number of dimensions is returned</p>
 <li><strong>data_X</strong> (<em>np.array</em>) – The dataset to perform reduction on</li>
 <li><strong>thresh</strong> (<em>float</em>) – The amount of variance that must be
 contained the in reduced dataset</li>
+<li><strong>verbose</strong> (<em>bool</em>) – Whether to display the number of dimensions</li>
 </ul>
 </td>
 </tr>
