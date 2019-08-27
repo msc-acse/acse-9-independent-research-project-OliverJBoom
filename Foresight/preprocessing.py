@@ -1,15 +1,15 @@
-# Author: Oliver Boom
-# Github Alias: OliverJBoom
+"""
+This module includes functions relating to the pre-processing of raw price
+time series. They are used to create a dataset that can be used for deep
+learning using long short term memory networks.
 
-import matplotlib.pyplot as plt
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
-
-
-"""This module includes functions relating to the pre-processing of raw price
-time series. They are used to create a dataset that can be used for deep
-learning using long short term memory networks."""
 
 
 def universe_select(path, commodity_name, custom_list=None):
@@ -73,7 +73,7 @@ def universe_select(path, commodity_name, custom_list=None):
 
             universe_dict[instrument] = df
 
-    elif ((commodity_name == "custom") and (custom_list!=None)):
+    elif commodity_name == "custom" and custom_list is not None:
         for instrument in custom_list:
             df = pd.read_csv(path + instrument + ".csv",
                              index_col='date', parse_dates=['date'],
@@ -152,7 +152,8 @@ def clean_dict_gen(universe_dict, verbose=True):
     :rtype:                     dict
     """
     cleaned_dict = {}
-    print("Included Instrument:")
+    if verbose:
+        print("Included Instrument:")
 
     for df_name in universe_dict:
         if verbose:
@@ -274,10 +275,10 @@ def generate_dataset(universe_dict, price_only=True, lg_only=False):
     """
     # Can't have both log returns only and price only
     if lg_only:
-        assert (lg_only != price_only)
+        assert lg_only != price_only
 
     if price_only:
-        assert (lg_only != price_only)
+        assert lg_only != price_only
 
     # Renames the columns with the name of the time series
     # Naming pre-processing is done using a dict because of naming convenience

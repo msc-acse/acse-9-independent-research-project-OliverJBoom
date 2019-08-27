@@ -1,15 +1,15 @@
-# Author: Oliver Boom
-# Github Alias: OliverJBoom
+"""
+This module include a set of functions that are used to evaluate and
+inspect the time series in the dataset.
 
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-
-
-"""This module include a set of functions that are used to evaluate and
-inspect the time series in the dataset."""
 
 
 def check_length(universe_dict):
@@ -28,14 +28,14 @@ def visualise_df(df):
     :param df:                  The DataFrame of time series to visualise
     :type  df:                  pd.DataFrame
     """
-    fig, ax_arr = plt.subplots(int(len(df.columns) / 2), 2,
-                               figsize=(4 * 10, 4 * len(df.columns)))
+    _, ax_arr = plt.subplots(int(len(df.columns) / 2), 2,
+                             figsize=(4 * 10, 4 * len(df.columns)))
 
-    for ax, df_name in zip(ax_arr.flatten(), df.columns):
-        ax.set_title(df_name)
-        ax.plot(df.index, df[df_name])
-        ax.grid()
-        ax.legend()
+    for axes, df_name in zip(ax_arr.flatten(), df.columns):
+        axes.set_title(df_name)
+        axes.plot(df.index, df[df_name])
+        axes.grid()
+        axes.legend()
 
     plt.show()
 
@@ -99,9 +99,9 @@ def inverse_log_returns(original_prices, log_returns, lag=5, offset=0):
     if offset == 0:
         return (original_prices.shift(offset).values[:-lag] *
                 np.exp(log_returns[:-lag])).values.ravel()
-    else:
-        return (original_prices.shift(offset).values *
-                np.exp(log_returns)).values.ravel()
+
+    return (original_prices.shift(offset).values *
+            np.exp(log_returns)).values.ravel()
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
@@ -130,8 +130,9 @@ def evaluate(y_true, y_pred, log_ret=False):
     For a log returns series the definition of mean directional accuracy
     changes. This is as for a log return series it is the signum values of the
     series that details which direction the series has moved. This is as a log
-    return series is the first difference of the original series. For raw price
-    The signal needs to be differenced before the signum function is applied.
+    return series is the first difference of the original series. For raw
+    price. The signal needs to be differenced before the signum function
+    is applied.
 
 
     :param y_true:            The observed values
@@ -187,4 +188,5 @@ def mean_directional_accuracy(y_true, y_pred):
     :return:                 The mean directional accuracy of the series
     :rtype:                  float
     """
-    return np.mean(np.sign(y_true[1:, :] - y_true[:-1, :]) == np.sign(y_pred[1:, :] - y_pred[:-1, :]))
+    return np.mean(np.sign(y_pred[1:, :] - y_pred[:-1, :])
+                   == np.sign(y_true[1:, :] - y_true[:-1, :]))

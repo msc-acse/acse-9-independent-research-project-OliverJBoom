@@ -1,11 +1,13 @@
-# Author: Oliver Boom
-# Github Alias: OliverJBoom
+"""
+This module contains the architectures for long short term memory
+neural networks.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
 
 import torch
 import torch.nn as nn
-
-"""This module contains the architectures for long short term memory
-neural networks"""
 
 
 class LSTM(nn.Module):
@@ -114,7 +116,7 @@ class LSTM(nn.Module):
         series_length = x.size()[1]
 
         # Making sure the series and batch haven't been mis-permuted
-        assert (series_length == self.series_length)
+        assert series_length == self.series_length
 
         # Keeps the dimensions constant regardless of batch size
         x = x.contiguous().view(series_length, batch_size, -1)
@@ -232,7 +234,7 @@ class LSTM_shallow(nn.Module):
         series_length = x.size()[1]
 
         # Making sure the series and batch haven't been mis-permuted
-        assert (series_length == self.series_length)
+        assert series_length == self.series_length
 
         # Keeps the dimensions constant regardless of batch size
         x = x.contiguous().view(series_length, batch_size, -1)
@@ -248,7 +250,7 @@ class LSTM_shallow(nn.Module):
         # So only use the final slice of the LSTM outputted sequence
         x = x[-1]
 
-        # Passes staight from LSMT through to prediction layer
+        # Passes staight from LSTM through to prediction layer
         x = self.fc(x)
 
         return x
@@ -368,7 +370,7 @@ class LSTM_deeper(nn.Module):
         series_length = x.size()[1]
 
         # Making sure the series and batch haven't been mis-permuted
-        assert (series_length == self.series_length)
+        assert series_length == self.series_length
 
         # Keeps the dimensions constant regardless of batch size
         x = x.contiguous().view(series_length, batch_size, -1)

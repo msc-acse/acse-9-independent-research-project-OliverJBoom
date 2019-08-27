@@ -1,9 +1,11 @@
-# Author: Oliver Boom
-# Github Alias: OliverJBoom
+"""
+This module contains functions relating to the loading of data from an
+external PostGre SQL database
 
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
 
-# Importing database access information
-from config import USER, PASSWORD, HOST, DB_NAME
 import datetime
 import logging
 import numpy as np
@@ -13,8 +15,8 @@ import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
 
-"""This module contains functions relating to the loading of data from an
-external PostGre SQL database"""
+# Importing database access information
+from config import USER, PASSWORD, HOST, DB_NAME
 
 
 class ChaiDB:
@@ -72,8 +74,8 @@ def plot_instrument(universe_dict):
     :param universe_dict:        The dictionary of time series
     :type  universe_dict:        dict
     """
-    fig, ax_arr = plt.subplots(len(universe_dict), 1,
-                               figsize=(4, len(universe_dict) * 2))
+    _, ax_arr = plt.subplots(len(universe_dict), 1,
+                             figsize=(4, len(universe_dict) * 2))
 
     for ax, df_name in zip(ax_arr.flatten(), universe_dict):
         df = universe_dict[df_name]
@@ -116,7 +118,9 @@ def df_save(universe_dict, path="Data/"):
         universe_dict[df_name].to_csv(path + df_name + ".csv")
 
 
-if __name__ == "__main__":
+def main():
+    """Retrieves the dataframes from the database and
+    saves the files as csvs"""
     db = ChaiDB()
     print(db.get_list_datascope_instruments())
 
@@ -198,3 +202,7 @@ if __name__ == "__main__":
     plot_instrument(generic_dict)
 
     db.close_db_connection()
+
+
+if __name__ == "__main__":
+    main()

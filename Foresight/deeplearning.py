@@ -1,19 +1,23 @@
-# Author: Oliver Boom
-# Github Alias: OliverJBoom
+"""
+This module include a set of functions relating to the training,
+validation and testing of neural networks.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
+"""
 
 from copy import deepcopy
-import matplotlib.pyplot as plt
-import numpy as np
-import random
+
 import time
+import random
+import warnings
+
+import numpy as np
+import matplotlib.pyplot as plt
+
 import torch
 from torch.utils.data import TensorDataset, DataLoader
 from sklearn.model_selection import train_test_split
-from .models import *
-import warnings
-
-"""This module include a set of functions relating to the training,
-validation and testing of neural networks."""
 
 
 def set_seed(seed):
@@ -63,6 +67,9 @@ def model_load(model_name, device, path="Results/Pths/"):
     :param model_name:     The model name to load
     :type  model_name:     string
 
+    :param device:         The device to run on (Cpu or CUDA)
+    :type  device:         string
+
     :param path:           The directory path to load the model from
     :type  path:           string
     """
@@ -70,7 +77,7 @@ def model_load(model_name, device, path="Results/Pths/"):
     return model
 
 
-class early_stopping:
+class EarlyStopping:
     """Used to facilitate early stopping during the training
     of neural networks.
 
@@ -129,7 +136,7 @@ class early_stopping:
             print("Count:", self.counter)
 
 
-class DeepLearning():
+class DeepLearning:
     """Class to perform training and validation for a given model
 
     :param model:           The neural network model
@@ -266,12 +273,12 @@ class DeepLearning():
 
         # Initialising the early stop object
         if self.early_stop:
-            self.early = early_stopping(patience=patience,
+            self.early = EarlyStopping(patience=patience,
                                        rel_tol=rel_tol,
                                        verbose=early_verbose)
 
         # Tag for using multi task learning
-        self.MTL = False
+        self.mtl = False
 
         # The tracker for the best validation score
         self.best_val_score = np.inf
@@ -315,7 +322,7 @@ class DeepLearning():
 
         # If the labels have more than one target feature then using MTL
         if self.y_test.shape[1] > 1:
-            self.MTL = True
+            self.mtl = True
 
     def size_check(self):
         """Checks the size of the datasets"""
@@ -366,7 +373,7 @@ class DeepLearning():
         train_loss = 0.
 
         # Initialising the empty array for target predictions
-        if self.MTL:
+        if self.mtl:
             pred_list = np.empty((0, self.y_test.shape[1]))
         else:
             pred_list = np.empty((0, 1))
@@ -399,8 +406,7 @@ class DeepLearning():
                 [pred_list, y_pred.detach().cpu().numpy()], axis=0)
 
             # Calculate the training loss
-            train_loss += (
-                    loss * X_train_batch.size()[0]).detach().cpu().numpy()
+            train_loss += (loss*X_train_batch.size()[0]).detach().cpu().numpy()
 
             # Update Parameters
             self.optimiser.step()
@@ -425,7 +431,7 @@ class DeepLearning():
         val_loss = 0.
 
         # Initialising the empty array for target predictions
-        if self.MTL:
+        if self.mtl:
             val_pred_list = np.empty((0, self.y_test.shape[1]))
         else:
             val_pred_list = np.empty((0, 1))
@@ -480,7 +486,7 @@ class DeepLearning():
         test_loss = 0.
 
         # Selecting the number of output features
-        if self.MTL:
+        if self.mtl:
             test_pred_list = np.empty((0, self.y_test.shape[1]))
         else:
             test_pred_list = np.empty((0, 1))
@@ -517,52 +523,52 @@ class DeepLearning():
          training/validation losses as they are predicted.
         """
         # More plots are required for MTL then single task
-        if self.MTL:
-            fig, ax = plt.subplots(1, 5, figsize=(24, 5))
+        if self.mtl:
+            _, axes = plt.subplots(1, 5, figsize=(24, 5))
 
-            ax[0].set_title("Training Predictions")
-            ax[0].plot(self.train_predictions, label="Predicted")
-            ax[0].plot(self.y_train.numpy(), '--', label="Observed")
-            ax[0].legend()
+            axes[0].set_title("Training Predictions")
+            axes[0].plot(self.train_predictions, label="Predicted")
+            axes[0].plot(self.y_train.numpy(), '--', label="Observed")
+            axes[0].legend()
 
-            ax[1].set_title("Validation Predictions")
-            ax[1].plot(self.val_predictions, label="Predicted")
-            ax[1].plot(self.y_val.numpy(), '--', label="Observed")
-            ax[1].legend()
+            axes[1].set_title("Validation Predictions")
+            axes[1].plot(self.val_predictions, label="Predicted")
+            axes[1].plot(self.y_val.numpy(), '--', label="Observed")
+            axes[1].legend()
 
-            ax[2].set_title("Loss Plots")
-            ax[2].plot(self.logs['Training Loss'], label="Training Loss")
-            ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
-            ax[2].legend()
+            axes[2].set_title("Loss Plots")
+            axes[2].plot(self.logs['Training Loss'], label="Training Loss")
+            axes[2].plot(self.logs['Validation Loss'], label="Validation Loss")
+            axes[2].legend()
 
-            ax[3].set_title("Single Metal Inspection Train")
-            ax[3].plot(self.train_predictions[:, 0], label="Predicted")
-            ax[3].plot(self.y_train.numpy()[:, 0], label="Observed")
-            ax[3].legend()
+            axes[3].set_title("Single Metal Inspection Train")
+            axes[3].plot(self.train_predictions[:, 0], label="Predicted")
+            axes[3].plot(self.y_train.numpy()[:, 0], label="Observed")
+            axes[3].legend()
 
-            ax[4].set_title("Single Metal Inspection Val")
-            ax[4].plot(self.val_predictions[:, 0], label="Predicted")
-            ax[4].plot(self.y_val.numpy()[:, 0], label="Observed")
-            ax[4].legend()
+            axes[4].set_title("Single Metal Inspection Val")
+            axes[4].plot(self.val_predictions[:, 0], label="Predicted")
+            axes[4].plot(self.y_val.numpy()[:, 0], label="Observed")
+            axes[4].legend()
             plt.show()
 
         else:
-            fig, ax = plt.subplots(1, 3, figsize=(20, 5))
+            _, axes = plt.subplots(1, 3, figsize=(20, 5))
 
-            ax[0].set_title("Training Predictions")
-            ax[0].plot(self.train_predictions, label="Predicted")
-            ax[0].plot(self.y_train.numpy(), label="Observed")
-            ax[0].legend()
+            axes[0].set_title("Training Predictions")
+            axes[0].plot(self.train_predictions, label="Predicted")
+            axes[0].plot(self.y_train.numpy(), label="Observed")
+            axes[0].legend()
 
-            ax[1].set_title("Validation Predictions")
-            ax[1].plot(self.val_predictions, label="Predicted")
-            ax[1].plot(self.y_val.numpy(), label="Observed")
-            ax[1].legend()
+            axes[1].set_title("Validation Predictions")
+            axes[1].plot(self.val_predictions, label="Predicted")
+            axes[1].plot(self.y_val.numpy(), label="Observed")
+            axes[1].legend()
 
-            ax[2].set_title("Loss Plots")
-            ax[2].plot(self.logs['Training Loss'], label="Training Loss")
-            ax[2].plot(self.logs['Validation Loss'], label="Validation Loss")
-            ax[2].legend()
+            axes[2].set_title("Loss Plots")
+            axes[2].plot(self.logs['Training Loss'], label="Training Loss")
+            axes[2].plot(self.logs['Validation Loss'], label="Validation Loss")
+            axes[2].legend()
             plt.show()
 
     def training_wrapper(self):

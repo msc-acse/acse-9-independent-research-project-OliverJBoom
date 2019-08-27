@@ -3,6 +3,7 @@ Models Module
 
 Here are contained the LSTM models developed for price prediction.
 
+
 .. autoclass:: Foresight.models.LSTM
    :members:
 
