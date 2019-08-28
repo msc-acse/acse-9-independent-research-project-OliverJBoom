@@ -210,7 +210,7 @@
     <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.pth&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="model_load"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.model_load">[docs]</a><span class="k">def</span> <span class="nf">model_load</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Results/Pths/&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="model_load"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.model_load">[docs]</a><span class="k">def</span> <span class="nf">model_load</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;../Results/Pths/&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Loading function for the models.</span>
 
 <span class="sd">    :param model_name:     The model name to load</span>
@@ -796,7 +796,7 @@
 <div class="viewcode-block" id="full_save"><a class="viewcode-back" href="../../deeplearning.html#Foresight.deeplearning.full_save">[docs]</a><span class="k">def</span> <span class="nf">full_save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">optimiser</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">momentum</span><span class="p">,</span>
               <span class="n">weight_decay</span><span class="p">,</span> <span class="n">use_lg_returns</span><span class="p">,</span>
               <span class="n">PCA_used</span><span class="p">,</span> <span class="n">data_X</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">test_loss</span><span class="p">,</span> <span class="n">train_time</span><span class="p">,</span>
-              <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mde</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;Models/CSVs/&quot;</span><span class="p">):</span>
+              <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">mse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">mde</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Saves the models run details and hyper-parameters to a csv file</span>
 <span class="sd">    :param model:               The model run</span>
 <span class="sd">    :type  model:               nn.module</span>
