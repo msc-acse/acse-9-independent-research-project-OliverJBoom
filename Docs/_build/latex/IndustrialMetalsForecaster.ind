@@ -32,10 +32,11 @@
   \item \spxentry{feature\_spawn()}\spxextra{in module Foresight.preprocessing}, \hyperpage{3}
   \item \spxentry{Foresight.deeplearning}\spxextra{module}, \hyperpage{5}
   \item \spxentry{Foresight.eval\_inspect}\spxextra{module}, \hyperpage{10}
+  \item \spxentry{Foresight.models}\spxextra{module}, \hyperpage{8}
   \item \spxentry{Foresight.preprocessing}\spxextra{module}, \hyperpage{2}
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM method}, \hyperpage{9}
-  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{10}
-  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{9}
+  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{9}
+  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{10}
   \item \spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}, \hyperpage{7}
 
   \indexspace
@@ -47,8 +48,8 @@
   \indexspace
   \bigletter I
   \item \spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM method}, \hyperpage{9}
-  \item \spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{10}
-  \item \spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{9}
+  \item \spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{9}
+  \item \spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{10}
   \item \spxentry{inverse\_log\_returns()}\spxextra{in module Foresight.eval\_inspect}, 
 		\hyperpage{11}
 

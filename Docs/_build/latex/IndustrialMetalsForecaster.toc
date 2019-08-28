@@ -11,5 +11,5 @@
 \contentsline {section}{\numberline {1.4}Models Module}{8}{section.1.4}
 \contentsline {section}{\numberline {1.5}Evaluation and Inspection Module}{10}{section.1.5}
 \contentsline {chapter}{\numberline {2}Indices and tables}{13}{chapter.2}
-\contentsline {chapter}{Python Module Index}{15}{section*.52}
-\contentsline {chapter}{Index}{17}{section*.53}
+\contentsline {chapter}{Python Module Index}{15}{section*.53}
+\contentsline {chapter}{Index}{17}{section*.54}

@@ -938,6 +938,13 @@ bool
 \section{Models Module}
 \label{\detokenize{models:models-module}}\label{\detokenize{models::doc}}
 Here are contained the LSTM models developed for price prediction.
+
+\phantomsection\label{\detokenize{models:module-Foresight.models}}\index{Foresight.models (module)@\spxentry{Foresight.models}\spxextra{module}}
+This module contains the architectures for long short term memory
+neural networks.
+
+Author: Oliver Boom
+Github Alias: OliverJBoom
 \index{LSTM (class in Foresight.models)@\spxentry{LSTM}\spxextra{class in Foresight.models}}
 
 \begin{fulllineitems}
@@ -992,76 +999,6 @@ Forward pass through the neural network
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{models:Foresight.models.LSTM.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
-Initialised the hidden state to be zeros. This clears the hidden
-state between batches. If you are running a stateful LSTM then this
-needs to be changed.
-
-To change to a stateful LSTM requires not detaching the backprop and
-storing the computational graph. This strongly increases runtime and
-shouldn’t make a big difference. Hence a stateful LSTM was not used.
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-\index{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.models.}}\sphinxbfcode{\sphinxupquote{LSTM\_shallow}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
-A Long Short Term Memory network model that passes staight
-from the LSTM layer to predictions
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode\begin{itemize}
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
-
-\item {} 
-\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
-
-\end{itemize}
-
-\end{description}\end{quote}
-\index{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
-Forward pass through the neural network
-\begin{quote}\begin{description}
-\item[{Parameters}] \leavevmode
-\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
-
-\end{description}\end{quote}
-
-\end{fulllineitems}
-
-\index{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
 Initialised the hidden state to be zeros. This clears the hidden
 state between batches. If you are running a stateful LSTM then this
 needs to be changed.
@@ -1137,6 +1074,76 @@ Forward pass through the neural network
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{models:Foresight.models.LSTM_deeper.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
+Initialised the hidden state to be zeros. This clears the hidden
+state between batches. If you are running a stateful LSTM then this
+needs to be changed.
+
+To change to a stateful LSTM requires not detaching the backprop and
+storing the computational graph. This strongly increases runtime and
+shouldn’t make a big difference. Hence a stateful LSTM was not used.
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The batch size to be zeroed
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
+\end{fulllineitems}
+
+\index{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{Foresight.models.}}\sphinxbfcode{\sphinxupquote{LSTM\_shallow}}}{\emph{num\_features}, \emph{hidden\_dim}, \emph{output\_dim}, \emph{batch\_size}, \emph{series\_length}, \emph{device}, \emph{dropout=0.1}, \emph{num\_layers=2}}{}
+A Long Short Term Memory network model that passes staight
+from the LSTM layer to predictions
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode\begin{itemize}
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_features}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of features in the dataset
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{hidden\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the LSTMs hidden layer/s
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{output\_dim}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of neurons in the output layer
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{batch\_size}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of items in each batch
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{series\_length}} (\sphinxstyleliteralemphasis{\sphinxupquote{Int}}) \textendash{} The length of the time series
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{device}} (\sphinxstyleliteralemphasis{\sphinxupquote{string}}) \textendash{} The device to run on (Cpu or CUDA)
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{dropout}} (\sphinxstyleliteralemphasis{\sphinxupquote{float}}) \textendash{} The probability of dropout
+
+\item {} 
+\sphinxstyleliteralstrong{\sphinxupquote{num\_layers}} (\sphinxstyleliteralemphasis{\sphinxupquote{int}}) \textendash{} The number of stacked LSTM layers
+
+\end{itemize}
+
+\end{description}\end{quote}
+\index{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.forward}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{forward}}}{\emph{x}}{}
+Forward pass through the neural network
+\begin{quote}\begin{description}
+\item[{Parameters}] \leavevmode
+\sphinxstyleliteralstrong{\sphinxupquote{x}} (\sphinxstyleliteralemphasis{\sphinxupquote{torch.Tensor}}) \textendash{} The input into the network
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{models:Foresight.models.LSTM_shallow.init_hidden}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{init\_hidden}}}{\emph{batch\_size}}{}
 Initialised the hidden state to be zeros. This clears the hidden
 state between batches. If you are running a stateful LSTM then this
 needs to be changed.
@@ -1416,6 +1423,7 @@ Visualises each time series in a DataFrame.
 \bigletter{f}
 \item\relax\sphinxstyleindexentry{Foresight.deeplearning}\sphinxstyleindexpageref{deeplearning:\detokenize{module-Foresight.deeplearning}}
 \item\relax\sphinxstyleindexentry{Foresight.eval\_inspect}\sphinxstyleindexpageref{eval_inspect:\detokenize{module-Foresight.eval_inspect}}
+\item\relax\sphinxstyleindexentry{Foresight.models}\sphinxstyleindexpageref{models:\detokenize{module-Foresight.models}}
 \item\relax\sphinxstyleindexentry{Foresight.preprocessing}\sphinxstyleindexpageref{preprocessing:\detokenize{module-Foresight.preprocessing}}
 \end{sphinxtheindex}
 

@@ -28,15 +28,16 @@
 \indexentry{model\_save() (in module Foresight.deeplearning)@\spxentry{model\_save()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
 \indexentry{param\_strip() (in module Foresight.deeplearning)@\spxentry{param\_strip()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
 \indexentry{set\_seed() (in module Foresight.deeplearning)@\spxentry{set\_seed()}\spxextra{in module Foresight.deeplearning}|hyperpage}{8}
+\indexentry{Foresight.models (module)@\spxentry{Foresight.models}\spxextra{module}|hyperpage}{8}
 \indexentry{LSTM (class in Foresight.models)@\spxentry{LSTM}\spxextra{class in Foresight.models}|hyperpage}{8}
 \indexentry{forward() (Foresight.models.LSTM method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM method}|hyperpage}{9}
 \indexentry{init\_hidden() (Foresight.models.LSTM method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM method}|hyperpage}{9}
-\indexentry{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}|hyperpage}{9}
-\indexentry{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{9}
-\indexentry{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{9}
 \indexentry{LSTM\_deeper (class in Foresight.models)@\spxentry{LSTM\_deeper}\spxextra{class in Foresight.models}|hyperpage}{9}
-\indexentry{forward() (Foresight.models.LSTM\_deeper method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{10}
-\indexentry{init\_hidden() (Foresight.models.LSTM\_deeper method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{10}
+\indexentry{forward() (Foresight.models.LSTM\_deeper method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{9}
+\indexentry{init\_hidden() (Foresight.models.LSTM\_deeper method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_deeper method}|hyperpage}{9}
+\indexentry{LSTM\_shallow (class in Foresight.models)@\spxentry{LSTM\_shallow}\spxextra{class in Foresight.models}|hyperpage}{9}
+\indexentry{forward() (Foresight.models.LSTM\_shallow method)@\spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{10}
+\indexentry{init\_hidden() (Foresight.models.LSTM\_shallow method)@\spxentry{init\_hidden()}\spxextra{Foresight.models.LSTM\_shallow method}|hyperpage}{10}
 \indexentry{Foresight.eval\_inspect (module)@\spxentry{Foresight.eval\_inspect}\spxextra{module}|hyperpage}{10}
 \indexentry{check\_day\_frequency() (in module Foresight.eval\_inspect)@\spxentry{check\_day\_frequency()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
 \indexentry{check\_length() (in module Foresight.eval\_inspect)@\spxentry{check\_length()}\spxextra{in module Foresight.eval\_inspect}|hyperpage}{10}
