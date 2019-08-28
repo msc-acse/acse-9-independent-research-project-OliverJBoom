@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name='ForesightPy',
     packages=['Foresight'],
-    version='1.0.10',
+    version='1.0.11',
     author="Oliver Boom",
     author_email="ob3618@ic.ac.uk",
     license='MIT',
@@ -25,7 +25,7 @@ setuptools.setup(
         "msc-acse/acse-9-independent-research-project-OliverJBoom",
     download_url="https://github.com/msc-acse/"
                  "acse-9-independent-research-project-OliverJBoom/"
-                 "archive/1.0.10.tar.gz",
+                 "archive/1.0.11.tar.gz",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

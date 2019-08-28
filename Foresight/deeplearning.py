@@ -61,7 +61,7 @@ def model_save(model, name, path="../Results/Pths/"):
     torch.save(model, path + name + '.pth')
 
 
-def model_load(model_name, device, path="Results/Pths/"):
+def model_load(model_name, device, path="../Results/Pths/"):
     """Loading function for the models.
 
     :param model_name:     The model name to load
@@ -647,7 +647,7 @@ def param_strip(param):
 def full_save(model, model_name, optimiser, num_epoch, learning_rate, momentum,
               weight_decay, use_lg_returns,
               PCA_used, data_X, train_loss, val_loss, test_loss, train_time,
-              hidden_dim, mse, mae, mde, path="Models/CSVs/"):
+              hidden_dim, mse, mae, mde, path):
     """Saves the models run details and hyper-parameters to a csv file
     :param model:               The model run
     :type  model:               nn.module
