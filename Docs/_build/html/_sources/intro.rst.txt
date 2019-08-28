@@ -58,3 +58,8 @@ All examples can be found within the Notebooks folder.
 Generic regression examples for univariate and multi-variate problems are contained within the "generic" notebooks. 
 
 For examples relating to industrial metal price forecasting; univariate, multivariate and multi-task examples can be found in the "metals forecaster" notebooks.
+
+Hyperparameter Tuning
+---------------------
+
+Python files can be found in the Tuning folder of the repository which can be used to investigate the effects of changing hyper parameters. This can be extended to grid search in n dimensions to adding n for loops searching through the parameter design space.

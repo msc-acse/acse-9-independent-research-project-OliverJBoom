@@ -18,14 +18,14 @@
   \bigletter D
   \item \spxentry{DeepLearning}\spxextra{class in Foresight.deeplearning}, \hyperpage{5}
   \item \spxentry{df\_std()}\spxextra{in module Foresight.eval\_inspect}, \hyperpage{10}
-  \item \spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}, \hyperpage{2}
+  \item \spxentry{dimension\_reduce()}\spxextra{in module Foresight.preprocessing}, \hyperpage{3}
   \item \spxentry{dimension\_selector()}\spxextra{in module Foresight.preprocessing}, \hyperpage{3}
 
   \indexspace
   \bigletter E
   \item \spxentry{EarlyStopping}\spxextra{class in Foresight.deeplearning}, \hyperpage{7}
   \item \spxentry{evaluate()}\spxextra{Foresight.deeplearning.DeepLearning method}, \hyperpage{6}
-  \item \spxentry{evaluate()}\spxextra{in module Foresight.eval\_inspect}, \hyperpage{10}
+  \item \spxentry{evaluate()}\spxextra{in module Foresight.eval\_inspect}, \hyperpage{11}
 
   \indexspace
   \bigletter F
@@ -33,7 +33,7 @@
   \item \spxentry{Foresight.deeplearning}\spxextra{module}, \hyperpage{5}
   \item \spxentry{Foresight.eval\_inspect}\spxextra{module}, \hyperpage{10}
   \item \spxentry{Foresight.preprocessing}\spxextra{module}, \hyperpage{2}
-  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM method}, \hyperpage{8}
+  \item \spxentry{forward()}\spxextra{Foresight.models.LSTM method}, \hyperpage{9}
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_deeper method}, \hyperpage{10}
   \item \spxentry{forward()}\spxextra{Foresight.models.LSTM\_shallow method}, \hyperpage{9}
   \item \spxentry{full\_save()}\spxextra{in module Foresight.deeplearning}, \hyperpage{7}
@@ -42,7 +42,7 @@
   \bigletter G
   \item \spxentry{generate\_dataset()}\spxextra{in module Foresight.preprocessing}, \hyperpage{3}
   \item \spxentry{generate\_lg\_return()}\spxextra{in module Foresight.preprocessing}, 
-		\hyperpage{3}
+		\hyperpage{4}
 
   \indexspace
   \bigletter I
@@ -68,7 +68,7 @@
   \item \spxentry{mean\_directional\_accuracy()}\spxextra{in module Foresight.eval\_inspect}, 
 		\hyperpage{11}
   \item \spxentry{mean\_directional\_accuracy\_log\_ret()}\spxextra{in module Foresight.eval\_inspect}, 
-		\hyperpage{11}
+		\hyperpage{12}
   \item \spxentry{model\_load()}\spxextra{in module Foresight.deeplearning}, \hyperpage{8}
   \item \spxentry{model\_save()}\spxextra{in module Foresight.deeplearning}, \hyperpage{8}
 
@@ -96,11 +96,11 @@
 
   \indexspace
   \bigletter U
-  \item \spxentry{universe\_select()}\spxextra{in module Foresight.preprocessing}, \hyperpage{4}
+  \item \spxentry{universe\_select()}\spxextra{in module Foresight.preprocessing}, \hyperpage{5}
 
   \indexspace
   \bigletter V
-  \item \spxentry{validate()}\spxextra{Foresight.deeplearning.DeepLearning method}, \hyperpage{6}
+  \item \spxentry{validate()}\spxextra{Foresight.deeplearning.DeepLearning method}, \hyperpage{7}
   \item \spxentry{visualise\_df()}\spxextra{in module Foresight.eval\_inspect}, \hyperpage{12}
 
 \end{sphinxtheindex}
