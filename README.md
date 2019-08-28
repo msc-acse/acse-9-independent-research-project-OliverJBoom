@@ -12,8 +12,6 @@ The tools can equally be applied to any user chosen datasets, provided the datas
 
 Full documentation can be found on https://industrial-metals-forecaster.readthedocs.io/en/latest/.
 
-Read the docs will not show the models module online. For more information on the models module refer to the [PDF Documentation](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/Docs/_build/latex/IndustrialMetalsForecaster.pdf)<sup>1</sup>
-
 Foresight is hosted on PyPi under ForesightPy: https://pypi.org/project/ForesightPy/
 
 ## Repository Structure
@@ -26,9 +24,9 @@ Foresight is hosted on PyPi under ForesightPy: https://pypi.org/project/Foresigh
 
 * __Notebooks__                      -  Contains example notebooks for SISO, MISO and MIMO regression
 
-* __Results/Pths__                   -  Contains saved model weights<sup>2</sup>
+* __Results/Pths__                   -  Contains saved model weights<sup>1</sup>
 
-* __Results/Pickles__                -  Contains saved deeplearning objects<sup>3</sup>
+* __Results/Pickles__                -  Contains saved deeplearning objects<sup>2</sup>
 
 * __Results/Plots__                  -  Contains images of predictions and training/val losses 
 
@@ -56,8 +54,6 @@ Foresight is licensed under the MIT license. See [LICENSE](https://github.com/ms
 
 
 ## Footnotes
-<sup>1</sup> Pytorch is too heavy a dependency for Read the Docs Docker containers. And so requires mocking when passing through the Sphinx autodocumentation. However, inheritance from mocked classes is not supported. It is a known issue in Read the Docs. 
+<sup>1</sup> For loading pickle and pths it requires the `DeepLearning` and `LSTM` classes to be identical to the version at the time of initialisation. Many of the experiments were completed and then minor updates to these classes were made, this means that it is not recommended to try and load the pickle/pth files. They were kept for record and if the classes were matched to the version at the time of commit then they can be loaded. But it is more trouble then it is worth to reload these old experiments, and the user is better of retraining that model if it is particurly desired. Going forwards the saving/loading functionality can be used as no changes to the `DeepLearning` or `LSTM` classes is planned.
 
-<sup>2</sup> For loading pickle and pths it requires the `DeepLearning` and `LSTM` classes to be identical to the version at the time of initialisation. Many of the experiments were completed and then minor updates to these classes were made, this means that it is not recommended to try and load the pickle/pth files. They were kept for record and if the classes were matched to the version at the time of commit then they can be loaded. But it is more trouble then it is worth to reload these old experiments, and the user is better of retraining that model if it is particurly desired. Going forwards the saving/loading functionality can be used as no changes to the `DeepLearning` or `LSTM` classes is planned.
-
-<sup>3</sup> As is explained in the deeplearning documentation. It is a pre-requisite of Pytorch's serialization routines that pickled files and model pths are loaded in the same computational environment as they are created. So the pickled files in this folder must be loaded in the same computational configuration as they were initialized on (in terms of processing units and parallelisation framework).
+<sup>2</sup> As is explained in the deeplearning documentation. It is a pre-requisite of Pytorch's serialization routines that pickled files and model pths are loaded in the same computational environment as they are created. So the pickled files in this folder must be loaded in the same computational configuration as they were initialized on (in terms of processing units and parallelisation framework).
