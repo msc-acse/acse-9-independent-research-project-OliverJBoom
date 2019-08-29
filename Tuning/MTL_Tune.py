@@ -50,7 +50,7 @@ def main():
     auto_regressive = False
     use_pca = True
     feat_spawn = False
-    saving = False
+    saving = True
 
     print("MTL\nAutoregressive = ", auto_regressive)
 
