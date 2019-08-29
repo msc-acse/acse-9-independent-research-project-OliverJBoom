@@ -46,12 +46,15 @@ This collection of tools was built as part of the Applied Computational Science 
 
 With the exception of parts of the ChaiDB class (the init, get_instrument_data, close_db_connection and get_list_datascope_instruments functions), all of the work contained within this repository is my own.
 
+A critical evaluation and discussion of the investigation can be found in the [Thesis PDF](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/Thesis.pdf).
 
 ## License
 
 Foresight is licensed under the MIT license. See [LICENSE](https://github.com/msc-acse/acse-9-independent-research-project-OliverJBoom/blob/master/LICENSE).
 
+## Acknowledgements
 
+I'd like to express my thanks to Dr Tristan Fletcher and ChAI for providing me with this interesting project, and for their mentorship throughout. And to Dr Stephen Neethling for his support and advice. 
 
 ## Footnotes
 <sup>1</sup> For loading pickle and pths it requires the `DeepLearning` and `LSTM` classes to be identical to the version at the time of initialisation. Many of the experiments were completed and then minor updates to these classes were made, this means that it is not recommended to try and load the pickle/pth files. They were kept for record and if the classes were matched to the version at the time of commit then they can be loaded. But it is more trouble then it is worth to reload these old experiments, and the user is better of retraining that model if it is particurly desired. Going forwards the saving/loading functionality can be used as no changes to the `DeepLearning` or `LSTM` classes is planned.
